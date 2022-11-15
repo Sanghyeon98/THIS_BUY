@@ -1,9 +1,9 @@
 package com.pcwk.ehr;
 
-public class hello06 {
+public class Hello_YR {
 
 	public static void main(String[] args) {
-		System.out.println("._.");
+		System.out.println("hello");
 
 	}
 
