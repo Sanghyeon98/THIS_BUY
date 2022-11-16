@@ -46,19 +46,17 @@
 집에서 편하게 영화를 볼 수 있는 페이지를 만들고자 하였습니다.  
 해당 웹 페이지를 이용하여 최신 영화를 볼 수 있습니다.  
 ### 3-1. 개발환경  
-![개발환경](https://user-images.githubusercontent.com/50819376/178106207-403ca0f9-1be2-41e6-a534-a1f34b2b1b21.JPG)  
+![개발환경](https://github.com/hykim-king/THIS_BUY/blob/main/doc/imgs/env.jpg)  
 ### 3-2. 진행일정(WBS)
-![진행일정](https://user-images.githubusercontent.com/50819376/178106270-a7780da9-ac93-4b2c-8a8d-264d2e07ba28.JPG)   
+![진행일정](https://github.com/hykim-king/THIS_BUY/blob/main/doc/imgs/WBS.PNG)   
  
 # 4. Project 설계:sunflower:   
 
 ### 4-1. 요구사항정의서  
-![요구사항정의서](https://github.com/hykim-king/THIS_BUY/blob/main/THIS_buy/img/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD1.JPG)      
-![요구사항정의서](https://github.com/hykim-king/THIS_BUY/blob/main/THIS_buy/img/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD2.JPG)    
-![요구사항정의서](https://github.com/hykim-king/THIS_BUY/blob/main/THIS_buy/img/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD3.JPG)    
+![요구사항정의서](https://github.com/hykim-king/THIS_BUY/blob/main/doc/imgs/requirements.png)         
 
 ### 4-2. exERD    
-<img src="https://user-images.githubusercontent.com/50819376/178106297-d3349d50-408e-4365-856e-3f73d2b7ae6a.JPG" width="85%" height="85%"/>
+<img src="https://github.com/hykim-king/THIS_BUY/blob/main/doc/imgs/ERD.png" width="85%" height="85%"/>
 
 # 5. 기능시연:deciduous_tree:   
 ### 5-1. 로그인  
