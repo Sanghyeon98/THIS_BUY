@@ -35,10 +35,9 @@
 
 # 2. Project 목적:sun_with_face:   
 
-:round_pushpin: 자동완성 검색창을 보유한 영화 정보 검색 시스템 구현 :triangular_flag_on_post:   
-:round_pushpin: Spring 프레임워크를 사용하여 웹표준 Full-Stack 융합 프로젝트 구현 :triangular_flag_on_post:   
-:round_pushpin: Spring MVC아키텍처를 기반으로 Dispatcher-Servlet 원리 이해 :triangular_flag_on_post:   
-:round_pushpin: GitHub 형상관리를 사용하여 조직적 직무수행 :triangular_flag_on_post:
+:round_pushpin: 식품 판매관련하여 쇼핑몰 구현 :triangular_flag_on_post:   
+:round_pushpin: Spring 프레임워크를 사용하여 웹표준 Full-Stack 융합 프로젝트 구현 기술 습득 :triangular_flag_on_post:   
+:round_pushpin: gitHub형상관리를 사용하여 조직적 직무수행에 필요한 기술 습득:triangular_flag_on_post:   
 
 
 # 3. Project 기획:seedling:   
