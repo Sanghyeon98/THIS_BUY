@@ -53,7 +53,9 @@
 # 4. Project 설계:sunflower:   
 
 ### 4-1. 요구사항정의서  
-![요구사항정의서](https://user-images.githubusercontent.com/50819376/178106382-3eb9b5f7-def9-4d83-b0c5-ec79fd4c8d20.JPG)    
+![요구사항정의서](https://github.com/hykim-king/THIS_BUY/blob/main/THIS_buy/img/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD1.JPG)      
+![요구사항정의서](https://github.com/hykim-king/THIS_BUY/blob/main/THIS_buy/img/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD2.JPG)    
+![요구사항정의서](https://github.com/hykim-king/THIS_BUY/blob/main/THIS_buy/img/%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD3.JPG)    
 
 ### 4-2. exERD    
 <img src="https://user-images.githubusercontent.com/50819376/178106297-d3349d50-408e-4365-856e-3f73d2b7ae6a.JPG" width="85%" height="85%"/>
