@@ -24,7 +24,7 @@
   <script src="/PC_HTML/assets/js/jquery-3.6.1.js"></script>
   <script src="/PC_HTML/assets/js/jquery-ui.js"></script>
   
-  <!-- javascript -->
+  <!-- javascript --> 
   <script>
     $(document).ready(function(){
       
