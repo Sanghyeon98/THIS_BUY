@@ -25,7 +25,7 @@ public interface BoardDao<T> {
 	 */
 	// query, param 처리
 	// 예외처리, 자원반납의 경우는 JdbcTemplate 내부로 이동
-	//int doInsert(DTO dto)throws SQLException;
+	int doInsert(DTO dto)throws SQLException;
 
 	/**
 	 * 공지사항 단건조회

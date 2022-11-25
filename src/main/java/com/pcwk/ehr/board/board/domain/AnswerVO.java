@@ -2,12 +2,12 @@ package com.pcwk.ehr.board.board.domain;
 
 public class AnswerVO {
 
-	private int answerNo;
-	private int seq;
-	private String title;
-	private String contents;
-	private String regDt;
-	private String regId;
+	private int answerNo; 	// 답변 번호
+	private int seq; 		//문의 번호 
+	private String title;   //제목
+	private String contents; //내용
+	private String regDt; //등록일
+	private String regId; //등록자
 	
 	public AnswerVO() {}
 
