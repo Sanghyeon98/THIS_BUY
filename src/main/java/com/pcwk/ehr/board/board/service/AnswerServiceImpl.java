@@ -1,11 +1,11 @@
-package buy.board.service;
+package com.pcwk.ehr.board.board.service;
 
 import java.sql.SQLException;
 import java.util.List;
 
 import com.pcwk.ehr.cmn.DTO;
 
-public class AmswerServiceImpl implements AnswerService {
+public class AnswerServiceImpl implements AnswerService {
 
 	@Override
 	public List<?> getAllList() throws SQLException {

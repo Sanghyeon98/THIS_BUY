@@ -1,4 +1,4 @@
-package buy.board.domain;
+package com.pcwk.ehr.board.board.domain;
 
 import com.pcwk.ehr.cmn.DTO;
 

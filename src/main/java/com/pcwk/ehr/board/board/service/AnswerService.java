@@ -1,4 +1,4 @@
-package buy.board.service;
+package com.pcwk.ehr.board.board.service;
 
 import java.sql.SQLException;
 import java.util.List;
