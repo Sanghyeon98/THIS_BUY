@@ -5,33 +5,38 @@ import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.pcwk.ehr.board.board.domain.BoardVO;
 import com.pcwk.ehr.cmn.DTO;
 
-public class BoardDaoImpl {
-
-	final Logger LOG = LogManager.getLogger(getClass());
+@Repository("boardDao")
+public class BoardDaoImpl implements BoardDao{
+	final Logger LOG = LogManager.getFormatterLogger(getClass());
 	
-	final String NAMESPACE = "";		
-
+	final String NAMESPACE = "com.pcwk.ehr.board";		
+	final String DOT       = ".";
+	
+	@Autowired
+	SqlSessionTemplate sqlSessionTemplate;//db연결객체
+	
+	public BoardDaoImpl() {}
+	
 	/*
 	 * 답변 체크 (있으면 1, 없으면 0(=기본값))
 	 */
 	public int answerCheck(DTO dto) {
+		LOG.debug("┌--------------------------------┐");
+		LOG.debug("|param:"+dto );
 		
-		int flag = 0;
-		return flag;
+		String statement = NAMESPACE+DOT+"answerCheck";
+		LOG.debug("|statement:"+statement );
 		
-	}
-	
-	
-	/**
-	 * 질의 조회수 (doSelectOne시)
-	 */
-	public int doReadCnt(DTO dto)  throws SQLException{
-		
-		int flag = 0;
+		int flag = sqlSessionTemplate.insert(statement, dto);
+		LOG.debug("|flag:"+flag );
+		LOG.debug("└--------------------------------┘");		
 		return flag;
 		
 	}
