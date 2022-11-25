@@ -13,7 +13,7 @@ public class BoardDaoImpl {
 
 	final Logger LOG = LogManager.getLogger(getClass());
 	
-	final String NAMESPACE = "com.sist.mar.question";		
+	final String NAMESPACE = "";		
 
 	/*
 	 * 답변 체크 (있으면 1, 없으면 0(=기본값))
