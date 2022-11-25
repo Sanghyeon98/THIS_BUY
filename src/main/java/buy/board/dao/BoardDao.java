@@ -8,7 +8,7 @@ import com.pcwk.ehr.cmn.DTO;
 public interface BoardDao<T> {
 
 	/**
-	 * 질의 삭제
+	 * 공지사항 삭제
 	 * @param dto
 	 * @return int (1성공, 0 실패)
 	 * @throws SQLException
@@ -18,7 +18,7 @@ public interface BoardDao<T> {
 	int doDelete(DTO dto) throws SQLException;
 
 	/**
-	 * 질의 등록
+	 * 공지사항 등록
 	 * @param dto
 	 * @return int (1성공, 0 실패)
 	 * @throws SQLException
@@ -28,7 +28,7 @@ public interface BoardDao<T> {
 	int doInsert(DTO dto)throws SQLException;
 
 	/**
-	 * 질의 단건조회
+	 * 공지사항 단건조회
 	 * @param DTO
 	 * @return DTO
 	 * @throws SQLException
@@ -36,7 +36,7 @@ public interface BoardDao<T> {
 	DTO doSelectOne(DTO dto) throws SQLException;
 	
 	/**
-	 * 질의 수정
+	 * 공지사항 수정
 	 * @param dto
 	 * @return int (1성공, 0 실패)
 	 * @throws SQLException
@@ -44,7 +44,7 @@ public interface BoardDao<T> {
 	int doUpdate(DTO dto) throws SQLException;
 	
 	/**
-	 * 질의 목록조회 (검색포함)
+	 * 공지사항 목록조회 (검색포함)
 	 * @param dto
 	 * @return List<?>
 	 * @throws SQLException
