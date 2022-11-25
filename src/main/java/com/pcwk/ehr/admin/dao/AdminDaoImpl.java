@@ -55,7 +55,7 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public List<DTO> doRetrieve(CategoryVO inVO) throws SQLException {
+	public List<CategoryVO> doRetrieve(DTO inVO) throws SQLException {
 		return null;
 	}
 

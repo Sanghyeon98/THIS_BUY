@@ -26,5 +26,11 @@
 			SYSDATE
 		)
 	</insert>
+	
+  <!-- mybatis-config.xml에 alias 설정했기때문에 parameterType 풀경로X -->
+  <delete id="doDelete" parameterType="UserVO">  
+       DELETE FROM hr_member
+       WHERE u_id = #{uId}
+  </delete>  <!-- #{uId} 는 UserVO의 멤버변수명 -->
 
 </mapper>
