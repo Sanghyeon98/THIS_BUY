@@ -1,13 +1,13 @@
 package com.pcwk.ehr.cmn;
 
-public class MessageVO extends DTO {
+public class Message extends DTO {
 
 	private String msgId; //메시지ID
 	private String msgContents; //메시지
 	
-	public MessageVO() {}
+	public Message() {}
 
-	public MessageVO(String msgId, String msgContents) {
+	public Message(String msgId, String msgContents) {
 		super();
 		this.msgId = msgId;
 		this.msgContents = msgContents;
