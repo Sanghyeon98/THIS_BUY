@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pcwk.ehr.board">
+		
+	<!-- getAllList -->
+	<select id="getAllList" resultType="Answer">
+		SELECT
+			answer_no as answerNo,
+		    seq,
+		    title,
+		    contents,
+		    CASE WHEN TO_CHAR(SYSDATE,'YYYY/MM/DD') = TO_CHAR(reg_dt, 'YYYY/MM/DD')           
+            THEN TO_CHAR(reg_dt,'HH24:MI')                                               
+            ELSE TO_CHAR(reg_dt,'YYYY/MM/DD') END regDt,
+            reg_id as regId
+		FROM answer
+	
+	</select>
+	
+		<!-- doSelectOne -->
+	<select id="doSelectAnswer" parameterType="Answer" resultType="Answer" >
+		SELECT
+			answer_no as answerNo,
+		    seq,
+		    title,
+		    contents,
+		    CASE WHEN TO_CHAR(SYSDATE,'YYYY/MM/DD') = TO_CHAR(reg_dt, 'YYYY/MM/DD')           
+            THEN TO_CHAR(reg_dt,'HH24:MI')                                               
+            ELSE TO_CHAR(reg_dt,'YYYY/MM/DD') END regDt,
+            reg_id as regId
+		FROM answer
+		WHERE answer_no = #{answerNo}
+
+	</select>
+
+	<!-- doSelectOne -->
+	<select id="doSelectOne" parameterType="Answer" resultType="Answer" >
+		SELECT
+			answer_no as answerNo,
+		    seq,
+		    title,
+		    contents,
+		    CASE WHEN TO_CHAR(SYSDATE,'YYYY/MM/DD') = TO_CHAR(reg_dt, 'YYYY/MM/DD')           
+            THEN TO_CHAR(reg_dt,'HH24:MI')                                               
+            ELSE TO_CHAR(reg_dt,'YYYY/MM/DD') END regDt,
+            reg_id as regId
+		FROM answer
+		WHERE seq = #{seq}
+
+	</select>
+
+	<!-- update -->
+	<update id="doUpdate" parameterType="Answer">
+		UPDATE answer
+		SET contents = #{contents}
+		WHERE answer_no = #{answerNo}
+	</update>
+
+	<!-- delete -->
+	<delete id="doDelete" parameterType="Answer">
+	 	DELETE FROM answer 
+ 		WHERE  answer_no = #{answerNo}  
+	</delete>
+	
+	<!-- insert -->
+	<insert id="doInsert" parameterType="Answer">
+		INSERT INTO answer (
+		    answer_no,
+		    seq,
+		    a_user,
+		    contents,
+		    reg_dt
+		) VALUES (
+		    ANSWER_SEQ.nextval,
+		    #{questionNo},
+		    #{aUser},
+		    #{contents},
+		    SYSDATE
+		)
+	</insert>
+	
+	
+</mapper>
