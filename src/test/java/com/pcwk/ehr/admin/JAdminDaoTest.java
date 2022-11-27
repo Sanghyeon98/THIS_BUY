@@ -16,7 +16,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.pcwk.ehr.admin.dao.AdminDao;
 import com.pcwk.ehr.admin.dao.UserDao;
+import com.pcwk.ehr.admin.domain.CategoryVO;
 import com.pcwk.ehr.admin.domain.Level;
 import com.pcwk.ehr.admin.domain.UserVO;
 
@@ -27,33 +29,42 @@ import com.pcwk.ehr.admin.domain.UserVO;
 public class JAdminDaoTest {
 	final Logger LOG = LogManager.getLogger(getClass());
 	
+	
 	@Autowired
 	ApplicationContext context;
 	
 	@Autowired
 	UserDao dao;
 	
+	@Autowired
+	AdminDao adminDao;
+	
 	UserVO userVO1;
 	UserVO search;
 	
+	CategoryVO cateVO;
+	
 	@Before
 	public void setUp() throws Exception {
-		userVO1 = new UserVO("p8_01", "이상무8_01", "8888", Level.BASIC, 1, 0, "yls7577@naver.com", "날짜_미사용");
+		userVO1 = new UserVO("p8_10", "이상무8_10", "8888", Level.BASIC, 1, 0, "yls7577@naver.com", "날짜_미사용");
 		
 		search = new UserVO("p8", "이상무8", "8888", Level.BASIC, 1, 0, "yls7577@naver.com", "날짜_미사용");
+		
+		cateVO = new CategoryVO(1, "과일류");
 	}
 	
 	@Test
+	//@Ignore	
 	public void addAndGet() throws SQLException {
 		LOG.debug("==============================");
 		LOG.debug("=== addAndGet() ===");
 		LOG.debug("==============================");
 		
 		// 삭제
-		dao.doDelete(userVO1);
+		//adminDao.doDelete(cateVO);
 		
 		// 등록(1)
-		dao.doSave(userVO1);
+		adminDao.doSave(cateVO);
 		//List<UserVO> list = dao.getALL(search);
 		//assertEquals(1, dao.getCount(search));
 

@@ -5,25 +5,13 @@
 
 <mapper namespace="com.pcwk.ehr.admin">
 
-	<insert id="doSave" parameterType="DTO">
-		INSERT INTO hr_member (
-			u_id,
-			name,
-			passwd,
-			u_level,
-			login,
-			recommend,
-			email,
-			reg_dt
+	<insert id="doSaveCategory" parameterType="CategoryVO">
+		INSERT INTO category (
+			CATEGORY_NO,
+			CATEGORY_NM
 		) VALUES (
-			#{uId},
-			#{name},
-			#{passwd},
-			#{intLevel},
-			#{login},
-			#{recommend},
-			#{email},
-			SYSDATE
+			#{categoryNo},
+			#{categoryNm}
 		)
 	</insert>
 	

@@ -16,7 +16,7 @@ import com.pcwk.ehr.cmn.DTO;
 public class AdminDaoImpl implements AdminDao {
 	final Logger LOG = LogManager.getLogger(getClass());
 	
-	final String NAMESPACE = "com.pcwk.ehr.user";
+	final String NAMESPACE = "com.pcwk.ehr.admin";
 	final String DOT       = ".";
 	
 	@Autowired
@@ -29,7 +29,7 @@ public class AdminDaoImpl implements AdminDao {
 		LOG.debug("┌--------------------------------┐");
 		LOG.debug("|  param : " + inVO);
 		
-		String statement = NAMESPACE + DOT + "doSave";
+		String statement = NAMESPACE + DOT + "doSaveCategory";
 		LOG.debug("|  statement : " + statement);
 		
 		int flag = sqlSessionTemplate.insert(statement, inVO);

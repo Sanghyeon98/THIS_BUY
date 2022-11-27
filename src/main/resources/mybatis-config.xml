@@ -6,6 +6,6 @@
 <configuration>
   <typeAliases>
     <typeAlias type="com.pcwk.ehr.admin.domain.UserVO" alias="UserVO"/>
-    <!-- <typeAlias type="com.pcwk.ehr.cmn.SearchVO" alias="SearchVO"/> -->
+    <typeAlias type="com.pcwk.ehr.admin.domain.CategoryVO" alias="CategoryVO"/>
   </typeAliases>
 </configuration>
