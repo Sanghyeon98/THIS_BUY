@@ -5,141 +5,82 @@
 
 <mapper namespace="com.pcwk.ehr.board">
 	
-	<resultMap type="QuestionVO" id="questionResult">
-	
-		<id 	property="seq" 	 column="seq"	/>	
-		<result property="gubun" 	     column="gubun"		/>
-		<result property="title"	 	 column="title"  		/>
-		<result property="contents"  		 column="contents"			/>
-		<result property="regDt" 	 column="reg_dt"		/>
-		<result property="regId" 		 column="reg_id"		/>
-		<result property="answerCheck"   column="answer_check"	/>
-		
-	</resultMap>
-	
-	
-	<!-- answerCheck -->
-	<!-- 답변수가 0보다 많으면, QUESTION 테이블의 answer_check 칼럼이 0 -> 1로 변함.. 현재 doSelectOne시 갱신, 답변 insert시 발동가능하게 하길.. -->
-	<update id="answerCheck" parameterType="Answer">
-	
-		UPDATE board
-		SET answer_check = 1
-		WHERE EXISTS (
-		        SELECT A.cnt
-		        FROM(SELECT COUNT(*) cnt
-		            FROM  answer
-		            WHERE question_no = #{questionNo}) A
-		        WHERE A.cnt > 0
-		        )
-		AND seq = #{seq}   
-	
-	</update>
-	
-	<!-- doRetrieve 카테고리 : 10 (공지사항), 20(1:1 문의 )   -->
-	<sql id="searchCondition">
-		<where>
-			<choose>
-				<when test=" '10'  == searchDiv ">
-					gubun = #{searchWord}    
-				</when>
-				<when test=" '20'  == searchDiv ">
-				</when>
-			</choose> 
-		</where>
-	</sql>
-	
-	
-	<!-- doRetrieve -->
-	<select id="doRetrieve" parameterType="Search" resultType="QuestionVO">
+<!-- getAllList -->
+  <select id="getAllList" resultType="AnswerVO">
+    SELECT
+      answer_no as answerNo,
+        seq as seq,
+        title,
+        contents,
+        CASE WHEN TO_CHAR(SYSDATE,'YYYY/MM/DD') = TO_CHAR(reg_dt, 'YYYY/MM/DD')           
+            THEN TO_CHAR(reg_dt,'HH24:MI')                                               
+            ELSE TO_CHAR(reg_dt,'YYYY/MM/DD') END regDt,
+        reg_id as regId
+    FROM answer
+  
+  </select>
+  
+    <!-- doSelectOne -->
+  <select id="doSelectAnswer" parameterType="AnswerVO" resultType="AnswerVO" >
+    SELECT
+      answer_no as answerNo,
+        question_no as questionNo,
+         title,
+        contents,
+        CASE WHEN TO_CHAR(SYSDATE,'YYYY/MM/DD') = TO_CHAR(reg_dt, 'YYYY/MM/DD')           
+            THEN TO_CHAR(reg_dt,'HH24:MI')                                               
+            ELSE TO_CHAR(reg_dt,'YYYY/MM/DD') END regDt,
+         reg_id as regId
+    FROM answer
+    WHERE answer_no = #{answerNo}
 
-		 SELECT A.*,                                                                                                                    
-		        B.*                                                                                                                      
-		 FROM(    
-		        SELECT t2.seq 			AS num,             
-		        	   t2.gubun 	AS questionNo, 		                                                                                                     
-		               t2.title 		AS orderNo, 		                                                                                                       
-		               t2.contents 		AS qUser,                                                                                                       
-		               t2.reg_id			AS regId,                                   			                                                                                                                                                                                                                                                                                                                                                                         
-		               DECODE(TO_CHAR(SYSDATE, 'YYYYMMDD'), TO_CHAR(t2.reg_dt, 'YYYYMMDD')
-		                          , TO_CHAR(t2.reg_dt, 'HH24:MI')             
-		                          , TO_CHAR(t2.reg_dt, 'YYYYMMDD')) AS regDt,
-		               t2.answer_check  AS answerCheck           
-		         FROM(                                                                                                                
-		             SELECT ROWNUM rnum                                                                                                 
-		                     , t1.*                                                                                                     
-		             FROM(SELECT *                                                                                                      
-		                  FROM question                                                                                                                                               
-		                  ORDER BY question_no DESC ) t1  
-		              <include refid="searchCondition" />                                                                                 
-		             )t2 
-		         WHERE rnum BETWEEN #{pageSize} * (#{pageNum} - 1) + 1 AND #{pageSize} * (#{pageNum} - 1) + #{pageSize}
-		     )A                                                                                                                         
-		 CROSS JOIN                                                                                                                     
-		     (SELECT COUNT(*) totalCnt                                                                                                 
-		     FROM question          
-		     <include refid="searchCondition" />                                                                                                      
-		     )B     
+  </select>
 
-	                                                                                                                                                                         															
-       <!--  WHERE rnum BETWEEN #{pageSize} * (#{pageNum} - 1) + 1 AND #{pageSize} * (#{pageNum} - 1) + #{pageSize} -->
-	
-	</select>
-	
-	
-	<select id="doSelectOne" parameterType="QuestionVO" resultMap="questionResult">
-		
-		SELECT seq, 	            					  
-			   gubun,	                					   			  
-			   title,			                   				  
-			   contents,	
-			   reg_id,	                   				  	 	                   				  	    				  
-			   TO_CHAR(reg_dt, 'YYYY/MM/DD HH24MISS') reg_dt,	   
-			   answer_check 			  
-		FROM   seq                  					  
-		WHERE seq = #{seq}
-		ORDER BY seq
-		
-	</select>
-	
-	
-	<!-- doUpdate -->
-	<update id = "doUpdate" parameterType="QuestionVO">
-		UPDATE question
-		SET   title = #{title}
-		    , contents = #{contents}
-		    , reg_dt = SYSDATE
-		WHERE question_no = #{questionNo}
-		
-	</update>
-	
-	
-	<!-- doDelete -->
-	<delete id = "doDelete" parameterType="QuestionVO">
-	
-		DELETE FROM board
-		WHERE seq = #{seq}
-	
-	</delete>
+  <!-- doSelectOne -->
+  <select id="doSelectOne" parameterType="AnswerVO" resultType="AnswerVO" >
+    SELECT
+      answer_no as answerNo,
+        seq as seq,
+        title,
+        contents,
+        CASE WHEN TO_CHAR(SYSDATE,'YYYY/MM/DD') = TO_CHAR(reg_dt, 'YYYY/MM/DD')           
+            THEN TO_CHAR(reg_dt,'HH24:MI')                                               
+            ELSE TO_CHAR(reg_dt,'YYYY/MM/DD') END regDt,
+            reg_id as regId
+    FROM answer
+    WHERE seq = #{seq}
 
+  </select>
 
-	<!-- doInsert -->	
-	<insert id = "doInsert" parameterType="QuestionVO">
-		
-		INSERT INTO question (
-		    seq,
-		    gubun,
-		    title,
-		    contents,
-		    reg_dt,
-		    reg_id
-		) VALUES (
-		    seq_SEQ.NEXTVAL,
-		    #{gubun},
-		    #{title},
-		    #{contents},
-		    SYSDATE,
-		    #{reg_id}
-		)
-	
-	</insert>
+  <!-- update -->
+  <update id="doUpdate" parameterType="AnswerVO">
+    UPDATE answer
+    SET contents = #{contents}
+    WHERE answer_no = #{answerNo}
+  </update>
+
+  <!-- delete -->
+  <delete id="doDelete" parameterType="AnswerVO">
+    DELETE FROM answer 
+    WHERE  answer_no = #{answerNo}  
+  </delete>
+  
+  <!-- insert -->
+  <insert id="doInsert" parameterType="AnswerVO">
+    INSERT INTO answer (
+        answer_no,
+        seq,
+        a_user,
+        contents,
+        reg_dt,
+        reg_id
+    ) VALUES (
+        ANSWER_SEQ.nextval,
+        #{seq},
+        #{aUser},
+        #{contents},
+        SYSDATE,
+        #{reg_id}
+    )
+  </insert>
 </mapper>
