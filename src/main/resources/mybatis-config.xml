@@ -7,5 +7,7 @@
   <typeAliases>
     <typeAlias type="com.pcwk.ehr.admin.domain.UserVO" alias="UserVO"/>
     <typeAlias type="com.pcwk.ehr.admin.domain.CategoryVO" alias="CategoryVO"/>
+    <typeAlias type="com.pcwk.ehr.board.domain.AnswerVO" alias="AnswerVO"/>
+    <typeAlias type="com.pcwk.ehr.board.domain.BoardVO" alias="BoardVO"/>
   </typeAliases>
 </configuration>

@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
-import com.pcwk.ehr.board.board.domain.BoardVO;
-import com.pcwk.ehr.board.board.service.BoardService;
+import com.pcwk.ehr.board.domain.BoardVO;
+import com.pcwk.ehr.board.service.BoardService;
 import com.pcwk.ehr.cmn.Message;
 
 

@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.pcwk.ehr.cmn.DTO;
 
-public interface BoardDao<T> {
+public interface BoardDao {
 
 	/**
 	 * 공지사항 삭제
@@ -49,5 +49,5 @@ public interface BoardDao<T> {
 	 * @return List<?>
 	 * @throws SQLException
 	 */
-	List<T> doRetrieve(DTO dto) throws SQLException;
+	List<?> doRetrieve(DTO dto) throws SQLException;
 }
