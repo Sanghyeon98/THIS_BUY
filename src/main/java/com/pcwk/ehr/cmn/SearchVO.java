@@ -3,6 +3,7 @@ package com.pcwk.ehr.cmn;
 public class SearchVO extends DTO {
 	private int pageSize;	// 페이지 사이즈
 	private int pageNo;		// 페이지 번호
+	// 카테고리 searchDiv : 10(카테고리이름), 20(상태값 1:사용/0:미사용)
 	private String searchDiv;	// 검색 구분
 	private String searchWord;	// 검색어
 	
