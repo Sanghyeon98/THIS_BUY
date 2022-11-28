@@ -1,12 +1,12 @@
-package com.pcwk.ehr.board.board.service;
+package com.pcwk.ehr.board.service;
 
 import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.pcwk.ehr.board.board.dao.BoardDao;
-import com.pcwk.ehr.board.board.dao.BoardDaoImpl;
+import com.pcwk.ehr.board.dao.BoardDao;
+import com.pcwk.ehr.board.dao.BoardDaoImpl;
 import com.pcwk.ehr.cmn.DTO;
 
 public class BoardServiceImpl implements BoardService {

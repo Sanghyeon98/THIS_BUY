@@ -1,4 +1,4 @@
-package com.pcwk.ehr.board.board.dao;
+package com.pcwk.ehr.board.dao;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -9,7 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.pcwk.ehr.board.board.domain.BoardVO;
+import com.pcwk.ehr.board.domain.BoardVO;
 import com.pcwk.ehr.cmn.DTO;
 
 @Repository("boardDao")

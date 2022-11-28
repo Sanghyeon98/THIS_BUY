@@ -1,4 +1,4 @@
-package com.pcwk.ehr.board.board.domain;
+package com.pcwk.ehr.board.domain;
 
 public class AnswerVO {
 

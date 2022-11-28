@@ -1,4 +1,4 @@
-package com.pcwk.ehr.board.board.dao;
+package com.pcwk.ehr.board.dao;
 
 import java.sql.SQLException;
 import java.util.List;
