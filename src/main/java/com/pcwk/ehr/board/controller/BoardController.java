@@ -12,17 +12,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.pcwk.ehr.board.domain.BoardVO;
-import com.pcwk.ehr.board.service.BoardService;
+import com.pcwk.ehr.board.service.BoardServiceImpl;
 import com.pcwk.ehr.cmn.Message;
 
-
-@Controller("userController")
-@RequestMapping("board")
+//@Controller
 public class BoardController {
 	final Logger LOG = LogManager.getLogger(getClass());
 
 	@Autowired
-	BoardService boardService;
+	BoardServiceImpl boardServiceImpl;
 
 	// 화면 파일
 	final String VIEW_NAME = "board/board_mng";
@@ -31,7 +29,7 @@ public class BoardController {
 	}
 
 	// 화면
-	@RequestMapping(value = "/view.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/view.do")
 	public String view() {
 		LOG.debug("┌=============================┐");
 		LOG.debug("│view=                        │");
@@ -43,7 +41,7 @@ public class BoardController {
 		return VIEW_NAME;
 	}
 	
-	@RequestMapping(value = "/question/do_delete.do", method =  RequestMethod.GET
+	@RequestMapping(value = "/board/do_delete.do", method =  RequestMethod.GET
 			, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String doDelete(BoardVO question) throws SQLException {
@@ -52,7 +50,7 @@ public class BoardController {
 		LOG.debug("param : " + question);
 		LOG.debug("=======================");
 		
-		int flag = this.boardService.doDelete(question);
+		int flag = this.boardServiceImpl.doDelete(question);
 		
 		String resultMsg = "";
 		
@@ -75,5 +73,29 @@ public class BoardController {
 		
 		return jsonStr;
 		
+	}
+	
+	@RequestMapping(value="/doInsert.do", method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
+	@ResponseBody //비동기 처리를 하는 경우 , HTTP 요청 부분의 body 부분이 그대로 브라우저에 전달된다.
+	public String doInsert(BoardVO dto) throws SQLException{
+		String jsonString = "" ;
+		LOG.debug("┌=============================┐");
+		LOG.debug("┌inVO:┐"+dto);
+		int flag = boardServiceImpl.doInsert(dto);
+		
+		String message = ""; //json으로 전달할 메시지
+		if(1==flag) {
+			message = dto.getSeq()+"등록 되었습니다.";
+		}else {
+			message = dto.getSeq()+"등록 실패";
+		}
+		
+		Message messageVO = new Message(String.valueOf(flag),message);
+		
+		jsonString = new Gson().toJson(messageVO);
+		
+		LOG.debug("│jsonString= "+jsonString);
+		LOG.debug("└=============================┘");
+		return jsonString;
 	}
 }

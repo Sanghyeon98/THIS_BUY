@@ -54,7 +54,7 @@ public class JAdminDaoTest {
 	}
 	
 	@Test
-	//@Ignore	
+	@Ignore	
 	public void addAndGet() throws SQLException {
 		LOG.debug("==============================");
 		LOG.debug("=== addAndGet() ===");
@@ -72,7 +72,7 @@ public class JAdminDaoTest {
 	}	
 
 	@Test
-	@Ignore
+	//@Ignore
 	public void beans() {
 		LOG.debug("==============================");
 		LOG.debug("context:"+context);	

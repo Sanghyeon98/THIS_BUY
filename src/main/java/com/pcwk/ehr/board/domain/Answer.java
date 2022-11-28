@@ -1,6 +1,8 @@
 package com.pcwk.ehr.board.domain;
 
-public class AnswerVO {
+import com.pcwk.ehr.cmn.DTO;
+
+public class Answer extends DTO{
 
 	private int answerNo; 	// 답변 번호
 	private int seq; 		//문의 번호 
@@ -9,9 +11,9 @@ public class AnswerVO {
 	private String regDt; //등록일
 	private String regId; //등록자
 	
-	public AnswerVO() {}
+	public Answer() {}
 
-	public AnswerVO(int answerNo, int seq, String title, String contents, String regDt, String regId) {
+	public Answer(int answerNo, int seq, String title, String contents, String regDt, String regId) {
 		super();
 		this.answerNo = answerNo;
 		this.seq = seq;

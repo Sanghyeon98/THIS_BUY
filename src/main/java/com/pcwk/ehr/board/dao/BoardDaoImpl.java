@@ -10,6 +10,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.pcwk.ehr.board.domain.Answer;
 import com.pcwk.ehr.board.domain.BoardVO;
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.cmn.SearchVO;
@@ -26,7 +27,28 @@ public class BoardDaoImpl implements BoardDao {
 
 	public BoardDaoImpl() {}
 
-
+	/*
+	 * 답변 체크 (있으면 1, 없으면 0(=기본값))
+	 */
+	public int answerCheck(DTO dto) {
+		
+		int flag = 0;
+		
+		Answer question = (Answer) dto;
+		
+		// mybatis sql : NAMESPACE + . + id;
+		String statement = this.NAMESPACE + ".answerCheck";
+		
+		LOG.debug("============================");
+		LOG.debug("=question=" + question);
+		LOG.debug("=statement=" + statement);
+		LOG.debug("============================");
+		
+		flag = this.sqlSessionTemplate.update(statement, question);
+		return flag;
+		
+	}
+	
 	@Override
 	public List<BoardVO> doRetrieve(DTO dto) throws SQLException {
 		SearchVO search = (SearchVO) dto;
@@ -67,7 +89,7 @@ public class BoardDaoImpl implements BoardDao {
 		LOG.debug("┌--------------------------------┐");
 		LOG.debug("|  param : " + dto);
 		
-		String statement = NAMESPACE + DOT + "doSaveCategory";
+		String statement = NAMESPACE + DOT + "doInsert";
 		LOG.debug("|  statement : " + statement);
 		
 		int flag = sqlSessionTemplate.insert(statement, dto);
