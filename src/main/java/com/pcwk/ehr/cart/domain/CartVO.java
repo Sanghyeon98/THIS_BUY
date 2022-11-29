@@ -6,14 +6,14 @@ public class CartVO extends DTO {
 
 	private int cartNO;   // 장바구니 번호
 	private int itemNO;   // 상품 번호
-	private int memberId; // 사용자 아이디
+	private String memberId; // 사용자 아이디
 	private String name;  // 상품이름
 	private int  price;	  // 상품 가격
 	private int quantity; // 상품 수량
 	
 	public CartVO() {}
 
-	public CartVO(int cartNO, int itemNO, int memberId, String name, int price, int quantity) {
+	public CartVO(int cartNO, int itemNO, String memberId, String name, int price, int quantity) {
 		super();
 		this.cartNO = cartNO;
 		this.itemNO = itemNO;
@@ -39,11 +39,11 @@ public class CartVO extends DTO {
 		this.itemNO = itemNO;
 	}
 
-	public int getMemberId() {
+	public String getMemberId() {
 		return memberId;
 	}
 
-	public void setMemberId(int memberId) {
+	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
 

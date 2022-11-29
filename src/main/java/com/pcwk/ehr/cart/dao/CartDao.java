@@ -8,6 +8,7 @@ import com.pcwk.ehr.cmn.DTO;
 
 public interface CartDao {
 
+	int doUpdate(DTO dto)throws SQLException;
 	/**
 	 * 장바구니 선택 삭제
 	 * @param dto
