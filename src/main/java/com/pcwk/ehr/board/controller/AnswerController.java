@@ -14,21 +14,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
-import com.pcwk.ehr.board.domain.Answer;
+import com.pcwk.ehr.board.domain.AnswerVO;
 import com.pcwk.ehr.board.service.AnswerService;
 import com.pcwk.ehr.cmn.Message;
 
+@RequestMapping("answer")
 public class AnswerController {
 	
 	final Logger LOG = LogManager.getLogger(getClass());
 	
 	@Autowired
 	AnswerService answerService;
+	
+	//화면 파일
+	final String VIEW_NAME = "answer/answer_mng";
 
-	public AnswerController() {
-	}
+	public AnswerController() {}
 
-	@RequestMapping(value = "answer/answer_view.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/answer_view.do", method = RequestMethod.GET)
 	public String view01(Model model,@RequestParam(value = "questionNo", required = false)String questionNo) throws Exception {
 		LOG.debug("=================");
 		LOG.debug("=answer view=");
@@ -38,7 +41,7 @@ public class AnswerController {
 		return "answer/answer";
 	}
 	
-	@RequestMapping(value = "answer/answer_moview.do",  method = RequestMethod.GET)
+	@RequestMapping(value = "/answer_moview.do",  method = RequestMethod.GET)
 	public String view02(Model model, @RequestParam(value = "answerNo", required = false)String answerNo) throws Exception {
 		LOG.debug("=================");
 		LOG.debug("=answer view=");
@@ -58,12 +61,12 @@ public class AnswerController {
 	 * @throws SQLException
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "answer/get_all.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = "/get_all.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String getAllList() throws SQLException {
-		List<Answer> list = (List<Answer>) answerService.getAllList();
+		List<AnswerVO> list = (List<AnswerVO>) answerService.getAllList();
 
-		for (Answer vo : list) {
+		for (AnswerVO vo : list) {
 			LOG.debug(vo.toString());
 		}
 
@@ -85,12 +88,12 @@ public class AnswerController {
 	 * @throws RuntimeException
 	 * @throws SQLException
 	 */
-	@RequestMapping(value = "answer/do_selectone.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = "/do_selectone.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String doSelectOne(Answer answer) throws SQLException {
-		List<Answer> list = (List<Answer>) answerService.doSelectOne(answer);
+	public String doSelectOne(AnswerVO answer) throws SQLException {
+		List<AnswerVO> list = (List<AnswerVO>) answerService.doSelectOne(answer);
 
-		for (Answer vo : list) {
+		for (AnswerVO vo : list) {
 			LOG.debug(vo.toString());
 		}
 
@@ -104,13 +107,13 @@ public class AnswerController {
 	}
 	
    
-	@RequestMapping(value = "answer/do_selectans.do",method = RequestMethod.GET
+	@RequestMapping(value = "/do_selectans.do",method = RequestMethod.GET
 			,produces = "application/json;charset=UTF-8")
 	@ResponseBody	
-	public String doSelectAnswer(Answer answer) throws SQLException {
+	public String doSelectAnswer(AnswerVO answer) throws SQLException {
 		LOG.debug("param:"+answer);
 		
-		Answer outVO = (Answer) answerService.doSelectAnswer(answer);
+		AnswerVO outVO = (AnswerVO) answerService.doSelectAnswer(answer);
 		
 		LOG.debug("outVO:"+outVO);
 		
@@ -130,10 +133,10 @@ public class AnswerController {
 	 * @throws SQLException 
 	 */     
 	@SuppressWarnings("deprecation")
-	@RequestMapping(value = "answer/do_update.do",method = RequestMethod.POST
+	@RequestMapping(value = "/do_update.do",method = RequestMethod.POST
 			,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody       
-	public String doUpdate(Answer answer) throws SQLException {
+	public String doUpdate(AnswerVO answer) throws SQLException {
 		LOG.debug("param:"+answer);
 		
 		int flag = answerService.doUpdate(answer);
@@ -162,9 +165,9 @@ public class AnswerController {
 	 * @return JSON(1:성공. 0:실패)
 	 * @throws SQLException
 	 */
-	@RequestMapping(value = "answer/do_delete.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = "/do_delete.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String doDelete(Answer answer) throws SQLException {
+	public String doDelete(AnswerVO answer) throws SQLException {
 		LOG.debug("param:" + answer);
 
 		int flag = answerService.doDelete(answer);
@@ -195,9 +198,9 @@ public class AnswerController {
 	 * @throws RuntimeException
 	 * @throws SQLException
 	 */
-	@RequestMapping(value = "answer/do_insert.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = "/do_insert.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String doInsert(Answer answer) throws SQLException {
+	public String doInsert(AnswerVO answer) throws SQLException {
 		LOG.debug("param:" + answer);
 
 		int flag = answerService.doInsert(answer);

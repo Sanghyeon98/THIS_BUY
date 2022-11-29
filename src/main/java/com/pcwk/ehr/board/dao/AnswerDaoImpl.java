@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 
-import com.pcwk.ehr.board.domain.Answer;
+import com.pcwk.ehr.board.domain.AnswerVO;
 import com.pcwk.ehr.cmn.DTO;
 
 @Repository
@@ -32,9 +32,9 @@ public class AnswerDaoImpl {
 	public List<?> getAllList() throws SQLException {
 		String statement = this.NAMESPACE + ".getAllList";
 
-		List<Answer> list = sqlSessionTemplate.selectList(statement);
+		List<AnswerVO> list = sqlSessionTemplate.selectList(statement);
 
-		for (Answer vo : list) {
+		for (AnswerVO vo : list) {
 			LOG.debug("vo :" + vo);
 		}
 		return list;
@@ -48,20 +48,20 @@ public class AnswerDaoImpl {
 	 * @throws SQLException
 	 */
 	public List<?> doSelectOne(DTO dto) throws SQLException {
-		Answer inVO = (Answer) dto;
+		AnswerVO inVO = (AnswerVO) dto;
 
 		String statement = NAMESPACE + ".doSelectOne";
-		List<Answer> list = sqlSessionTemplate.selectList(statement, inVO);
+		List<AnswerVO> list = sqlSessionTemplate.selectList(statement, inVO);
 
-		for (Answer vo : list) {
+		for (AnswerVO vo : list) {
 			LOG.debug("vo :" + vo);
 		}
 		return list;
 	}
 
 	public DTO doSelectAnswer(DTO dto) throws SQLException {
-		Answer inVO = (Answer) dto;
-		Answer outVO = null;
+		AnswerVO inVO = (AnswerVO) dto;
+		AnswerVO outVO = null;
 
 		String statement = NAMESPACE + ".doSelectAnswer";
 		LOG.debug("=inVO=" + inVO);
@@ -91,7 +91,7 @@ public class AnswerDaoImpl {
 	 */
 	public int doUpdate(DTO dto) throws SQLException {
 		int flag = 0;
-		Answer answer = (Answer) dto;
+		AnswerVO answer = (AnswerVO) dto;
 
 		String statement = NAMESPACE + ".doUpdate";
 
@@ -110,7 +110,7 @@ public class AnswerDaoImpl {
 	 */
 	public int doDelete(DTO dto) throws SQLException {
 		int flag = 0;
-		Answer answer = (Answer) dto;
+		AnswerVO answer = (AnswerVO) dto;
 
 		String statement = NAMESPACE + ".doDelete";
 
@@ -132,7 +132,7 @@ public class AnswerDaoImpl {
 	 */
 	public int doInsert(DTO dto) throws SQLException {
 		int flag = 0;
-		Answer answer = (Answer) dto;
+		AnswerVO answer = (AnswerVO) dto;
 
 		String statement = NAMESPACE + ".doInsert";
 		LOG.debug("=answer=" + answer);

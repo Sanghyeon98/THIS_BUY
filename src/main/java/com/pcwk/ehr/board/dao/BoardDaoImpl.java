@@ -10,7 +10,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.pcwk.ehr.board.domain.Answer;
+import com.pcwk.ehr.board.domain.AnswerVO;
 import com.pcwk.ehr.board.domain.BoardVO;
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.cmn.SearchVO;
@@ -34,7 +34,7 @@ public class BoardDaoImpl implements BoardDao {
 		
 		int flag = 0;
 		
-		Answer question = (Answer) dto;
+		AnswerVO question = (AnswerVO) dto;
 		
 		// mybatis sql : NAMESPACE + . + id;
 		String statement = this.NAMESPACE + ".answerCheck";
