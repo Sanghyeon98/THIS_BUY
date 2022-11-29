@@ -14,24 +14,24 @@ import com.pcwk.ehr.admin.domain.CategoryVO;
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.cmn.SearchVO;
 
-@Repository("adminDao")
-public class AdminDaoImpl implements AdminDao {
+@Repository("adminCategoryDao")
+public class AdminCategoryDaoImpl implements AdminCategoryDao {
 	final Logger LOG = LogManager.getLogger(getClass());
 	
-	final String NAMESPACE = "com.pcwk.ehr.admin";
+	final String NAMESPACE = "com.pcwk.ehr.category";
 	final String DOT       = ".";
 	
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 	
-	public AdminDaoImpl() {}
+	public AdminCategoryDaoImpl() {}
 
 	@Override
 	public int doSave(CategoryVO inVO) throws SQLException {
 		LOG.debug("┌--------------------------------┐");
 		LOG.debug("|  param : " + inVO);
 		
-		String statement = NAMESPACE + DOT + "doSaveCategory";
+		String statement = NAMESPACE + DOT + "doSave";
 		LOG.debug("|  statement : " + statement);
 		
 		int flag = sqlSessionTemplate.insert(statement, inVO);
@@ -46,7 +46,7 @@ public class AdminDaoImpl implements AdminDao {
 		LOG.debug("================================");
 		LOG.debug("|  param : " + inVO);
 		
-		String statement = NAMESPACE + DOT + "doDeleteCategory";
+		String statement = NAMESPACE + DOT + "doDelete";
 		LOG.debug("|  statement: " + statement);
 		
 		int flag = sqlSessionTemplate.delete(statement, inVO);
@@ -63,7 +63,7 @@ public class AdminDaoImpl implements AdminDao {
 		LOG.debug("================================");
 		LOG.debug("|  param : " + inVO);
 		
-		String statement = NAMESPACE + DOT + "doUpdateCategory";
+		String statement = NAMESPACE + DOT + "doUpdate";
 		LOG.debug("|  statement: " + statement);
 		
 		flag = sqlSessionTemplate.update(statement, inVO);
@@ -75,7 +75,19 @@ public class AdminDaoImpl implements AdminDao {
 
 	@Override
 	public CategoryVO doSelectOne(CategoryVO inVO) throws SQLException {
-		return null;
+		CategoryVO outVO = null;
+		
+		String statement = NAMESPACE + DOT + "doSelectOne";
+
+		LOG.debug("================================");
+		LOG.debug("|  param : " + inVO);
+		LOG.debug("|  statement: " + statement);
+		
+		outVO = sqlSessionTemplate.selectOne(statement, inVO);
+		LOG.debug("|  outVO : " + outVO);
+		LOG.debug("================================");
+		
+		return outVO;
 	}
 
 	@Override
@@ -83,7 +95,7 @@ public class AdminDaoImpl implements AdminDao {
 		SearchVO search = (SearchVO) inVO;
 		List<CategoryVO> list = new ArrayList<CategoryVO>();
 		
-        String statement = NAMESPACE + DOT + "doRetrieveCategory";
+        String statement = NAMESPACE + DOT + "doRetrieve";
         LOG.debug("================================");
 		LOG.debug("|  param:" + inVO );        
 		LOG.debug("|  statement:" + statement );  
@@ -92,6 +104,41 @@ public class AdminDaoImpl implements AdminDao {
 		
 		for(CategoryVO vo : list) {
 			LOG.debug("|  vo : " + vo );
+		}
+		LOG.debug("================================");
+		
+		return list;
+	}
+
+	@Override
+	public int getCount(CategoryVO inVO) throws SQLException {
+		int count = 0;
+		
+		String statement = NAMESPACE + DOT + "getCount";
+		LOG.debug("================================");
+		LOG.debug("|  param : " + inVO);
+		LOG.debug("|  statement: " + statement);
+		
+		count = sqlSessionTemplate.selectOne(statement, inVO);
+		LOG.debug("================================");
+		
+		return count;
+	}
+
+	@Override
+	public List<CategoryVO> getALL(CategoryVO inVO) throws SQLException {
+		List<CategoryVO> list = null;
+		
+		String statement = NAMESPACE + DOT + "getALL";
+
+		LOG.debug("================================");
+		LOG.debug("|  param : " + inVO);
+		LOG.debug("|  statement: " + statement);
+		
+		list = sqlSessionTemplate.selectList(statement, inVO);
+		
+		for(CategoryVO vo : list) {
+			LOG.debug("|  vo : " + vo);
 		}
 		LOG.debug("================================");
 		
