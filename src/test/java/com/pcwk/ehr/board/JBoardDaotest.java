@@ -34,7 +34,7 @@ import com.pcwk.ehr.cmn.SearchVO;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/root-context.xml"
 								  ,"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"})
-public class JboardDaotest {
+public class JBoardDaotest {
 	final Logger LOG = LogManager.getLogger(getClass());
 
 	
@@ -67,11 +67,32 @@ public class JboardDaotest {
 		board02 = new BoardVO (2, 10, "제목10", "내용10" , "d", "d", 1);
 		board03 = new BoardVO (3, 10, "제목10", "내용10" , "d", "d", 1);
 	
-		//search = new SearchVO(10, 2, "", "");
+	
+		//searchVO  = new SearchVO(10,1,"10","p99");
+		search = new SearchVO(1, 2, "10", "10");
 		//int pageSize, int pageNo, String searchDiv, String searchWord
 	}
 	
-	
+	@Test
+	//@Ignore
+	public void listAndRead() throws SQLException {
+		// 1. 후기 전체 목록조회
+		// 2. 후기 단건 조회
+		
+		LOG.debug("*************************");
+		LOG.debug("=@listAndDetail=");
+		LOG.debug("*************************");
+		
+		// 1.
+		dao.doRetrieve(search);
+		
+		 //2.
+		dao.doSelectOne(board01);
+		dao.doSelectOne(board02);
+		dao.doSelectOne(board03);
+		
+		
+	}
 	
 	@Test
 	@Ignore
@@ -136,10 +157,14 @@ public class JboardDaotest {
 				// 3. 데이터 수정하기 (UPDATE)
 				
 				// 1. 
-			//dao.doInsert(board01);
-			//dao.doInsert(board02);
-			//dao.doInsert(board03);
-			dao.doDelete(board01);
+		    dao.doDelete(board01);
+		    dao.doDelete(board02);
+		    dao.doDelete(board03);
+		    //2
+			dao.doInsert(board01);
+			dao.doInsert(board02);
+			dao.doInsert(board03);
+			//dao.doDelete(board01);
 				
 				
 				
