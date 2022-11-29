@@ -21,6 +21,7 @@ import com.pcwk.ehr.admin.dao.UserDao;
 import com.pcwk.ehr.admin.domain.CategoryVO;
 import com.pcwk.ehr.admin.domain.Level;
 import com.pcwk.ehr.admin.domain.UserVO;
+import com.pcwk.ehr.cmn.SearchVO;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -42,7 +43,11 @@ public class JAdminDaoTest {
 	UserVO userVO1;
 	UserVO search;
 	
-	CategoryVO cateVO;
+	CategoryVO cateVO01;
+	CategoryVO cateVO02;
+	CategoryVO cateVO03;
+	
+	SearchVO searchVO;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -50,7 +55,28 @@ public class JAdminDaoTest {
 		
 		search = new UserVO("p8", "이상무8", "8888", Level.BASIC, 1, 0, "yls7577@naver.com", "날짜_미사용");
 		
-		cateVO = new CategoryVO(1, "과일류");
+		cateVO01 = new CategoryVO(1, "과일류");
+		cateVO02 = new CategoryVO(2, "생선류");
+		cateVO03 = new CategoryVO(3, "수산");
+		
+		searchVO = new SearchVO(10, 1, "10", "과일");
+	}
+	
+	@Test
+	public void doRetrieve() throws SQLException {
+		// 삭제
+		adminDao.doDelete(cateVO01);
+		adminDao.doDelete(cateVO02);
+		adminDao.doDelete(cateVO03);
+		
+		// 등록(1)
+		adminDao.doSave(cateVO01);
+		adminDao.doSave(cateVO02);
+		adminDao.doSave(cateVO03);
+				
+		List<CategoryVO> list = adminDao.doRetrieve(searchVO);
+		
+		assertEquals(cateVO01.getCategoryNm(), list.get(0).getCategoryNm());
 	}
 	
 	@Test
@@ -61,10 +87,18 @@ public class JAdminDaoTest {
 		LOG.debug("==============================");
 		
 		// 삭제
-		//adminDao.doDelete(cateVO);
+		adminDao.doDelete(cateVO01);
+		adminDao.doDelete(cateVO02);
+		adminDao.doDelete(cateVO03);
 		
 		// 등록(1)
-		adminDao.doSave(cateVO);
+		adminDao.doSave(cateVO01);
+		adminDao.doSave(cateVO02);
+		adminDao.doSave(cateVO03);
+		
+		
+		cateVO03.setCategoryNm("수산_UP");
+		adminDao.doUpdate(cateVO03);
 		//List<UserVO> list = dao.getALL(search);
 		//assertEquals(1, dao.getCount(search));
 
@@ -72,7 +106,7 @@ public class JAdminDaoTest {
 	}	
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void beans() {
 		LOG.debug("==============================");
 		LOG.debug("context:"+context);	
