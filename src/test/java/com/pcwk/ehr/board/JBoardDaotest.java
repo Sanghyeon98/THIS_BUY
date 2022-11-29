@@ -84,12 +84,13 @@ public class JBoardDaotest {
 		LOG.debug("*************************");
 		
 		// 1.
-		dao.doRetrieve(search);
-		
+		//dao.doRetrieve(search);
+		dao.doDelete(board01);
+		dao.doInsert(board01);
 		 //2.
 		dao.doSelectOne(board01);
-		dao.doSelectOne(board02);
-		dao.doSelectOne(board03);
+		//dao.doSelectOne(board02);
+		//dao.doSelectOne(board03);
 		
 		
 	}
