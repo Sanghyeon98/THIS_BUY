@@ -8,7 +8,7 @@
 <!-- getAllList -->
   <select id="getAllList" resultType="AnswerVO">
     SELECT
-      answer_no as answerNo,
+      answer_no as answerNo, 
         seq as seq,
         title,
         contents,
