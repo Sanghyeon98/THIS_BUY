@@ -1,7 +1,7 @@
 package com.pcwk.ehr.board.domain;
 
 import com.pcwk.ehr.cmn.DTO;
-
+ 
 public class AnswerVO extends DTO{
 
 	private int answerNo; 	// 답변 번호
