@@ -50,4 +50,5 @@ public interface BoardDao {
 	 * @throws SQLException
 	 */
 	List<?> doRetrieve(DTO dto) throws SQLException;
+	
 }

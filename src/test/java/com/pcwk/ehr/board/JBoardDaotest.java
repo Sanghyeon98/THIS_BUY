@@ -34,7 +34,7 @@ import com.pcwk.ehr.cmn.SearchVO;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/root-context.xml"
 								  ,"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"})
-public class JboardDaotest {
+public class JBoardDaotest {
 	final Logger LOG = LogManager.getLogger(getClass());
 
 	
@@ -63,18 +63,39 @@ public class JboardDaotest {
 		
 		LOG.debug("=context=" + context);
 		
-		board01 = new BoardVO (1, 10, "제목10", "내용10" , "d", "d", 1);
-		board02 = new BoardVO (2, 10, "제목10", "내용10" , "d", "d", 1);
-		board03 = new BoardVO (3, 10, "제목10", "내용10" , "d", "d", 1);
+		board01 = new BoardVO (1, 10, 10, "제목10", "내용10" , "d", "d", 1);
+		board02 = new BoardVO (2, 10, 10, "제목10", "내용10" , "d", "d", 1);
+		board03 = new BoardVO (3, 10, 10, "제목10", "내용10" , "d", "d", 1);
 	
-		//search = new SearchVO(10, 2, "", "");
+	
+		//searchVO  = new SearchVO(10,1,"10","p99");
+		search = new SearchVO(1, 2, "10", "10");
 		//int pageSize, int pageNo, String searchDiv, String searchWord
 	}
 	
-	
-	
 	@Test
 	@Ignore
+	public void list() throws SQLException {
+
+		
+		LOG.debug("*************************");
+		LOG.debug("=list=");
+		LOG.debug("*************************");
+		
+		// 1.
+		//dao.doRetrieve(search);
+		dao.doDelete(board01);
+		dao.doInsert(board01);
+		 //2.
+		dao.doSelectOne(board01);
+		//dao.doSelectOne(board02);
+		//dao.doSelectOne(board03);
+		
+		
+	}
+	
+	@Test
+	//@Ignore
 	public void addAndGet() throws SQLException {
 		
 		// 1. 기존데이터 3건 삭제
@@ -82,7 +103,7 @@ public class JboardDaotest {
 		// 3. 데이터 수정하기 (UPDATE)
 		
 		LOG.debug("*************************");
-		LOG.debug("=@addAndGet=");
+		LOG.debug("=addAndGet=");
 		LOG.debug("*************************");
 		
 		// 1. 
@@ -101,14 +122,14 @@ public class JboardDaotest {
 		assertThat(flagInsert, is(3));
 
 		// 3.
-		board01.setTitle(board01.getTitle() + "수정함");
-		board01.setContents(board01.getContents() + "수정함");
+		board01.setTitle(board01.getTitle() + "수정");
+		board01.setContents(board01.getContents() + "수정");
 		
-		board02.setTitle(board02.getTitle() + "수정함");
-		board02.setContents(board02.getContents() + "수정함");
+		board02.setTitle(board02.getTitle() + "수정");
+		board02.setContents(board02.getContents() + "수정");
 		
-		board03.setTitle(board03.getTitle() + "수정함");
-		board03.setContents(board03.getContents() + "수정함");
+		board03.setTitle(board03.getTitle() + "수정");
+		board03.setContents(board03.getContents() + "수정");
 		
 		LOG.debug("question01 : " + board01);
 		LOG.debug("question02 : " + board02);
@@ -136,10 +157,14 @@ public class JboardDaotest {
 				// 3. 데이터 수정하기 (UPDATE)
 				
 				// 1. 
-			//dao.doInsert(board01);
-			//dao.doInsert(board02);
-			//dao.doInsert(board03);
-			dao.doDelete(board01);
+		    dao.doDelete(board01);
+		    dao.doDelete(board02);
+		    dao.doDelete(board03);
+		    //2
+			dao.doInsert(board01);
+			dao.doInsert(board02);
+			dao.doInsert(board03);
+			//dao.doDelete(board01);
 				
 				
 				

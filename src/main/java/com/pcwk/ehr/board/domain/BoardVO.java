@@ -6,6 +6,7 @@ public class BoardVO extends DTO {
 
 	private int seq;		// 게시글 번호
 	private int gubun;		// 게시판 구분 10_공지사항 20_1:1문의
+	private int gubunQuestion;		// 게시판 구분 10_공지사항 20_1:1문의
 	private String title;		// 제목
 	private String contents;	// 내용
 	private String regDt;		// 등록일
@@ -14,10 +15,12 @@ public class BoardVO extends DTO {
 	
 	public BoardVO() {}
 
-	public BoardVO(int seq, int gubun, String title, String contents, String regDt, String regId, int answerCheck) {
+	public BoardVO(int seq, int gubun, int gubunQuestion, String title, String contents, String regDt, String regId,
+			int answerCheck) {
 		super();
 		this.seq = seq;
 		this.gubun = gubun;
+		this.gubunQuestion = gubunQuestion;
 		this.title = title;
 		this.contents = contents;
 		this.regDt = regDt;
@@ -39,6 +42,14 @@ public class BoardVO extends DTO {
 
 	public void setGubun(int gubun) {
 		this.gubun = gubun;
+	}
+
+	public int getGubunQuestion() {
+		return gubunQuestion;
+	}
+
+	public void setGubunQuestion(int gubunQuestion) {
+		this.gubunQuestion = gubunQuestion;
 	}
 
 	public String getTitle() {
@@ -83,9 +94,12 @@ public class BoardVO extends DTO {
 
 	@Override
 	public String toString() {
-		return "QuestionVO [seq=" + seq + ", gubun=" + gubun + ", title=" + title + ", contents=" + contents
-				+ ", regDt=" + regDt + ", regId=" + regId + ", answerCheck=" + answerCheck + "]";
+		return "BoardVO [seq=" + seq + ", gubun=" + gubun + ", gubunQuestion=" + gubunQuestion + ", title=" + title
+				+ ", contents=" + contents + ", regDt=" + regDt + ", regId=" + regId + ", answerCheck=" + answerCheck
+				+ "]";
 	}
+
+	
 	
 	
 	

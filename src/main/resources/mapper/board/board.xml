@@ -68,17 +68,21 @@
     INSERT INTO board (
         seq,
         gubun,
+        gubun_question,
         title,
         contents,
         reg_dt,
-        reg_id
+        reg_id,
+        answer_check
     ) VALUES (
         #{seq},
         #{gubun},
+        #{gubunQuestion},
         #{title},
         #{contents},
         SYSDATE,
-        #{regId}
+        #{regId},
+        #{answerCheck}
     )
   
   </insert>
@@ -90,7 +94,6 @@
         , contents = #{contents}
         , reg_dt = SYSDATE
     WHERE seq = #{seq}
-    
   </update>
   
     <sql id="searchCondition">
@@ -105,17 +108,29 @@
     </where>
   </sql>
   
+    <resultMap type="BoardVO" id="boardMap">
+   <result  column="seq"      property="seq"       />
+   <result  column="gubun"      property="gubun"      />
+   <result  column="gubun_question"      property="gubunQuestion"      />
+   <result  column="title"    property="title"    />
+   <result  column="contents"   property="contents"  />
+   <result  column="reg_dt"     property="regDt"     />
+   <result  column="reg_id" property="regId" />
+   <result  column="answer_check"     property="answerCheck"     />
+  </resultMap> 
+   
 
   
-  <select id="doSelectOne" parameterType="BoardVO" >
+  <select id="doSelectOne" parameterType="BoardVO" resultMap="boardMap">
     
     SELECT seq,                           
           gubun,
+          gubun_question,
           title,
           contents,
           reg_id,                                                                               
           TO_CHAR(reg_dt, 'YYYY/MM/DD HH24MISS') reg_dt ,
-          answer_check  
+          answer_check  as answerCheck
     FROM   board                             
     WHERE seq = #{seq}
     ORDER BY seq
