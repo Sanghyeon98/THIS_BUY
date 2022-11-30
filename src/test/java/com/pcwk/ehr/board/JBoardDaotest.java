@@ -63,9 +63,9 @@ public class JBoardDaotest {
 		
 		LOG.debug("=context=" + context);
 		
-		board01 = new BoardVO (1, 10, "제목10", "내용10" , "d", "d", 1);
-		board02 = new BoardVO (2, 10, "제목10", "내용10" , "d", "d", 1);
-		board03 = new BoardVO (3, 10, "제목10", "내용10" , "d", "d", 1);
+		board01 = new BoardVO (1, 10, 10, "제목10", "내용10" , "d", "d", 1);
+		board02 = new BoardVO (2, 10, 10, "제목10", "내용10" , "d", "d", 1);
+		board03 = new BoardVO (3, 10, 10, "제목10", "내용10" , "d", "d", 1);
 	
 	
 		//searchVO  = new SearchVO(10,1,"10","p99");
@@ -95,7 +95,7 @@ public class JBoardDaotest {
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void addAndGet() throws SQLException {
 		
 		// 1. 기존데이터 3건 삭제
@@ -103,7 +103,7 @@ public class JBoardDaotest {
 		// 3. 데이터 수정하기 (UPDATE)
 		
 		LOG.debug("*************************");
-		LOG.debug("=@addAndGet=");
+		LOG.debug("=addAndGet=");
 		LOG.debug("*************************");
 		
 		// 1. 
@@ -122,14 +122,14 @@ public class JBoardDaotest {
 		assertThat(flagInsert, is(3));
 
 		// 3.
-		board01.setTitle(board01.getTitle() + "수정함");
-		board01.setContents(board01.getContents() + "수정함");
+		board01.setTitle(board01.getTitle() + "수정");
+		board01.setContents(board01.getContents() + "수정");
 		
-		board02.setTitle(board02.getTitle() + "수정함");
-		board02.setContents(board02.getContents() + "수정함");
+		board02.setTitle(board02.getTitle() + "수정");
+		board02.setContents(board02.getContents() + "수정");
 		
-		board03.setTitle(board03.getTitle() + "수정함");
-		board03.setContents(board03.getContents() + "수정함");
+		board03.setTitle(board03.getTitle() + "수정");
+		board03.setContents(board03.getContents() + "수정");
 		
 		LOG.debug("question01 : " + board01);
 		LOG.debug("question02 : " + board02);

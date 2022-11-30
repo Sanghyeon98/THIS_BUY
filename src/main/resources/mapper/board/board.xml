@@ -68,6 +68,7 @@
     INSERT INTO board (
         seq,
         gubun,
+        gubun_question,
         title,
         contents,
         reg_dt,
@@ -76,6 +77,7 @@
     ) VALUES (
         #{seq},
         #{gubun},
+        #{gubunQuestion},
         #{title},
         #{contents},
         SYSDATE,
@@ -92,7 +94,6 @@
         , contents = #{contents}
         , reg_dt = SYSDATE
     WHERE seq = #{seq}
-    
   </update>
   
     <sql id="searchCondition">
@@ -110,6 +111,7 @@
     <resultMap type="BoardVO" id="boardMap">
    <result  column="seq"      property="seq"       />
    <result  column="gubun"      property="gubun"      />
+   <result  column="gubun_question"      property="gubunQuestion"      />
    <result  column="title"    property="title"    />
    <result  column="contents"   property="contents"  />
    <result  column="reg_dt"     property="regDt"     />
@@ -123,6 +125,7 @@
     
     SELECT seq,                           
           gubun,
+          gubun_question,
           title,
           contents,
           reg_id,                                                                               
