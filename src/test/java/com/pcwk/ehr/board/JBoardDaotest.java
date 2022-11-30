@@ -74,13 +74,12 @@ public class JBoardDaotest {
 	}
 	
 	@Test
-	//@Ignore
-	public void listAndRead() throws SQLException {
-		// 1. 후기 전체 목록조회
-		// 2. 후기 단건 조회
+	@Ignore
+	public void list() throws SQLException {
+
 		
 		LOG.debug("*************************");
-		LOG.debug("=@listAndDetail=");
+		LOG.debug("=list=");
 		LOG.debug("*************************");
 		
 		// 1.
