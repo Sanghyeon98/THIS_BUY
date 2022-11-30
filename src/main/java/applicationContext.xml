@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+    
+    <!-- Spring이 제공하는 DataSource 구현체 주입(DI) -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+        <!-- setter 통한 주입 : AbstractDriverBasedDataSource, SimpleDriverDataSource -->
+        <property name="driverClass" value="oracle.jdbc.driver.OracleDriver"/>  <!-- setDriverClass -->
+        <!-- <property name="url" value="jdbc:oracle:thin:@192.168.3.101:1521:XE"/>  setUrl --> 
+        <property name="url" value="jdbc:oracle:thin:@orcl_high?TNS_ADMIN=C:/DCOM_0725/00_PROJECT/01_MainProject/Oracle_Cloud/Wallet_orcl"/>  <!-- setUrl -->
+        <!-- <property name="username" value="spring"/>   setUsername -->
+        <property name="username" value="ADMIN"/>  <!-- setUsername -->
+        <!-- <property name="password" value="pcwk"/>    setPassword -->
+        <property name="password" value="Ehsqufkr123!@#"/>    <!-- setPassword -->
+    </bean>
+    
+    <bean id="userDao" class="com.pcwk.ehr.UserDaoImpl">
+        <!-- setter 통한 주입
+             setConnectionMaker -> connectionMaker
+             name값은 setter 메서드 이름에서 set을 제외하고 맨 앞에 한 글자를 소문자로 변경
+             ref : 메서드 파라미터  => setConnectionMaker(ConnectionMaker connectionMaker) 
+         -->
+         <!-- setConnectionMaker() setter를 통해 NConnectionMaker를 파라미터로 넘겨서 객체 생성 -->
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+</beans>
