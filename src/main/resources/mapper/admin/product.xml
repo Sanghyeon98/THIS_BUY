@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pcwk.ehr.product">
+
+  <sql id="searchCondition">
+     <where>
+        <choose>
+            <when test="searchDiv == '10' and '' != searchDiv">
+              category_nm LIKE #{searchWord} || '%'
+            </when>
+            <when test="searchDiv == '20' and '' != searchDiv">
+              status LIKE #{searchWord} || '%'
+            </when>
+        </choose>
+     </where>
+  </sql>
+    
+  <select id="doRetrieve" resultType="ProductVO" parameterType="SearchVO">
+
+  </select>
+
+  <select id="doSelectOne" parameterType="ProductVO" resultType="ProductVO">
+      <![CDATA[
+
+      ]]>
+  </select> 
+  
+  <select id="getCount" parameterType="ProductVO" resultType="int">
+
+  </select>
+
+  <!-- resultType이 UserVO인데 호출하는 쪽에서 return타입이 LIST이면 LIST형태로 UserVO를 넘겨줌 -->
+  <select id="getALL" parameterType="ProductVO" resultType="ProductVO">
+
+  </select>  
+   
+  <insert id="doSave" parameterType="ProductVO">
+
+  </insert>
+
+  <update id="doUpdate" parameterType="ProductVO">
+      <![CDATA[
+
+      ]]>
+  </update>
+
+  <delete id="doDelete" parameterType="ProductVO">
+ 
+  </delete>
+
+</mapper>

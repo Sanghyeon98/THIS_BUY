@@ -45,7 +45,6 @@ public class CartDaoImpl implements CartDao {
 
 	@Override
 	public int doInsert(DTO dto) throws SQLException {
-		
 		LOG.debug("┌--------------------------------┐");
 		LOG.debug("|  param : " + dto);
 		
@@ -77,6 +76,22 @@ public class CartDaoImpl implements CartDao {
 		LOG.debug("================================");
 		
 		return list;
+	}
+
+
+	@Override
+	public int doUpdate(DTO dto) throws SQLException {
+		LOG.debug("┌--------------------------------┐");
+		LOG.debug("|  param : " + dto);
+		
+		String statement = NAMESPACE + DOT + "doInsert";
+		LOG.debug("|  statement : " + statement);
+		
+		int flag = sqlSessionTemplate.insert(statement, dto);
+		LOG.debug("|  flag : " + flag);
+		LOG.debug("└--------------------------------┘");
+		
+		return flag;
 	}
 
 }
