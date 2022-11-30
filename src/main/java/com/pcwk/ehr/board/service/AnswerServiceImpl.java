@@ -39,8 +39,7 @@ public class AnswerServiceImpl implements AnswerService {
 
 	@Override
 	public int doInsert(DTO dto) throws SQLException {
-		int flag = answerDaoImpl.doInsert(dto);
-		return boardDaoImpl.answerCheck(dto);
+		return boardDaoImpl.doInsert(dto);
 	}
 
 	@Override
