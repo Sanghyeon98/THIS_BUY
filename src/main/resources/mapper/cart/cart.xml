@@ -13,7 +13,7 @@
 		INSERT INTO cart (
 		    cart_no,      
 		    member_id,    
-		    item_no,      
+		    item_no,       
 		    quantity      
 		) VALUES (        
 		    #{cartNO},            

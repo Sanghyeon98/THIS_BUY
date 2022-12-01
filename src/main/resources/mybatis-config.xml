@@ -12,5 +12,7 @@
     <typeAlias type="com.pcwk.ehr.board.domain.AnswerVO" alias="AnswerVO"/>
     <typeAlias type="com.pcwk.ehr.board.domain.BoardVO" alias="BoardVO"/>
     <typeAlias type="com.pcwk.ehr.board.domain.BoardSearchVO" alias="BoardSearchVO"/>
+    <typeAlias type="com.pcwk.ehr.cart.domain.CartVO" alias="CartVO"/>
+    <typeAlias type="com.pcwk.ehr.cart.domain.ImageVO" alias="ImageVO"/>
   </typeAliases>
 </configuration>
