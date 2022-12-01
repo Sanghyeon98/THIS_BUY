@@ -7,7 +7,30 @@
 
 
 
+<select id="doSave" parameterType="com.pcwk.ehr.order.domain.OderVO">
+INSERT INTO ordering (
+            order_no,
+            member_id,
+            price,
+            name,
+            phone,
+            address,
+            request,
+            order_state,
+            order_date
+) VALUES (
+    :#{}
+    :#{},
+    :#{},
+    :#{},
+    :#{},
+    :#{},
+    :#{},
+    :#{},
+    :#{}
+);
 
+</select>
 
 
 <delete id="doDelete" parameterType="OrderVO">
