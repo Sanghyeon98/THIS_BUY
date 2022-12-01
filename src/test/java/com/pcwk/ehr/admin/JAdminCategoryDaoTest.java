@@ -63,7 +63,7 @@ public class JAdminCategoryDaoTest {
 		
 		search = new CategoryVO(1, "과일");
 		
-		searchVO = new SearchVO(10, 1, "10", "과일");
+		searchVO = new SearchVO(10, 1, "10", "과일", "");
 	}
 	
 	public void isSameUser(CategoryVO actUser, CategoryVO addUser) {
