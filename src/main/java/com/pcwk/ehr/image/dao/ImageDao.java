@@ -26,7 +26,7 @@ public class ImageDao implements WorkDiv<ImageVO> {
 		LOG.debug("┌--------------------------------┐");
 		LOG.debug("|  param : " + inVO);
 		
-		String statement = NAMESPACE + DOT + "doDelete";
+		String statement = NAMESPACE + DOT + "doSave";
 		LOG.debug("|  statement : " + statement);
 		
 		int flag = sqlSessionTemplate.delete(statement, inVO);
@@ -65,8 +65,7 @@ public class ImageDao implements WorkDiv<ImageVO> {
 
 	@Override
 	public List<ImageVO> doRetrieve(DTO inVO) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		return this.sqlSessionTemplate.selectList(this.NAMESPACE + ".doRetrieve", inVO);
 	}
 
 }
