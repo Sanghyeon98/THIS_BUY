@@ -14,7 +14,7 @@ import com.pcwk.ehr.admin.domain.CategoryVO;
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.cmn.SearchVO;
 
-@Repository("adminCategoryDao")
+@Repository("CategoryDao")
 public class CategoryDaoImpl implements CategoryDao {
 	final Logger LOG = LogManager.getLogger(getClass());
 	

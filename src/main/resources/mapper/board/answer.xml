@@ -39,7 +39,7 @@
   <!-- doSelectOne -->
   <select id="doSelectOne" parameterType="AnswerVO" resultType="AnswerVO" >
     SELECT
-      answer_no as answerNo,
+        answer_no as answerNo,
         seq as seq,
         title,
         contents,

@@ -3,6 +3,7 @@ package com.pcwk.ehr.board.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.pcwk.ehr.board.domain.BoardVO;
 import com.pcwk.ehr.cmn.DTO;
 
 public interface BoardDao {
@@ -49,6 +50,6 @@ public interface BoardDao {
 	 * @return List<?>
 	 * @throws SQLException
 	 */
-	List<?> doRetrieve(DTO dto) throws SQLException;
+	List<BoardVO> doRetrieve(DTO dto) throws SQLException;
 	
 }
