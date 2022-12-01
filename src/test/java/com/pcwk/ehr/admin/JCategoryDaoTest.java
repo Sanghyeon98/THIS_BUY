@@ -16,7 +16,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.pcwk.ehr.admin.dao.AdminCategoryDao;
+import com.pcwk.ehr.admin.dao.CategoryDao;
 import com.pcwk.ehr.admin.dao.UserDao;
 import com.pcwk.ehr.admin.domain.CategoryVO;
 import com.pcwk.ehr.admin.domain.Level;
@@ -27,7 +27,7 @@ import com.pcwk.ehr.cmn.SearchVO;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/root-context.xml"
 								  ,"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"})
-public class JAdminCategoryDaoTest {
+public class JCategoryDaoTest {
 	final Logger LOG = LogManager.getLogger(getClass());
 	
 	
@@ -38,7 +38,7 @@ public class JAdminCategoryDaoTest {
 	UserDao dao;
 	
 	@Autowired
-	AdminCategoryDao adminDao;
+	CategoryDao adminDao;
 	
 	UserVO userVO1;
 	UserVO searchUser;
