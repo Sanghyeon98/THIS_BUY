@@ -5,7 +5,127 @@
 
 <mapper namespace="com.pcwk.ehr.order">
 
+    <sql id="searchCondition">
+     <where>
+        <choose>
+            <when test="searchDiv == '10' and '' != searchDiv">
+              order_no = #{searchDiv}
+            </when>
+            <when test="searchDiv == '20' and '' != searchDiv">
+              name LIKE #{searchWord} || '%'
+            </when>
+        </choose>
+     </where>
+  </sql>
 
+
+
+  <select id="doRetrieve" resultType="OrderVO" parameterType="OrderVO">
+      SELECT A.*,B.*
+      FROM(
+          SELECT 
+              TT1.order_no AS orderNo,
+              TT1.member_id AS memberId,
+              TT1.price,
+              TT1.name,
+              TT1.phone,
+              TT1.address,
+              TT1.request,
+              TT1.order_state AS orderState,
+              TO_CHAR(TT1.order_date, 'YYYY-MM-DD HH24:MI:SS') AS orderDate,
+             
+              DECODE( TO_CHAR(SYSDATE,'YYYY-MM-DD'),  TO_CHAR(TT1.order_date,'YYYY-MM-DD')
+                              ,TO_CHAR(TT1.order_date,'HH24:MI')
+                              ,TO_CHAR(TT1.order_date,'YYYY-MM-DD')) as orderDate,   
+          FROM (
+              SELECT ROWNUM AS RNUM, T1.*
+              FROM (
+                  SELECT *
+                  FROM ordering
+                  -- WHERE 조건 (검색구분:''(전체), 10(order_nm), 20(status), 검색어)
+                 <include refid="searchCondition"/>
+                  ORDER BY order_no
+              ) T1
+              -- 종료 번호
+              <![CDATA[ WHERE ROWNUM <= #{pageSize} * (#{pageNo} - 1) + #{pageSize} ]]>
+          ) TT1
+          -- 시작번호
+          <![CDATA[ WHERE ROWNUM >= #{pageSize} * (#{pageNo} - 1) + 1 ]]>
+      ) A
+      CROSS JOIN
+      (
+          SELECT COUNT(*) totalCnt
+          FROM product
+          --WHERE 조건
+          <include refid="searchCondition"/>
+      ) B
+  </select>
+
+
+  <select id="doSelectOne" parameterType="OrderVO" resultType="OrderVO">
+      <![CDATA[
+      SELECT
+        order_no AS orderNo,
+        member_id AS memberId,
+        price,
+        name,
+        phone,
+        address,
+        request,
+        order_state AS orderState,
+        TO_CHAR(order_date, 'YYYY-MM-DD HH24:MI:SS') AS orderDate
+      FROM ordering
+      WHERE name = #{name}
+      ]]>
+  </select> 
+
+
+  <select id="getCount" parameterType="OrderVO" resultType="int">
+    SELECT COUNT(*) cnt
+    FROM order
+    WHERE order_no LIKE #{order_no} ||'%'
+  </select>
+
+
+
+<!-- resultType이 OrderVO인데 호출하는 쪽에서 return타입이 LIST이면 LIST형태로 ProductVO를 넘겨줌 -->
+  <select id="getALL" parameterType="OrderVO" resultType="orderVO">
+       SELECT
+        order_no AS orderNo,
+        member_id AS memberId,
+        price,
+        name,
+        phone,
+        address,
+        request,
+        order_state AS orderState,
+        TO_CHAR(order_date, 'YYYY-MM-DD HH24:MI:SS') AS orderDate
+     
+      FROM ordering
+      WHERE order_no = #{orderNo}
+      ORDER BY order_no
+ </select>
+
+
+
+<update id="doUpdate" parameterType="OrderVO">
+<![CDATA[
+  UPDATE ordering
+  SET
+     
+     member_id   = #{member_id},
+     price       = #{price},
+     name        = #{name},
+     phone       = #{phone},
+     address     = #{address},
+     request     = #{request},
+     order_state = #{order_state},
+     order_date  = #{order_date}
+  WHERE
+        order_no = :v0
+    ]]>
+    </update>
+    
 
 <select id="doSave" parameterType="com.pcwk.ehr.order.domain.OderVO">
 INSERT INTO ordering (
@@ -19,15 +139,15 @@ INSERT INTO ordering (
             order_state,
             order_date
 ) VALUES (
-    :#{}
-    :#{},
-    :#{},
-    :#{},
-    :#{},
-    :#{},
-    :#{},
-    :#{},
-    :#{}
+    :#{order_no}
+    :#{member_id},
+    :#{price},
+    :#{name},
+    :#{phone},
+    :#{address},
+    :#{request},
+    :#{order_state},
+    :#{order_date}
 );
 
 </select>
