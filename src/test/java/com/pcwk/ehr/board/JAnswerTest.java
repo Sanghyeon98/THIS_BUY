@@ -59,7 +59,7 @@ public class JAnswerTest {
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void getAllList() throws Exception{
 		List<AnswerVO> list  =(List<AnswerVO>) dao.getAllList();
 		
@@ -67,47 +67,79 @@ public class JAnswerTest {
 	
 	@Test
 	@Ignore
-	public void doSelectOne() throws Exception{
-		AnswerVO vsAnswer01 = (AnswerVO) dao.doSelectOne(answer01);
-		isSameAnswer(vsAnswer01, answer01);
+	public void delete() throws Exception{
+		dao.doDelete(answer01);
+		dao.doDelete(answer02);
+		
 	}
 	
 	@Test
 	@Ignore
-	public void add() throws SQLException {
-		LOG.debug("==============================");
-		LOG.debug("=== add() ===");
-		LOG.debug("==============================");
+	public void list() throws SQLException {
+
+		
+		LOG.debug("*************************");
+		LOG.debug("=list=");
+		LOG.debug("*************************");
+		
+		// 1.
+		//dao.doRetrieve(search);
+		dao.doDelete(answer01);
+		dao.doInsert(answer01);
+		 //2.
+		dao.doSelectOne(answer01);
+		//dao.doSelectOne(board02);
+		//dao.doSelectOne(board03);
+		
+		
+	}
+	
+	@Test
+	@Ignore
+	public void addAndGet() throws SQLException {
+		
 		// 1. 기존데이터 3건 삭제
-				// 2. 신규데이터 3건 입력
-				// 3. 데이터 수정하기 (UPDATE)
-				
-				// 1. 
-			dao.doDelete(answer01);
-			//dao.doInsert(answer01);
-			//dao.doDelete(answer01);
-			
-//			// 3.
-//			answer01.setTitle(answer01.getTitle() + "수정함");
-//			answer01.setContents(answer01.getContents() + "수정함");
-//			
-//			answer02.setTitle(answer02.getTitle() + "수정함");
-//			answer02.setContents(answer02.getContents() + "수정함");
-//			
-//			LOG.debug("answer01 : " + answer01);
-//			LOG.debug("answer02 : " + answer02);
-//
-//			
-//			int flagUpdate = dao.doUpdate(answer01);
-//			assertThat(flagUpdate, is(1));
-//			
-//			flagUpdate += dao.doUpdate(answer02);
-//			assertThat(flagUpdate, is(2));
-			
-				
+		// 2. 신규데이터 3건 입력
+		// 3. 데이터 수정하기 (UPDATE)
+		
+		LOG.debug("*************************");
+		LOG.debug("=addAndGet=");
+		LOG.debug("*************************");
+		
+		// 1. 
+		dao.doDelete(answer01);
+		dao.doDelete(answer02);
+		
+		//2.
+		int flagInsert  =  dao.doInsert(answer01);
+		assertThat(flagInsert, is(1));
+		
+		flagInsert  +=  dao.doInsert(answer02);
+		assertThat(flagInsert, is(2));
+
+
+		// 3.
+		answer01.setTitle(answer01.getTitle() + "수정");
+		answer01.setContents(answer01.getContents() + "수정");
+		
+		answer02.setTitle(answer02.getTitle() + "수정");
+		answer02.setContents(answer02.getContents() + "수정");
+		
+		LOG.debug("question01 : " + answer01);
+		LOG.debug("question02 : " + answer02);
+
+		
+		int flagUpdate = dao.doUpdate(answer01);
+		assertThat(flagUpdate, is(1));
+		
+		flagUpdate += dao.doUpdate(answer02);
+		assertThat(flagUpdate, is(2));
+		
+		
 	}
 
 	@Test
+	@Ignore
 	public void bean() {
 		LOG.debug("context:"+context);
 		LOG.debug("dao:"+dao);

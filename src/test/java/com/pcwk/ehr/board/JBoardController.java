@@ -27,6 +27,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.pcwk.ehr.board.dao.BoardDao;
+import com.pcwk.ehr.board.domain.BoardSearchVO;
 import com.pcwk.ehr.board.domain.BoardVO;
 import com.pcwk.ehr.cmn.SearchVO;
 
@@ -55,8 +56,8 @@ public class JBoardController {
 	BoardDao  dao;
 
 	
-	//회원검색
-	SearchVO search;
+	//
+	BoardSearchVO search;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -70,7 +71,7 @@ public class JBoardController {
 				,new BoardVO(4, 10, 10, "제목10", "내용10" , "d", "d", 1)		
 				);
 		
-		search = new SearchVO(1, 2, "10", "10");
+		search = new BoardSearchVO(1, 1, "10", "10", "10", "20");
 	}
 	
 	@Test
