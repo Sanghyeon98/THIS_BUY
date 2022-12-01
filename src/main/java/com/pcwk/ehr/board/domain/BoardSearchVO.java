@@ -9,7 +9,7 @@ public class BoardSearchVO extends DTO {
 	private String searchWord;	// 검색어
 	
 	private String gubun; // 게시판 구분 (10: 공지사항 , 20: 1:1 문의) 
-	private String gubunQuestion; // 게시판 구분 (10: 공지사항 , 20: 1:1 문의) 
+	private String gubunQuestion; // 게시판 구분 (10: 공지사항 , 20: 1:1 문의)   
 	
 	public BoardSearchVO() {}
 
