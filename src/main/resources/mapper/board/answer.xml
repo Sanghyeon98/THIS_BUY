@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pcwk.ehr.board.answer">
+	
+<!-- getAllList -->
+  <select id="getAllList" resultType="AnswerVO">
+    SELECT
+      answer_no as answerNo,
+        seq as seq,
+        title,
+        contents,
+        CASE WHEN TO_CHAR(SYSDATE,'YYYY/MM/DD') = TO_CHAR(reg_dt, 'YYYY/MM/DD')           
+            THEN TO_CHAR(reg_dt,'HH24:MI')                                               
+            ELSE TO_CHAR(reg_dt,'YYYY/MM/DD') END regDt,
+        reg_id as regId
+    FROM answer
+  
+  </select>
+  
+    <!-- doSelectOne -->
+  <select id="doSelectAnswer" parameterType="AnswerVO" resultType="AnswerVO" >
+    SELECT
+      answer_no as answerNo,
+        question_no as questionNo,
+         title,
+        contents,
+        CASE WHEN TO_CHAR(SYSDATE,'YYYY/MM/DD') = TO_CHAR(reg_dt, 'YYYY/MM/DD')           
+            THEN TO_CHAR(reg_dt,'HH24:MI')                                               
+            ELSE TO_CHAR(reg_dt,'YYYY/MM/DD') END regDt,
+         reg_id as regId
+    FROM answer
+    WHERE answer_no = #{answerNo}
+
+  </select>
+
+  <!-- doSelectOne -->
+  <select id="doSelectOne" parameterType="AnswerVO" resultType="AnswerVO" >
+    SELECT
+      answer_no as answerNo,
+        seq as seq,
+        title,
+        contents,
+        CASE WHEN TO_CHAR(SYSDATE,'YYYY/MM/DD') = TO_CHAR(reg_dt, 'YYYY/MM/DD')           
+            THEN TO_CHAR(reg_dt,'HH24:MI')                                               
+            ELSE TO_CHAR(reg_dt,'YYYY/MM/DD') END regDt,
+            reg_id as regId
+    FROM answer
+    WHERE seq = #{seq}
+
+  </select>
+
+  <!-- update -->
+  <update id="doUpdate" parameterType="AnswerVO">
+    UPDATE answer
+    SET contents = #{contents}
+    WHERE answer_no = #{answerNo}
+  </update>
+
+  <!-- delete -->
+  <delete id="doDelete" parameterType="AnswerVO">
+    DELETE FROM answer 
+    WHERE  answer_no = #{answerNo}  
+  </delete>
+  
+  <!-- insert -->
+  <insert id="doInsert" parameterType="AnswerVO">
+    INSERT INTO answer (
+        answer_no,
+        seq,
+        title,
+        contents,
+        reg_dt,
+        reg_id
+    ) VALUES (
+        #{answerNo},
+        #{seq},
+        #{title},
+        #{contents},
+        SYSDATE,
+        #{regId}
+    )
+  </insert>
+</mapper>
