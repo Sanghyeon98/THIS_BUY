@@ -33,10 +33,10 @@ public class CartDaoImpl implements CartDao {
 		LOG.debug("┌--------------------------------┐");
 		LOG.debug("|  param : " + inVO);
 		
-		String statement = NAMESPACE + DOT + "doInsert";
+		String statement = NAMESPACE + DOT + "doDelete";
 		LOG.debug("|  statement : " + statement);
 		
-		int flag = sqlSessionTemplate.insert(statement, inVO);
+		int flag = sqlSessionTemplate.delete(statement, inVO);
 		LOG.debug("|  flag : " + flag);
 		LOG.debug("└--------------------------------┘");
 		
@@ -48,7 +48,7 @@ public class CartDaoImpl implements CartDao {
 		LOG.debug("┌--------------------------------┐");
 		LOG.debug("|  param : " + inVO);
 		
-		String statement = NAMESPACE + DOT + "doInsert";
+		String statement = NAMESPACE + DOT + "doSave";
 		LOG.debug("|  statement : " + statement);
 		
 		int flag = sqlSessionTemplate.insert(statement, inVO);
@@ -84,10 +84,10 @@ public class CartDaoImpl implements CartDao {
 		LOG.debug("┌--------------------------------┐");
 		LOG.debug("|  param : " + inVO);
 		
-		String statement = NAMESPACE + DOT + "doInsert";
+		String statement = NAMESPACE + DOT + "doUpdate";
 		LOG.debug("|  statement : " + statement);
 		
-		int flag = sqlSessionTemplate.insert(statement, inVO);
+		int flag = sqlSessionTemplate.update(statement, inVO);
 		LOG.debug("|  flag : " + flag);
 		LOG.debug("└--------------------------------┘");
 		

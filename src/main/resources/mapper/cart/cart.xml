@@ -16,7 +16,7 @@
 		    item_no,      
 		    quantity      
 		) VALUES (        
-		    CART_SEQ.NEXTVAL,            
+		    #{cartNO},            
 		    #{memberId},            
 		    #{itemNO},            
 		    #{quantity}             

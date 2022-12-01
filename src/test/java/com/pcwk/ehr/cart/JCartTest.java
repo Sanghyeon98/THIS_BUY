@@ -68,7 +68,7 @@ public class JCartTest {
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void doUpdate() throws SQLException{
 		dao.doDelete(cartVO1);
 		dao.doDelete(cartVO2);
@@ -78,14 +78,9 @@ public class JCartTest {
 		dao.doSave(cartVO2);
 		dao.doSave(cartVO3);
 		
-		CartVO out01 = dao.doSelectOne(cartVO1);
-		isSameData(out01, cartVO1);
+		cartVO1.setQuantity(5);
+	   	dao.doUpdate(cartVO1);
 		
-		String upStr = "_U";
-		int upInt    = 10;
-		
-		out01.setMemberId(out01.getMemberId()+upStr);
-		out01.setQuantity(out01.getQuantity()+upInt);
 	}
 	
 	public void isSameData(CartVO actual,CartVO expected) {
