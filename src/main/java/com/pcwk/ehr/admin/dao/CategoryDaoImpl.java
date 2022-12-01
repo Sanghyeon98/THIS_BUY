@@ -11,24 +11,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.pcwk.ehr.admin.domain.CategoryVO;
-import com.pcwk.ehr.admin.domain.ProductVO;
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.cmn.SearchVO;
 
-@Repository("adminProductDao")
-public class AdminProductDaoImpl implements AdminProductDao {
+@Repository("adminCategoryDao")
+public class CategoryDaoImpl implements CategoryDao {
 	final Logger LOG = LogManager.getLogger(getClass());
 	
-	final String NAMESPACE = "com.pcwk.ehr.product";
+	final String NAMESPACE = "com.pcwk.ehr.category";
 	final String DOT       = ".";
 	
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 	
-	public AdminProductDaoImpl() {}
+	public CategoryDaoImpl() {}
 
 	@Override
-	public int doSave(ProductVO inVO) throws SQLException {
+	public int doSave(CategoryVO inVO) throws SQLException {
 		LOG.debug("┌--------------------------------┐");
 		LOG.debug("|  param : " + inVO);
 		
@@ -43,7 +42,7 @@ public class AdminProductDaoImpl implements AdminProductDao {
 	}
 
 	@Override
-	public int doDelete(ProductVO inVO) throws SQLException {
+	public int doDelete(CategoryVO inVO) throws SQLException {
 		LOG.debug("================================");
 		LOG.debug("|  param : " + inVO);
 		
@@ -58,7 +57,7 @@ public class AdminProductDaoImpl implements AdminProductDao {
 	}
 
 	@Override
-	public int doUpdate(ProductVO inVO) throws SQLException {
+	public int doUpdate(CategoryVO inVO) throws SQLException {
 		int flag = 0;
 		
 		LOG.debug("================================");
@@ -75,8 +74,8 @@ public class AdminProductDaoImpl implements AdminProductDao {
 	}
 
 	@Override
-	public ProductVO doSelectOne(ProductVO inVO) throws SQLException {
-		ProductVO outVO = null;
+	public CategoryVO doSelectOne(CategoryVO inVO) throws SQLException {
+		CategoryVO outVO = null;
 		
 		String statement = NAMESPACE + DOT + "doSelectOne";
 
@@ -92,9 +91,9 @@ public class AdminProductDaoImpl implements AdminProductDao {
 	}
 
 	@Override
-	public List<ProductVO> doRetrieve(DTO inVO) throws SQLException {
+	public List<CategoryVO> doRetrieve(DTO inVO) throws SQLException {
 		SearchVO search = (SearchVO) inVO;
-		List<ProductVO> list = new ArrayList<ProductVO>();
+		List<CategoryVO> list = new ArrayList<CategoryVO>();
 		
         String statement = NAMESPACE + DOT + "doRetrieve";
         LOG.debug("================================");
@@ -103,7 +102,7 @@ public class AdminProductDaoImpl implements AdminProductDao {
 		
 		list = sqlSessionTemplate.selectList(statement, search);
 		
-		for(ProductVO vo : list) {
+		for(CategoryVO vo : list) {
 			LOG.debug("|  vo : " + vo );
 		}
 		LOG.debug("================================");
@@ -112,7 +111,7 @@ public class AdminProductDaoImpl implements AdminProductDao {
 	}
 
 	@Override
-	public int getCount(ProductVO inVO) throws SQLException {
+	public int getCount(CategoryVO inVO) throws SQLException {
 		int count = 0;
 		
 		String statement = NAMESPACE + DOT + "getCount";
@@ -127,8 +126,8 @@ public class AdminProductDaoImpl implements AdminProductDao {
 	}
 
 	@Override
-	public List<ProductVO> getALL(ProductVO inVO) throws SQLException {
-		List<ProductVO> list = null;
+	public List<CategoryVO> getALL(CategoryVO inVO) throws SQLException {
+		List<CategoryVO> list = null;
 		
 		String statement = NAMESPACE + DOT + "getALL";
 
@@ -138,7 +137,7 @@ public class AdminProductDaoImpl implements AdminProductDao {
 		
 		list = sqlSessionTemplate.selectList(statement, inVO);
 		
-		for(ProductVO vo : list) {
+		for(CategoryVO vo : list) {
 			LOG.debug("|  vo : " + vo);
 		}
 		LOG.debug("================================");
