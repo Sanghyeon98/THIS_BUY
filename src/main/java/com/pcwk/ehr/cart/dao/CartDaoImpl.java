@@ -20,7 +20,7 @@ public class CartDaoImpl implements CartDao {
 	final Logger LOG = LogManager.getFormatterLogger(getClass());
 
 	final String NAMESPACE = "com.pcwk.ehr.cart";
-	final String DOT = ".";
+	final String DOT = "."; 
 	
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;

@@ -27,5 +27,5 @@
 		UPDATE cart      
 		SET quantity = #{quantity} 
 		WHERE cart_no = #{cartNo}
-	</update>
+	</update> 
   </mapper>

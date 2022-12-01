@@ -27,7 +27,7 @@ public class CartVO extends DTO {
 	}
 
 	public void setCartNO(int cartNO) {
-		this.cartNO = cartNO;
+		this.cartNO = cartNO; 
 	}
 
 	public int getItemNO() {
