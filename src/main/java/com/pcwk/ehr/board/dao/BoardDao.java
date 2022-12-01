@@ -1,11 +1,12 @@
-package com.pcwk.ehr.board.board.dao;
+package com.pcwk.ehr.board.dao;
 
 import java.sql.SQLException;
 import java.util.List;
 
+import com.pcwk.ehr.board.domain.BoardVO;
 import com.pcwk.ehr.cmn.DTO;
 
-public interface BoardDao<T> {
+public interface BoardDao {
 
 	/**
 	 * 공지사항 삭제
@@ -25,7 +26,7 @@ public interface BoardDao<T> {
 	 */
 	// query, param 처리
 	// 예외처리, 자원반납의 경우는 JdbcTemplate 내부로 이동
-	//int doInsert(DTO dto)throws SQLException;
+	int doInsert(DTO dto)throws SQLException;
 
 	/**
 	 * 공지사항 단건조회
@@ -49,5 +50,6 @@ public interface BoardDao<T> {
 	 * @return List<?>
 	 * @throws SQLException
 	 */
-	List<T> doRetrieve(DTO dto) throws SQLException;
+	List<BoardVO> doRetrieve(DTO dto) throws SQLException;
+	
 }

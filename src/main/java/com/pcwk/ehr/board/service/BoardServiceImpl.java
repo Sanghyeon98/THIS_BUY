@@ -1,21 +1,19 @@
-package com.pcwk.ehr.board.board.service;
+package com.pcwk.ehr.board.service;
 
 import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.pcwk.ehr.board.board.dao.BoardDaoImpl;
+import com.pcwk.ehr.board.dao.BoardDao;
+import com.pcwk.ehr.board.dao.BoardDaoImpl;
+import com.pcwk.ehr.board.domain.BoardVO;
 import com.pcwk.ehr.cmn.DTO;
 
 public class BoardServiceImpl {
 	@Autowired
 	BoardDaoImpl boardDaoImpl;
-	
-	
-	public BoardServiceImpl(){}
-	
-	
+
 	public int doDelete(DTO dto) throws SQLException {
 		
 		return boardDaoImpl.doDelete(dto);
@@ -24,7 +22,7 @@ public class BoardServiceImpl {
 
 	public int doInsert(DTO dto) throws SQLException {
 		
-		return boardDaoImpl.doDelete(dto);
+		return boardDaoImpl.doInsert(dto);
 	}
 
 
@@ -44,4 +42,5 @@ public class BoardServiceImpl {
 		
 		return boardDaoImpl.doRetrieve(dto);
 	}
+
 }

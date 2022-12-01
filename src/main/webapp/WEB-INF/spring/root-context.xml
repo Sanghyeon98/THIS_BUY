@@ -12,13 +12,12 @@
 
 	<!-- mybatis 설정 -->
 	<!-- mybatis db연결 객체 생성 -->
-	<bean id="sqlSessionTemplate"
-		class="org.mybatis.spring.SqlSessionTemplate">
+	<bean id="sqlSessionTemplate"	class="org.mybatis.spring.SqlSessionTemplate">
 		<!-- xml mybatis설정 파일 읽기 -->
 		<constructor-arg index="0" ref="sqlSessionFactoryBean"></constructor-arg>
 	</bean>
 
-	<!-- xml mybatis설정 파일 읽기: 환경설정 파일 읽기 mybatis-config.xml mapper: mapper/**/*.xml -->
+	<!-- xml mybatis설정 파일 읽기 -->
 	<bean id="sqlSessionFactoryBean"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
@@ -31,10 +30,11 @@
 
 	<!--SimpleDriverDataSource to -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-		<!-- <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" /> -->
-		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
+		<!-- <property name="driverClassName" value="${jdbc.driver}" /> -->
+    <property name="url" value="jdbc:log4jdbc:oracle:thin:@orcl_high?TNS_ADMIN=C:/DCOM_0725/00_PROJECT/01_MainProject/Oracle_Cloud/Wallet_orcl" />
 		<!-- <property name="url" value="jdbc:log4jdbc:oracle:thin:@192.168.3.101:1521:XE" /> -->
-		<property name="url" value="${jdbc.url}" />
+		<!-- <property name="url" value="${jdbc.url}" /> -->
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
 		<!-- 최대 접속 허용 갯수 -->
