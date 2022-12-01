@@ -5,7 +5,7 @@ public class ImageVO {
 	private  int       	imageNo;      //이미지번호
 	private  int		gubun;        //구분
 	private  int		imageM;       //공통이미지
-	private  int		mainImage;    //메인이미지
+	private  int		mainImage;    //메인이미지 
 	private  String		orgName;      //원본파일명
 	private  String		saveName;     //저장파일명
 	private  String		path;         //경로

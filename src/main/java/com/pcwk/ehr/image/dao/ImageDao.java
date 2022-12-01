@@ -15,7 +15,7 @@ import com.pcwk.ehr.image.domain.ImageVO;
 public class ImageDao implements WorkDiv<ImageVO> {
 	final Logger LOG = LogManager.getFormatterLogger(getClass());
 
-	final String NAMESPACE = "com.pcwk.ehr.image";
+	final String NAMESPACE = "com.pcwk.ehr.image"; 
 	final String DOT = "."; 
 	
 	@Autowired

@@ -15,4 +15,4 @@
     <typeAlias type="com.pcwk.ehr.cart.domain.CartVO" alias="CartVO"/>
     <typeAlias type="com.pcwk.ehr.cart.domain.ImageVO" alias="ImageVO"/>
   </typeAliases>
-</configuration>
+</configuration> 

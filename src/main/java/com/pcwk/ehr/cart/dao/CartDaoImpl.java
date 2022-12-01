@@ -38,7 +38,7 @@ public class CartDaoImpl implements CartDao {
 		
 		int flag = sqlSessionTemplate.delete(statement, inVO);
 		LOG.debug("|  flag : " + flag);
-		LOG.debug("└--------------------------------┘"); 
+		LOG.debug("└--------------------------------┘");  
 		
 		return flag;
 	}

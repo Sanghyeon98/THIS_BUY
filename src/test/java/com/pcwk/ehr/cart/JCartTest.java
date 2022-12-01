@@ -81,7 +81,7 @@ public class JCartTest {
 		//cartVO1.setCartNO(1).setQuantity(5);
 	   	//dao.doUpdate(cartVO1);
 		
-	} 
+	}  
 	
 	public void isSameData(CartVO actual,CartVO expected) {
 		assertEquals(actual.getCartNO(), expected.getCartNO());
