@@ -9,46 +9,169 @@
      <where>
         <choose>
             <when test="searchDiv == '10' and '' != searchDiv">
-              category_nm LIKE #{searchWord} || '%'
+              category_no = #{searchDiv}
             </when>
             <when test="searchDiv == '20' and '' != searchDiv">
-              status LIKE #{searchWord} || '%'
+              name LIKE #{searchWord} || '%'
             </when>
         </choose>
      </where>
   </sql>
     
   <select id="doRetrieve" resultType="ProductVO" parameterType="SearchVO">
-
+      SELECT A.*,B.*
+      FROM(
+          SELECT 
+			        TT1.item_no AS itemNo,
+			        TT1.name,
+			        TT1.price,
+			        TT1.category_no AS categoryNo,
+			        TT1.image_no AS imageNo,
+			        TT1.production,
+			        TT1.weight,
+			        TO_CHAR(TT1.expired, 'YYYY-MM-DD HH24:MI:SS') AS expired,
+			        TT1.detail,
+			        TT1.discount,
+			        TT1.final_price AS finalPrice,
+			        TT1.sales,
+			        DECODE( TO_CHAR(SYSDATE,'YYYY-MM-DD'),  TO_CHAR(TT1.reg_dt,'YYYY-MM-DD')
+			                        ,TO_CHAR(TT1.reg_dt,'HH24:MI')
+			                        ,TO_CHAR(TT1.reg_dt,'YYYY-MM-DD')) as regDt,
+			        DECODE( TO_CHAR(SYSDATE,'YYYY-MM-DD'),  TO_CHAR(TT1.mod_dt,'YYYY-MM-DD')
+			                        ,TO_CHAR(TT1.mod_dt,'HH24:MI')
+			                        ,TO_CHAR(TT1.mod_dt,'YYYY-MM-DD')) as modDt       
+          FROM (
+              SELECT ROWNUM AS RNUM, T1.*
+              FROM (
+                  SELECT *
+                  FROM product
+                  -- WHERE 조건 (검색구분:''(전체), 10(category_nm), 20(status), 검색어)
+                 <include refid="searchCondition"/>
+                  ORDER BY item_no
+              ) T1
+              -- 종료 번호
+              <![CDATA[ WHERE ROWNUM <= #{pageSize} * (#{pageNo} - 1) + #{pageSize} ]]>
+          ) TT1
+          -- 시작번호
+          <![CDATA[ WHERE ROWNUM >= #{pageSize} * (#{pageNo} - 1) + 1 ]]>
+      ) A
+      CROSS JOIN
+      (
+          SELECT COUNT(*) totalCnt
+          FROM product
+          --WHERE 조건
+          <include refid="searchCondition"/>
+      ) B
   </select>
 
   <select id="doSelectOne" parameterType="ProductVO" resultType="ProductVO">
       <![CDATA[
-
+      SELECT
+        item_no AS itemNo,
+        name,
+        price,
+        category_no AS categoryNo,
+        image_no AS imageNo,
+        production,
+        weight,
+        TO_CHAR(expired, 'YYYYMMDD') AS expired,
+        detail,
+        discount,
+        final_price AS finalPrice,
+        sales,
+        TO_CHAR(reg_dt, 'YYYY-MM-DD HH24:MI:SS') AS regDt,
+        TO_CHAR(mod_dt, 'YYYY-MM-DD HH24:MI:SS') AS modDt
+      FROM product
+      WHERE name = #{name}
       ]]>
   </select> 
   
   <select id="getCount" parameterType="ProductVO" resultType="int">
-
+    SELECT COUNT(*) cnt
+    FROM product
+    WHERE category_no LIKE #{categoryNo} ||'%'
   </select>
 
-  <!-- resultType이 UserVO인데 호출하는 쪽에서 return타입이 LIST이면 LIST형태로 UserVO를 넘겨줌 -->
+  <!-- resultType이 ProductVO인데 호출하는 쪽에서 return타입이 LIST이면 LIST형태로 ProductVO를 넘겨줌 -->
   <select id="getALL" parameterType="ProductVO" resultType="ProductVO">
-
+      SELECT
+		    item_no AS itemNo,
+		    name,
+		    price,
+		    category_no AS categoryNo,
+		    image_no AS imageNo,
+		    production,
+		    weight,
+		    TO_CHAR(expired, 'YYYY-MM-DD HH24:MI:SS') AS expired,
+		    detail,
+		    discount,
+		    final_price AS finalPrice,
+		    sales,
+		    TO_CHAR(reg_dt, 'YYYY-MM-DD HH24:MI:SS') AS regDt,
+		    TO_CHAR(mod_dt, 'YYYY-MM-DD HH24:MI:SS') AS modDt
+      FROM product
+      WHERE category_no = #{categoryNo}
+      ORDER BY category_no
   </select>  
-   
-  <insert id="doSave" parameterType="ProductVO">
-
-  </insert>
 
   <update id="doUpdate" parameterType="ProductVO">
       <![CDATA[
-
+      UPDATE product
+      SET
+          name = #{name},
+          price = #{price},
+          category_no = #{categoryNo},
+          image_no = #{imageNo},
+          production = #{production},
+          weight = #{weight},
+          expired = TO_DATE( #{expired} , 'YYYYMMDD'),
+          detail = #{detail},
+          discount = #{discount},
+          final_price = #{finalPrice},
+          sales = #{sales},
+          mod_dt = SYSDATE
+      WHERE
+          item_no = #{itemNo}
       ]]>
   </update>
+  
+  <insert id="doSave" parameterType="ProductVO">
+	  INSERT INTO product (
+		    item_no,
+		    name,
+		    price,
+		    category_no,
+		    image_no,
+		    production,
+		    weight,
+		    expired,
+		    detail,
+		    discount,
+		    final_price,
+		    sales,
+		    reg_dt,
+		    mod_dt
+		) VALUES (
+		    #{itemNo},
+		    #{name},
+		    #{price},
+		    #{categoryNo},
+		    #{imageNo},
+		    #{production},
+		    #{weight},
+		    TO_DATE(#{expired}, 'YYYYMMDD'),
+		    #{detail},
+		    #{discount},
+		    #{finalPrice},
+		    #{sales},
+		    SYSDATE,
+		    SYSDATE
+	  )
+  </insert>
 
   <delete id="doDelete" parameterType="ProductVO">
- 
+    DELETE FROM product
+    WHERE CATEGORY_NO = #{itemNo}
   </delete>
 
 </mapper>

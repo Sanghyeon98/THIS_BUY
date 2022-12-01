@@ -10,10 +10,10 @@ public class ProductVO extends DTO {
 	private int imageNo;		// 이미지 번호(FK)
 	private String production;	// 생산지
 	private int weight;			// 무게_default 0
-	private String exrired;		// 유통기간
+	private String expired;		// 유통기간
 	private String detail;		// 상품설명
 	private int discount;		// 할인율_default 0
-	private int final_price;	// 최종가격_default 0
+	private int finalPrice;	// 최종가격_default 0
 	private int sales;			// 판매량_default 0
 	private String regDt;		// 상품등록일_defuault SYSDATE
 	private String modDt;		// 상품수정일_defuault SYSDATE
@@ -21,7 +21,7 @@ public class ProductVO extends DTO {
 	public ProductVO() {}
 	
 	public ProductVO(int itemNo, String name, int price, int categoryNo, int imageNo, String production, int weight,
-			String exrired, String detail, int discount, int final_price, int sales, String regDt, String modDt) {
+			String expired, String detail, int discount, int finalPrice, int sales, String regDt, String modDt) {
 		super();
 		this.itemNo = itemNo;
 		this.name = name;
@@ -30,10 +30,10 @@ public class ProductVO extends DTO {
 		this.imageNo = imageNo;
 		this.production = production;
 		this.weight = weight;
-		this.exrired = exrired;
+		this.expired = expired;
 		this.detail = detail;
 		this.discount = discount;
-		this.final_price = final_price;
+		this.finalPrice = finalPrice;
 		this.sales = sales;
 		this.regDt = regDt;
 		this.modDt = modDt;
@@ -95,12 +95,12 @@ public class ProductVO extends DTO {
 		this.weight = weight;
 	}
 
-	public String getExrired() {
-		return exrired;
+	public String getExpired() {
+		return expired;
 	}
 
-	public void setExrired(String exrired) {
-		this.exrired = exrired;
+	public void setExpired(String expired) {
+		this.expired = expired;
 	}
 
 	public String getDetail() {
@@ -119,12 +119,12 @@ public class ProductVO extends DTO {
 		this.discount = discount;
 	}
 
-	public int getFinal_price() {
-		return final_price;
+	public int getFinalPrice() {
+		return finalPrice;
 	}
 
-	public void setFinal_price(int final_price) {
-		this.final_price = final_price;
+	public void setFinalPrice(int finalPrice) {
+		this.finalPrice = finalPrice;
 	}
 
 	public int getSales() {
@@ -154,8 +154,8 @@ public class ProductVO extends DTO {
 	@Override
 	public String toString() {
 		return "ProductVO [itemNo=" + itemNo + ", name=" + name + ", price=" + price + ", categoryNo=" + categoryNo
-				+ ", imageNo=" + imageNo + ", production=" + production + ", weight=" + weight + ", exrired=" + exrired
-				+ ", detail=" + detail + ", discount=" + discount + ", final_price=" + final_price + ", sales=" + sales
+				+ ", imageNo=" + imageNo + ", production=" + production + ", weight=" + weight + ", expired=" + expired
+				+ ", detail=" + detail + ", discount=" + discount + ", finalPrice=" + finalPrice + ", sales=" + sales
 				+ ", regDt=" + regDt + ", modDt=" + modDt + "]";
 	}
 	
