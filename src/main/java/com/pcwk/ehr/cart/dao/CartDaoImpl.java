@@ -29,14 +29,14 @@ public class CartDaoImpl implements CartDao {
 	
 	
 	@Override
-	public int doDelete(DTO dto) throws SQLException {
+	public int doDelete(CartVO inVO) throws SQLException {
 		LOG.debug("┌--------------------------------┐");
-		LOG.debug("|  param : " + dto);
+		LOG.debug("|  param : " + inVO);
 		
 		String statement = NAMESPACE + DOT + "doInsert";
 		LOG.debug("|  statement : " + statement);
 		
-		int flag = sqlSessionTemplate.insert(statement, dto);
+		int flag = sqlSessionTemplate.insert(statement, inVO);
 		LOG.debug("|  flag : " + flag);
 		LOG.debug("└--------------------------------┘");
 		
@@ -44,14 +44,14 @@ public class CartDaoImpl implements CartDao {
 	}
 
 	@Override
-	public int doInsert(DTO dto) throws SQLException {
+	public int doSave(CartVO inVO) throws SQLException {
 		LOG.debug("┌--------------------------------┐");
-		LOG.debug("|  param : " + dto);
+		LOG.debug("|  param : " + inVO);
 		
 		String statement = NAMESPACE + DOT + "doInsert";
 		LOG.debug("|  statement : " + statement);
 		
-		int flag = sqlSessionTemplate.insert(statement, dto);
+		int flag = sqlSessionTemplate.insert(statement, inVO);
 		LOG.debug("|  flag : " + flag);
 		LOG.debug("└--------------------------------┘");
 		
@@ -80,18 +80,25 @@ public class CartDaoImpl implements CartDao {
 
 
 	@Override
-	public int doUpdate(DTO dto) throws SQLException {
+	public int doUpdate(CartVO inVO) throws SQLException {
 		LOG.debug("┌--------------------------------┐");
-		LOG.debug("|  param : " + dto);
+		LOG.debug("|  param : " + inVO);
 		
 		String statement = NAMESPACE + DOT + "doInsert";
 		LOG.debug("|  statement : " + statement);
 		
-		int flag = sqlSessionTemplate.insert(statement, dto);
+		int flag = sqlSessionTemplate.insert(statement, inVO);
 		LOG.debug("|  flag : " + flag);
 		LOG.debug("└--------------------------------┘");
 		
 		return flag;
+	}
+
+
+	@Override
+	public CartVO doSelectOne(CartVO inVO) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

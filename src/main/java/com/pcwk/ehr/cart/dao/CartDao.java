@@ -5,33 +5,9 @@ import java.util.List;
 
 import com.pcwk.ehr.cart.domain.CartVO;
 import com.pcwk.ehr.cmn.DTO;
+import com.pcwk.ehr.cmn.WorkDiv;
 
-public interface CartDao {
+public interface CartDao extends WorkDiv<CartVO> {
 
-	int doUpdate(DTO dto)throws SQLException;
-	/**
-	 * 장바구니 선택 삭제
-	 * @param dto
-	 * @return
-	 * @throws SQLException
-	 */
-	int doDelete(DTO dto)throws SQLException;
-	
-	/**
-	 * 장바구니 추가
-	 * @param dto
-	 * @return
-	 * @throws SQLException
-	 */
-	
-	int doInsert(DTO dto)throws SQLException;
-	
-	/**
-	 * 장바구니 목록조회
-	 * @param dto
-	 * @return
-	 * @throws SQLException
-	 */
-	
-	List<CartVO> doRetrieve(DTO dto) throws SQLException;
+
 }
