@@ -59,14 +59,14 @@ public class JAnswerTest {
 	}
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void getAllList() throws Exception{
 		List<AnswerVO> list  =(List<AnswerVO>) dao.getAllList();
 		
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void delete() throws Exception{
 		dao.doDelete(answer01);
 		dao.doDelete(answer02);
