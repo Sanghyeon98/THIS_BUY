@@ -49,4 +49,4 @@ public class JImageTest {
 		fail("Not yet implemented");
 	}
  
-}
+} 
