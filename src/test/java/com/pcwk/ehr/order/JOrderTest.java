@@ -59,8 +59,17 @@ public class JOrderTest {
 		assertEquals(actUser.getPrice(), addUser.getPrice());
 	}	
 	@Test
-	//@Ignore
+	@Ignore
 	public void doUpdate() throws SQLException{
+		dao.doDelete(orderVO1);
+		dao.doDelete(orderVO2);
+		dao.doDelete(orderVO3);
+		
+		dao.doSave(orderVO1);
+		dao.doSave(orderVO2);
+		dao.doSave(orderVO3);
+		
+		
 		
 	}
 	
@@ -68,9 +77,9 @@ public class JOrderTest {
 	@Test
 	@Ignore	
 	public void addAndGet() throws SQLException {
-		LOG.debug("==============================");
-		LOG.debug("=== addAndGet() ===");
-		LOG.debug("==============================");
+		LOG.debug("┌============================┐");
+		LOG.debug("│== addAndGet() ===");
+		LOG.debug("└============================┘");
 		
 		dao.doDelete(orderVO1);
 		dao.doDelete(orderVO2);
@@ -85,13 +94,13 @@ public class JOrderTest {
 		
 		// getCount()는 현재 ProductVO 에 categoryNo 값으로 비교하고 있음
 		// 카테고리 카운트
-		assertEquals(3, dao.getCount(search));
+		//assertEquals(3, dao.getCount(search));
 
 	}	
 	
 	@Test
 	
-	public void beans() {
+	public void bean() {
 		LOG.debug("==============================");
 		LOG.debug("context:"+context);	
 		LOG.debug("==============================");

@@ -63,40 +63,51 @@ public class OrderDaoImpl implements OrderDao {
 		List<OrderVO> list = new ArrayList<OrderVO>();
 		
 		String statement = NAMESPACE + DOT + "doRetrieve";
-		LOG.debug("================================");
+		LOG.debug("┌--------------------------------┐");
 		LOG.debug("|  param:" + dto);
 		LOG.debug("|  statement:" + statement);
-
-		LOG.debug("================================");
+		LOG.debug("└--------------------------------┘");
 		
 		return list;
 	}
 
 	@Override
-	public int doUpdate(DTO dto) throws SQLException {
+	public int doUpdate(OrderVO inVO) throws SQLException {
 		LOG.debug("┌--------------------------------┐");
-		LOG.debug("|  param : " + dto);
+		LOG.debug("|  param : " + inVO);
 
 		String statement = NAMESPACE + DOT + "doInsert";
 		LOG.debug("|  statement : " + statement);
 
-		int flag = sqlSessionTemplate.insert(statement, dto);
+		int flag = sqlSessionTemplate.insert(statement, inVO);
 		LOG.debug("|  flag : " + flag);
 		LOG.debug("└--------------------------------┘");
 
 		return flag;
 	}
 
+
+
 	@Override
-	public int getCount(OrderVO inVO) throws SQLException {
+	public OrderVO selectOne(OrderVO inVO) throws SQLException {
+		String statement = NAMESPACE + DOT + "doSelectOne";
+		OrderVO outVO = null;
 		
-		return 0;
+		LOG.debug("================================");
+		LOG.debug("|  param : " + inVO);
+		LOG.debug("|  statement: " + statement);
+
+		outVO = sqlSessionTemplate.selectOne(statement, inVO);
+		LOG.debug("|  outVO : " + outVO);
+		LOG.debug("================================");
+
+		return outVO;
 	}
 
 	@Override
-	public OrderVO selectOne(DTO dto) throws SQLException {
+	public int getCount(OrderVO inVO) throws SQLException {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 }
