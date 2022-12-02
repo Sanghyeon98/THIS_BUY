@@ -68,7 +68,7 @@
   </delete>
 
   <!-- doInsert --> 
-  <insert id = "doInsert" parameterType="BoardVO">
+  <insert id = "doSave" parameterType="BoardVO">
     
     INSERT INTO board (
         seq,
