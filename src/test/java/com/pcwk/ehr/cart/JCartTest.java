@@ -78,8 +78,8 @@ public class JCartTest {
 		dao.doSave(cartVO2);
 		dao.doSave(cartVO3);
 		
-		//cartVO1.setCartNO(1).setQuantity(5);
-	   	//dao.doUpdate(cartVO1);
+		cartVO1.setQuantity(5);
+	   	dao.doUpdate(cartVO1);
 		
 	}  
 	
