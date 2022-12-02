@@ -43,9 +43,9 @@ public class JImageDaoTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		imageVO1 = new ImageVO(1, 1, 1, 1, "test1", "test1", "test1", 0, "test1", 0, 0, "1111", "1111");
-		imageVO2 = new ImageVO(2, 1, 1, 1, "test2", "test2", "test2", 0, "test2", 0, 0, "2222", "2222");
-		imageVO3 = new ImageVO(3, 1, 1, 1, "test3", "test3", "test3", 0, "test3", 0, 0, "3333", "3333");
+		imageVO1 = new ImageVO(77, 1, 1, 1, "test1", "test1", "test1", 0, "test1", 0, 0, "1111", "1111");
+		imageVO2 = new ImageVO(88, 1, 1, 1, "test2", "test2", "test2", 0, "test2", 0, 0, "2222", "2222");
+		imageVO3 = new ImageVO(99, 1, 1, 1, "test3", "test3", "test3", 0, "test3", 0, 0, "3333", "3333");
 	}
 
 	@Test
