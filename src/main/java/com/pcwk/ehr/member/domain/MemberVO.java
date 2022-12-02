@@ -1,6 +1,6 @@
-package com.pcwk.ehr.member.dao;
+package com.pcwk.ehr.member.domain;
 
-import com.pcwk.ehr.member.dao.DTO;
+import com.pcwk.ehr.member.domain.DTO;
 
 public class MemberVO extends DTO {
 	private String uId; // ����� ���̵�
