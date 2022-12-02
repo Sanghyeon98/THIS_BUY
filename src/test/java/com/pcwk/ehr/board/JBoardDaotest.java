@@ -76,7 +76,7 @@ public class JBoardDaotest {
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void doRetrive()throws SQLException{
 		//1.
 		dao.doDelete(board01);
@@ -95,7 +95,7 @@ public class JBoardDaotest {
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void list() throws SQLException {
 
 		
@@ -118,7 +118,7 @@ public class JBoardDaotest {
 	
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void addAndGet() throws SQLException {
 		
 		// 1. 기존데이터 3건 삭제
@@ -170,7 +170,7 @@ public class JBoardDaotest {
 		
 	}
 	@Test
-	@Ignore
+	//@Ignore
 	public void add() throws SQLException {
 		LOG.debug("==============================");
 		LOG.debug("=== add() ===");
@@ -195,7 +195,7 @@ public class JBoardDaotest {
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void beans() {
 		LOG.debug("==============================");
 		LOG.debug("context:"+context);	

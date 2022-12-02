@@ -59,7 +59,7 @@ public class JAnswerTest {
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void getAllList() throws Exception{
 		List<AnswerVO> list  =(List<AnswerVO>) dao.getAllList();
 		
@@ -74,7 +74,7 @@ public class JAnswerTest {
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void list() throws SQLException {
 
 		
@@ -95,7 +95,7 @@ public class JAnswerTest {
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void addAndGet() throws SQLException {
 		
 		// 1. 기존데이터 3건 삭제
@@ -139,7 +139,7 @@ public class JAnswerTest {
 	}
 
 	@Test
-	@Ignore
+	//@Ignore
 	public void bean() {
 		LOG.debug("context:"+context);
 		LOG.debug("dao:"+dao);
