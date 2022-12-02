@@ -75,7 +75,7 @@ public class BoardVO extends DTO {
 	public void setRegDt(String regDt) {
 		this.regDt = regDt;
 	}
-
+ 
 	public String getRegId() {
 		return regId;
 	}
@@ -97,9 +97,9 @@ public class BoardVO extends DTO {
 		return "BoardVO [seq=" + seq + ", gubun=" + gubun + ", gubunQuestion=" + gubunQuestion + ", title=" + title
 				+ ", contents=" + contents + ", regDt=" + regDt + ", regId=" + regId + ", answerCheck=" + answerCheck
 				+ "]";
-	}
+	}  
 
-	
+	      
 	
 	
 	

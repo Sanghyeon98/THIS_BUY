@@ -44,7 +44,7 @@ public class AnswerVO extends DTO{
 	}
 
 	public void setTitle(String title) {
-		this.title = title;
+		this.title = title;    
 	}
 
 	public String getContents() {

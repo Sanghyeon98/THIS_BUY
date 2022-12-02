@@ -124,15 +124,14 @@ public class AnswerDaoImpl {
 	}
 
 	/**
-	 * 문의 답변 등록
-	 * 
+	 * 문의답변등록
 	 * @param dto
-	 * @return int (성공:1, 실패:0)
+	 * @return
 	 * @throws SQLException
 	 */
-	public int doInsert(DTO dto) throws SQLException {
+	public int doInsert(DTO inVO) throws SQLException {
 		int flag = 0;
-		AnswerVO answer = (AnswerVO) dto;
+		AnswerVO answer = (AnswerVO) inVO;
 
 		String statement = NAMESPACE + ".doInsert";
 		LOG.debug("=answer=" + answer);

@@ -3,13 +3,14 @@ package com.pcwk.ehr.order.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.pcwk.ehr.admin.domain.ProductVO;
 import com.pcwk.ehr.cart.domain.CartVO;
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.order.domain.OrderVO;
 
 public interface OrderDao {
 
-	int doUpdate(DTO dto)throws SQLException;
+	int doUpdate(OrderVO inVO)throws SQLException;
 	/**
 	 * 선택 삭제
 	 * @param dto
@@ -33,8 +34,28 @@ public interface OrderDao {
 	 * @return
 	 * @throws SQLException
 	 */
-	
 	List<OrderVO> doRetrieve(DTO dto) throws SQLException;
 	
+	/**
+	 * 
+	 * @param inVO
+	 * @return
+	 * @throws SQLException
+	 */
+	int getCount(OrderVO inVO) throws SQLException;
+	
+	/**
+	 * 
+	 * @param inVO
+	 * @return
+	 * @throws SQLException
+	 */
+	
+	OrderVO selectOne(OrderVO inVO) throws SQLException;
+
+	
+	
+	// 등록된 데이터 건수 확인
+
 }
 

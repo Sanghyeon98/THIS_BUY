@@ -29,14 +29,23 @@ public class BoardDaoImpl implements BoardDao {
 	public BoardDaoImpl() {}
 	
 	
+	public int answerCheck(BoardVO inVO) {
+		
+		int flag = 0;
+		
+	
+		return flag;
+		
+	}
+	
 	@Override
-	public List<BoardVO> doRetrieve(DTO dto) throws SQLException {
-		BoardSearchVO search = (BoardSearchVO) dto;
+	public List<BoardVO> doRetrieve(DTO inVO) throws SQLException {
+		BoardSearchVO search = (BoardSearchVO) inVO;
 		List<BoardVO> list = new ArrayList<BoardVO>();
 		
         String statement = NAMESPACE + DOT + "doRetrieve";
         LOG.debug("================================");
-		LOG.debug("|  param:" + dto );        
+		LOG.debug("|  param:" + inVO );        
 		LOG.debug("|  statement:" + statement );  
 		
 		list = sqlSessionTemplate.selectList(statement, search);
@@ -50,67 +59,70 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public int doDelete(DTO dto) throws SQLException {
-		LOG.debug("================================");
-		LOG.debug("|  param : " + dto);
-		
-		String statement = NAMESPACE + DOT + "doDelete";
-		LOG.debug("|  statement: " + statement);
-		
-		int flag = sqlSessionTemplate.delete(statement, dto);
-		LOG.debug("|  flag: " + flag);
-		LOG.debug("================================");
-		
-		return flag;
-	}
-
-	@Override
-	public int doInsert(DTO dto) throws SQLException {
+	public int doSave(BoardVO inVO) throws SQLException {
 		LOG.debug("┌--------------------------------┐");
-		LOG.debug("|  param : " + dto);
+		LOG.debug("|  param : " + inVO);
 		
-		String statement = NAMESPACE + DOT + "doInsert";
+		String statement = NAMESPACE + DOT + "doSave";
 		LOG.debug("|  statement : " + statement);
 		
-		int flag = sqlSessionTemplate.insert(statement, dto);
+		int flag = sqlSessionTemplate.insert(statement, inVO);
 		LOG.debug("|  flag : " + flag);
 		LOG.debug("└--------------------------------┘");
 		
 		return flag;
 	}
 
+
 	@Override
-	public DTO doSelectOne(DTO dto) throws SQLException {
+	public int doDelete(BoardVO inVO) throws SQLException {
+		LOG.debug("================================");
+		LOG.debug("|  param : " + inVO);
+		
+		String statement = NAMESPACE + DOT + "doDelete";
+		LOG.debug("|  statement: " + statement);
+		
+		int flag = sqlSessionTemplate.delete(statement, inVO);
+		LOG.debug("|  flag: " + flag);
+		LOG.debug("================================");
+		
+		return flag;
+	}
+
+
+	@Override
+	public int doUpdate(BoardVO inVO) throws SQLException {
+		int flag = 0;
+
+		LOG.debug("================================");
+		LOG.debug("|  param : " + inVO);
+
+		String statement = NAMESPACE + DOT + "doUpdate";
+		LOG.debug("|  statement: " + statement);
+
+		flag = sqlSessionTemplate.update(statement, inVO);
+		LOG.debug("|  flag: " + flag);
+		LOG.debug("================================");
+
+		return flag;
+	}
+
+
+	@Override
+	public BoardVO doSelectOne(BoardVO inVO) throws SQLException {
 		BoardVO outVO = null;
 
 		String statement = NAMESPACE + DOT + "doSelectOne";
 
 		LOG.debug("================================");
-		LOG.debug("|  param : " + dto);
+		LOG.debug("|  param : " + inVO);
 		LOG.debug("|  statement: " + statement);
 
-		outVO = sqlSessionTemplate.selectOne(statement, dto);
+		outVO = sqlSessionTemplate.selectOne(statement, inVO);
 		LOG.debug("|  outVO : " + outVO);
 		LOG.debug("================================");
 
 		return outVO;
-	}
-
-	@Override
-	public int doUpdate(DTO dto) throws SQLException {
-		int flag = 0;
-
-		LOG.debug("================================");
-		LOG.debug("|  param : " + dto);
-
-		String statement = NAMESPACE + DOT + "doUpdate";
-		LOG.debug("|  statement: " + statement);
-
-		flag = sqlSessionTemplate.update(statement, dto);
-		LOG.debug("|  flag: " + flag);
-		LOG.debug("================================");
-
-		return flag;
 	}
 
 

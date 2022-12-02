@@ -85,9 +85,9 @@ public class JBoardDaotest {
 		
 		
 		//2.
-		dao.doInsert(board01);
-		dao.doInsert(board02);
-		dao.doInsert(board03);
+		dao.doSave(board01);
+		dao.doSave(board02);
+		dao.doSave(board03);
 
 		search.setGubun("10");
 		List<BoardVO> list = dao.doRetrieve(search);
@@ -95,7 +95,7 @@ public class JBoardDaotest {
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void list() throws SQLException {
 
 		
@@ -106,7 +106,7 @@ public class JBoardDaotest {
 		// 1.
 		//dao.doRetrieve(search);
 		dao.doDelete(board01);
-		dao.doInsert(board01);
+		dao.doSave(board01);
 		 //2.
 		dao.doSelectOne(board01);
 		//dao.doSelectOne(board02);
@@ -118,7 +118,7 @@ public class JBoardDaotest {
 	
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void addAndGet() throws SQLException {
 		
 		// 1. 기존데이터 3건 삭제
@@ -135,13 +135,13 @@ public class JBoardDaotest {
 		dao.doDelete(board03);
 		
 		//2.
-		int flagInsert  =  dao.doInsert(board01);
+		int flagInsert  =  dao.doSave(board01);
 		assertThat(flagInsert, is(1));
 		
-		flagInsert  +=  dao.doInsert(board02);
+		flagInsert  +=  dao.doSave(board02);
 		assertThat(flagInsert, is(2));
 		
-		flagInsert  +=  dao.doInsert(board03);
+		flagInsert  +=  dao.doSave(board03);
 		assertThat(flagInsert, is(3));
 
 		// 3.
@@ -170,7 +170,7 @@ public class JBoardDaotest {
 		
 	}
 	@Test
-	@Ignore
+	//@Ignore
 	public void add() throws SQLException {
 		LOG.debug("==============================");
 		LOG.debug("=== add() ===");
@@ -184,9 +184,9 @@ public class JBoardDaotest {
 		    dao.doDelete(board02);
 		    dao.doDelete(board03);
 		    //2
-			dao.doInsert(board01);
-			dao.doInsert(board02);
-			dao.doInsert(board03);
+			dao.doSave(board01);
+			dao.doSave(board02);
+			dao.doSave(board03);
 			//dao.doDelete(board01);
 				
 				
@@ -195,7 +195,7 @@ public class JBoardDaotest {
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void beans() {
 		LOG.debug("==============================");
 		LOG.debug("context:"+context);	

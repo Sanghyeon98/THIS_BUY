@@ -3,14 +3,21 @@ package com.pcwk.ehr.board.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.pcwk.ehr.board.dao.AnswerDaoImpl;
+import com.pcwk.ehr.board.dao.BoardDao;
 import com.pcwk.ehr.board.dao.BoardDaoImpl;
 import com.pcwk.ehr.cmn.DTO;
 
+@Service("answerService")
 public class AnswerServiceImpl implements AnswerService {
 
+	final Logger LOG = LogManager.getLogger(getClass());
+	
 	@Autowired
 	AnswerDaoImpl answerDaoImpl;
 	
@@ -19,32 +26,38 @@ public class AnswerServiceImpl implements AnswerService {
 	
 	@Override
 	public List<?> getAllList() throws SQLException {
-		return answerDaoImpl.getAllList();
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public List<?> doSelectOne(DTO dto) throws SQLException {
-		return answerDaoImpl.doSelectOne(dto);
-	}
-
-	@Override
-	public int doUpdate(DTO dto) throws SQLException {
-		return answerDaoImpl.doUpdate(dto);
-	}
-
-	@Override
-	public int doDelete(DTO dto) throws SQLException {
-		return answerDaoImpl.doDelete(dto);
-	}
-
-	@Override
-	public int doInsert(DTO dto) throws SQLException {
-		return boardDaoImpl.doInsert(dto);
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public DTO doSelectAnswer(DTO dto) throws SQLException {
-		return answerDaoImpl.doSelectAnswer(dto);
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int doUpdate(DTO dto) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int doDelete(DTO dto) throws SQLException {
+	
+		return 0;
+	}
+
+	@Override
+	public int doInsert(DTO dto) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

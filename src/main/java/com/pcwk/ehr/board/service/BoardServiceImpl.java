@@ -3,44 +3,48 @@ package com.pcwk.ehr.board.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.pcwk.ehr.board.dao.BoardDao;
-import com.pcwk.ehr.board.dao.BoardDaoImpl;
 import com.pcwk.ehr.board.domain.BoardVO;
 import com.pcwk.ehr.cmn.DTO;
 
-public class BoardServiceImpl {
+@Service("boardService")
+public class BoardServiceImpl implements BoardService {
+
+	final Logger LOG = LogManager.getLogger(getClass());
+	
 	@Autowired
-	BoardDaoImpl boardDaoImpl;
+	BoardDao boardDao;
+	
+	public BoardServiceImpl() {}
 
-	public int doDelete(DTO dto) throws SQLException {
-		
-		return boardDaoImpl.doDelete(dto);
+	@Override
+	public int doSave(BoardVO inVO) throws SQLException {
+		return boardDao.doSave(inVO);
 	}
 
-
-	public int doInsert(DTO dto) throws SQLException {
-		
-		return boardDaoImpl.doInsert(dto);
+	@Override
+	public int doDelete(BoardVO inVO) throws SQLException {
+		return boardDao.doDelete(inVO);
 	}
 
-
-	public DTO doSelectOne(DTO dto) throws SQLException {
-		
-		return boardDaoImpl.doSelectOne(dto);
+	@Override
+	public int doUpdate(BoardVO inVO) throws SQLException {
+		return boardDao.doUpdate(inVO);
 	}
 
-
-	public int doUpdate(DTO dto) throws SQLException {
-		
-		return boardDaoImpl.doUpdate(dto);
+	@Override
+	public BoardVO doSelectOne(BoardVO inVO) throws SQLException {
+		return boardDao.doSelectOne(inVO);
 	}
 
-
-	public List<?> doRetrieve(DTO dto) throws SQLException {
-		
-		return boardDaoImpl.doRetrieve(dto);
+	@Override
+	public List<BoardVO> doRetrive(DTO inVO) throws SQLException {
+		return boardDao.doRetrieve(inVO);
 	}
 
 }
