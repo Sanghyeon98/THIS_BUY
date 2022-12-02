@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.pcwk.ehr.board.domain.BoardVO;
+import com.pcwk.ehr.cart.domain.CartJoinVO;
 import com.pcwk.ehr.cart.domain.CartVO;
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.cmn.SearchVO;
@@ -99,6 +100,29 @@ public class CartDaoImpl implements CartDao {
 	public CartVO doSelectOne(CartVO inVO) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	@Override
+	public List<CartJoinVO> getAll(CartJoinVO inVO) throws SQLException {
+		List<CartJoinVO> list =null;
+		
+		//String statement =NAMESPACE+DOT+"getAll";
+		String statement = NAMESPACE + DOT + "getAll";
+		LOG.debug("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		LOG.debug("┃param:"+inVO);
+		LOG.debug("┃statement:"+statement);
+		
+		//com.pcwk.ehr.cart
+		list=sqlSessionTemplate.selectList(statement, inVO);
+		for(CartJoinVO vo : list) {
+			LOG.debug("|vo:"+vo);
+		}
+		
+		LOG.debug("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		
+		
+		return list;
 	}
 
 }

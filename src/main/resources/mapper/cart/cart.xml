@@ -2,30 +2,68 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="com.pcwk.ehr.cart">
-  
-  <delete id="doDelete" parameterType="com.pcwk.ehr.cart.domain.CartVO">
-		DELETE FROM cart 
-		WHERE cart_no = #{cartNO} 
+
+<mapper namespace="com.pcwk.ehr.cart">
+
+
+	<resultMap type="com.pcwk.ehr.cart.domain.CartJoinVO"
+		id="CartMap">
+		<result column="cart_no" property="cartNO" />
+		<result column="item_no" property="itemNO" />
+		<result column="member_id" property="memberId" />
+		<result column="quantity" property="quantity" />
+		<result column="org_name" property="orgName" />
+		<result column="save_name" property="saveName" />
+		<result column="path" property="path" />
+		<result column="image_no" property="imageNo" />
+		<result column="name" property="name" />
+		<result column="price" property="price" />
+		<result column="finalPrice" property="finalPrice" />
+	</resultMap>
+
+    
+    <select id="getAll" parameterType="com.pcwk.ehr.cart.domain.CartJoinVO"
+    resultMap="CartMap">
+        SELECT c.item_no,
+            m.member_id,
+            c.quantity,
+            p.name,
+            p.price,            
+            (c.quantity * p.price) finalPrice
+        FROM cart c, product p, member m
+        WHERE 1=1
+        and c.item_no = p.item_no
+        and c.member_id = m.member_id
+        and m.member_id = #{memberId}    
+    </select>
+
+
+
+	<delete id="doDelete"
+		parameterType="com.pcwk.ehr.cart.domain.CartVO">
+		DELETE FROM cart
+		WHERE cart_no = #{cartNO}
 	</delete>
-  
-  	<insert id="doSave" parameterType="com.pcwk.ehr.cart.domain.CartVO">
+
+	<insert id="doSave"
+		parameterType="com.pcwk.ehr.cart.domain.CartVO">
 		INSERT INTO cart (
-		    cart_no,      
-		    member_id,    
-		    item_no,        
-		    quantity      
-		) VALUES (        
-		    #{cartNO},            
-		    #{memberId},            
-		    #{itemNO},            
-		    #{quantity}             
-		)                 
+		cart_no,
+		member_id,
+		item_no,
+		quantity
+		) VALUES (
+		#{cartNO},
+		#{memberId},
+		#{itemNO},
+		#{quantity}
+		)
 	</insert>
-  
-  <update id="doUpdate" parameterType="com.pcwk.ehr.cart.domain.CartVO">
-		UPDATE cart      
-		SET quantity = #{quantity} 
-		WHERE cart_no = #{cartNo}
-	</update> 
-  </mapper>
+
+	<update id="doUpdate"
+		parameterType="com.pcwk.ehr.cart.domain.CartVO">
+		UPDATE cart
+		SET quantity = #{quantity}
+		WHERE cart_no = #{cartNO}
+	</update>
+</mapper>

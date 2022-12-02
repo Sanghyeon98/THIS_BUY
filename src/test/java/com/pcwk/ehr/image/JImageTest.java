@@ -1,12 +1,13 @@
 package com.pcwk.ehr.image;
 
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertNotNull;
+
+import java.sql.SQLException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.pcwk.ehr.cmn.SearchVO;
 import com.pcwk.ehr.image.dao.ImageDao;
 import com.pcwk.ehr.image.domain.ImageVO;
 
@@ -28,25 +30,56 @@ public class JImageTest {
 	@Autowired
 	ImageDao dao;
 	
-	ImageVO   imageVO1;
-	ImageVO   imageVO2;
-	ImageVO   imageVO3;
+	//테스트 데이터
+	ImageVO imageVO1;
+	ImageVO imageVO2;
+	ImageVO imageVO3;
 	
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
+	ImageVO search;
+	
+	SearchVO searchVO;
+	
 	@Before
 	public void setUp() throws Exception {                                                               
 	}
 
-	@After
-	public void tearDown() throws Exception {
+	@Test
+	@Ignore
+	public void addAndGet()throws SQLException{
+		dao.doDelete(imageVO1);
+		dao.doDelete(imageVO2);
+		dao.doDelete(imageVO3);
+		
+		
+		dao.doSave(imageVO1);
+		dao.doSave(imageVO2);
+		dao.doSave(imageVO3);
 	}
+	
+	@Test
+	//@Ignore
+	public void doUpdate() throws SQLException{
+		dao.doDelete(imageVO1);
+		dao.doDelete(imageVO2);
+		dao.doDelete(imageVO3);
+		
+		dao.doSave(imageVO1);
+		dao.doSave(imageVO2);
+		dao.doSave(imageVO3);
+		
+		//cartVO1.setCartNO(1).setQuantity(5);
+	   	//dao.doUpdate(cartVO1);
+		
+	} 
 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void bean() {
+		LOG.debug("┌────────────────────────────────────────────────────────┐");
+		LOG.debug("│ context : " + context                                    );
+		LOG.debug("│ dao : " + dao                                            );
+		LOG.debug("└────────────────────────────────────────────────────────┘");
+		assertNotNull(context);
+		assertNotNull(dao);
 	}
  
 } 

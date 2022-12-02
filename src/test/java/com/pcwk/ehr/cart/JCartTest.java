@@ -1,12 +1,13 @@
 package com.pcwk.ehr.cart;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.After;
 import org.junit.AfterClass ;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -18,6 +19,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.pcwk.ehr.cart.dao.CartDao;
+import com.pcwk.ehr.cart.domain.CartJoinVO;
 import com.pcwk.ehr.cart.domain.CartVO;
 
 
@@ -32,13 +34,18 @@ public class JCartTest {
 	@Autowired
 	CartDao dao;
 	
+	
+	
+	CartJoinVO cartJoinVO1; 
+	CartJoinVO cartJoinVO2; 
+	CartJoinVO cartJoinVO3; 
+	
 	CartVO   cartVO1;
 	CartVO   cartVO2;
 	CartVO   cartVO3;
+	
 
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
+
 
 	
 	@Before
@@ -52,6 +59,18 @@ public class JCartTest {
 		cartVO2 = new CartVO(3,3,"test01",3);
 		cartVO3 = new CartVO(4,4,"test01",4);
 	
+		cartJoinVO1 = new CartJoinVO(1, 1, "admin", 1, "", "", "", 1, "", 0, 0);
+	}
+	
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+		
+	}
+	@Test
+	//@Ignore
+	public void getAll() throws SQLException{
+		
+		List<CartJoinVO> list = dao.getAll(cartJoinVO1);
 	}
 	
 	@Test
@@ -68,7 +87,7 @@ public class JCartTest {
 	}
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void doUpdate() throws SQLException{
 		dao.doDelete(cartVO1);
 		dao.doDelete(cartVO2);
