@@ -10,7 +10,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.pcwk.ehr.cart.domain.CartVO;
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.cmn.SearchVO;
 import com.pcwk.ehr.order.domain.OrderVO;
@@ -86,6 +85,18 @@ public class OrderDaoImpl implements OrderDao {
 		LOG.debug("└--------------------------------┘");
 
 		return flag;
+	}
+
+	@Override
+	public int getCount(OrderVO inVO) throws SQLException {
+		
+		return 0;
+	}
+
+	@Override
+	public OrderVO selectOne(DTO dto) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
