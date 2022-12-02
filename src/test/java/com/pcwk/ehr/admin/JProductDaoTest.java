@@ -68,7 +68,7 @@ public class JProductDaoTest {
 
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void doRetrieve() throws SQLException {
 		dao.doDelete(prodVO1);
 		dao.doDelete(prodVO2);
@@ -119,7 +119,7 @@ public class JProductDaoTest {
 	}
 	
 	@Test
-	@Ignore	
+	//@Ignore	
 	public void addAndGet() throws SQLException {
 		LOG.debug("==============================");
 		LOG.debug("=== addAndGet() ===");
@@ -143,7 +143,7 @@ public class JProductDaoTest {
 	}	
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void beans() {
 		LOG.debug("==============================");
 		LOG.debug("context:"+context);	

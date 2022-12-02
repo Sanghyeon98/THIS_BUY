@@ -28,13 +28,13 @@
 	<!-- database.properties read -->
 	<context:property-placeholder location="classpath:/resource/config/database.properties" />
 
-	<!--SimpleDriverDataSource to -->
+	<!--SimpleDriverDataSource to --> 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
-		<!-- <property name="driverClassName" value="${jdbc.driver}" /> -->
-    <property name="url" value="jdbc:log4jdbc:oracle:thin:@orcl_high?TNS_ADMIN=C:/DCOM_0725/00_PROJECT/01_MainProject/Oracle_Cloud/Wallet_orcl" />
+		<!-- <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" /> -->
+		<property name="driverClassName" value="${jdbc.driver}" />
+    <!-- <property name="url" value="jdbc:log4jdbc:oracle:thin:@orcl_high?TNS_ADMIN=C:/Wallet_orcl" /> -->
 		<!-- <property name="url" value="jdbc:log4jdbc:oracle:thin:@192.168.3.101:1521:XE" /> -->
-		<!-- <property name="url" value="${jdbc.url}" /> -->
+		<property name="url" value="${jdbc.url}" />
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
 		<!-- 최대 접속 허용 갯수 -->
