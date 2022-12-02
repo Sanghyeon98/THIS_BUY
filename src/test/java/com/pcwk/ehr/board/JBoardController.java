@@ -1,12 +1,14 @@
 package com.pcwk.ehr.board;
 
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,11 +27,13 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.pcwk.ehr.board.dao.BoardDao;
 import com.pcwk.ehr.board.domain.BoardSearchVO;
 import com.pcwk.ehr.board.domain.BoardVO;
-import com.pcwk.ehr.cmn.SearchVO;
+import com.pcwk.ehr.cmn.Message;
 
 
 
@@ -51,11 +55,9 @@ public class JBoardController {
 	//테스트 픽스처
 	List<BoardVO> board;
 	
-	//
 	@Autowired
 	BoardDao  dao;
 
-	
 	//
 	BoardSearchVO search;
 	
@@ -75,23 +77,108 @@ public class JBoardController {
 	}
 	
 	@Test
-	public void view()throws Exception{
-		//url, param 설정, 호출방식(get/post)
-		MockHttpServletRequestBuilder  requestBuilder= MockMvcRequestBuilders.get("/board/view.do")
-				                                       .param("seq", String.valueOf(board.get(0).getSeq()));
+	public void doUpdate()throws Exception{
+		//url:/user/add.do, param 설정, 
+		//호출방식(post)
+		MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/board/doUpdate.do")
+				                                      .param("seq", board.get(0).getSeq()+"")
+				                                      .param("gubun", board.get(0).getGubun()+"")
+				                                      .param("gubunQuestion", board.get(0).getGubunQuestion()+"")
+				                                      .param("title", board.get(0).getTitle()+"수정함")
+				                                      .param("contents", board.get(0).getContents()+"수정함")
+				                                      .param("regId", board.get(0).getRegId())
+				                                      .param("answerCheck", board.get(0).getAnswerCheck()+"");
+		//호출 성공
+		ResultActions  resultActions  = mockMvc.perform(requestBuilder)
+				                        .andExpect(status().isOk());		
+		String result = resultActions.andDo(print()).andReturn().getResponse().getContentAsString();
 		
-		//대역 객체를 통해 호출
-		ResultActions resultActions =mockMvc.perform(requestBuilder)
-		                                               .andExpect(status().is2xxSuccessful());
+		LOG.debug("┌=============================┐");	
+		LOG.debug("|result="+result);		
+		LOG.debug("└=============================┘");
 		
-		String responseResult =  resultActions.andDo( print() )
-		    .andReturn().getResponse().getContentAsString();
+		Message messageVO=new Gson().fromJson(result, Message.class);
+		assertEquals("1", messageVO.getMsgId());
+		
+	}
+	
+	@Test
+	//@Ignore
+	public void doSelectOne() throws Exception {
+		// url, param, 호출방식
+		MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/board/doSelectOne.do")
+				.param("seq",board.get(0).getSeq()+"");
+
+		ResultActions resultAction = mockMvc.perform(requestBuilder).andExpect(status().isOk());
+		
+		ModelAndView mav = resultAction.andDo(print()).andReturn().getModelAndView();
+		
+		Map<String, Object> model = mav.getModel();
+		
+		//String result = resultAction.andDo(print()).andReturn().getResponse().getContentAsString();
 		LOG.debug("┌-------------------------------------------┐");
-		LOG.debug("|responseResult:"+responseResult);
-		LOG.debug("└-------------------------------------------┘");				
+		LOG.debug("|model:"+model);
+		LOG.debug("└-------------------------------------------┘");	
+	}
+
+	
+	@Test
+	//@Ignore
+	public void doDelete() throws Exception {
+		MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/board/doSave.do")
+														.param("seq", board.get(0).getSeq()+"")
+														.param("gubun", board.get(0).getGubun()+"")
+														.param("gubunQuestion", board.get(0).getGubunQuestion()+"")
+														.param("title", board.get(0).getTitle())
+														.param("contents", board.get(0).getContents())
+														.param("regId", board.get(0).getRegId())
+														.param("answerCheck", board.get(0).getAnswerCheck()+"");
+		
+
+		ResultActions resultAction = mockMvc.perform(requestBuilder).andExpect(status().isOk());
+
+		String result = resultAction.andDo(print()).andReturn().getResponse().getContentAsString();
+
+		LOG.debug("┌-------------------------------------------┐");
+		LOG.debug("|result:" + result);
+		LOG.debug("└-------------------------------------------┘");
+		
+		Message messageVO = new Gson().fromJson(result, Message.class);
+		assertEquals("1", messageVO.getMsgId());
+		
+
+	}
+	
+
+	@Test
+	//@Ignore
+	public void doSave() throws Exception {
+		MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/board/doSave.do")
+														.param("seq", board.get(0).getSeq()+"")
+														.param("gubun", board.get(0).getGubun()+"")
+														.param("gubunQuestion", board.get(0).getGubunQuestion()+"")
+														.param("title", board.get(0).getTitle())
+														.param("contents", board.get(0).getContents())
+														.param("regId", board.get(0).getRegId())
+														.param("answerCheck", board.get(0).getAnswerCheck()+"");
+		
+
+		ResultActions resultAction = mockMvc.perform(requestBuilder).andExpect(status().isOk());
+
+		String result = resultAction.andDo(print()).andReturn().getResponse().getContentAsString();
+
+		LOG.debug("┌-------------------------------------------┐");
+		LOG.debug("|result:" + result);
+		LOG.debug("└-------------------------------------------┘");
+		
+		Message messageVO = new Gson().fromJson(result, Message.class);
+		assertEquals("1", messageVO.getMsgId());
+		
+
 	}
 
 	@Test
+	//@Ignore
 	public void beans() {
 		LOG.debug("┌-------------------------------------------┐");
 		LOG.debug("|webApplicationContext:"+webApplicationContext);
