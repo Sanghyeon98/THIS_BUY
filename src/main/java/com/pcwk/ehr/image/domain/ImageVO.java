@@ -145,8 +145,6 @@ public class ImageVO {
 		return "ImageVO [imageNo=" + imageNo + ", gubun=" + gubun + ", imageM=" + imageM + ", mainImage=" + mainImage
 				+ ", orgName=" + orgName + ", saveName=" + saveName + ", path=" + path + ", fileSize=" + fileSize
 				+ ", fileExt=" + fileExt + ", fromTb=" + fromTb + ", fromNo=" + fromNo + ", regDt=" + regDt + ", modDt="
-				+ modDt + "]";
+				+ modDt + ", toString()=" + super.toString() + "]";
 	}
-	
-	
 }
