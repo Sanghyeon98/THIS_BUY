@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.pcwk.ehr.board.domain.AnswerVO;
+import com.pcwk.ehr.board.domain.BoardSearchVO;
 import com.pcwk.ehr.board.domain.BoardVO;
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.cmn.SearchVO;
@@ -30,7 +31,7 @@ public class BoardDaoImpl implements BoardDao {
 	
 	@Override
 	public List<BoardVO> doRetrieve(DTO dto) throws SQLException {
-		SearchVO search = (SearchVO) dto;
+		BoardSearchVO search = (BoardSearchVO) dto;
 		List<BoardVO> list = new ArrayList<BoardVO>();
 		
         String statement = NAMESPACE + DOT + "doRetrieve";

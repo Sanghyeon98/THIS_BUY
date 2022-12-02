@@ -5,25 +5,26 @@
 
 <mapper namespace="com.pcwk.ehr.board">
 
-<sql id="searchConditionboard">
-     <where>
-        <choose>
-            <when test="searchDiv == '10' and '' != searchDiv">
-              gubun LIKE #{searchWord} || '%'
-            </when>
-            <when test="searchDiv == '20' and '' != searchDiv">
-              reg_id LIKE #{searchWord} || '%'
-            </when>
-        </choose>
-     </where>
+ <sql id="searchConditionboard">
+      <choose>
+        <when test="  '10' == searchDiv  and '' != searchWord ">
+         AND  title LIKE #{searchWord} || '%'
+        </when>
+        <when test="  '20' == searchDiv  and '' != searchWord ">
+         AND   contents LIKE #{searchWord} || '%'
+        </when>
+        <when test="  '30' == searchDiv  and '' != searchWord ">
+         AND   reg_id LIKE #{searchWord} || '%'
+        </when>                 
+      </choose>
   </sql>
-    
   <select id="doRetrieve" resultType="BoardVO" parameterType="SearchVO">
       SELECT A.*,B.*
       FROM(
           SELECT 
                  TT1.seq as seq,
                  TT1.gubun as "gubun",
+                 TT1.gubun_question as "gubunQuestion",
                  TT1.title as "title",
                  TT1.contents as "contents",
                  -- 당일이면 시:분, 그렇지 않으면 년-월-일
@@ -36,7 +37,9 @@
               FROM (
                   SELECT *
                   FROM board
-                 <include refid="searchConditionboard"/>
+                 WHERE gubun = #{gubun}
+                  AND  gubun_question = #{gubunQuestion}
+                   <include refid="searchConditionboard"></include>
                   ORDER BY reg_dt DESC
               ) T1
               -- 종료 번호
@@ -50,7 +53,9 @@
           SELECT COUNT(*) totalCnt
           FROM board
           --WHERE 조건
-          <include refid="searchConditionboard"/>
+         WHERE gubun = #{gubun}
+          AND  gubun_question = #{gubunQuestion}
+         <include refid="searchConditionboard"></include>
       ) B
    </select>
   

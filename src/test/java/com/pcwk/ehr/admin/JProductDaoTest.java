@@ -16,8 +16,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.pcwk.ehr.admin.dao.AdminCategoryDao;
-import com.pcwk.ehr.admin.dao.AdminProductDao;
+import com.pcwk.ehr.admin.dao.CategoryDao;
+import com.pcwk.ehr.admin.dao.ProductDao;
 import com.pcwk.ehr.admin.dao.UserDao;
 import com.pcwk.ehr.admin.domain.CategoryVO;
 import com.pcwk.ehr.admin.domain.Level;
@@ -29,14 +29,14 @@ import com.pcwk.ehr.cmn.SearchVO;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/root-context.xml"
 								  ,"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"})
-public class JAdminProductDaoTest {
+public class JProductDaoTest {
 	final Logger LOG = LogManager.getLogger(getClass());
 	
 	@Autowired
 	ApplicationContext context;
 	
 	@Autowired
-	AdminProductDao dao;
+	ProductDao dao;
 	
 	ProductVO prodVO1;
 	ProductVO prodVO2;

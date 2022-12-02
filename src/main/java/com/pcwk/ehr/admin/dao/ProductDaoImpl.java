@@ -15,8 +15,8 @@ import com.pcwk.ehr.admin.domain.ProductVO;
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.cmn.SearchVO;
 
-@Repository("adminProductDao")
-public class AdminProductDaoImpl implements AdminProductDao {
+@Repository("ProductDao")
+public class ProductDaoImpl implements ProductDao {
 	final Logger LOG = LogManager.getLogger(getClass());
 	
 	final String NAMESPACE = "com.pcwk.ehr.product";
@@ -25,7 +25,7 @@ public class AdminProductDaoImpl implements AdminProductDao {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 	
-	public AdminProductDaoImpl() {}
+	public ProductDaoImpl() {}
 
 	@Override
 	public int doSave(ProductVO inVO) throws SQLException {

@@ -4,6 +4,28 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.pcwk.ehr.cart">
   
+  <delete id="doDelete" parameterType="com.pcwk.ehr.cart.domain.CartVO">
+		DELETE FROM cart 
+		WHERE cart_no = #{cartNO} 
+	</delete>
   
+  	<insert id="doSave" parameterType="com.pcwk.ehr.cart.domain.CartVO">
+		INSERT INTO cart (
+		    cart_no,      
+		    member_id,    
+		    item_no,        
+		    quantity      
+		) VALUES (        
+		    #{cartNO},            
+		    #{memberId},            
+		    #{itemNO},            
+		    #{quantity}             
+		)                 
+	</insert>
   
+  <update id="doUpdate" parameterType="com.pcwk.ehr.cart.domain.CartVO">
+		UPDATE cart      
+		SET quantity = #{quantity} 
+		WHERE cart_no = #{cartNo}
+	</update> 
   </mapper>

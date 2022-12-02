@@ -20,7 +20,7 @@ public class CartDaoImpl implements CartDao {
 	final Logger LOG = LogManager.getFormatterLogger(getClass());
 
 	final String NAMESPACE = "com.pcwk.ehr.cart";
-	final String DOT = ".";
+	final String DOT = "."; 
 	
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
@@ -29,29 +29,29 @@ public class CartDaoImpl implements CartDao {
 	
 	
 	@Override
-	public int doDelete(DTO dto) throws SQLException {
+	public int doDelete(CartVO inVO) throws SQLException {
 		LOG.debug("┌--------------------------------┐");
-		LOG.debug("|  param : " + dto);
+		LOG.debug("|  param : " + inVO);
 		
-		String statement = NAMESPACE + DOT + "doInsert";
+		String statement = NAMESPACE + DOT + "doDelete";
 		LOG.debug("|  statement : " + statement);
 		
-		int flag = sqlSessionTemplate.insert(statement, dto);
+		int flag = sqlSessionTemplate.delete(statement, inVO);
 		LOG.debug("|  flag : " + flag);
-		LOG.debug("└--------------------------------┘");
+		LOG.debug("└--------------------------------┘");  
 		
 		return flag;
 	}
 
 	@Override
-	public int doInsert(DTO dto) throws SQLException {
+	public int doSave(CartVO inVO) throws SQLException {
 		LOG.debug("┌--------------------------------┐");
-		LOG.debug("|  param : " + dto);
+		LOG.debug("|  param : " + inVO);
 		
-		String statement = NAMESPACE + DOT + "doInsert";
+		String statement = NAMESPACE + DOT + "doSave";
 		LOG.debug("|  statement : " + statement);
 		
-		int flag = sqlSessionTemplate.insert(statement, dto);
+		int flag = sqlSessionTemplate.insert(statement, inVO);
 		LOG.debug("|  flag : " + flag);
 		LOG.debug("└--------------------------------┘");
 		
@@ -80,18 +80,25 @@ public class CartDaoImpl implements CartDao {
 
 
 	@Override
-	public int doUpdate(DTO dto) throws SQLException {
+	public int doUpdate(CartVO inVO) throws SQLException {
 		LOG.debug("┌--------------------------------┐");
-		LOG.debug("|  param : " + dto);
+		LOG.debug("|  param : " + inVO);
 		
-		String statement = NAMESPACE + DOT + "doInsert";
+		String statement = NAMESPACE + DOT + "doUpdate";
 		LOG.debug("|  statement : " + statement);
 		
-		int flag = sqlSessionTemplate.insert(statement, dto);
+		int flag = sqlSessionTemplate.update(statement, inVO);
 		LOG.debug("|  flag : " + flag);
 		LOG.debug("└--------------------------------┘");
 		
 		return flag;
+	}
+
+
+	@Override
+	public CartVO doSelectOne(CartVO inVO) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

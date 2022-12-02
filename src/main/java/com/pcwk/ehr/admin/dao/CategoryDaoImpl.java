@@ -14,8 +14,8 @@ import com.pcwk.ehr.admin.domain.CategoryVO;
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.cmn.SearchVO;
 
-@Repository("adminCategoryDao")
-public class AdminCategoryDaoImpl implements AdminCategoryDao {
+@Repository("CategoryDao")
+public class CategoryDaoImpl implements CategoryDao {
 	final Logger LOG = LogManager.getLogger(getClass());
 	
 	final String NAMESPACE = "com.pcwk.ehr.category";
@@ -24,7 +24,7 @@ public class AdminCategoryDaoImpl implements AdminCategoryDao {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 	
-	public AdminCategoryDaoImpl() {}
+	public CategoryDaoImpl() {}
 
 	@Override
 	public int doSave(CategoryVO inVO) throws SQLException {
