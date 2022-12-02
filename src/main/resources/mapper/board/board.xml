@@ -101,18 +101,7 @@
     WHERE seq = #{seq}
   </update>
   
-    <sql id="searchCondition">
-    <where>
-      <choose>
-        <when test=" '10'  == searchDiv ">
-          gubun = #{searchWord}    
-        </when>
-        <when test=" '20'  == searchDiv ">
-        </when>
-      </choose> 
-    </where>
-  </sql>
-  
+
     <resultMap type="BoardVO" id="boardMap">
    <result  column="seq"      property="seq"       />
    <result  column="gubun"      property="gubun"      />
