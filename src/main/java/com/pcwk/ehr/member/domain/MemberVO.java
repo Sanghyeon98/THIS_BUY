@@ -7,6 +7,7 @@ public class MemberVO extends DTO {
 	private String passwd;// ��й�ȣ
 	private String name; // �̸�
 	private String email;// �̸���
+	private String phone;// �̸���
 	private String address;// �ּ�
 	private int gender;// ���� ��1 ��2
 	private String birthdate;// �������
@@ -16,13 +17,14 @@ public class MemberVO extends DTO {
 	
 	public MemberVO() {}
 
-	public MemberVO(String uId, String passwd, String name, String email, String address, int gender, String birthdate,
-			String regDt, String modDt, String auth) {
+	public MemberVO(String uId, String passwd, String name, String email, String phone, String address, int gender,
+			String birthdate, String regDt, String modDt, String auth) {
 		super();
 		this.uId = uId;
 		this.passwd = passwd;
 		this.name = name;
 		this.email = email;
+		this.phone = phone;
 		this.address = address;
 		this.gender = gender;
 		this.birthdate = birthdate;
@@ -61,6 +63,14 @@ public class MemberVO extends DTO {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	public String getAddress() {
@@ -113,8 +123,9 @@ public class MemberVO extends DTO {
 
 	@Override
 	public String toString() {
-		return "MemberVO [uId=" + uId + ", passwd=" + passwd + ", name=" + name + ", email=" + email + ", address="
-				+ address + ", gender=" + gender + ", birthdate=" + birthdate + ", regDt=" + regDt + ", modDt=" + modDt
-				+ ", auth=" + auth + "]";
-	}  
+		return "MemberVO [uId=" + uId + ", passwd=" + passwd + ", name=" + name + ", email=" + email + ", phone="
+				+ phone + ", address=" + address + ", gender=" + gender + ", birthdate=" + birthdate + ", regDt="
+				+ regDt + ", modDt=" + modDt + ", auth=" + auth + ", toString()=" + super.toString() + "]";
+	}
+
 }
