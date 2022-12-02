@@ -76,7 +76,7 @@
         UPDATE hr_member
         SET 
             passwd = #{passwd},
-            name = #{name],
+            name = #{name},
             email = #{email},
             phone = #{phone},
             address = #{address},
@@ -84,7 +84,7 @@
             birthdate = #{birthdate},
             reg_dt = #SYSDATE,
             mod_dt = #SYSDATE,
-            auth = #{auth},
+            auth = #{auth}
         WHERE u_id = #{uId}
     </update>
 
@@ -159,9 +159,9 @@
         mod_dt ,
         auth
         ) VALUES (
-        #{u_id},
+        #{uId},
         #{passwd},
-        #{name],
+        #{name},
         #{email},
         #{phone},
         #{address},
@@ -169,7 +169,7 @@
         #{birthdate},
         #SYSDATE,
         #SYSDATE,
-        #{auth},
+        #{auth}
         )
     </insert>
 

@@ -8,14 +8,19 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
-import com.pcwk.ehr.member.domain.DTO;
+import com.pcwk.ehr.admin.domain.ProductVO;
+import com.pcwk.ehr.admin.domain.UserVO;
+import com.pcwk.ehr.cmn.SearchVO;
+import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.member.domain.MemberVO;
 
+@Repository("memberDao")
 public class MemberDaoImpl implements Memberdao {
 final Logger LOG = LogManager.getFormatterLogger(getClass());
     
-	final String NAMESPACE = "com.pcwk.ehr.user";
+	final String NAMESPACE = "com.pcwk.ehr.member";
 	final String DOT       = ".";
 	
 	@Autowired
@@ -120,10 +125,48 @@ final Logger LOG = LogManager.getFormatterLogger(getClass());
 	}
 
 
+
 	@Override
-	public List<MemberVO> doRetrieve(com.pcwk.ehr.cmn.DTO inVO) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<MemberVO> doRetrieve(DTO inVO) throws SQLException {
+		SearchVO search = (SearchVO) inVO;
+		List<MemberVO> list = new ArrayList<MemberVO>();
+		
+        String statement = NAMESPACE + DOT + "doRetrieve";
+        LOG.debug("================================");
+		LOG.debug("|  param:" + inVO );        
+		LOG.debug("|  statement:" + statement );  
+		
+		list = sqlSessionTemplate.selectList(statement, search);
+		
+		for(MemberVO vo : list) {
+			LOG.debug("|  vo : " + vo );
+		}
+		LOG.debug("================================");
+		
+		return list;
+	}
+
+
+	@Override
+	public int getCount(MemberVO inVO) throws SQLException {
+		int count = 0;
+		String statement = NAMESPACE+DOT+"getCount";
+		
+		LOG.debug("┌--------------------------------┐");
+		LOG.debug("|param:"+inVO );        
+		LOG.debug("|statement:"+statement );  
+		
+		count = sqlSessionTemplate.selectOne(statement, inVO);
+		
+		LOG.debug("|count:"+count );  		
+		LOG.debug("└--------------------------------┘");		
+		return count;
+	}
+
+
+
+
+
 	}
 
 
@@ -133,4 +176,4 @@ final Logger LOG = LogManager.getFormatterLogger(getClass());
 
 
 
-}
+
