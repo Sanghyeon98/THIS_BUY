@@ -143,7 +143,7 @@ public class JProductDaoTest {
 	}	
 
 	@Test
-	@Ignore
+	//@Ignore
 	public void beans() {
 		LOG.debug("==============================");
 		LOG.debug("context:"+context);	
