@@ -34,8 +34,6 @@ public class JCartTest {
 	@Autowired
 	CartDao dao;
 	
-	
-	
 	CartJoinVO cartJoinVO1; 
 	CartJoinVO cartJoinVO2; 
 	CartJoinVO cartJoinVO3; 
@@ -43,10 +41,6 @@ public class JCartTest {
 	CartVO   cartVO1;
 	CartVO   cartVO2;
 	CartVO   cartVO3;
-	
-
-
-
 	
 	@Before
 	public void setUp() throws Exception {
@@ -74,12 +68,11 @@ public class JCartTest {
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void addAndGet()throws SQLException{
 		dao.doDelete(cartVO1);
 		dao.doDelete(cartVO2);
 		dao.doDelete(cartVO3);
-		
 		
 		dao.doSave(cartVO1);
 		dao.doSave(cartVO2);
@@ -87,7 +80,7 @@ public class JCartTest {
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void doUpdate() throws SQLException{
 		dao.doDelete(cartVO1);
 		dao.doDelete(cartVO2);
@@ -115,7 +108,7 @@ public class JCartTest {
 	public void beans() {
 		LOG.debug("==============================");
 		LOG.debug("context:"+context);	
-	//	LOG.debug("dao:"+dao);
+		LOG.debug("dao:"+dao);
 		LOG.debug("==============================");
 		
 		assertNotNull(context);
