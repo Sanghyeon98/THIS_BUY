@@ -81,9 +81,9 @@
             phone = #{phone},
             address = #{address},
             gender = #{gender},
-            birthdate = #{birthdate},
-            reg_dt = #SYSDATE,
-            mod_dt = #SYSDATE,
+            birthdate = SYSDATE,
+            reg_dt = SYSDATE,
+            mod_dt = SYSDATE,
             auth = #{auth}
         WHERE u_id = #{uId}
     </update>
@@ -113,7 +113,7 @@
                 phone       ,
                 address     ,
                 gender      ,
-                birthdate   ,
+                TO_CHAR(reg_dt,'yyyy-mm-dd hh24:mi:ss') AS birthdate   ,
                 TO_CHAR(reg_dt,'yyyy-mm-dd hh24:mi:ss') AS reg_dt      ,
                 TO_CHAR(reg_dt,'yyyy-mm-dd hh24:mi:ss') AS mod_dt      ,
                 auth      
@@ -133,12 +133,13 @@
     <select id="getAll" parameterType="memberVO"
         resultType="memberVO">
         SELECT u_id AS "uId",
-        name,
         passwd,
-        u_level AS intLevel,
-        login,
-        recommend,
+        name,
         email,
+        phone,
+        address,
+        gender,
+        TO_CHAR(reg_dt,'yyyy-mm-dd hh24:mi:ss') ASbirthdate,
         TO_CHAR(reg_dt,'yyyy-mm-dd hh24:mi:ss') AS regDt
         FROM hr_member
         WHERE u_id like #{uId} || '%'
@@ -166,9 +167,9 @@
         #{phone},
         #{address},
         #{gender},
-        #{birthdate},
-        #SYSDATE,
-        #SYSDATE,
+        SYSDATE,
+        SYSDATE,
+        SYSDATE,
         #{auth}
         )
     </insert>
