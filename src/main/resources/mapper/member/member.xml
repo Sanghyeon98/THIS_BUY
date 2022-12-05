@@ -139,7 +139,7 @@
         phone,
         address,
         gender,
-        TO_CHAR(reg_dt,'yyyy-mm-dd hh24:mi:ss') ASbirthdate,
+        TO_CHAR(reg_dt,'yyyy-mm-dd hh24:mi:ss') AS birthdate,
         TO_CHAR(reg_dt,'yyyy-mm-dd hh24:mi:ss') AS regDt
         FROM hr_member
         WHERE u_id like #{uId} || '%'

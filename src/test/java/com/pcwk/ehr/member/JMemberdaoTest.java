@@ -1,6 +1,8 @@
 package com.pcwk.ehr.member;
 
 import static org.junit.Assert.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -15,10 +17,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.pcwk.ehr.member.domain.MemberVO;
 import com.pcwk.ehr.member.dao.Memberdao;
 import com.pcwk.ehr.member.dao.MemberDaoImpl;
+import com.google.gson.Gson;
+import com.pcwk.ehr.cmn.WorkDiv;
 import com.pcwk.ehr.cmn.SearchVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -44,6 +52,12 @@ public class JMemberdaoTest {
 	SearchVO   searchVO;
 	
 	MemberVO   search;
+	
+	//브라우저 대역(Mock)
+		MockMvc  mockMvc;
+		
+	//테스트 픽스처
+		List<MemberVO> users;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -144,9 +158,46 @@ public class JMemberdaoTest {
 		list= dao.getAll(search);
 		assertEquals(3, dao.getCount(search));
 		isSameUser(memberVO3, list.get(2));		
-	
+	}
+	@Test
+	public void doRetrive() throws Exception{
+		//url, param 설정, 호출방식(get/post)
+		MockHttpServletRequestBuilder  requestBuilder= MockMvcRequestBuilders.get("/user/doRetrive.do")
+				                                       .param("pageSize", searchVO.getPageSize()+"")
+				                                       .param("pageNo", searchVO.getPageNo()+"")
+				                                       .param("searchDiv", searchVO.getSearchDiv())
+				                                       .param("searchWord", searchVO.getSearchWord());
+		//대역 객체를 통해 호출
+		ResultActions resultActions =mockMvc.perform(requestBuilder)
+		                                               .andExpect(status().is2xxSuccessful());	
 		
-		}
+		String responseResult =  resultActions.andDo( print() )
+			    .andReturn().getResponse().getContentAsString();	
+		LOG.debug("┌-------------------------------------------┐");
+		LOG.debug("|responseResult:"+responseResult);
+		LOG.debug("└-------------------------------------------┘");			
+		
+	}
+	@Test
+	public void doSelectOne() throws Exception{
+		//url, param 설정, 호출방식(get/post)
+		MockHttpServletRequestBuilder  requestBuilder= MockMvcRequestBuilders.get("/user/doSelectOne.do")
+				                                       .param("uId", users.get(0).getuId());	
+		
+		//대역 객체를 통해 호출
+		ResultActions resultActions =mockMvc.perform(requestBuilder)
+		                                               .andExpect(status().is2xxSuccessful());	
+		
+		String responseResult =  resultActions.andDo( print() )
+			    .andReturn().getResponse().getContentAsString();	
+		LOG.debug("┌-------------------------------------------┐");
+		LOG.debug("|responseResult:"+responseResult);
+		LOG.debug("└-------------------------------------------┘");		
+		
+		MemberVO outVO = new Gson().fromJson(responseResult, MemberVO.class);
+		assertEquals(outVO.getuId(), users.get(0).getuId());
+	}
+	
 	@Test
 	public void beans() {
 		assertNotNull(context);
