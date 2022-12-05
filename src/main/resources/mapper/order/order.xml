@@ -127,7 +127,7 @@
     </update>
     
 
-<select id="doSave" parameterType="com.pcwk.ehr.order.domain.OderVO">
+<select id="doSave" parameterType="OrderVO">
 INSERT INTO ordering (
             order_no,
             member_id,
