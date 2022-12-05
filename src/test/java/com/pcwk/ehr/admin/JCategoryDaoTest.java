@@ -75,10 +75,10 @@ public class JCategoryDaoTest {
 	}	
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void doRetrieve() throws SQLException {
 		// 삭제
-		adminDao.doDelete(cateVO01);
+		 adminDao.doDelete(cateVO01);
 		adminDao.doDelete(cateVO02);
 		adminDao.doDelete(cateVO03);
 		
@@ -100,17 +100,17 @@ public class JCategoryDaoTest {
 		LOG.debug("==============================");
 		
 		// 삭제
-//		adminDao.doDelete(cateVO01);
+		adminDao.doDelete(cateVO01);
 		adminDao.doDelete(cateVO02);
 		adminDao.doDelete(cateVO03);
 		
 		// 등록(1)
-//		adminDao.doSave(cateVO01);
-//		assertEquals(1, adminDao.getCount(search));
+		adminDao.doSave(cateVO01);
+		assertEquals(1, adminDao.getCount(search));
 		
 		// 한건 조회
 		CategoryVO cateVO = adminDao.doSelectOne(cateVO01);
-		isSameUser(cateVO01, cateVO);
+		//isSameUser(cateVO01, cateVO);
 		
 		cateVO.setCategoryNm(cateVO.getCategoryNm() + "_UPDATE");
 		
@@ -127,21 +127,21 @@ public class JCategoryDaoTest {
 		LOG.debug("==============================");
 		
 		// 삭제
-//		adminDao.doDelete(cateVO01);
+		adminDao.doDelete(cateVO01);
 		adminDao.doDelete(cateVO02);
 		adminDao.doDelete(cateVO03);
 		
-		/*
+		
 		// 등록(1)
 		adminDao.doSave(cateVO01);
 		List<CategoryVO> list = adminDao.getALL(search);
 		assertEquals(1, adminDao.getCount(search));
 		isSameUser(cateVO01, list.get(0));
-		*/
+		
 		
 		// 등록(2)
 		adminDao.doSave(cateVO02);
-		List<CategoryVO> list = adminDao.getALL(cateVO02);
+		list = adminDao.getALL(cateVO02);
 		isSameUser(cateVO02, list.get(0));
 		
 		// 등록(3)
