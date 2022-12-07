@@ -65,7 +65,7 @@ public class JCategoryDaoTest {
 		
 		search = new CategoryVO(1, "과일");
 		
-		searchVO = new SearchVO(10, 1, "10", "과일");
+		searchVO = new SearchVO(10, 1, "10", "과일", "1");
 	}
 	
 	public void isSameUser(CategoryVO actUser, CategoryVO addUser) {

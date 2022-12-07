@@ -4,8 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:set var="CP" value="${pageContext.request.contextPath}" /> <!-- ContextPath -->
-<c:set var="resources" value="/resources/css"/>
-<c:set var="CP_RES" value="${CP}${resources}"/>
+<c:set var="RES" value="/resources"/>
+<c:set var="CP_RES" value="${CP}${RES}"/>
 
 <fmt:bundle basename="message">
 <%@ include file="/WEB-INF/views/cmn/cache.jsp" %>
@@ -20,7 +20,7 @@
   <!-- favicon -->
   <link rel="shortcut icon" type="images/x-icon" href="/PC_HTML/favicon.ico">
   <!-- jquery ui -->
-  <link rel="stylesheet" href="${CP_RES}/admin_product_reg.css">
+  <link rel="stylesheet" href="${CP_RES}/css/admin_product_reg.css">
   <style>
   </style>
 

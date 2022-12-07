@@ -30,7 +30,7 @@ public class AdminController {
 	// 제품 목록 화면
 	@RequestMapping(value = "/productView.do", method = RequestMethod.GET)
 	public String productView(Model model, SearchVO inVO) throws SQLException {
-		String viewPage = "admin/admin_product_mng";
+		String VIEW_NAME = "admin/admin_product_mng";
 		
 		//페이지 번호
 		if(null !=inVO && inVO.getPageNo()==0) {
@@ -74,7 +74,19 @@ public class AdminController {
 		model.addAttribute("totalCnt", totalCnt);
 		model.addAttribute("totalPage", totalPage);
 		
-		return viewPage;
+		return VIEW_NAME;
+	}
+	
+	@RequestMapping(value = "moveToReg.do", method = RequestMethod.GET)
+	public String moveToReg(Model model, SearchVO inVO) throws SQLException {
+		String VIEW_NAME = "admin/admin_product_reg";
+		
+		LOG.debug("┌-------------------------------------┐");	
+		LOG.debug("|  inVO = " + inVO);
+		
+		
+		
+		return VIEW_NAME;
 	}
 	
 }
