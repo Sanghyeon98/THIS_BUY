@@ -27,6 +27,7 @@ import com.pcwk.ehr.member.dao.Memberdao;
 import com.pcwk.ehr.member.dao.MemberDaoImpl;
 import com.google.gson.Gson;
 import com.pcwk.ehr.cmn.WorkDiv;
+import com.pcwk.ehr.admin.domain.CategoryVO;
 import com.pcwk.ehr.cmn.SearchVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -79,6 +80,22 @@ public class JMemberdaoTest {
 		assertEquals(actUser.getuId(), addUser.getuId());
 		assertEquals(actUser.getPasswd(), addUser.getPasswd());
 		assertEquals(actUser.getEmail(), addUser.getEmail());
+	}
+	@Test
+	//@Ignore
+	public void doRetrieve() throws SQLException {
+		// 삭제
+		dao.doDelete(memberVO1);			
+		dao.doDelete(memberVO2);			
+		dao.doDelete(memberVO3);		
+		
+		// 등록(1)
+		dao.doSave(memberVO1);
+		dao.doSave(memberVO2);
+		dao.doSave(memberVO3);
+				
+		List<MemberVO> list = dao.doRetrieve(searchVO);
+		
 	}
 	
 	@Test
@@ -159,43 +176,10 @@ public class JMemberdaoTest {
 		assertEquals(3, dao.getCount(search));
 		isSameUser(memberVO3, list.get(2));		
 	}
+	
 	@Test
-	public void doRetrive() throws Exception{
-		//url, param 설정, 호출방식(get/post)
-		MockHttpServletRequestBuilder  requestBuilder= MockMvcRequestBuilders.get("/user/doRetrive.do")
-				                                       .param("pageSize", searchVO.getPageSize()+"")
-				                                       .param("pageNo", searchVO.getPageNo()+"")
-				                                       .param("searchDiv", searchVO.getSearchDiv())
-				                                       .param("searchWord", searchVO.getSearchWord());
-		//대역 객체를 통해 호출
-		ResultActions resultActions =mockMvc.perform(requestBuilder)
-		                                               .andExpect(status().is2xxSuccessful());	
-		
-		String responseResult =  resultActions.andDo( print() )
-			    .andReturn().getResponse().getContentAsString();	
-		LOG.debug("┌-------------------------------------------┐");
-		LOG.debug("|responseResult:"+responseResult);
-		LOG.debug("└-------------------------------------------┘");			
-		
-	}
-	@Test
+	@Ignore
 	public void doSelectOne() throws Exception{
-		//url, param 설정, 호출방식(get/post)
-		MockHttpServletRequestBuilder  requestBuilder= MockMvcRequestBuilders.get("/user/doSelectOne.do")
-				                                       .param("uId", users.get(0).getuId());	
-		
-		//대역 객체를 통해 호출
-		ResultActions resultActions =mockMvc.perform(requestBuilder)
-		                                               .andExpect(status().is2xxSuccessful());	
-		
-		String responseResult =  resultActions.andDo( print() )
-			    .andReturn().getResponse().getContentAsString();	
-		LOG.debug("┌-------------------------------------------┐");
-		LOG.debug("|responseResult:"+responseResult);
-		LOG.debug("└-------------------------------------------┘");		
-		
-		MemberVO outVO = new Gson().fromJson(responseResult, MemberVO.class);
-		assertEquals(outVO.getuId(), users.get(0).getuId());
 	}
 	
 	@Test
