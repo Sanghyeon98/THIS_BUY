@@ -35,7 +35,6 @@ public class ProductServiceImpl implements ProductService {
 			LOG.debug("└-------------------------------------------┘");
 			throw e;
 		}
-		
 		return cnt;
 	}
 
@@ -46,32 +45,32 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public int add(ProductVO inVO) throws SQLException {
-		return 0;
+		return prodDao.doSave(inVO);
 	}
 
 	@Override
 	public int doDelete(ProductVO inVO) throws SQLException {
-		return 0;
+		return prodDao.doDelete(inVO);
 	}
 
 	@Override
 	public int doUpdate(ProductVO inVO) throws SQLException {
-		return 0;
+		return prodDao.doUpdate(inVO);
 	}
 
 	@Override
 	public ProductVO doSelectOne(ProductVO inVO) throws SQLException {
-		return null;
+		return prodDao.doSelectOne(inVO);
 	}
 
 	@Override
 	public List<ProductVO> doRetrieve(DTO inVO) throws SQLException {
-		return null;
+		return prodDao.doRetrieve(inVO);
 	}
 
 	@Override
 	public int getCount(ProductVO inVO) throws SQLException {
-		return 0;
+		return prodDao.getCount(inVO);
 	}
 
 }

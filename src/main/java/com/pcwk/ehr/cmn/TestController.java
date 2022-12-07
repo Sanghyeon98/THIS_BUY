@@ -11,11 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
+@RequestMapping("thisbuy")
 public class TestController {
 	
 	public TestController() {}
 	
-	@RequestMapping(value="thisbuy/admin_product_mng.do")
+	@RequestMapping(value="/admin_product_mng.do")
 	public String adminProductMngView() {
 		System.out.println("=================================");
 		System.out.println("=== TestController, adminProductMngView() ===");
@@ -29,7 +30,7 @@ public class TestController {
 		return "admin/admin_product_mng";
 	}
 	
-	@RequestMapping(value="thisbuy/admin_product_reg.do")
+	@RequestMapping(value="/admin_product_reg.do")
 	public String adminProductRegView() {
 		System.out.println("=================================");
 		System.out.println("=== TestController, adminProductRegView() ===");
@@ -38,7 +39,7 @@ public class TestController {
 		return "admin/admin_product_reg";
 	}
 	
-	@RequestMapping(value="thisbuy/admin_category_mng.do")
+	@RequestMapping(value="/admin_category_mng.do")
 	public String adminCategoryMngView() {
 		System.out.println("=================================");
 		System.out.println("=== TestController, adminCategoryMngView() ===");

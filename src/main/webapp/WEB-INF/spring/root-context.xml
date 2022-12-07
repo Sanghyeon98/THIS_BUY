@@ -10,6 +10,20 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
+    <!-- 트랜잭션 매니저 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<!-- do*로 시작하는 메서드는 트랜잭션관리 대상에서 제외 -->
+			<tx:method name="do*" read-only="true" />
+			<!-- up*시작하는 메서드는 트랜잭션 관리 대상이다. -->
+			<tx:method name="up*" read-only="false" rollback-for="Exception" />
+		</tx:attributes>
+	</tx:advice>
+	
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	    <property name="dataSource" ref="dataSource"></property>
+	</bean>
+
 	<!-- mybatis 설정 -->
 	<!-- mybatis db연결 객체 생성 -->
 	<bean id="sqlSessionTemplate"	class="org.mybatis.spring.SqlSessionTemplate">

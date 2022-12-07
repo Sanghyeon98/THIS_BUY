@@ -22,35 +22,35 @@
       SELECT A.*,B.*
       FROM(
           SELECT 
-			        TT1.item_no AS itemNo,
-			        TT1.name,
-			        TT1.price,
-			        TT1.category_no AS categoryNo,
-			        TT1.image_no AS imageNo,
-			        TT1.production,
-			        TT1.weight,
-			        TO_CHAR(TT1.expired, 'YYYY-MM-DD HH24:MI:SS') AS expired,
-			        TT1.detail,
-			        TT1.discount,
-			        TT1.final_price AS finalPrice,
-			        TT1.sales,
-			        DECODE( TO_CHAR(SYSDATE,'YYYY-MM-DD'),  TO_CHAR(TT1.reg_dt,'YYYY-MM-DD')
-			                        ,TO_CHAR(TT1.reg_dt,'HH24:MI')
-			                        ,TO_CHAR(TT1.reg_dt,'YYYY-MM-DD')) as regDt,
-			        DECODE( TO_CHAR(SYSDATE,'YYYY-MM-DD'),  TO_CHAR(TT1.mod_dt,'YYYY-MM-DD')
-			                        ,TO_CHAR(TT1.mod_dt,'HH24:MI')
-			                        ,TO_CHAR(TT1.mod_dt,'YYYY-MM-DD')) as modDt       
+			TT1.item_no AS itemNo,
+			TT1.name,
+			TT1.price,
+			TT1.category_no AS categoryNo,
+			TT1.image_no AS imageNo,
+			TT1.production,
+			TT1.weight,
+			TO_CHAR(TT1.expired, 'YYYY-MM-DD HH24:MI:SS') AS expired,
+			TT1.detail,
+			TT1.discount,
+			TT1.final_price AS finalPrice,
+			TT1.sales,
+			DECODE( TO_CHAR(SYSDATE,'YYYY-MM-DD'),  TO_CHAR(TT1.reg_dt,'YYYY-MM-DD')
+			                ,TO_CHAR(TT1.reg_dt,'HH24:MI')
+			                ,TO_CHAR(TT1.reg_dt,'YYYY-MM-DD')) as regDt,
+			DECODE( TO_CHAR(SYSDATE,'YYYY-MM-DD'),  TO_CHAR(TT1.mod_dt,'YYYY-MM-DD')
+			                ,TO_CHAR(TT1.mod_dt,'HH24:MI')
+			                ,TO_CHAR(TT1.mod_dt,'YYYY-MM-DD')) as modDt       
           FROM (
-              SELECT ROWNUM AS RNUM, T1.*
-              FROM (
-                  SELECT *
-                  FROM product
-                  -- WHERE 조건 (검색구분:''(전체), 10(category_nm), 20(status), 검색어)
-                 <include refid="searchCondition"/>
-                  ORDER BY item_no
-              ) T1
-              -- 종료 번호
-              <![CDATA[ WHERE ROWNUM <= #{pageSize} * (#{pageNo} - 1) + #{pageSize} ]]>
+            SELECT ROWNUM AS RNUM, T1.*
+            FROM (
+                SELECT *
+                FROM product
+                -- WHERE 조건 (검색구분:''(전체), 10(category_nm), 20(status), 검색어)
+               <include refid="searchCondition"/>
+                ORDER BY item_no
+            ) T1
+            -- 종료 번호
+            <![CDATA[ WHERE ROWNUM <= #{pageSize} * (#{pageNo} - 1) + #{pageSize} ]]>
           ) TT1
           -- 시작번호
           <![CDATA[ WHERE ROWNUM >= #{pageSize} * (#{pageNo} - 1) + 1 ]]>

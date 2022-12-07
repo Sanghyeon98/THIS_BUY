@@ -13,7 +13,7 @@ public class ProductVO extends DTO {
 	private String expired;		// 유통기간
 	private String detail;		// 상품설명
 	private int discount;		// 할인율_default 0
-	private int finalPrice;	// 최종가격_default 0
+	private int finalPrice;		// 최종가격_default 0
 	private int sales;			// 판매량_default 0
 	private String regDt;		// 상품등록일_defuault SYSDATE
 	private String modDt;		// 상품수정일_defuault SYSDATE
@@ -156,7 +156,7 @@ public class ProductVO extends DTO {
 		return "ProductVO [itemNo=" + itemNo + ", name=" + name + ", price=" + price + ", categoryNo=" + categoryNo
 				+ ", imageNo=" + imageNo + ", production=" + production + ", weight=" + weight + ", expired=" + expired
 				+ ", detail=" + detail + ", discount=" + discount + ", finalPrice=" + finalPrice + ", sales=" + sales
-				+ ", regDt=" + regDt + ", modDt=" + modDt + "]";
+				+ ", regDt=" + regDt + ", modDt=" + modDt + ", toString()=" + super.toString() + "]";
 	}
 	
 }
