@@ -1,6 +1,7 @@
 package com.pcwk.ehr.cart.controller;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,12 +12,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.pcwk.ehr.cart.domain.CartJoinVO;
 import com.pcwk.ehr.cart.domain.CartVO;
 import com.pcwk.ehr.cart.service.CartService;
 import com.pcwk.ehr.cmn.Message;
 
 @Controller("CartController")
-@RequestMapping("Cart")
+@RequestMapping("cart")
 public class CartController {
 	final Logger LOG = LogManager.getLogger(getClass());
 	
@@ -25,8 +27,18 @@ public class CartController {
 	
 	public CartController() {};
 	
+	@RequestMapping(value="/view.do")
+	public String cartView() {
+		System.out.println("=============================================");
+		System.out.println("==cartcontroller=cartView====");
+		System.out.println("=============================================");
+		
+		return "cart/cart";
+	}
+	
+	
 	//수정
-	@RequestMapping(value = "/doUpdate.do",method=RequestMethod.GET
+	@RequestMapping(value = "/doUpdate.do",method=RequestMethod.POST
 			,produces = "application/json;charset=UTF-8")
 	@ResponseBody //비동기 처리를 하는 경우, HTTP 요청 부분의 body부분이 그대로 브라우저에 전달된다.	
 	public String doUpdate(CartVO inVO)throws SQLException{
@@ -51,7 +63,7 @@ public class CartController {
 		
 		return jsonString;
 	}
-	@RequestMapping(value = "/doSave.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = "/doSave.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String doSave(CartVO inVO)throws SQLException{
 		String jsonString = "";
@@ -73,7 +85,7 @@ public class CartController {
 		
 		return jsonString;
 	}
-	@RequestMapping(value = "/doDelete.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = "/doDelete.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String doDelete(CartVO inVO)throws SQLException{
 		String jsonString = "";
@@ -96,5 +108,22 @@ public class CartController {
 		LOG.debug("└=============================┘");
 
 		return jsonString;
+	}
+	
+	@RequestMapping(value = "/getAll.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String doRetrieve(CartJoinVO inVO) throws SQLException{
+		LOG.debug("= doRetrieve() =");
+		LOG.debug("inVO : " + inVO);
+		
+		List<CartJoinVO> list = (List<CartJoinVO>) cartService.getAll(inVO);
+		for(CartJoinVO vo : list) {
+			LOG.debug(vo.toString());
+		}
+		
+		String jsonList =new Gson().toJson(list);
+		
+		return jsonList;
+		
 	}
 }
