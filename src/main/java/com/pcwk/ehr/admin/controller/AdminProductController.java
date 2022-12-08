@@ -16,15 +16,15 @@ import com.pcwk.ehr.admin.service.ProductService;
 import com.pcwk.ehr.cmn.SearchVO;
 import com.pcwk.ehr.cmn.StringUtil;
 
-@Controller
+@Controller("adminProduct")
 @RequestMapping("product")
-public class AdminController {
+public class AdminProductController {
 	final Logger LOG = LogManager.getLogger(getClass());
 	
 	@Autowired
 	ProductService prodService;
 	
-	public AdminController() {}
+	public AdminProductController() {}
 	
 	
 	// 제품 목록 화면
@@ -77,16 +77,10 @@ public class AdminController {
 		return VIEW_NAME;
 	}
 	
+	// 제품 등록 화면 이동
 	@RequestMapping(value = "moveToReg.do", method = RequestMethod.GET)
 	public String moveToReg(Model model, SearchVO inVO) throws SQLException {
-		String VIEW_NAME = "admin/admin_product_reg";
-		
-		LOG.debug("┌-------------------------------------┐");	
-		LOG.debug("|  inVO = " + inVO);
-		
-		
-		
-		return VIEW_NAME;
+		return "admin/admin_product_reg";
 	}
 	
 }

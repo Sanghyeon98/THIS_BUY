@@ -4,7 +4,8 @@ import com.pcwk.ehr.cmn.DTO;
 
 public class CategoryVO extends DTO {
 	private int categoryNo;		// 카테고리 번호
-	private String categoryNm;		// 카테고리 이름
+	private String categoryNm;	// 카테고리 이름
+	private int topNo;		// 상위 카테고리 번호
 	private String regDt;	// 등록일
 	private String modDt;	// 수정일
 	private int status;		// 상태값 (1:사용, 0:미사용)
@@ -17,17 +18,19 @@ public class CategoryVO extends DTO {
 		this.status = 1;	// default 1
 	}
 	
-	public CategoryVO(int categoryNo, String categoryNm) {
+	public CategoryVO(int categoryNo, String categoryNm, int topNo) {
 		super();
 		this.categoryNo = categoryNo;
 		this.categoryNm = categoryNm;
+		this.topNo = topNo;
 		this.status = 1;	// default 1
 	}
-	
-	public CategoryVO(int categoryNo, String categoryNm, String regDt, String modDt, int status) {
+
+	public CategoryVO(int categoryNo, String categoryNm, int topNo, String regDt, String modDt, int status) {
 		super();
 		this.categoryNo = categoryNo;
 		this.categoryNm = categoryNm;
+		this.topNo = topNo;
 		this.regDt = regDt;
 		this.modDt = modDt;
 		this.status = status;
@@ -49,6 +52,14 @@ public class CategoryVO extends DTO {
 		this.categoryNm = categoryNm;
 	}
 	
+	public int getTopNo() {
+		return topNo;
+	}
+
+	public void setTopNo(int topNo) {
+		this.topNo = topNo;
+	}
+
 	public String getRegDt() {
 		return regDt;
 	}
@@ -75,7 +86,8 @@ public class CategoryVO extends DTO {
 
 	@Override
 	public String toString() {
-		return "CategoryVO [categoryNo=" + categoryNo + ", categoryNm=" + categoryNm + ", regDt=" + regDt + ", modDt="
-				+ modDt + ", status=" + status + "]";
+		return "CategoryVO [categoryNo=" + categoryNo + ", categoryNm=" + categoryNm + ", topNo=" + topNo + ", regDt="
+				+ regDt + ", modDt=" + modDt + ", status=" + status + ", toString()=" + super.toString() + "]";
 	}
+	
 }

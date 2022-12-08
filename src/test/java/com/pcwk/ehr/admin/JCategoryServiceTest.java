@@ -49,14 +49,20 @@ public class JCategoryServiceTest {
 	@Before
 	public void setUp() throws Exception {
 		categories = Arrays.asList(
-						new CategoryVO(1, "채소/과일"),
-						new CategoryVO(2, "수산/해산/건어물"),
-						new CategoryVO(3, "정육/계란"),
-						new CategoryVO(4, "생수/음료/우유/커피"),
-						new CategoryVO(5, "밀키트"),
-						new CategoryVO(6, "간식/과자/떡")
+						new CategoryVO(1, "채소/과일", 0),
+						new CategoryVO(2, "수산/해산/건어물", 0),
+						new CategoryVO(3, "정육/계란", 0),
+						new CategoryVO(4, "생수/음료/우유/커피", 0),
+						new CategoryVO(5, "밀키트", 0),
+						new CategoryVO(6, "간식/과자/떡", 0),
+						new CategoryVO(7, "생수/탄산수", 4),
+						new CategoryVO(8, "음료/주스", 4),
+						new CategoryVO(9, "우유/두유/요거트", 4),
+						new CategoryVO(10, "커피", 4),
+						new CategoryVO(11, "차", 4)
+						
 					 );
-		search = new CategoryVO(0, "간식");
+		search = new CategoryVO(0, "간식", 0);
 	}
 	
 	

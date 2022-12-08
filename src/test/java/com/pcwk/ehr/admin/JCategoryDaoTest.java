@@ -58,12 +58,12 @@ public class JCategoryDaoTest {
 		
 		searchUser = new UserVO("p8", "이상무8", "8888", Level.BASIC, 1, 0, "yls7577@naver.com", "날짜_미사용");
 		
-		cateVO01 = new CategoryVO(1, "과일류");
-		cateVO02 = new CategoryVO(2, "생선류");
-		cateVO03 = new CategoryVO(3, "수산");
-		cateVO04 = new CategoryVO(4, "간식");
+		cateVO01 = new CategoryVO(1, "과일류", 0);
+		cateVO02 = new CategoryVO(2, "생선류", 0);
+		cateVO03 = new CategoryVO(3, "수산", 0);
+		cateVO04 = new CategoryVO(4, "간식", 0);
 		
-		search = new CategoryVO(1, "과일");
+		search = new CategoryVO(1, "과일", 0);
 		
 		searchVO = new SearchVO(10, 1, "10", "과일", "1");
 	}
@@ -75,7 +75,7 @@ public class JCategoryDaoTest {
 	}	
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void doRetrieve() throws SQLException {
 		// 삭제
 		 adminDao.doDelete(cateVO01);
@@ -120,7 +120,7 @@ public class JCategoryDaoTest {
 	}
 	
 	@Test
-	//@Ignore	
+	@Ignore	
 	public void addAndGet() throws SQLException {
 		LOG.debug("==============================");
 		LOG.debug("=== addAndGet() ===");
@@ -150,7 +150,7 @@ public class JCategoryDaoTest {
 	}	
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void beans() {
 		LOG.debug("==============================");
 		LOG.debug("context:"+context);	
