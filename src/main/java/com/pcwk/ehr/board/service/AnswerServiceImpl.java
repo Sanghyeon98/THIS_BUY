@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.pcwk.ehr.board.dao.AnswerDaoImpl;
 import com.pcwk.ehr.board.dao.BoardDao;
 import com.pcwk.ehr.board.dao.BoardDaoImpl;
+import com.pcwk.ehr.board.domain.AnswerVO;
 import com.pcwk.ehr.cmn.DTO;
 
 @Service("answerService")
@@ -18,46 +19,43 @@ public class AnswerServiceImpl implements AnswerService {
 
 	final Logger LOG = LogManager.getLogger(getClass());
 	
+	
 	@Autowired
 	AnswerDaoImpl answerDaoImpl;
-	
-	@Autowired
-	BoardDaoImpl boardDaoImpl;
-	
+
 	@Override
-	public List<?> getAllList() throws SQLException {
-		// TODO Auto-generated method stub
+	public List<AnswerVO> doRetrive(DTO inVO) throws SQLException {
 		return null;
 	}
 
 	@Override
-	public List<?> doSelectOne(DTO dto) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public int doUpdate(AnswerVO inVO) throws SQLException {
+		return answerDaoImpl.doUpdate(inVO);
 	}
 
 	@Override
-	public DTO doSelectAnswer(DTO dto) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public int doDelete(AnswerVO inVO) throws SQLException {
+		return answerDaoImpl.doDelete(inVO);
 	}
 
 	@Override
-	public int doUpdate(DTO dto) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+	public int doInsert(AnswerVO inVO) throws SQLException {
+		return answerDaoImpl.doInsert(inVO);
+	}
+
+
+	@Override
+	public List<AnswerVO> doSelectOne(DTO inVO) throws SQLException {
+		return answerDaoImpl.doSelectOne(inVO);
 	}
 
 	@Override
-	public int doDelete(DTO dto) throws SQLException {
+	public DTO doSelectAnswer(AnswerVO inVO) throws SQLException {
+
+		return answerDaoImpl.doSelectAnswer(inVO);
+	}
+
+
 	
-		return 0;
-	}
-
-	@Override
-	public int doInsert(DTO dto) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 }

@@ -16,7 +16,6 @@ import com.pcwk.ehr.board.domain.BoardVO;
 import com.pcwk.ehr.board.service.BoardService;
 import com.pcwk.ehr.cmn.Message;
 
-
 @Controller("boardController")
 @RequestMapping("board")
 public class BoardController {

@@ -14,6 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
@@ -77,6 +78,7 @@ public class JBoardController {
 	}
 	
 	@Test
+	@Ignore
 	public void doUpdate()throws Exception{
 		//url:/user/add.do, param 설정, 
 		//호출방식(post)
@@ -103,7 +105,7 @@ public class JBoardController {
 	}
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void doSelectOne() throws Exception {
 		// url, param, 호출방식
 		MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/board/doSelectOne.do")
@@ -123,9 +125,9 @@ public class JBoardController {
 
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void doDelete() throws Exception {
-		MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/board/doSave.do")
+		MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/board/doDelete.do")
 														.param("seq", board.get(0).getSeq()+"")
 														.param("gubun", board.get(0).getGubun()+"")
 														.param("gubunQuestion", board.get(0).getGubunQuestion()+"")
