@@ -44,8 +44,8 @@ position: relative;
 }
 .side{
     display: flex;
-    width: 1050px;
-    margin: 0px auto;
+    width: 1050px; 
+    margin: 0px auto; 
     padding-bottom: 80px;
     float: center;
     justify-content: space-between;
