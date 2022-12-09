@@ -78,18 +78,17 @@
   </select>
 
   <!-- resultType이 UserVO인데 호출하는 쪽에서 return타입이 LIST이면 LIST형태로 UserVO를 넘겨줌 -->
-  <select id="getALL" resultType="CategoryVO">
+  <select id="getALL" parameterType="CategoryVO" resultType="CategoryVO">
 		SELECT 
-		    category_no, 
-		    LPAD(' ', 3 * (level-1)) || category_nm as category_nm, 
-		    top_no, 
+		    category_no as categoryNo, 
+		    LPAD(' ', 3 * (level-1)) || category_nm as categoryNm, 
+		    top_no as topNo, 
 		    TO_CHAR(reg_dt, 'YYYY-MM-DD HH24:MI:SS') regDt,
 		    TO_CHAR(mod_dt, 'YYYY-MM-DD HH24:MI:SS') modDt,
 		    status
 		FROM category a
 		START WITH top_no = 0
 		CONNECT BY PRIOR category_no = top_no
-		ORDER BY category_no
   </select>  
    
   <insert id="doSave" parameterType="CategoryVO">

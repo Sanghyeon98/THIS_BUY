@@ -65,8 +65,13 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public List<CategoryVO> doRetrive(DTO inVO) throws SQLException {
+	public List<CategoryVO> doRetrieve(DTO inVO) throws SQLException {
 		return cateDao.doRetrieve(inVO);
+	}
+
+	@Override
+	public List<CategoryVO> getALL(CategoryVO inVO) throws SQLException {
+		return cateDao.getALL(inVO);
 	}
 
 }

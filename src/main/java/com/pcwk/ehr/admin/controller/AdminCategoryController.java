@@ -1,6 +1,7 @@
 package com.pcwk.ehr.admin.controller;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.pcwk.ehr.admin.domain.CategoryVO;
 import com.pcwk.ehr.admin.service.CategoryService;
 import com.pcwk.ehr.cmn.SearchVO;
 
@@ -24,10 +26,12 @@ public class AdminCategoryController {
 	public AdminCategoryController() {}
 	
 	@RequestMapping(value = "categoryView.do", method = RequestMethod.GET)
-	public String categoryView(Model model, SearchVO inVO) throws SQLException {
+	public String categoryView(Model model, CategoryVO inVO) throws SQLException {
 		String VIEW_NAME = "admin/admin_category_mng";
 		
+		List<CategoryVO> list = cateService.getALL(inVO);
 		
+		model.addAttribute("list", list);
 		
 		return VIEW_NAME;
 	}

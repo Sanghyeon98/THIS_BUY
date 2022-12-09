@@ -43,8 +43,8 @@
 <body>
 	<ul>
 	  <li><a href="${CP}/product/productView.do">상품 관리 목록</a></li>
-	  <li><a href="#">카테고리 관리</a></li>
-	  <li><a href="#">상품 등록</a></li>
+	  <li><a href="${CP}/category/categoryView.do">카테고리 관리</a></li>
+	  <li><a href="${CP}/product/moveToReg.do">상품 등록</a></li>
 	  <li><a href="#">상품 Q&A</a></li>
 	</ul>
 </body>

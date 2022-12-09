@@ -132,7 +132,7 @@ public class CategoryDaoImpl implements CategoryDao {
 		String statement = NAMESPACE + DOT + "getALL";
 
 		LOG.debug("================================");
-		LOG.debug("|  param : " + inVO);
+		LOG.debug("|  param: " + inVO);
 		LOG.debug("|  statement: " + statement);
 		
 		list = sqlSessionTemplate.selectList(statement, inVO);

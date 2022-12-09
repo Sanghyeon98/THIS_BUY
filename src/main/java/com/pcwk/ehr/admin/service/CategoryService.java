@@ -60,6 +60,14 @@ public interface CategoryService {
 	 * @return List<DTO>
 	 * @throws SQLException
 	 */
-	List<CategoryVO> doRetrive(DTO inVO) throws SQLException;
+	List<CategoryVO> doRetrieve(DTO inVO) throws SQLException;
+	
+	
+	/**
+	 * 조건절 없이 모든 카테고리 목록 조회
+	 * @return
+	 * @throws SQLException
+	 */
+	List<CategoryVO> getALL(CategoryVO inVO) throws SQLException;
 
 }
