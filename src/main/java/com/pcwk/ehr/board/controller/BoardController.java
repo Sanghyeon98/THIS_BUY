@@ -29,13 +29,23 @@ public class BoardController {
 
 	// board화면 보여주기
 	@RequestMapping(value = "/boardView.do")
-	public String tmpMenuView() {
+	public String boardView() {
 		String VIEW_NAME = "board/board_list";
 		LOG.debug("┌──────────────────────────────┐");
 		LOG.debug("│boardView ");
 		LOG.debug("└──────────────────────────────┘");
 		return VIEW_NAME;
 	}
+	
+	// board화면 보여주기
+		@RequestMapping(value = "/questionView.do")
+		public String questionView() {
+			String VIEW_NAME = "board/board_question";
+			LOG.debug("┌──────────────────────────────┐");
+			LOG.debug("│boardView ");
+			LOG.debug("└──────────────────────────────┘");
+			return VIEW_NAME;
+		}
 	
 
 	@RequestMapping(value = "/doUpdate.do",method=RequestMethod.GET

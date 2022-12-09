@@ -77,10 +77,7 @@ html {
 *, :after, :before, legend, td, th {
     padding: 0;
 }
-.css-2b29tl {
-    position: relative;
-    min-width: 1050px;
-}
+
 .css-1 {
     display: flex;
     width: 1050px;
@@ -287,8 +284,8 @@ ol, ul {
      <div class="css-2 ">
      <div class="css-3 ">고객센터</div>
      <ul class="css-4 ">
-     <li class="css-0 "><a class=" css-20 ">공지사항</a></li>
-     <li class="css-0 "><a class=" css-20 ">1:1 문의</a></li>
+     <li class="css-0 "><a class=" css-20 " href="${CP}/board/boardView.do">공지사항</a></li>
+     <li class="css-0 "><a class=" css-20 " href="${CP}/board/questionView.do">1:1 문의</a></li>
      </ul>
    </div>
     
@@ -300,9 +297,9 @@ ol, ul {
        </div>
       </div>
         <div class="css-10 ">
-         <div width="50" class="css-11 e16adls20">번호</div>
+         <div width="50" class="css-11">번호</div>
          <div class="css-12 ">제목</div>
-         <div width="100" class="css-13 e16adls20">관리자</div>
+         <div width="100" class="css-13">관리자</div>
          <div width="100" class="css-13 ">작성일</div>
         </div>
      <ul class="css-14 ">
