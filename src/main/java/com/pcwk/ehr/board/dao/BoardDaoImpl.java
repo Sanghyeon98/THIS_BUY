@@ -29,7 +29,6 @@ public class BoardDaoImpl implements BoardDao {
 	public BoardDaoImpl() {
 	}
 
-
 	@Override
 	public List<BoardVO> doRetrieve(DTO inVO) throws SQLException {
 		BoardSearchVO search = (BoardSearchVO) inVO;
