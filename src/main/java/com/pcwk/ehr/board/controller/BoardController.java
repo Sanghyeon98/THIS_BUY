@@ -24,8 +24,20 @@ public class BoardController {
 	@Autowired
 	BoardService boardService;
 
-	public BoardController() {}
+	public BoardController() {
+	}
+
+	// board화면 보여주기
+	@RequestMapping(value = "/boardView.do")
+	public String tmpMenuView() {
+		String VIEW_NAME = "board/board_list";
+		LOG.debug("┌──────────────────────────────┐");
+		LOG.debug("│boardView ");
+		LOG.debug("└──────────────────────────────┘");
+		return VIEW_NAME;
+	}
 	
+
 	@RequestMapping(value = "/doUpdate.do",method=RequestMethod.GET
 			,produces = "application/json;charset=UTF-8")
 	@ResponseBody //비동기 처리를 하는 경우, HTTP 요청 부분의 body부분이 그대로 브라우저에 전달된다.	
