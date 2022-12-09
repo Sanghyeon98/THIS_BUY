@@ -26,35 +26,27 @@ public class BoardDaoImpl implements BoardDao {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;// db연결객체
 
-	public BoardDaoImpl() {}
-	
-	
-	public int answerCheck(BoardVO inVO) {
-		
-		int flag = 0;
-		
-	
-		return flag;
-		
+	public BoardDaoImpl() {
 	}
-	
+
+
 	@Override
 	public List<BoardVO> doRetrieve(DTO inVO) throws SQLException {
 		BoardSearchVO search = (BoardSearchVO) inVO;
 		List<BoardVO> list = new ArrayList<BoardVO>();
-		
-        String statement = NAMESPACE + DOT + "doRetrieve";
-        LOG.debug("================================");
-		LOG.debug("|  param:" + inVO );        
-		LOG.debug("|  statement:" + statement );  
-		
+
+		String statement = NAMESPACE + DOT + "doRetrieve";
+		LOG.debug("================================");
+		LOG.debug("|  param:" + inVO);
+		LOG.debug("|  statement:" + statement);
+
 		list = sqlSessionTemplate.selectList(statement, search);
-		
-		for(BoardVO vo : list) {
-			LOG.debug("|  vo : " + vo );
+
+		for (BoardVO vo : list) {
+			LOG.debug("|  vo : " + vo);
 		}
 		LOG.debug("================================");
-		
+
 		return list;
 	}
 
@@ -62,33 +54,31 @@ public class BoardDaoImpl implements BoardDao {
 	public int doSave(BoardVO inVO) throws SQLException {
 		LOG.debug("┌--------------------------------┐");
 		LOG.debug("|  param : " + inVO);
-		
+
 		String statement = NAMESPACE + DOT + "doSave";
 		LOG.debug("|  statement : " + statement);
-		
+
 		int flag = sqlSessionTemplate.insert(statement, inVO);
 		LOG.debug("|  flag : " + flag);
 		LOG.debug("└--------------------------------┘");
-		
+
 		return flag;
 	}
-
 
 	@Override
 	public int doDelete(BoardVO inVO) throws SQLException {
 		LOG.debug("================================");
 		LOG.debug("|  param : " + inVO);
-		
+
 		String statement = NAMESPACE + DOT + "doDelete";
 		LOG.debug("|  statement: " + statement);
-		
+
 		int flag = sqlSessionTemplate.delete(statement, inVO);
 		LOG.debug("|  flag: " + flag);
 		LOG.debug("================================");
-		
+
 		return flag;
 	}
-
 
 	@Override
 	public int doUpdate(BoardVO inVO) throws SQLException {
@@ -107,7 +97,6 @@ public class BoardDaoImpl implements BoardDao {
 		return flag;
 	}
 
-
 	@Override
 	public BoardVO doSelectOne(BoardVO inVO) throws SQLException {
 		BoardVO outVO = null;
@@ -125,6 +114,27 @@ public class BoardDaoImpl implements BoardDao {
 		return outVO;
 	}
 
+	/**
+	 * 답변체크 (답변있음 1, 답변없음 0)
+	 * 
+	 * @param inVO
+	 * @return flag
+	 */
+	@Override
+	public int answerCheck(BoardVO inVO) throws SQLException {
+		int flag = 0;
 
+		LOG.debug("================================");
+		LOG.debug("|  param : " + inVO);
+
+		String statement = NAMESPACE + DOT + "answerCheck";
+		LOG.debug("|  statement: " + statement);
+
+		flag = sqlSessionTemplate.update(statement, inVO);
+		LOG.debug("|  flag: " + flag);
+		LOG.debug("================================");
+
+		return flag;
+	}
 
 }
