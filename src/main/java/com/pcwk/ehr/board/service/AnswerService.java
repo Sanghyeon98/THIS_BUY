@@ -8,7 +8,7 @@ import com.pcwk.ehr.board.domain.BoardVO;
 import com.pcwk.ehr.cmn.DTO;
 
 public interface AnswerService {
-	
+	  
 	final String DOT       = ".";
 	
 	/**
