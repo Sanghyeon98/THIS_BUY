@@ -16,7 +16,7 @@ import com.pcwk.ehr.member.dao.MemberDaoImpl;
 import com.pcwk.ehr.member.dao.Memberdao;
 import com.pcwk.ehr.member.domain.MemberVO;
 
-@Service("memberService")
+//@Service("memberService")
 public class MemberServiceImpl implements MemberService {
 
 	final Logger LOG = LogManager.getLogger(getClass());

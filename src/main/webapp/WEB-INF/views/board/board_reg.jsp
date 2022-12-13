@@ -130,81 +130,73 @@ ol, ul {
     letter-spacing: -0.5px;
     line-height: 48px;
 }
-.css-9 {
-    padding-left: 11px;
-    font-size: 14px;
-    letter-spacing: -0.3px;
-    color: rgb(153, 153, 153);
-    line-height: 20px;
-}
-.css-10 {
+.css-21 {
     display: flex;
+    padding: 12px 0px;
+    -webkit-box-align: start;
+    align-items: start;
+}
+
+.css-22 {
+    width: 140px;
+    font-size: 14px;
+    line-height: 44px;
+}
+.css-23 {
+    width: 640px;
+}
+.css-24 {
+    padding: 0px;
+}
+.css-25 {
+    position: relative;
+    height: 44px;
+}
+.css-26 {
     width: 100%;
-    padding: 20px 0px;
-    border-bottom: 1px solid rgb(51, 51, 51);
-    border-top: 2px solid rgb(51, 51, 51);
-}
-.css-11 {
-    flex-basis: 50px;
-    text-align: center;
-    line-height: 20px;
+    height: 44px;
+    padding: 0px 11px 1px 15px;
+    border-radius: 4px;
+    border: 1px solid rgb(221, 221, 221);
     font-weight: 400;
+    font-size: 16px;
+    line-height: 42px;
     color: rgb(51, 51, 51);
+    outline: none;
+    box-sizing: border-box;
 }
-.css-12 {
-    -webkit-box-flex: 1;
-    flex-grow: 1;
-    text-align: center;
-    line-height: 20px;
-    font-weight: 400;
-    color: rgb(51, 51, 51);
-}
-.css-13 {
-    flex-basis: 100px;
-    text-align: center;
-    line-height: 20px;
-    font-weight: 400;
-    color: rgb(51, 51, 51);
-}
-.css-13 {
-    flex-basis: 100px;
-    text-align: center;
-    line-height: 20px;
-    font-weight: 400;
-    color: rgb(51, 51, 51);
-}
-.css-14 {
+.css-27 {
+    position: relative;
     display: flex;
     flex-direction: column;
+    height: 536px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 4px;
 }
-.css-15 {
-    display: flex;
-    flex-direction: row;
-    border-bottom: 1px solid rgb(244, 244, 244);
+.css-28 {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 15px 16px;
+    font-size: 16px;
+    line-height: 21px;
+    word-break: break-all;
+    z-index: 1;
+    background: none;
+    border-radius: 4px;
+    color: rgb(51, 51, 51);
+    outline: none;
+    resize: none;
+    border: none;
 }
-.css-16 {
-    text-align: center;
-    padding: 20px 0px;
-    color: rgb(76, 76, 76);
-    flex-basis: 50px;
-}
-.css-17 {
-    padding: 20px 0px 20px 20px;
-    color: rgb(76, 76, 76);
-    flex: 1 1 0%;
-    text-align: left;
-}
-.css-18 {
-    text-align: center;
-    padding: 20px 0px;
-    color: rgb(76, 76, 76);
-    flex-basis: 100px;
-}
-.css-19 {
-    text-align: center;
-    padding: 20px 0px;
-    flex-basis: 100px;
-    color: rgb(153, 153, 153);
+.css-29 {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    padding: 15px 15px 32px;
 }
 
 .css-20 {
@@ -240,6 +232,76 @@ ol, ul {
     width: 1px;
     height: 1px;
 }
+
+   .css-30 {
+    font-size: 14px;
+    line-height: 20px;
+    color: rgb(153, 153, 153);
+}
+
+.css-31 {
+    display: block;
+    margin: 0px 0px 4px;
+    font-weight: 500;
+}
+      .css-40 {
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    padding-top: 40px;
+}
+
+.css-41 {
+    width: 160px;
+    height: 56px;
+    padding: 0px 10px;
+    text-align: center;
+    letter-spacing: 0px;
+    font-size: 16px;
+    line-height: 20px;
+    color: white;
+    cursor: pointer;
+    background-color: rgb(221, 221, 221);
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 500;
+    border-radius: 3px !important;
+}
+   
+   .css-42 {
+    display: flex;
+    flex-direction: column;
+    padding: 5px 0px;
+}
+        
+        .css-43 {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 9px;
+    font-size: 20px !important;
+}
+
+.css-44 {
+    margin: 11px 0px 7px;
+    line-height: 16px;
+    font-size: 13px;
+    color: rgb(153, 153, 153);
+}
+
+.css-45 {
+    display: flex;
+    flex-direction: row;
+    margin-top: 7px;
+}
+
+.css-span {
+    margin: 11px 0px 7px;
+    line-height: 16px;
+    font-size: 13px;
+    color: rgb(153, 153, 153);
+}
+    
 </style>
   
 <head> 
@@ -268,7 +330,7 @@ ol, ul {
 <title>목록</title>
 <script >
   $(document).ready(function(){
-	  console.log("document.ready");
+    console.log("document.ready");
   });
 </script>
 
@@ -296,38 +358,70 @@ ol, ul {
          <h2 class="css-8 ">1:1문의</h2>
        </div>
       </div>
-        <div class="css-10 ">
-         <div width="50" class="css-11">번호</div>
-         <div class="css-12 ">제목</div>
-         <div width="100" class="css-13">작성일</div>
-         <div width="100" class="css-13 ">답변상태</div>
+      <form>
+       <div class="css-21">
+        <div class="css-22">
+         <label>제목</label>
         </div>
-   <c:choose>
-        <c:when test="${list.size()>0 }">
-          <c:forEach var="vo" items="${list }">
-           <ul class="css-14 ">
-            <li><a href="#">
-              <div class="css-15">
-              <div class="css-16 "><c:out value="${vo.seq }"></c:out></div>
-              <div class="css-17 "><c:out value="${vo.title }"></c:out></div>
-              <div class="css-18 "><c:out value="${vo.regDt }"></c:out></div>
-              <div class="css-19 "><c:out value="${vo.answerCheck }"></c:out></div>
-            </div></a></li> </ul>
-          </c:forEach>
-        </c:when>
-        <c:otherwise>
-          <div>
-            <div class="text-center col-sm-12 col-dm-12 col-lg-12" colspan="99">
-             No data found
-            </div>
+        <div class="css-23">
+         <div class="css-24">
+           <div height="44" class="css-25">
+            <input data-testid="input-box" id="inquiry-subject" name="subject" placeholder="제목을 입력해주세요" 
+            type="text" height="44" class="css-26" value>
+           </div>
+         </div>
+        </div>
+        </div>
+        <div class="">
+         <div class="css-21">
+          <div class="css-22">
+            <label>내용</label>
+           </div>
+        <div class="css-23">
+          <div class="">
+           <div class="css-27">
+            <textarea rows="inquiry-contents" inputmode="text" aria-label="textarea-message"
+             name="contents" class="css-28"></textarea>
+           </div>
           </div>
-        </c:otherwise>
+        </div>
+        </div>
+        </div>
+        
+        <div class="">
+         <div class="css-21">
+          <div class="css-22">
+           </div>
+        <div class="css-23">
+          <div class="css-42">
+           <div class="css-43">
+            <div>
+             <label>첨부파일</label>
+            </div>
+           </div>
+          </div>
+          <div class="css-44">
+           <div class="css-45">
+            "30MB이하의 이미지만 업로드 가능합니다."
+           </div>
+           <div class="css-45">
+            "상품의 최대 8장까지 등록가능합니다.  "
+           </div>
+          
+          
+          </div>
+        </div>
+        </div>
+        </div>
+
+        <div class="css-40">
+         <button type="submit" disabled class="css-41">등록</button>
+        </div>
       
-      </c:choose> 
-        <li class="css-0 "><a class=" css-20 " href="${CP}/board/questionreq.do">등록</a></li>
+      </form>
+      
     
-    
-    <button disabled type="button" >
+<button disabled type="button" >
     <div class="css-button ">이전</div>
     </button>
     <button type="button" >

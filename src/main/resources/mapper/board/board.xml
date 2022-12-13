@@ -90,10 +90,8 @@
 		      title as "title",
 		      contents as "contents",
 		     TO_CHAR(reg_dt, 'YYYY-MM-DD HH24:MI:SS') regDt,
-	       reg_id,
-	       
+	       reg_id
 		FROM board
-		ORDER BY seq
 	</select>  
 
   <!-- doInsert --> 

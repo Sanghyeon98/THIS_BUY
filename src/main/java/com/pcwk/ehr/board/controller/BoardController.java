@@ -36,6 +36,12 @@ public class BoardController {
 	@RequestMapping(value = "/boardView.do")
 	public String boardView(Model model, BoardVO inVO) throws SQLException {
 		String VIEW_NAME = "board/board_list";
+		
+//		//10공지,20 자유게시판
+//				if(null !=inVO && null == inVO.getGubun()+"") {
+//					inVO.setDiv(StringUtil.nvl(inVO.getGubun(),"10"));
+//				} 
+		
 		LOG.debug("┌──────────────────────────────┐");
 		LOG.debug("│boardView ");
 		LOG.debug("└──────────────────────────────┘");
@@ -57,6 +63,17 @@ public class BoardController {
 		model.addAttribute("list", list);
 		return VIEW_NAME;
 	}
+	
+	// board화면 보여주기
+		@RequestMapping(value = "/questionreq.do")
+		public String questionreq(Model model, BoardVO inVO) throws SQLException {
+			String VIEW_NAME = "board/board_Reg";
+			LOG.debug("┌──────────────────────────────┐");
+			LOG.debug("│boardView ");
+			LOG.debug("└──────────────────────────────┘");
+
+			return VIEW_NAME;
+		}
 
 	/**
 	 * 목록조회

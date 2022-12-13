@@ -18,7 +18,28 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%
+     //공지사항(10)/자유게시판 구분(20)
+     String divValue = request.getParameter("gubun");
+     String title = "";
+     String gubun1 = "";
+     String gubun2 = "";
+     if("20".equals(divValue)){
+       title = "1:1문의";
+       gubun1 = "작성일";
+       gubun2 = "답변상태";
+       
+     }else{
+       title = "공지사항";
+       gubun1 = "작성자";
+       gubun2 = "작성일";
+     }
+     
+     request.setAttribute("title", title);
+     request.setAttribute("gubun1", gubun1);
+     request.setAttribute("gubun2", gubun2);
+     request.setAttribute("divValue", divValue);
+%>
 <c:set var="CP" value="${pageContext.request.contextPath}" /> <!-- ContextPath -->
 <c:set var="RES" value="/resources"/>
 <c:set var="CP_RES" value="${CP}${RES}"/>
@@ -241,6 +262,19 @@ ol, ul {
     width: 1px;
     height: 1px;
 }
+
+  .css-Button {
+    display: block;
+    padding: 0px 10px;
+    text-align: center;
+    overflow: hidden;
+    width: 120px;
+    height: 44px;
+    border-radius: 3px;
+    color: rgb(255, 255, 255);
+    background-color: blue;
+    border: 0px none;
+}
 </style>
   
 <head> 
@@ -268,6 +302,17 @@ ol, ul {
 <script >
   $(document).ready(function(){
   
+	  
+	  //등록화면으로 이동
+	    $("#moveToReg").on("click",function(){
+	      
+	      console.log('moveToReg');
+	      
+	      window.location.href = "${CP}/board/questionreq.do";
+	      
+	    //moveToReg
+	    });
+	  
   });
   
  
@@ -323,10 +368,13 @@ ol, ul {
             </div>
           </div>
         </c:otherwise>
-      
       </c:choose> 
+      
+     <div >
+      <button class="css-Button" type="button" width="120" height="44" radius="3" id="moveToReg"> 등록  </button>
+     </div>
  
-    
+
     
     <!-- ----------------------------------페이징  -->
         <div class="text-center col-sm-12 col-dm-12 col-lg-12">

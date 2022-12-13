@@ -304,9 +304,9 @@ tr {
      <div class="css-2 ">
      <div class="css-3 ">고객센터</div>
      <ul class="css-4 ">
-     <li class="css-0 "><a class=" css-20 ">공지사항</a></li>
-     <li class="css-0 "><a class=" css-20 ">1:1 문의</a></li>
-     </ul>
+     <li class="css-0 "><a class=" css-20 " href="${CP}/board/boardView.do">공지사항</a></li>
+     <li class="css-0 "><a class=" css-20 " href="${CP}/board/questionView.do">1:1 문의</a></li>
+      </ul>
    </div>
     
     
@@ -342,6 +342,7 @@ tr {
         </table>
         </div>
         </div>
+          <li class="css-0 "><a class=" css-20 " href="${CP}/board/boardView.do">등록</a></li>
  
     
     
