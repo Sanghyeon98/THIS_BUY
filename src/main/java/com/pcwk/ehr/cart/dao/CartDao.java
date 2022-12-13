@@ -11,4 +11,5 @@ import com.pcwk.ehr.cmn.WorkDiv;
 public interface CartDao extends WorkDiv<CartVO> {
  
 	List<CartJoinVO> getAll(CartJoinVO inVO) throws SQLException;
+	int cartCheck(CartVO inVO) throws SQLException;
 }

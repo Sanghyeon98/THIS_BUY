@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.pcwk.ehr.cart.dao.CartDao;
 import com.pcwk.ehr.cart.domain.CartJoinVO;
 import com.pcwk.ehr.cart.domain.CartVO;
+import com.pcwk.ehr.cmn.DTO;
 
 @Service("CartService")
 public class CartServiceImpl implements CartService {
@@ -21,6 +22,13 @@ public class CartServiceImpl implements CartService {
 	
 	@Override
 	public int doSave(CartVO inVO) throws SQLException {
+		
+		int flag=cartDao.cartCheck(inVO);
+		if(flag != 0) {
+			cartDao.doDelete(inVO);
+			return cartDao.doSave(inVO);
+		}
+		
 		return cartDao.doSave(inVO);
 	}
 
@@ -37,6 +45,12 @@ public class CartServiceImpl implements CartService {
 	@Override
 	public List<CartJoinVO> getAll(CartJoinVO inVO) throws SQLException {
 		return cartDao.getAll(inVO);
+	}
+
+	@Override
+	public int cartCheck(CartVO inVO) throws SQLException {
+		
+		return cartDao.cartCheck(inVO);
 	}
 
 }

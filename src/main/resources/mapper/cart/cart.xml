@@ -5,6 +5,13 @@
 
 <mapper namespace="com.pcwk.ehr.cart">
 
+    <select id="cartCheck" parameterType="CartVO" resultType="int">
+        SELECT COUNT(*) cnt
+        FROM cart
+        WHERE item_no = #{itemNO}
+        AND member_id = #{memberId} 
+    </select>
+
 
 	<resultMap type="com.pcwk.ehr.cart.domain.CartJoinVO"
 		id="CartMap">
