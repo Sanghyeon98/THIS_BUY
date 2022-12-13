@@ -70,8 +70,8 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public List<CategoryVO> getALL(CategoryVO inVO) throws SQLException {
-		return cateDao.getALL(inVO);
+	public List<CategoryVO> getALL() throws SQLException {
+		return cateDao.getALL();
 	}
 
 }

@@ -29,7 +29,7 @@ public class AdminCategoryController {
 	public String categoryView(Model model, CategoryVO inVO) throws SQLException {
 		String VIEW_NAME = "admin/admin_category_mng";
 		
-		List<CategoryVO> list = cateService.getALL(inVO);
+		List<CategoryVO> list = cateService.getALL();
 		
 		model.addAttribute("list", list);
 		

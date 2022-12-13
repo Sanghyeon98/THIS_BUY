@@ -15,7 +15,7 @@ public interface CategoryDao extends WorkDiv<CategoryVO> {
 	*/
 	
 	// like 전체 데이터 리턴
-	List<CategoryVO> getALL(CategoryVO inVO) throws SQLException;
+	List<CategoryVO> getALL() throws SQLException;
 	
 	// 등록된 데이터 건수 확인
 	int getCount(CategoryVO inVO) throws SQLException;

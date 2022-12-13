@@ -133,16 +133,16 @@ public class JCategoryDaoTest {
 		
 		
 		// 등록(1)
-		adminDao.doSave(cateVO01);
-		List<CategoryVO> list = adminDao.getALL(search);
-		assertEquals(1, adminDao.getCount(search));
-		isSameUser(cateVO01, list.get(0));
-		
-		
-		// 등록(2)
-		adminDao.doSave(cateVO02);
-		list = adminDao.getALL(cateVO02);
-		isSameUser(cateVO02, list.get(0));
+//		adminDao.doSave(cateVO01);
+//		List<CategoryVO> list = adminDao.getALL(search);
+//		assertEquals(1, adminDao.getCount(search));
+//		isSameUser(cateVO01, list.get(0));
+//		
+//		
+//		// 등록(2)
+//		adminDao.doSave(cateVO02);
+//		list = adminDao.getALL(cateVO02);
+//		isSameUser(cateVO02, list.get(0));
 		
 		// 등록(3)
 		adminDao.doSave(cateVO03);

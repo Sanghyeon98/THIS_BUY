@@ -12,6 +12,9 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+  <meta name="_csrf" th:content="${_csrf.token}" />
+  <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+  
   <!-- 뷰포트(반응형 웹)  -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,29 +26,128 @@
   <link rel="stylesheet" href="${CP_RES}/css/admin_product_mng.css">
   <!-- jQuery -->
   <script src="${CP_RES}/js/jquery-1.12.4.js"></script>
-	<!-- callAjax -->
-	<script src="${CP_RES}/js/callAjax.js"></script>
-	<!-- String, Number, Date Util -->
-	<script src="${CP_RES}/js/eUtil.js"></script>
-	<!-- paging -->
-	<script src="${CP_RES}/js/jquery.bootpag.js"></script>
-	<!-- bootstrap js -->
-	<script src="${CP_RES}/js/bootstrap.min.js"></script>
-	
+    <!-- callAjax -->
+    <script src="${CP_RES}/js/callAjax.js"></script>
+    <!-- String, Number, Date Util -->
+    <script src="${CP_RES}/js/eUtil.js"></script>
+    <!-- paging -->
+    <script src="${CP_RES}/js/jquery.bootpag.js"></script>
+    <!-- bootstrap js -->
+    <script src="${CP_RES}/js/bootstrap.min.js"></script>
+    
   <title>제품 목록</title>
   
   <!-- javascript -->
   <script>
+    
     $(document).ready(function(){
-    	
-    	// '상품 등록' 버튼 클릭 시, 상품등록 페이지로 이동
-    	$("#prod_reg_bt").on("click", function() {
-    		console.log("#prod_reg_bt");
-    		
-    		window.location.href = "${CP}/product/moveToReg.do";
-    	});
+    	/*
+        // 모든 카테고리
+        let cateList = JSON.parse('${allCateJson}');
+        console.log("cateList : " + cateList);
+        
+        let cate1Array = new Array();
+        let cate2Array = new Array();
+        let cate1Obj = new Object();
+        let cate2Obj = new Object();
+        let cateSelect1 = $(".cate1"); // 1차 분류
+        let cateSelect2 = $(".cate2"); // 2차 분류
+        
+        makeCateArray(cate1Obj, cate1Array, cateList, 0);
+        makeCateArray(cate2Obj, cate2Array, cateList, 4);
+        
+        console.log("cate1Array : " + cate1Array);
+        console.log("cate2Array : " + cate2Array);
+        
+        for(let i = 0; i < cate1Array.length; i++){
+        	console.log("i = " + i);
+        	console.log("cate1Array[i].categoryNm = " + cate1Array[i].categoryNm);
+            cateSelect1.append("<option value='"+cate1Array[i].categoryNo+"'>" + cate1Array[i].categoryNm + "</option>");
+        }
+        */
+        
+        
+        $(".cate01List").on("change", function() {
+        	console.log(".cate01List");
+        	console.log("$(this).val() : " + $(this).val());
+        	
+        	// 선택된 1차 분류 value 값
+        	let currentCateNo = $(this).val();
+        	
+        	$(".cate02List").empty();
+        	
+        	let cate02ListJson = JSON.parse('${cate02ListJson}');
+        	console.log("cate02ListJson : " + cate02ListJson);
+        	
+        	let htmlData = "";
+        	
+        	$.each(cate02ListJson, function(index, value) {
+        	    // 2차 분류의 topNo와 현재 선택된 1차 분류의 categoryNo가 같으면 (하위 카테고리이면~!)
+        		if(value.topNo == currentCateNo) {
+        	    	htmlData += "<option value='"+value.categoryNo+"'>" + value.categoryNm + "</option>";
+        	    } else { 
+        	    	htmlData += "<option value='none'>==선택==</option>";
+        	    }
+        	    
+                //console.log("=cate02ListJson.topNo : " + cate02ListJson.topNo);
+                //htmlData += "<option value='"+value.categoryNo+"'>" + value.categoryNm + "</option>";
+            });
+        	
+        	/*
+       		if(cate02ListJson.topNo == $(this).val()) {
+        	//if(null != cate02ListJson && cate02ListJson.length > 0) {
+        		console.log("cate02ListJson.topNo : " + cate02ListJson.topNo);
+        		
+        		$.each(cate02ListJson, function(index, value) {
+	        		console.log("=cate02ListJson.topNo : " + cate02ListJson.topNo);
+        			htmlData += "<option value='"+value.categoryNo+"'>" + value.categoryNm + "</option>";
+        		});
+        	} else {
+    			htmlData += "<option value='none'>==선택==</option>";
+        		
+        	}
+        	*/
+        	
+        	$(".cate02List").append(htmlData);
+        });
+        
+        
+        // '상품 등록' 버튼 클릭 시, 상품등록 페이지로 이동
+        $("#prod_reg_bt").on("click", function() {
+            console.log("#prod_reg_bt");
+            
+            window.location.href = "${CP}/product/moveToReg.do";
+        });
       
     });
+    
+    function makeCateArray(obj, array, cateList, topNo) {
+    	for(let i=0; i<cateList.length; i++) {
+    		if(topNo == 0) {
+	            if(cateList[i].topNo === topNo) {  // 1차 분류이면 
+	                cate1Obj = new Object();
+	            
+	                obj.categoryNo = cateList[i].categoryNo;
+	                obj.categoryNm = cateList[i].categoryNm;
+	                obj.topNo = cateList[i].topNo;
+	                
+	                array.push(obj);
+	                
+	                console.log("-- cateList[i].categoryNm : " + cateList[i].categoryNm);
+	            }
+    		} else {  // 1차분류가 아닐때 
+    			if(cateList[i].topNo === topNo) {  // 2차 분류이면 
+                    cate1Obj = new Object();
+                
+                    obj.categoryNo = cateList[i].categoryNo;
+                    obj.categoryNm = cateList[i].categoryNm;
+                    obj.topNo = cateList[i].topNo;
+                    
+                    array.push(obj);
+                }
+    		}
+        }
+    }
   </script>
 </head>
 
@@ -74,10 +176,14 @@
               <tr>
                 <td class="table_left"><label>분류선택</label></td>
                 <td>
-                  <select>
-                    <option>1차 분류</option>
+                  <select class="cate01List">
+                    <c:forEach var="vo" items="${cate01List}">
+                        <option value='<c:out value="${vo.categoryNo}"/>'>
+                            <c:out value="${vo.categoryNm}"/>
+                        </option>
+                    </c:forEach>
                   </select>
-                  <select>
+                  <select class="cate02List">
                     <option>2차 분류</option>
                   </select>
                 </td>
@@ -96,15 +202,15 @@
           <button>검색</button>
         </div>
         <div class="search_option">
-          <select id="search_option" name="search_option">
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="30">30</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
+          <select id="pageSize" name="pageSize">
+            <c:forEach var="vo" items="${PAGE_SIZE }">
+                <option value='<c:out value="${vo.detCode}"/>'>
+                    <c:out value="${vo.detName }"></c:out>
+                </option>
+            </c:forEach>
           </select>
         </div>
-        
+
         <!-- 테이블 목록 -->
         <div class="search_list">
           <form action="#">
@@ -137,10 +243,10 @@
                   </c:when>
                   <c:otherwise>
                     <tr>
-				              <td class="text-center col-sm-12 col-md-12 col-lg-12" colspan="99">
-				                  No data found
-				              </td>
-				            </tr>
+                      <td class="text-center col-sm-12 col-md-12 col-lg-12" colspan="99">
+                          No data found
+                      </td>
+                    </tr>
                   </c:otherwise>
                 </c:choose>
 

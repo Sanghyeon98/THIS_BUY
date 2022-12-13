@@ -78,7 +78,7 @@
   </select>
 
   <!-- resultType이 UserVO인데 호출하는 쪽에서 return타입이 LIST이면 LIST형태로 UserVO를 넘겨줌 -->
-  <select id="getALL" parameterType="CategoryVO" resultType="CategoryVO">
+  <select id="getALL" resultType="CategoryVO">
 		SELECT 
 		    category_no as categoryNo, 
 		    LPAD(' ', 3 * (level-1)) || category_nm as categoryNm, 

@@ -126,16 +126,15 @@ public class CategoryDaoImpl implements CategoryDao {
 	}
 
 	@Override
-	public List<CategoryVO> getALL(CategoryVO inVO) throws SQLException {
+	public List<CategoryVO> getALL() throws SQLException {
 		List<CategoryVO> list = null;
 		
 		String statement = NAMESPACE + DOT + "getALL";
 
 		LOG.debug("================================");
-		LOG.debug("|  param: " + inVO);
 		LOG.debug("|  statement: " + statement);
 		
-		list = sqlSessionTemplate.selectList(statement, inVO);
+		list = sqlSessionTemplate.selectList(statement);
 		
 		for(CategoryVO vo : list) {
 			LOG.debug("|  vo : " + vo);

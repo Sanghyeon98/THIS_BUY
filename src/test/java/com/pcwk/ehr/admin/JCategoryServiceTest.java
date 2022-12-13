@@ -59,7 +59,11 @@ public class JCategoryServiceTest {
 						new CategoryVO(8, "음료/주스", 4),
 						new CategoryVO(9, "우유/두유/요거트", 4),
 						new CategoryVO(10, "커피", 4),
-						new CategoryVO(11, "차", 4)
+						new CategoryVO(11, "차", 4),
+						new CategoryVO(12, "과자/스낵/쿠키", 6),
+						new CategoryVO(13, "초콜릿/젤리/캔디", 6),
+						new CategoryVO(14, "떡/한과", 6),
+						new CategoryVO(15, "아이스크림", 6)
 						
 					 );
 		search = new CategoryVO(0, "간식", 0);
