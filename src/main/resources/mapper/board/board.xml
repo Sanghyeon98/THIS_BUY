@@ -35,7 +35,7 @@
         </when>                 
       </choose>
   </sql>
-  <select id="doRetrieve" resultType="BoardVO" parameterType="SearchVO">
+  <select id="doRetrieve" resultType="BoardVO" parameterType="BoardSearchVO">
       SELECT A.*,B.*
       FROM(
           SELECT 
@@ -56,7 +56,6 @@
                   FROM board
                  WHERE gubun = #{gubun}
                   AND  gubun_question = #{gubunQuestion}
-                   <include refid="searchConditionboard"></include>
                   ORDER BY reg_dt DESC
               ) T1
               -- 종료 번호
@@ -72,7 +71,6 @@
           --WHERE 조건
          WHERE gubun = #{gubun}
           AND  gubun_question = #{gubunQuestion}
-         <include refid="searchConditionboard"></include>
       ) B
    </select>
   
@@ -83,6 +81,20 @@
     WHERE seq = #{seq}
   
   </delete>
+  
+   <!-- resultType이 UserVO인데 호출하는 쪽에서 return타입이 LIST이면 LIST형태로 UserVO를 넘겨줌 -->
+	<select id="getALL" parameterType="BoardVO" resultType="BoardVO">
+		SELECT seq as seq,
+		      gubun as "gubun",
+		      gubun_question as "gubunQuestion",
+		      title as "title",
+		      contents as "contents",
+		     TO_CHAR(reg_dt, 'YYYY-MM-DD HH24:MI:SS') regDt,
+	       reg_id,
+	       
+		FROM board
+		ORDER BY seq
+	</select>  
 
   <!-- doInsert --> 
   <insert id = "doSave" parameterType="BoardVO">
@@ -116,6 +128,7 @@
         , contents = #{contents}
         , reg_dt = SYSDATE
     WHERE seq = #{seq}
+    
   </update>
   
 

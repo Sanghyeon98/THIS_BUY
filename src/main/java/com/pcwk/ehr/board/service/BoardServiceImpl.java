@@ -47,4 +47,10 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.doRetrieve(inVO);
 	}
 
+	@Override
+	public List<BoardVO> getALL(BoardVO inVO) throws SQLException {
+		return boardDao.getALL(inVO);
+	}
+	
+
 }

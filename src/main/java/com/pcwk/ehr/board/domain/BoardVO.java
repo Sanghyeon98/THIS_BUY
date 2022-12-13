@@ -10,7 +10,7 @@ public class BoardVO extends DTO {
 	private String title;		// 제목
 	private String contents;	// 내용
 	private String regDt;		// 등록일
-	private String regId;		// 등록일
+	private String regId;		// 등록자
 	private int answerCheck;	// 답변 체크
 	
 	public BoardVO() {}

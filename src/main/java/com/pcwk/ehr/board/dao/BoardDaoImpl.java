@@ -10,6 +10,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.pcwk.ehr.admin.domain.CategoryVO;
 import com.pcwk.ehr.board.domain.AnswerVO;
 import com.pcwk.ehr.board.domain.BoardSearchVO;
 import com.pcwk.ehr.board.domain.BoardVO;
@@ -134,6 +135,26 @@ public class BoardDaoImpl implements BoardDao {
 		LOG.debug("================================");
 
 		return flag;
+	}
+
+	@Override
+	public List<BoardVO> getALL(BoardVO inVO) throws SQLException {
+		List<BoardVO> list = null;
+		
+		String statement = NAMESPACE + DOT + "getALL";
+
+		LOG.debug("================================");
+		LOG.debug("|  param: " + inVO);
+		LOG.debug("|  statement: " + statement);
+		
+		list = sqlSessionTemplate.selectList(statement, inVO);
+		
+		for(BoardVO vo : list) {
+			LOG.debug("|  vo : " + vo);
+		}
+		LOG.debug("================================");
+		
+		return list;
 	}
 
 }

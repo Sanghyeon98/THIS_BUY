@@ -130,49 +130,6 @@ ol, ul {
     letter-spacing: -0.5px;
     line-height: 48px;
 }
-.css-9 {
-    padding-left: 11px;
-    font-size: 14px;
-    letter-spacing: -0.3px;
-    color: rgb(153, 153, 153);
-    line-height: 20px;
-}
-.css-10 {
-    display: flex;
-    width: 100%;
-    padding: 20px 0px;
-    border-bottom: 1px solid rgb(51, 51, 51);
-    border-top: 2px solid rgb(51, 51, 51);
-}
-.css-11 {
-    flex-basis: 50px;
-    text-align: center;
-    line-height: 20px;
-    font-weight: 400;
-    color: rgb(51, 51, 51);
-}
-.css-12 {
-    -webkit-box-flex: 1;
-    flex-grow: 1;
-    text-align: center;
-    line-height: 20px;
-    font-weight: 400;
-    color: rgb(51, 51, 51);
-}
-.css-13 {
-    flex-basis: 100px;
-    text-align: center;
-    line-height: 20px;
-    font-weight: 400;
-    color: rgb(51, 51, 51);
-}
-.css-13 {
-    flex-basis: 100px;
-    text-align: center;
-    line-height: 20px;
-    font-weight: 400;
-    color: rgb(51, 51, 51);
-}
 .css-14 {
     display: flex;
     flex-direction: column;
@@ -240,6 +197,68 @@ ol, ul {
     width: 1px;
     height: 1px;
 }
+
+thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+.table-1 {
+    width: 820px;
+    border-bottom: 1px solid rgb(244, 244, 244);
+}
+
+.table-t-tr {
+    width: 100%;
+    table-layout: fixed;
+    border-bottom: 1px solid rgb(51, 51, 51);
+    border-top: 2px solid rgb(51, 51, 51);
+}
+
+.table-t-th {
+    width: 100px;
+    padding: 20px 0px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    color: rgb(51, 51, 51);
+}
+
+.table-b td:first-of-type {
+    width: 620px;
+    padding: 20px;
+    text-align: left;
+}
+
+.table-b td {
+    width: 100px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 22px;
+}
+.css-1 {
+    overflow: hidden;
+    display: block;
+    width: 580px;
+    cursor: pointer;
+}
+
+.css-2 {
+    width: 100%;
+}
 </style>
   
 <head> 
@@ -276,6 +295,7 @@ ol, ul {
 
 <body>
 
+ 
  <div id="__next" data-reactroot="">
   <div>
    <div>
@@ -284,8 +304,8 @@ ol, ul {
      <div class="css-2 ">
      <div class="css-3 ">고객센터</div>
      <ul class="css-4 ">
-     <li class="css-0 "><a class=" css-20 " href="${CP}/board/boardView.do" >공지사항</a></li>
-     <li class="css-0 "><a class=" css-20 " href="${CP}/board/questionView.do">1:1 문의</a></li>
+     <li class="css-0 "><a class=" css-20 ">공지사항</a></li>
+     <li class="css-0 "><a class=" css-20 ">1:1 문의</a></li>
      </ul>
    </div>
     
@@ -293,37 +313,36 @@ ol, ul {
      <div class="css-5 ">
       <div class="css-6 ">
        <div class="css-7 ">
-         <h2 class="css-8 ">1:1문의</h2>
+         <h2 class="css-8 ">공지사항</h2>
        </div>
       </div>
         <div class="css-10 ">
-         <div width="50" class="css-11">번호</div>
-         <div class="css-12 ">제목</div>
-         <div width="100" class="css-13">작성일</div>
-         <div width="100" class="css-13 ">답변상태</div>
+         <div class="css-2">
+        <table class="table-1">
+          <thead>
+           <tr class = "table-t-tr">
+            <th class = "table-t-th">제목</th>
+            <th class = "table-t-th">작성일</th>
+            <th class = "table-t-th">답변상태</th>
+           </tr>
+          </thead>
+          <tbody>
+           <tr class = "table-b"> 
+            <td>
+             <div class = "css-1">주문취소</div>
+            </td>
+             <td>
+             <div class = "css-1">2022.12.09</div>
+            </td>
+             <td>
+             <div class = "css-1">답변완료</div>
+            </td>
+           </tr>
+          </tbody>
+        </table>
         </div>
-   <c:choose>
-        <c:when test="${list.size()>0 }">
-          <c:forEach var="vo" items="${list }">
-           <ul class="css-14 ">
-            <li><a href="#">
-              <div class="css-15">
-              <div class="css-16 "><c:out value="${vo.seq }"></c:out></div>
-              <div class="css-17 "><c:out value="${vo.title }"></c:out></div>
-              <div class="css-18 "><c:out value="${vo.regDt }"></c:out></div>
-              <div class="css-19 "><c:out value="${vo.answerCheck }"></c:out></div>
-            </div></a></li> </ul>
-          </c:forEach>
-        </c:when>
-        <c:otherwise>
-          <div>
-            <div class="text-center col-sm-12 col-dm-12 col-lg-12" colspan="99">
-             No data found
-            </div>
-          </div>
-        </c:otherwise>
-      
-      </c:choose> 
+        </div>
+ 
     
     
     <button disabled type="button" >

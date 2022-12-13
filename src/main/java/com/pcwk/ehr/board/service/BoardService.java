@@ -3,6 +3,7 @@ package com.pcwk.ehr.board.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.pcwk.ehr.admin.domain.CategoryVO;
 import com.pcwk.ehr.board.domain.BoardVO;
 import com.pcwk.ehr.cmn.DTO;
 
@@ -49,6 +50,14 @@ public interface BoardService {
 	 * @throws SQLException
 	 */
 	List<BoardVO> doRetrive(DTO inVO)throws SQLException;
+	
+
+	/**
+	 * 조건절 없이 모든 카테고리 목록 조회
+	 * @return
+	 * @throws SQLException
+	 */
+	List<BoardVO> getALL(BoardVO inVO) throws SQLException;
 	
 	
 }

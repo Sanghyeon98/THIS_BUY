@@ -91,7 +91,6 @@ public class JBoardDaotest {
 
 		search.setGubun("10");
 		List<BoardVO> list = dao.doRetrieve(search);
-		
 	}
 	
 	@Test

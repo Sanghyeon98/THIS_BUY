@@ -16,10 +16,14 @@
  --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<c:set var="CP" value="${pageContext.request.contextPath }"></c:set>
-<c:set var="RES" value="/resources" ></c:set>
-<c:set var="CP_RES" value="${CP}${RES}" ></c:set>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<c:set var="CP" value="${pageContext.request.contextPath}" /> <!-- ContextPath -->
+<c:set var="RES" value="/resources"/>
+<c:set var="CP_RES" value="${CP}${RES}"/>
+
+<%@ include file="/WEB-INF/views/cmn/cache.jsp" %>
 <!DOCTYPE html>
 <html>
 
@@ -70,10 +74,7 @@ html {
 *, :after, :before, legend, td, th {
     padding: 0;
 }
-*, :after, :before {
-    box-sizing: border-box;
-    margin: 0;
-}
+
 *, :after, :before, legend, td, th {
     padding: 0;
 }
@@ -243,33 +244,33 @@ ol, ul {
 </style>
   
 <head> 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="shortcut icon" type="image/x-icon" href="${CP}/favicon.ico">   
-<!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet" href="${CP_RES}/css/bootstrap.min.css">
-
-<!-- jQuery -->
-<script src="${CP_RES}/js/jquery-1.12.4.js"></script>
-
-<!-- callAjax.js -->
-<script src="${CP_RES}/js/callAjax.js"></script>
-
-<!-- eUtil.js  String,Number,date Util -->
-<script src="${CP_RES}/js/eUtil.js"></script>   
-    
-<!-- bootpag js -->
-<script src="${CP_RES}/js/jquery.bootpag.js"></script>
-
-<!-- bootstrap js -->
-<script src="${CP_RES}/js/bootstrap.min.js"></script>
-
+  <!-- 뷰포트(반응형 웹)  -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="project product list" >
+  <meta name="keywords" content="html5, css3, javascipt6, jQuery">
+  <!-- favicon -->
+  <link rel="shortcut icon" type="images/x-icon" href="/PC_HTML/favicon.ico">
+  <!-- jquery ui -->
+  <link rel="stylesheet" href="${CP_RES}/css/admin_product_mng.css">
+  <!-- jQuery -->
+  <script src="${CP_RES}/js/jquery-1.12.4.js"></script>
+  <!-- callAjax -->
+  <script src="${CP_RES}/js/callAjax.js"></script>
+  <!-- String, Number, Date Util -->
+  <script src="${CP_RES}/js/eUtil.js"></script>
+  <!-- paging -->
+  <script src="${CP_RES}/js/jquery.bootpag.js"></script>
+  <!-- bootstrap js -->
+  <script src="${CP_RES}/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
 <title>목록</title>
 <script >
   $(document).ready(function(){
-	  console.log("document.ready");
+  
   });
+  
+ 
 </script>
 
 </head>
@@ -284,7 +285,7 @@ ol, ul {
      <div class="css-2 ">
      <div class="css-3 ">고객센터</div>
      <ul class="css-4 ">
-     <li class="css-0 "><a class=" css-20 " href="${CP}/board/boardView.do" >공지사항</a></li>
+     <li class="css-0 "><a class=" css-20 " href="${CP}/board/boardView.do">공지사항</a></li>
      <li class="css-0 "><a class=" css-20 " href="${CP}/board/questionView.do">1:1 문의</a></li>
      </ul>
    </div>
@@ -293,48 +294,47 @@ ol, ul {
      <div class="css-5 ">
       <div class="css-6 ">
        <div class="css-7 ">
-         <h2 class="css-8 ">1:1문의</h2>
+         <h2 class="css-8 ">공지사항</h2>
        </div>
       </div>
         <div class="css-10 ">
          <div width="50" class="css-11">번호</div>
          <div class="css-12 ">제목</div>
-         <div width="100" class="css-13">작성일</div>
-         <div width="100" class="css-13 ">답변상태</div>
+         <div width="100" class="css-13">관리자</div>
+         <div width="100" class="css-13 ">작성일</div>
         </div>
-   <c:choose>
+        
+      <ul class="css-14 ">
+     <c:choose>
         <c:when test="${list.size()>0 }">
           <c:forEach var="vo" items="${list }">
-           <ul class="css-14 ">
             <li><a href="#">
-              <div class="css-15">
               <div class="css-16 "><c:out value="${vo.seq }"></c:out></div>
               <div class="css-17 "><c:out value="${vo.title }"></c:out></div>
-              <div class="css-18 "><c:out value="${vo.regDt }"></c:out></div>
-              <div class="css-19 "><c:out value="${vo.answerCheck }"></c:out></div>
-            </div></a></li> </ul>
+              <div class="css-18 "><c:out value="${vo.regId }"></c:out></div>
+              <div class="css-19 "><c:out value="${vo.regDt }"></c:out></div>
+            </a></li>
           </c:forEach>
         </c:when>
         <c:otherwise>
-          <div>
-            <div class="text-center col-sm-12 col-dm-12 col-lg-12" colspan="99">
+          <tr>
+            <td class="text-center col-sm-12 col-dm-12 col-lg-12" colspan="99">
              No data found
-            </div>
-          </div>
+            </td>
+          </tr>
         </c:otherwise>
       
       </c:choose> 
+    </ul>
     
+    <!-- ----------------------------------페이징  -->
+        <div class="text-center col-sm-12 col-dm-12 col-lg-12">
+      <div id="page-selection" class="text-center page"></div>
+    </div>
+    <!-- ----------------------------------페이징  끝-->
     
-    <button disabled type="button" >
-    <div class="css-button ">이전</div>
-    </button>
-    <button type="button" >
-    <div class="css-button ">다음</div>
-    </button>
-    
-    
-    </div></div></div></div></div></div>
+    </div>
+    </div></div></div></div></div>
   
 </body>
 </html>
