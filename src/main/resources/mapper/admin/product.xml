@@ -8,8 +8,8 @@
   <sql id="searchCondition">
      <where>
         <choose>
-            <when test="searchDiv == '10' and '' != searchDiv">
-              category_no = #{searchDiv}
+            <when test="searchDiv == 'none' and '' != searchDiv">
+              category_no = #{cateId}
             </when>
             <when test="searchDiv == '20' and '' != searchDiv">
               name LIKE #{searchWord} || '%'
@@ -22,25 +22,26 @@
       SELECT A.*,B.*
       FROM(
           SELECT 
-						TT1.rnum AS num,
-						TT1.item_no AS itemNo,
-						TT1.name,
-						TT1.price,
-						TT1.category_no AS categoryNo,
-						TT1.image_no AS imageNo,
-						TT1.production,
-						TT1.weight,
-						TO_CHAR(TT1.expired, 'YYYY-MM-DD HH24:MI:SS') AS expired,
-						TT1.detail,
-						TT1.discount,
-						TT1.final_price AS finalPrice,
-						TT1.sales,
-						DECODE( TO_CHAR(SYSDATE,'YYYY-MM-DD'),  TO_CHAR(TT1.reg_dt,'YYYY-MM-DD')
-						                ,TO_CHAR(TT1.reg_dt,'HH24:MI')
-						                ,TO_CHAR(TT1.reg_dt,'YYYY-MM-DD')) as regDt,
-						DECODE( TO_CHAR(SYSDATE,'YYYY-MM-DD'),  TO_CHAR(TT1.mod_dt,'YYYY-MM-DD')
-						                ,TO_CHAR(TT1.mod_dt,'HH24:MI')
-						                ,TO_CHAR(TT1.mod_dt,'YYYY-MM-DD')) as modDt       
+			TT1.rnum AS num,
+			TT1.item_no AS itemNo,
+			TT1.name,
+			TT1.price,
+			TT1.quantity,
+			TT1.category_no AS categoryNo,
+			TT1.image_no AS imageNo,
+			TT1.production,
+			TT1.weight,
+			TO_CHAR(TT1.expired, 'YYYY-MM-DD HH24:MI:SS') AS expired,
+			TT1.detail,
+			TT1.discount,
+			TT1.final_price AS finalPrice,
+			TT1.sales,
+			DECODE( TO_CHAR(SYSDATE,'YYYY-MM-DD'),  TO_CHAR(TT1.reg_dt,'YYYY-MM-DD')
+			                ,TO_CHAR(TT1.reg_dt,'HH24:MI')
+			                ,TO_CHAR(TT1.reg_dt,'YYYY-MM-DD')) as regDt,
+			DECODE( TO_CHAR(SYSDATE,'YYYY-MM-DD'),  TO_CHAR(TT1.mod_dt,'YYYY-MM-DD')
+			                ,TO_CHAR(TT1.mod_dt,'HH24:MI')
+			                ,TO_CHAR(TT1.mod_dt,'YYYY-MM-DD')) as modDt       
           FROM (
             SELECT ROWNUM AS RNUM, T1.*
             FROM (
@@ -71,6 +72,7 @@
         item_no AS itemNo,
         name,
         price,
+        quantity,
         category_no AS categoryNo,
         image_no AS imageNo,
         production,
@@ -100,6 +102,7 @@
 		    item_no AS itemNo,
 		    name,
 		    price,
+		    quantity,
 		    category_no AS categoryNo,
 		    image_no AS imageNo,
 		    production,
@@ -123,6 +126,7 @@
       SET
           name = #{name},
           price = #{price},
+          quantity = #{quantity},
           category_no = #{categoryNo},
           image_no = #{imageNo},
           production = #{production},
@@ -143,6 +147,7 @@
 		    item_no,
 		    name,
 		    price,
+		    quantity,
 		    category_no,
 		    image_no,
 		    production,
@@ -158,6 +163,7 @@
 		    #{itemNo},
 		    #{name},
 		    #{price},
+		    #{quantity},
 		    #{categoryNo},
 		    #{imageNo},
 		    #{production},

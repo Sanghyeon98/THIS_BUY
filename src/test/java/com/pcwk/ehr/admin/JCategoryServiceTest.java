@@ -63,7 +63,8 @@ public class JCategoryServiceTest {
 						new CategoryVO(12, "과자/스낵/쿠키", 6),
 						new CategoryVO(13, "초콜릿/젤리/캔디", 6),
 						new CategoryVO(14, "떡/한과", 6),
-						new CategoryVO(15, "아이스크림", 6)
+						new CategoryVO(15, "아이스크림", 6),
+						new CategoryVO(16, "친환경", 1)
 						
 					 );
 		search = new CategoryVO(0, "간식", 0);

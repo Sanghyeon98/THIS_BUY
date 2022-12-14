@@ -6,6 +6,7 @@ public class ProductVO extends DTO {
 	private int itemNo;			// 상품번호(PK)
 	private String name;		// 상품명
 	private int price;			// 가격_default 0
+	private int quantity;		// 수량 default 0
 	private int categoryNo;		// 카테고리 번호(FK)
 	private int imageNo;		// 이미지 번호(FK)
 	private String production;	// 생산지
@@ -20,12 +21,14 @@ public class ProductVO extends DTO {
 	
 	public ProductVO() {}
 	
-	public ProductVO(int itemNo, String name, int price, int categoryNo, int imageNo, String production, int weight,
-			String expired, String detail, int discount, int finalPrice, int sales, String regDt, String modDt) {
+	public ProductVO(int itemNo, String name, int price, int quantity, int categoryNo, int imageNo, String production,
+			int weight, String expired, String detail, int discount, int finalPrice, int sales, String regDt,
+			String modDt) {
 		super();
 		this.itemNo = itemNo;
 		this.name = name;
 		this.price = price;
+		this.quantity = quantity;
 		this.categoryNo = categoryNo;
 		this.imageNo = imageNo;
 		this.production = production;
@@ -150,13 +153,22 @@ public class ProductVO extends DTO {
 	public void setModDt(String modDt) {
 		this.modDt = modDt;
 	}
+	
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 
 	@Override
 	public String toString() {
-		return "ProductVO [itemNo=" + itemNo + ", name=" + name + ", price=" + price + ", categoryNo=" + categoryNo
-				+ ", imageNo=" + imageNo + ", production=" + production + ", weight=" + weight + ", expired=" + expired
-				+ ", detail=" + detail + ", discount=" + discount + ", finalPrice=" + finalPrice + ", sales=" + sales
-				+ ", regDt=" + regDt + ", modDt=" + modDt + ", toString()=" + super.toString() + "]";
+		return "ProductVO [itemNo=" + itemNo + ", name=" + name + ", price=" + price + ", quantity=" + quantity
+				+ ", categoryNo=" + categoryNo + ", imageNo=" + imageNo + ", production=" + production + ", weight="
+				+ weight + ", expired=" + expired + ", detail=" + detail + ", discount=" + discount + ", finalPrice="
+				+ finalPrice + ", sales=" + sales + ", regDt=" + regDt + ", modDt=" + modDt + ", toString()="
+				+ super.toString() + "]";
 	}
-	
+
 }

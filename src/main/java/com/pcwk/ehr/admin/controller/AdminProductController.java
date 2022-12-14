@@ -11,12 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.pcwk.ehr.admin.domain.CategoryVO;
 import com.pcwk.ehr.admin.domain.ProductVO;
 import com.pcwk.ehr.admin.service.CategoryService;
 import com.pcwk.ehr.admin.service.ProductService;
+import com.pcwk.ehr.board.domain.BoardVO;
 import com.pcwk.ehr.cmn.SearchVO;
 import com.pcwk.ehr.cmn.StringUtil;
 import com.pcwk.ehr.code.domain.CodeVO;
@@ -37,6 +39,50 @@ public class AdminProductController {
 	CodeService codeService;
 	
 	public AdminProductController() {}
+	
+	
+	@RequestMapping(value = "/doRetrieve.do", method = RequestMethod.GET,
+			produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String doRetrieve(SearchVO inVO) throws SQLException {
+		String jsonString = "";
+		
+		//페이지 번호
+		if(null !=inVO && inVO.getPageNo()==0) {
+			inVO.setPageNo(1);
+		}
+		
+		//페이지사이즈
+		if(null !=inVO && inVO.getPageSize()==0) {
+		    inVO.setPageSize(10);
+		}
+		
+		//검색구분
+		if(null !=inVO && null == inVO.getSearchDiv()) {
+			inVO.setSearchDiv(StringUtil.nvl(inVO.getSearchDiv()));
+		}
+		
+		//검색어
+		if(null !=inVO && null == inVO.getSearchWord()) {  
+			inVO.setSearchWord(StringUtil.nvl(inVO.getSearchWord()));
+		}
+		
+		//카테고리ID
+		if(null !=inVO && null == inVO.getCateId()) {  
+			inVO.setCateId(StringUtil.nvl(inVO.getCateId()));
+		}
+		
+		LOG.debug("┌-------------------------------------┐");
+		LOG.debug("|  inVO = " + inVO);
+		
+		List<ProductVO> list = prodService.doRetrieve(inVO);
+		
+		jsonString = new Gson().toJson(list);
+		LOG.debug("|  jsonString = " + jsonString);
+		LOG.debug("└-------------------------------------┘");		
+		
+		return jsonString;
+	}
 	
 	
 	// 제품 목록 화면
