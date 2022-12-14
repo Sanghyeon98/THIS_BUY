@@ -378,9 +378,9 @@ ol, ul {
         let url    = "/board/doSave.do";
         let async  = true;
         let params = {
-            seq : 4005,
-            gubun : 20,
-            gubunQuestion : 10,
+        		seq : 400,
+        		gubun : 20,
+        		gubunQuestion : 10,
             title : $("#title").val(),
             contents : $("#contents").val(),
             regDt : "ddd",
@@ -444,7 +444,7 @@ ol, ul {
      <div class="css-5 ">
       <div class="css-6 ">
        <div class="css-7 ">
-         <h2 class="css-8 ">공지사항</h2>
+         <h2 class="css-8 ">1:1문의</h2>
        </div>
       </div>
       <form>

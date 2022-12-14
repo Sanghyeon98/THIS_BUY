@@ -36,25 +36,7 @@ public class BoardController {
 	@RequestMapping(value = "/boardView.do")
 	public String boardView(Model model, BoardVO inVO) throws SQLException {
 		String VIEW_NAME = "board/board_list";
-		
-//		//10공지,20 자유게시판
-//				if(null !=inVO && null == inVO.getGubun()+"") {
-//					inVO.setDiv(StringUtil.nvl(inVO.getGubun(),"10"));
-//				} 
-		
-		LOG.debug("┌──────────────────────────────┐");
-		LOG.debug("│boardView ");
-		LOG.debug("└──────────────────────────────┘");
-		List<BoardVO> list = boardService.getALL(inVO);
 
-				model.addAttribute("list", list);
-		return VIEW_NAME;
-	}
-
-	// board화면 보여주기
-	@RequestMapping(value = "/questionView.do")
-	public String questionView(Model model, BoardVO inVO) throws SQLException {
-		String VIEW_NAME = "board/board_question";
 		LOG.debug("┌──────────────────────────────┐");
 		LOG.debug("│boardView ");
 		LOG.debug("└──────────────────────────────┘");
@@ -63,11 +45,36 @@ public class BoardController {
 		model.addAttribute("list", list);
 		return VIEW_NAME;
 	}
+
+//	// 등록화면보여주기
+//	@RequestMapping(value = "/questionView.do")
+//	public String questionView(Model model, BoardVO inVO) throws SQLException {
+//		String VIEW_NAME = "board/board_question";
+//		LOG.debug("┌──────────────────────────────┐");
+//		LOG.debug("│boardView ");
+//		LOG.debug("└──────────────────────────────┘");
+//		List<BoardVO> list = boardService.getALL(inVO);
+//
+//		model.addAttribute("list", list);
+//		return VIEW_NAME;
+//	}
+
 	
-	// board화면 보여주기
-		@RequestMapping(value = "/questionreq.do")
-		public String questionreq(Model model, BoardVO inVO) throws SQLException {
-			String VIEW_NAME = "board/board_Reg";
+	// board화면 등록화면보여주기
+	@RequestMapping(value = "/questionReg.do",method = RequestMethod.GET)
+	public String questionReg(Model model, BoardVO inVO) throws SQLException {
+		String VIEW_NAME = "board/question_reg";
+		LOG.debug("┌──────────────────────────────┐");
+		LOG.debug("│boardView ");
+		LOG.debug("└──────────────────────────────┘");
+
+		return VIEW_NAME;
+	}
+	
+	// board화면 등록화면보여주기
+		@RequestMapping(value = "/boardReg.do",method = RequestMethod.GET)
+		public String boardReg(Model model, BoardVO inVO) throws SQLException {
+			String VIEW_NAME = "board/board_reg";
 			LOG.debug("┌──────────────────────────────┐");
 			LOG.debug("│boardView ");
 			LOG.debug("└──────────────────────────────┘");

@@ -301,14 +301,24 @@ ol, ul {
 <title>목록</title>
 <script >
   $(document).ready(function(){
-  
+	  
+	 //등록화면으로 이동
+      $("#boardReg").on("click",function(){
+        
+        console.log('moveTomoveToRegBoardReg');
+        
+        window.location.href = "${CP}/board/boardReg.do"
+        
+      //moveToReg
+      });
+	  
 	  
 	  //등록화면으로 이동
-	    $("#moveToReg").on("click",function(){
+	    $("#questionReg").on("click",function(){
 	      
 	      console.log('moveToReg');
 	      
-	      window.location.href = "${CP}/board/questionreq.do";
+	      window.location.href = "${CP}/board/questionReg.do"
 	      
 	    //moveToReg
 	    });
@@ -330,8 +340,8 @@ ol, ul {
      <div class="css-2 ">
      <div class="css-3 ">고객센터</div>
      <ul class="css-4 ">
-     <li class="css-0 "><a class=" css-20 " href="${CP}/board/boardView.do">공지사항</a></li>
-     <li class="css-0 "><a class=" css-20 " href="${CP}/board/questionView.do">1:1 문의</a></li>
+     <li class="css-0 "><a class=" css-20 " href="${CP}/board/boardView.do?gubun=10">공지사항</a></li>
+     <li class="css-0 "><a class=" css-20 " href="${CP}/board/boardView.do?gubun=20">1:1 문의</a></li>
      </ul>
    </div>
     
@@ -339,42 +349,59 @@ ol, ul {
      <div class="css-5 ">
       <div class="css-6 ">
        <div class="css-7 ">
-         <h2 class="css-8 ">공지사항</h2>
+         <h2 class="css-8 ">${title}</h2>
        </div>
       </div>
         <div class="css-10 ">
          <div width="50" class="css-11">번호</div>
          <div class="css-12 ">제목</div>
-         <div width="100" class="css-13">작성자</div>
-         <div width="100" class="css-13 ">작성일</div>
+         <div width="100" class="css-13">${gubun1}</div>
+         <div width="100" class="css-13 ">${gubun2}</div>
         </div>
      <c:choose>
         <c:when test="${list.size()>0 }">
           <c:forEach var="vo" items="${list }">
-           <ul class="css-14 ">
-            <li><a href="#">
-              <div class="css-15">
-              <div class="css-16 "><c:out value="${vo.seq }"></c:out></div>
-              <div class="css-17 "><c:out value="${vo.title }"></c:out></div>
-              <div class="css-18 "><c:out value="${vo.regId }"></c:out></div>
-              <div class="css-19 "><c:out value="${vo.regDt }"></c:out></div>
-            </div></a></li> </ul>
+           <c:choose>
+            <c:when test="${vo.gubun == 10 }"> 
+             <ul class="css-14 ">
+              <li><a href="#">
+                <div class="css-15"> <!-- 공지사항  -->
+                <div class="css-16 "><c:out value="${vo.seq }"></c:out></div>
+                <div class="css-17 "><c:out value="${vo.title }"></c:out></div>
+                <div class="css-18 "><c:out value="${vo.regId }"></c:out></div>
+                <div class="css-19 "><c:out value="${vo.regDt }"></c:out></div>
+               </div></a></li> </ul>
+             </c:when>
+            <c:otherwise>
+              <ul class="css-14 ">
+               <li><a href="#">
+                <div class="css-15">  <!-- 1:1문의  -->
+                <div class="css-16 "><c:out value="${vo.seq }"></c:out></div>
+                <div class="css-17 "><c:out value="${vo.title }"></c:out></div>
+                <div class="css-18 "><c:out value="${vo.regDt }"></c:out></div>
+                <div class="css-19 "><c:out value="${vo.answerCheck }"></c:out></div>
+                </div></a></li> </ul>
+            </c:otherwise>
+           </c:choose>
           </c:forEach>
-        </c:when>
+        </c:when>    
         <c:otherwise>
           <div>
-            <div class="text-center col-sm-12 col-dm-12 col-lg-12" colspan="99">
+            <div>
              No data found
             </div>
           </div>
         </c:otherwise>
       </c:choose> 
       
-     <div >
-      <button class="css-Button" type="button" width="120" height="44" radius="3" id="moveToReg"> 등록  </button>
-     </div>
- 
+   
+        <div >
+            <button class="css-Button" type="button" width="120" height="44" radius="3" id="boardReg"> 등록  </button>
+       </div>
 
+        <div>
+            <button class="css-Button" type="button" width="120" height="44" radius="3" id="questionReg"> 문의하기 </button>
+        </div>
     
     <!-- ----------------------------------페이징  -->
         <div class="text-center col-sm-12 col-dm-12 col-lg-12">
