@@ -37,7 +37,7 @@ public class MemberServiceImpl implements MemberService {
 		flag = memberDao.passCheck(inVO);
 		if(1 != flag) {
 			LOG.debug("┌-------------------------------------------┐");
-			LOG.debug("|비번 불일치 !");
+			LOG.debug("|비번 불일치 !                                   ");
 			LOG.debug("└-------------------------------------------┘");					
 			return 20;
 		}
