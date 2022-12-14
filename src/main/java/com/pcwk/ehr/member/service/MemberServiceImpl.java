@@ -16,22 +16,13 @@ import com.pcwk.ehr.member.dao.MemberDaoImpl;
 import com.pcwk.ehr.member.dao.Memberdao;
 import com.pcwk.ehr.member.domain.MemberVO;
 
-//@Service("memberService")
+@Service("MemberService")
 public class MemberServiceImpl implements MemberService {
 
 	final Logger LOG = LogManager.getLogger(getClass());
 	@Autowired
 	private Memberdao memberDao;
 	
-	@Resource(name = "dummyMailSender")
-	private MailSender mailSender;
-	
-	public MemberServiceImpl() {}
-	
-	public void setMailSender(MailSender mailSender) {
-		this.mailSender = mailSender;
-	}
-
 	
 	@Override
 	public int idPassCheck(MemberVO inVO) throws SQLException {

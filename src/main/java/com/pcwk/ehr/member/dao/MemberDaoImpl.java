@@ -166,8 +166,16 @@ final Logger LOG = LogManager.getFormatterLogger(getClass());
 
 	@Override
 	public int passCheck(MemberVO inVO) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		int cnt = 0;
+		String statement = NAMESPACE+DOT+"passCheck";
+		LOG.debug("┌--------------------------------┐");
+		LOG.debug("|param:"+inVO );        
+		LOG.debug("|statement:"+statement );		
+		
+		cnt = sqlSessionTemplate.selectOne(statement, inVO);
+		LOG.debug("|cnt:"+cnt );
+		LOG.debug("└--------------------------------┘");		
+		return cnt;
 	}
 
 

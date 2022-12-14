@@ -133,7 +133,7 @@ public class JMemberdaoTest {
 		voVO01.setEmail(voVO01.getEmail()+upStr);
 		voVO01.setPhone(voVO01.getPhone()+upStr);
 		voVO01.setAddress(voVO01.getAddress()+upStr);
-		voVO01.setGender(voVO01.getGender()+upInta);
+		voVO01.setGender(voVO01.getGender()-upInta);
 		
 		//5.
 		assertEquals(1, dao.doUpdate(voVO01));
