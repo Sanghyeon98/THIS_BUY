@@ -15,16 +15,17 @@ import com.pcwk.ehr.detail.domain.DetailVO;
 @Service("detailService")
 public class DetailServiceImpl implements DetailService {
 	final Logger LOG = LogManager.getLogger(getClass());
-	
+
 	@Autowired
 	DetailDao detailDao;
-	
-	public DetailServiceImpl() {}
+
+	public DetailServiceImpl() {
+	}
 
 	@Override
 	public int upDeleteAll(List<DetailVO> details) throws SQLException {
 		int cnt = 0;
-	
+
 		return cnt;
 	}
 
