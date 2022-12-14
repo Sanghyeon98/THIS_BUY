@@ -18,67 +18,78 @@ import com.pcwk.ehr.detail.domain.DetailVO;
 @Repository("DetailDao")
 public class DetailDaoImpl implements DetailDao {
 	final Logger LOG = LogManager.getLogger(getClass());
-	
+
 	final String NAMESPACE = "com.pcwk.ehr.detail";
-	final String DOT       = ".";
-	
+	final String DOT = ".";
+
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
-	
-	public DetailDaoImpl() {}
+
+	public DetailDaoImpl() {
+	}
 
 	@Override
 	public int doSave(DetailVO inVO) throws SQLException {
+		LOG.debug("================================");
+		LOG.debug("|  param : " + inVO);
 
-		return 0;
+		String statement = NAMESPACE + DOT + "doSave";
+		LOG.debug("|  statement: " + statement);
+
+		int flag = sqlSessionTemplate.insert(statement, inVO);
+		LOG.debug("|  flag: " + flag);
+		LOG.debug("================================");
+
+		return flag;
+
 	}
 
 	@Override
 	public int doDelete(DetailVO inVO) throws SQLException {
 		LOG.debug("================================");
 		LOG.debug("|  param : " + inVO);
-		
+
 		String statement = NAMESPACE + DOT + "doDelete";
 		LOG.debug("|  statement: " + statement);
-		
+
 		int flag = sqlSessionTemplate.delete(statement, inVO);
 		LOG.debug("|  flag: " + flag);
 		LOG.debug("================================");
-		
+
 		return flag;
 	}
 
 	@Override
 	public int doUpdate(DetailVO inVO) throws SQLException {
 		int flag = 0;
-		
+
 		LOG.debug("================================");
 		LOG.debug("|  param : " + inVO);
-		
+
 		String statement = NAMESPACE + DOT + "doUpdate";
 		LOG.debug("|  statement: " + statement);
-		
+
 		flag = sqlSessionTemplate.update(statement, inVO);
 		LOG.debug("|  flag: " + flag);
 		LOG.debug("================================");
-		
+
 		return flag;
 	}
 
 	@Override
 	public DetailVO doSelectOne(DetailVO inVO) throws SQLException {
 		DetailVO outVO = null;
-		
+
 		String statement = NAMESPACE + DOT + "doSelectOne";
 
 		LOG.debug("================================");
 		LOG.debug("|  param : " + inVO);
 		LOG.debug("|  statement: " + statement);
-		
+
 		outVO = sqlSessionTemplate.selectOne(statement, inVO);
 		LOG.debug("|  outVO : " + outVO);
 		LOG.debug("================================");
-		
+
 		return outVO;
 	}
 
@@ -86,58 +97,55 @@ public class DetailDaoImpl implements DetailDao {
 	public List<DetailVO> doRetrieve(DTO inVO) throws SQLException {
 		SearchVO search = (SearchVO) inVO;
 		List<DetailVO> list = new ArrayList<DetailVO>();
-		
-        String statement = NAMESPACE + DOT + "doRetrieve";
-        LOG.debug("================================");
-		LOG.debug("|  param:" + inVO );        
-		LOG.debug("|  statement:" + statement );  
-		
+
+		String statement = NAMESPACE + DOT + "doRetrieve";
+		LOG.debug("================================");
+		LOG.debug("|  param:" + inVO);
+		LOG.debug("|  statement:" + statement);
+
 		list = sqlSessionTemplate.selectList(statement, search);
-		
-		for(DetailVO vo : list) {
-			LOG.debug("|  vo : " + vo );
+
+		for (DetailVO vo : list) {
+			LOG.debug("|  vo : " + vo);
 		}
 		LOG.debug("================================");
-		
+
 		return list;
 	}
 
 	@Override
 	public int getCount(DetailVO inVO) throws SQLException {
 		int count = 0;
-		
+
 		String statement = NAMESPACE + DOT + "getCount";
 		LOG.debug("================================");
 		LOG.debug("|  param : " + inVO);
 		LOG.debug("|  statement: " + statement);
-		
+
 		count = sqlSessionTemplate.selectOne(statement, inVO);
 		LOG.debug("================================");
-		
+
 		return count;
 	}
 
 	@Override
 	public List<DetailVO> getALL(DetailVO inVO) throws SQLException {
 		List<DetailVO> list = null;
-		
+
 		String statement = NAMESPACE + DOT + "getALL";
 
 		LOG.debug("================================");
 		LOG.debug("|  param : " + inVO);
 		LOG.debug("|  statement: " + statement);
-		
+
 		list = sqlSessionTemplate.selectList(statement, inVO);
-		
-		for(DetailVO vo : list) {
+
+		for (DetailVO vo : list) {
 			LOG.debug("|  vo : " + vo);
 		}
 		LOG.debug("================================");
-		
+
 		return list;
 	}
-
-
-
 
 }

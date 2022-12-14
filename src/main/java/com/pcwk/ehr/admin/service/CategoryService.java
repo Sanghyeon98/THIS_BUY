@@ -68,6 +68,6 @@ public interface CategoryService {
 	 * @return
 	 * @throws SQLException
 	 */
-	List<CategoryVO> getALL(CategoryVO inVO) throws SQLException;
+	List<CategoryVO> getALL() throws SQLException;
 
 }

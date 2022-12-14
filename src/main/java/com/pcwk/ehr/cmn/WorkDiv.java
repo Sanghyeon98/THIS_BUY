@@ -6,6 +6,8 @@ import java.util.List;
 // DAO 공통 인터페이스
 public interface WorkDiv<T> {
 	
+	final String DOT = ".";
+	
 	/**
 	 * 등록
 	 * @param t

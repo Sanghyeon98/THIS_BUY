@@ -12,6 +12,9 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+  <meta name="_csrf" th:content="${_csrf.token}" />
+  <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+  
   <!-- 뷰포트(반응형 웹)  -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,29 +26,99 @@
   <link rel="stylesheet" href="${CP_RES}/css/admin_product_mng.css">
   <!-- jQuery -->
   <script src="${CP_RES}/js/jquery-1.12.4.js"></script>
-	<!-- callAjax -->
-	<script src="${CP_RES}/js/callAjax.js"></script>
-	<!-- String, Number, Date Util -->
-	<script src="${CP_RES}/js/eUtil.js"></script>
-	<!-- paging -->
-	<script src="${CP_RES}/js/jquery.bootpag.js"></script>
-	<!-- bootstrap js -->
-	<script src="${CP_RES}/js/bootstrap.min.js"></script>
-	
+    <!-- callAjax -->
+    <script src="${CP_RES}/js/callAjax.js"></script>
+    <!-- String, Number, Date Util -->
+    <script src="${CP_RES}/js/eUtil.js"></script>
+    <!-- paging -->
+    <script src="${CP_RES}/js/jquery.bootpag.js"></script>
+    <!-- bootstrap js -->
+    <script src="${CP_RES}/js/bootstrap.min.js"></script>
+    
   <title>제품 목록</title>
   
   <!-- javascript -->
   <script>
+    
     $(document).ready(function(){
     	
-    	// '상품 등록' 버튼 클릭 시, 상품등록 페이지로 이동
-    	$("#prod_reg_bt").on("click", function() {
-    		console.log("#prod_reg_bt");
+    	// 검색
+    	$("#doRetrieve").on("click", function() {
+    		console.log("doRetrieve");
     		
-    		window.location.href = "${CP}/product/moveToReg.do";
-    	});
+    		let method = "GET";
+    		let url = "/product/doRetrieve.do";
+    		let async = true;
+    		
+    		let cate2val = $(".cate02List").val();   // 2차 분류 value
+    		console.log("cate2val : " + cate2val);
+    		
+    		let cateId = "";
+    		
+    		if('none' == cate2val) {  // 2차 분류가 선택되지 않으면
+    			cateId = $(".cate01List").val(); // 1차 분류로 검색
+    		} else {
+    			cateId = $(".cate02List").val(); // 2차 분류로 검색 
+    		}
+    		console.log("cateId : " + cateId);
+    		
+    		let params = {
+    			searchDiv : cate2val,
+    			searchWord : $('#searchWord').val(),
+    			cateId : cateId
+    		};
+    		
+    		
+    		PClass.callAjax(method, url, async, params, function(data) {
+    			console.log(data);
+    		});
+    		
+    	});  // 검색 -------------------------------------------------------------
+
+        // 1차 분류 변경 시, 2차 분류 표출
+        $(".cate01List").on("change", function() {
+        	console.log(".cate01List");
+        	console.log("$(this).val() : " + $(this).val());
+        	
+        	// 선택된 1차 분류 value 값
+        	let currentCateNo = $(this).val();
+        	
+        	$(".cate02List").empty();
+        	
+        	let cate02ListJson = JSON.parse('${cate02ListJson}');
+        	console.log("cate02ListJson : " + cate02ListJson);
+        	
+        	let htmlData = "";
+        	console.log("htmlData length : " + htmlData.length);
+        	
+        	htmlData += "<option value='none'>==선택==</option>";
+        	
+        	$.each(cate02ListJson, function(index, value) {
+        	    // 2차 분류의 topNo와 현재 선택된 1차 분류의 categoryNo가 같으면 (하위 카테고리이면~!)
+        		if(value.topNo == currentCateNo) {
+        	    	htmlData += "<option value='"+value.categoryNo+"'>" + value.categoryNm + "</option>";
+        	    }
+            });
+        	
+        	/* // 2차 분류에 값이 없으면 '==선택==' 표출
+        	if(htmlData.length == 0) {
+        		htmlData += "<option value='none'>==선택==</option>";
+        	}
+        	 */
+        	$(".cate02List").append(htmlData);
+        });  // 1차 분류 변경 시, 2차 분류 표출 -------------------------------------------
+        
+        
+        // '상품 등록' 버튼 클릭 시, 상품등록 페이지로 이동
+        $("#prod_reg_bt").on("click", function() {
+            console.log("#prod_reg_bt");
+            
+            window.location.href = "${CP}/product/moveToReg.do";
+        });  // '상품 등록' 버튼 클릭 시, 상품등록 페이지로 이동-------------------------------
       
     });
+    
+ 
   </script>
 </head>
 
@@ -74,17 +147,30 @@
               <tr>
                 <td class="table_left"><label>분류선택</label></td>
                 <td>
-                  <select>
-                    <option>1차 분류</option>
+                  <select class="cate01List">
+                    <c:forEach var="vo" items="${cate01List}">
+                        <option value='<c:out value="${vo.categoryNo}"/>'>
+                            <c:out value="${vo.categoryNm}"/>
+                        </option>
+                    </c:forEach>
                   </select>
-                  <select>
-                    <option>2차 분류</option>
-                  </select>
+                  <select class="cate02List">
+                    <option value='none'>==선택==</option>
+                    <c:forEach var="vo" items="${cate02List}">
+	                    <c:choose>
+	                        <c:when test="${vo.topNo == 1 }">
+		                        <option value='<c:out value="${vo.categoryNo}"/>'>
+		                            <c:out value="${vo.categoryNm}"/>
+			                    </option>
+	                        </c:when>
+	                    </c:choose>
+                    </c:forEach>
+                  </select> 
                 </td>
               </tr>
               <tr>
                 <td class="table_left"><label>검색어</label></td>
-                <td><input type="text" placeholder="상품명"></td>
+                <td><input type="text" name="searchWord" id="searchWord" placeholder="상품명을 입력하세요."></td>
               </tr>
             </table>
             <div class="reset">
@@ -93,18 +179,18 @@
           </form>
         </div>
         <div class="search_bt_area">
-          <button>검색</button>
+          <button id="doRetrieve">검색</button>
         </div>
         <div class="search_option">
-          <select id="search_option" name="search_option">
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="30">30</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
+          <select id="pageSize" name="pageSize">
+            <c:forEach var="vo" items="${PAGE_SIZE }">
+                <option value='<c:out value="${vo.detCode}"/>'>
+                    <c:out value="${vo.detName }"></c:out>
+                </option>
+            </c:forEach>
           </select>
         </div>
-        
+
         <!-- 테이블 목록 -->
         <div class="search_list">
           <form action="#">
@@ -129,7 +215,7 @@
                         <td class="td_center"><c:out value="${vo.num }"/></td>
                         <td><c:out value="${vo.name }"/></td>
                         <td class="td_center"><c:out value="${vo.price }"/></td>
-                        <td class="td_center"><c:out value="${vo.weight }"/></td>
+                        <td class="td_center"><c:out value="${vo.quantity }"/></td>
                         <td class="td_center"><c:out value="${vo.modDt }"/></td>
                         <td style="display: none;"><c:out value="${vo.itemNo }"/></td>
                       </tr>
@@ -137,10 +223,10 @@
                   </c:when>
                   <c:otherwise>
                     <tr>
-				              <td class="text-center col-sm-12 col-md-12 col-lg-12" colspan="99">
-				                  No data found
-				              </td>
-				            </tr>
+                      <td class="text-center col-sm-12 col-md-12 col-lg-12" colspan="99">
+                          No data found
+                      </td>
+                    </tr>
                   </c:otherwise>
                 </c:choose>
 

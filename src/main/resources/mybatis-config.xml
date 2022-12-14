@@ -9,6 +9,7 @@
     <typeAlias type="com.pcwk.ehr.admin.domain.CategoryVO" alias="CategoryVO"/>
     <typeAlias type="com.pcwk.ehr.admin.domain.ProductVO" alias="ProductVO"/>
     <typeAlias type="com.pcwk.ehr.cmn.SearchVO" alias="SearchVO"/>
+    <typeAlias type="com.pcwk.ehr.code.domain.CodeVO" alias="CodeVO"/>
     <typeAlias type="com.pcwk.ehr.board.domain.AnswerVO" alias="AnswerVO"/>
     <typeAlias type="com.pcwk.ehr.board.domain.BoardVO" alias="BoardVO"/>
     <typeAlias type="com.pcwk.ehr.board.domain.BoardSearchVO" alias="BoardSearchVO"/>
@@ -17,5 +18,6 @@
     <typeAlias type="com.pcwk.ehr.order.domain.OrderVO" alias="OrderVO"/>
     <typeAlias type="com.pcwk.ehr.member.domain.MemberVO" alias="MemberVO"/>
     <typeAlias type="com.pcwk.ehr.cart.domain.CartJoinVO" alias="CartJoinVO"/>
+    <typeAlias type="com.pcwk.ehr.detail.domain.DetailVO" alias="DetailVO"/>
   </typeAliases>
 </configuration>
