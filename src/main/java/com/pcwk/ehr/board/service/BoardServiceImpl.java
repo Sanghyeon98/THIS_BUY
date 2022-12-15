@@ -43,7 +43,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardVO> doRetrive(DTO inVO) throws SQLException {
+	public List<BoardVO> doRetrieve(DTO inVO) throws SQLException {
 		return boardDao.doRetrieve(inVO);
 	}
 

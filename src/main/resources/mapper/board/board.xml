@@ -38,7 +38,7 @@
   <select id="doRetrieve" resultType="BoardVO" parameterType="BoardSearchVO">
       SELECT A.*,B.*
       FROM(
-          SELECT 
+          SELECT TT1.rnum as num,
                  TT1.seq as seq,
                  TT1.gubun as "gubun",
                  TT1.gubun_question as "gubunQuestion",
@@ -50,12 +50,11 @@
                         ,TO_CHAR(TT1.reg_dt,'YYYY-MM-DD')) as regDt,
                 TT1.reg_id
           FROM (
-              SELECT ROWNUM AS RNUM, T1.*
+              SELECT ROWNUM AS rnum, T1.*
               FROM (
                   SELECT *
                   FROM board
                  WHERE gubun = #{gubun}
-                  AND  gubun_question = #{gubunQuestion}
                   ORDER BY reg_dt DESC
               ) T1
               -- 종료 번호
@@ -70,7 +69,6 @@
           FROM board
           --WHERE 조건
          WHERE gubun = #{gubun}
-          AND  gubun_question = #{gubunQuestion}
       ) B
    </select>
   
@@ -109,7 +107,7 @@
         reg_id,
         answer_check
     ) VALUES (
-        #{seq},
+        seq.NEXTVAL,
         #{gubun},
         #{gubunQuestion},
         #{title},

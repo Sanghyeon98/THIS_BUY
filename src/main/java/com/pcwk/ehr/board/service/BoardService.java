@@ -49,7 +49,7 @@ public interface BoardService {
 	 * @return List<DTO>
 	 * @throws SQLException
 	 */
-	List<BoardVO> doRetrive(DTO inVO)throws SQLException;
+	List<BoardVO> doRetrieve(DTO inVO)throws SQLException;
 	
 
 	/**
