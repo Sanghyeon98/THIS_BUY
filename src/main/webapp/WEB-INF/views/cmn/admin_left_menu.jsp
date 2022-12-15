@@ -19,18 +19,6 @@
   <meta name="keywords" content="html5, css3, javascipt6, jQuery">
   <!-- favicon -->
   <link rel="shortcut icon" type="images/x-icon" href="/PC_HTML/favicon.ico">
-  <!-- jquery ui -->
-  <link rel="stylesheet" href="${CP_RES}/css/admin_product_mng.css">
-  <!-- jQuery -->
-  <script src="${CP_RES}/js/jquery-1.12.4.js"></script>
-  <!-- callAjax -->
-  <script src="${CP_RES}/js/callAjax.js"></script>
-  <!-- String, Number, Date Util -->
-  <script src="${CP_RES}/js/eUtil.js"></script>
-  <!-- paging -->
-  <script src="${CP_RES}/js/jquery.bootpag.js"></script>
-  <!-- bootstrap js -->
-  <script src="${CP_RES}/js/bootstrap.min.js"></script>
   
   <title>Insert title here</title>
   

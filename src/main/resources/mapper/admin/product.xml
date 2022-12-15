@@ -6,16 +6,24 @@
 <mapper namespace="com.pcwk.ehr.product">
 
   <sql id="searchCondition">
-     <where>
-        <choose>
-            <when test="searchDiv == 'none' and '' != searchDiv">
-              category_no = #{cateId}
-            </when>
-            <when test="searchDiv == '20' and '' != searchDiv">
-              name LIKE #{searchWord} || '%'
-            </when>
-        </choose>
-     </where>
+	  <choose>
+	      <when test="searchDiv == 'none' and '' != searchDiv">
+	        and c.top_no = #{cateId}
+	        <choose>
+	          <when test="'' != searchWord ">
+	            and p.name LIKE '%' || #{searchWord} || '%'
+	          </when>
+	        </choose>
+	      </when>
+	      <when test="searchDiv != 'none' and '' != searchDiv">
+	        and p.category_no = #{cateId}
+	        <choose>
+	          <when test="'' != searchWord ">
+	            and p.name LIKE '%' || #{searchWord} || '%'
+	          </when>
+	        </choose>
+	      </when>
+	  </choose>
   </sql>
     
   <select id="doRetrieve" resultType="ProductVO" parameterType="SearchVO">
@@ -45,9 +53,9 @@
           FROM (
             SELECT ROWNUM AS RNUM, T1.*
             FROM (
-                SELECT *
-                FROM product
-                -- WHERE 조건 (검색구분:''(전체), 10(category_nm), 20(status), 검색어)
+                SELECT p.*
+                FROM product p, category c
+                WHERE p.category_no = c.category_no  -- 조인 조건
                <include refid="searchCondition"/>
                 ORDER BY item_no
             ) T1
@@ -60,8 +68,8 @@
       CROSS JOIN
       (
           SELECT COUNT(*) totalCnt
-          FROM product
-          --WHERE 조건
+          FROM product p, category c
+          WHERE p.category_no = c.category_no   -- 조인 조건
           <include refid="searchCondition"/>
       ) B
   </select>
@@ -173,8 +181,8 @@
 		    #{discount},
 		    #{finalPrice},
 		    #{sales},
-		    SYSDATE,
-		    SYSDATE
+		    LOCALTIMESTAMP,
+		    LOCALTIMESTAMP
 	  )
   </insert>
 

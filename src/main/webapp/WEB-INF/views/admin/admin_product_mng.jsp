@@ -12,9 +12,6 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta name="_csrf" th:content="${_csrf.token}" />
-  <meta name="_csrf_header" th:content="${_csrf.headerName}" />
-  
   <!-- 뷰포트(반응형 웹)  -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,6 +55,7 @@
     		if('none' == cate2val) {  // 2차 분류가 선택되지 않으면
     			cateId = $(".cate01List").val(); // 1차 분류로 검색
     		} else {
+    			console.log("cate2val != none >> " + cate2val);
     			cateId = $(".cate02List").val(); // 2차 분류로 검색 
     		}
     		console.log("cateId : " + cateId);
@@ -71,9 +69,37 @@
     		
     		PClass.callAjax(method, url, async, params, function(data) {
     			console.log(data);
-    		});
-    		
-    	});  // 검색 -------------------------------------------------------------
+    			let parsedJson = JSON.parse(data);
+    			let htmlData = "";
+    			
+    			$("#productTable>tbody").empty();
+    			
+    			if (null != parsedJson && parsedJson.length > 0) {
+    				$.each(parsedJson, function(index, value) {
+	    			    htmlData += "<tr>";
+	    			    htmlData += "  <td class='td_center'><input type='checkbox'></td>";
+	    			    htmlData += "  <td class='td_center'>" + value.num + "</td>";
+	    			    htmlData += "  <td>" + value.name + "</td>";
+	    			    htmlData += "  <td class='td_center'>" + value.price + "</td>";
+	    			    htmlData += "  <td class='td_center'>" + value.quantity + "</td>";
+	    			    htmlData += "  <td class='td_center'>" + value.modDt + "</td>";
+	    			    htmlData += "  <td style='display: none;'>" + value.itemNo + "</td>";
+	    			    htmlData += "</tr>";
+    				});
+    			} else {
+		          htmlData += "<tr>";
+		          htmlData += "  <td class='td_center' colspan='99'>";
+		          htmlData += "   No data found ";
+		          htmlData += "  </td>";
+		          htmlData += "</tr>";
+    			}
+    			
+    			// 데이터 출력
+    			$("#productTable>tbody").append(htmlData);
+    			
+    			
+    		});  // PClass.callAjax END 
+    	});  // 검색 --------------------------------------------------------------
 
         // 1차 분류 변경 시, 2차 분류 표출
         $(".cate01List").on("change", function() {
@@ -106,7 +132,7 @@
         	}
         	 */
         	$(".cate02List").append(htmlData);
-        });  // 1차 분류 변경 시, 2차 분류 표출 -------------------------------------------
+        });  // 1차 분류 변경 시, 2차 분류 표출 -----------------------------------------
         
         
         // '상품 등록' 버튼 클릭 시, 상품등록 페이지로 이동
@@ -114,7 +140,7 @@
             console.log("#prod_reg_bt");
             
             window.location.href = "${CP}/product/moveToReg.do";
-        });  // '상품 등록' 버튼 클릭 시, 상품등록 페이지로 이동-------------------------------
+        });  // '상품 등록' 버튼 클릭 시, 상품등록 페이지로 이동-----------------------------
       
     });
     
