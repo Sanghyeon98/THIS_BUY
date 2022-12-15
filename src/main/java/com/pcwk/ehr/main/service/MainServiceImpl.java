@@ -14,7 +14,6 @@ import com.pcwk.ehr.main.domain.MainJoinVO;
 
 @Service("mainService")
 public class MainServiceImpl implements MainService {
-	
 	final Logger LOG = LogManager.getLogger(getClass());
 	
 	@Autowired

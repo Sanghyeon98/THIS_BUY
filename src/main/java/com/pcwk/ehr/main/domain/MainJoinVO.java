@@ -11,7 +11,6 @@ public class MainJoinVO extends DTO {
 	private int discount;		// 할인율_default 0
 	private String detail;		// 상품설명
 	
-
 	public MainJoinVO(String categoryNm, int status, String name, int imageNo, int price, int discount, String detail) {
 		super();
 		this.categoryNm = categoryNm;
