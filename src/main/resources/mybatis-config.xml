@@ -19,5 +19,6 @@
     <typeAlias type="com.pcwk.ehr.member.domain.MemberVO" alias="MemberVO"/>
     <typeAlias type="com.pcwk.ehr.cart.domain.CartJoinVO" alias="CartJoinVO"/>
     <typeAlias type="com.pcwk.ehr.detail.domain.DetailVO" alias="DetailVO"/>
+    <typeAlias type="com.pcwk.ehr.main.domain.MainJoinVO" alias="MainJoinVO"/>
   </typeAliases>
 </configuration>
