@@ -30,16 +30,16 @@ public class MemberController {
 	@Autowired
 	MemberService memberService;
 
-	final String VIEW_NAME = "member/singup";
+	final String VIEW_NAME = "member/signup";
 
 	public MemberController() {
 	}
 
 	// 화면
-	@RequestMapping(value = "/singup.do")
+	@RequestMapping(value = "/signup.do")
 	public String singup() {
 		LOG.debug("┌=============================┐");
-		LOG.debug("|singup=                        |");
+		LOG.debug("|signup=                        |");
 		LOG.debug("└=============================┘");
 
 		return VIEW_NAME;
