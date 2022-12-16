@@ -46,9 +46,9 @@ public class JOrderTest {
 	@Before
 	public void setUp() throws Exception {
 		
-		orderVO1 = new OrderVO(01,"AB",1000,"아무개","01011111111","서울시","없음","없음","20221111");
-		orderVO2 = new OrderVO(01,"AB",1000,"아무개","01011111111","서울시","없음","없음","20221111");
-		orderVO3 = new OrderVO(01,"AB",1000,"아무개","01011111111","서울시","없음","없음","20221111");
+		orderVO1 = new OrderVO(01,90,"AB",10,1000,50,"아무개","01011111111","서울시","없음","없음","20221111");
+		orderVO2 = new OrderVO(01,90,"AB",10,1000,51,"아무개","01011111111","서울시","없음","없음","20221111");
+		orderVO3 = new OrderVO(01,90,"AB",10,1000,52,"아무개","01011111111","서울시","없음","없음","20221111");
 		
 		searchVO = new SearchVO(10, 1, "", "");
 	}
