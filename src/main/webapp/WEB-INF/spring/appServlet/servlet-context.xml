@@ -13,22 +13,7 @@
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
-
-  <!-- 스케줄러 -->
-  <task:scheduler id="jobScheduler" pool-size="5"/>
-  <task:annotation-driven scheduler="jobScheduler"/>
-  
-  <!-- cron 세팅 
-      ref는 @Component, @Controller, @service, @Repository
-      rec에는 came; case로 입력
-      method: 스케줄러롤 실행할 메서드
-      cron: cron표현식으로 지정
-  -->
-  <task:scheduled-tasks>
-  <!-- 10초에 1번  -->
-  <task:scheduled ref="cronTest" method="test" cron="0/10 * * * ?"/>
-  </task:scheduled-tasks>
- 
+	 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 
