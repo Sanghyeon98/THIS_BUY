@@ -1,24 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <c:set var="CP" value="${pageContext.request.contextPath}" /> <!-- ContextPath -->
-<c:set var="resources" value="/resources/css"/>
-<c:set var="CP_RES" value="${CP}${resources}"/>
-    
+<c:set var="RES" value="/resources"/>
+<c:set var="CP_RES" value="${CP}${RES}"/>
+
 <fmt:bundle basename="message">
-<%@ include file="/WEB-INF/views/cmn/cache.jsp" %>   
+<%@ include file="/WEB-INF/views/cmn/cache.jsp" %> 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="description" content="pcwk html" >
-<meta name="keywords" content="html5, css3, javascipt6, jQuery">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="pcwk html" >
+  <meta name="keywords" content="html5, css3, javascipt6, jQuery">
+  <meta charset="UTF-8">
+  <!-- favicon -->
+  <link rel="shortcut icon" type="images/x-icon" href="/PC_HTML/favicon.ico">
+  <!-- jQuery -->
+<script src="${CP_RES}/js/jquery-1.12.4.js"></script>
+<!-- jQuery -->
+<script src="${CP_RES}/js/jquery-1.12.4.js"></script>
+<!-- callAjax -->
+<script src="${CP_RES}/js/callAjax.js"></script>
+<!-- String,number -->
+<script src="${CP_RES}/js/eUtil.js"></script>
+
+<!-- paging -->
+<script src="${CP_RES}/js/jquery.bootpag.js"></script>
+<!-- bootstrap js -->
+<script src="${CP_RES}/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
-<!-- favicon -->
-<link rel="shortcut icon" type="image/x-icon" href="/PC_HTML/favicon.ico">
-<!-- jquery ui -->
-<link rel="stylesheet" href="/PC_HTML/assets/css/jquery-ui.css">
 <style>       
 
 
@@ -96,14 +109,16 @@ width: 30px;
     }
 </style>
 <title>제목</title>
-  <script src="/PC_HTML/assets/js/jquery-3.6.1.js"></script>
-  <script src="/PC_HTML/assets/js/jquery-ui.js"></script>
+
   <!-- javascript -->
   <script>
     $(document).ready(function(){
     	console.log('Hello, world!');
     	
-    	$("#dodelete").on("click")
+    	$("#dodelete").on("click",function(e){
+    		console.log("dodelete");
+        });
+    	
     });  
   
   </script>
@@ -120,7 +135,7 @@ width: 30px;
                 <thead>
                     <tr class="checkBox">
                         <td colspan="3"><input type="checkbox"> <button class="cart__list__optionbtn">전체선택</button>
-                            <button class="cart__list__optionbtn">선택삭제</button>
+                            <button class="cart__list__optionbtn" id="dodelete">선택삭제</button>
                         </td>
                         <td></td>
                         <td></td>
