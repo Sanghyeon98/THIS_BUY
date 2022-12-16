@@ -24,9 +24,12 @@
       SELECT A.*,B.*
       FROM(
           SELECT 
-              TT1.order_no AS orderNo,
+              TT1.order_no AS orderNO,
+              TT1.same_order AS sameOrder,
               TT1.member_id AS memberId,
+              TT1.item_no AS itemNO,
               TT1.price,
+              TT1.payment_id AS paymentId,
               TT1.name,
               TT1.phone,
               TT1.address,
@@ -34,7 +37,7 @@
               TT1.order_state AS orderState,
               TO_CHAR(TT1.order_date, 'YYYY-MM-DD HH24:MI:SS') AS orderDate,
              
-              DECODE( TO_CHAR(SYSDATE,'YYYY-MM-DD'),  TO_CHAR(TT1.order_date,'YYYY-MM-DD')
+              DECODE( TO_CHAR(LOCALTIMESTAMP,'YYYY-MM-DD'),  TO_CHAR(TT1.order_date,'YYYY-MM-DD')
                               ,TO_CHAR(TT1.order_date,'HH24:MI')
                               ,TO_CHAR(TT1.order_date,'YYYY-MM-DD')) as orderDate,   
           FROM (
@@ -65,9 +68,12 @@
   <select id="doSelectOne" parameterType="OrderVO" resultType="OrderVO">
       <![CDATA[
       SELECT
-        order_no AS orderNo,
+        order_no AS orderNO,
+        same_order AS sameOrder, 
         member_id AS memberId,
+        item_no AS itemNO,
         price,
+        payment_id AS paymentId,
         name,
         phone,
         address,
@@ -83,7 +89,7 @@
   <select id="getCount" parameterType="OrderVO" resultType="int">
     SELECT COUNT(*) cnt
     FROM order
-    WHERE order_no LIKE #{order_no} ||'%'
+    WHERE order_no LIKE #{orderNO} ||'%'
   </select>
 
 
@@ -91,9 +97,12 @@
 <!-- resultType이 OrderVO인데 호출하는 쪽에서 return타입이 LIST이면 LIST형태로 ProductVO를 넘겨줌 -->
   <select id="getALL" parameterType="OrderVO" resultType="orderVO">
        SELECT
-        order_no AS orderNo,
+        order_no AS orderNO,
+        same_order AS sameOrder,
         member_id AS memberId,
+        item_no AS itemNO,
         price,
+        payment_id AS paymentId,
         name,
         phone,
         address,
@@ -102,7 +111,7 @@
         TO_CHAR(order_date, 'YYYY-MM-DD HH24:MI:SS') AS orderDate
      
       FROM ordering
-      WHERE order_no = #{orderNo}
+      WHERE order_no = #{orderNO}
       ORDER BY order_no
  </select>
 
@@ -113,16 +122,19 @@
   UPDATE ordering
   SET
      
-     member_id   = #{member_id},
+     same_order  = #{sameOrder},
+     member_id   = #{memberId},
+     item_no     = #{itemNO},
      price       = #{price},
+     payment_id  = #{paymentId},
      name        = #{name},
      phone       = #{phone},
      address     = #{address},
      request     = #{request},
-     order_state = #{order_state},
-     order_date  = #{order_date}
+     order_state = #{orderState},
+     order_date  = LOCALTIMESTAMP
   WHERE
-        order_no = :v0
+        order_no = :#{orderNO}
     ]]>
     </update>
     
@@ -130,8 +142,11 @@
 <select id="doSave" parameterType="OrderVO">
 INSERT INTO ordering (
             order_no,
+            same_order,
             member_id,
+            item_no,
             price,
+            payment_id,
             name,
             phone,
             address,
@@ -139,15 +154,18 @@ INSERT INTO ordering (
             order_state,
             order_date
 ) VALUES (
-    :#{order_no}
-    :#{member_id},
+    :#{orderNO},
+    :#{sameOrder},
+    :#{memberId},
+    :#{itemNO},
     :#{price},
+    :#{paymentId},
     :#{name},
     :#{phone},
     :#{address},
     :#{request},
-    :#{order_state},
-    :#{order_date}
+    :#{orderState},
+    :LOCALTIMESTAMP
 );
 
 </select>
@@ -156,7 +174,7 @@ INSERT INTO ordering (
 <delete id="doDelete" parameterType="OrderVO">
 DELETE FROM ordering
 WHERE
-        order_no = ${orderNO}
+        order_no = #{orderNO}
 
 </delete>
 

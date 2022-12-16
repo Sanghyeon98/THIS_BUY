@@ -26,7 +26,9 @@ public class OrderDaoImpl implements OrderDao {
 
 	public OrderDaoImpl() {
 	}
-
+    
+	
+	
 	@Override
 	public int doDelete(DTO dto) throws SQLException {
 		LOG.debug("┌--------------------------------┐");
