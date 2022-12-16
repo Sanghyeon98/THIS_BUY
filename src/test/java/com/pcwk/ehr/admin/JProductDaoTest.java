@@ -53,7 +53,7 @@ public class JProductDaoTest {
 		
 		search = new ProductVO(3, "라라스윗", 2500, 100, 1, 1, "생산지", 0, "20230131", "상품설명", 0, 2000, 5, "", "");
 		
-		searchVO = new SearchVO(10, 1, "20", "라라스윗", "1", "1");
+		searchVO = new SearchVO(10, 1, "20", "라라스윗", "1", "1","","");
 		
 	}
 	

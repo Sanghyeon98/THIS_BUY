@@ -7,6 +7,15 @@ import com.pcwk.ehr.admin.domain.ProductVO;
 import com.pcwk.ehr.cmn.DTO;
 
 public interface ProductService {
+	
+	/**
+	 * 상품 다건 품절
+	 * @param products
+	 * @return
+	 * @throws SQLException
+	 */
+	int upSoldOutAll(List<ProductVO> products) throws SQLException;
+	
     /**
      * 상품 다건 삭제
      * @param users
