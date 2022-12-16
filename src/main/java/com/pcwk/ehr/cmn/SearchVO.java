@@ -7,6 +7,9 @@ public class SearchVO extends DTO {
 	private String searchDiv;	// 검색 구분
 	private String searchWord;	// 검색어
 	
+	private String cateClass01;	// 카테고리 1차 분류
+	private String cateClass02;	// 카테고리 2차 분류
+	
 	private String cateId;	// 카테고리 ID (제품 검색 시 사용)
 	
 	private String div;		// 구분
@@ -21,12 +24,15 @@ public class SearchVO extends DTO {
 		this.searchWord = searchWord;
 	}
 	
-	public SearchVO(int pageSize, int pageNo, String searchDiv, String searchWord, String cateId, String div) {
+	public SearchVO(int pageSize, int pageNo, String searchDiv, String searchWord, String cateClass01,
+			String cateClass02, String cateId, String div) {
 		super();
 		this.pageSize = pageSize;
 		this.pageNo = pageNo;
 		this.searchDiv = searchDiv;
 		this.searchWord = searchWord;
+		this.cateClass01 = cateClass01;
+		this.cateClass02 = cateClass02;
 		this.cateId = cateId;
 		this.div = div;
 	}
@@ -46,7 +52,6 @@ public class SearchVO extends DTO {
 	public void setPageNo(int pageNo) {
 		this.pageNo = pageNo;
 	}
-
 
 	public String getSearchDiv() {
 		return searchDiv;
@@ -79,11 +84,28 @@ public class SearchVO extends DTO {
 	public void setCateId(String cateId) {
 		this.cateId = cateId;
 	}
+	
+	public String getCateClass01() {
+		return cateClass01;
+	}
+
+	public void setCateClass01(String cateClass01) {
+		this.cateClass01 = cateClass01;
+	}
+
+	public String getCateClass02() {
+		return cateClass02;
+	}
+
+	public void setCateClass02(String cateClass02) {
+		this.cateClass02 = cateClass02;
+	}
 
 	@Override
 	public String toString() {
 		return "SearchVO [pageSize=" + pageSize + ", pageNo=" + pageNo + ", searchDiv=" + searchDiv + ", searchWord="
-				+ searchWord + ", cateId=" + cateId + ", div=" + div + ", toString()=" + super.toString() + "]";
+				+ searchWord + ", cateClass01=" + cateClass01 + ", cateClass02=" + cateClass02 + ", cateId=" + cateId
+				+ ", div=" + div + ", toString()=" + super.toString() + "]";
 	}
 
 }

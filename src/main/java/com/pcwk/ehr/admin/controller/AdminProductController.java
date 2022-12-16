@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import com.pcwk.ehr.admin.domain.ProductVO;
 import com.pcwk.ehr.admin.service.CategoryService;
 import com.pcwk.ehr.admin.service.ProductService;
 import com.pcwk.ehr.board.domain.BoardVO;
+import com.pcwk.ehr.cmn.MessageVO;
 import com.pcwk.ehr.cmn.SearchVO;
 import com.pcwk.ehr.cmn.StringUtil;
 import com.pcwk.ehr.code.domain.CodeVO;
@@ -41,6 +44,97 @@ public class AdminProductController {
 	public AdminProductController() {}
 	
 	
+	@RequestMapping(value = "/upSoldOutAll.do", method = RequestMethod.POST,
+			produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String upSoldOutAll(HttpServletRequest req) throws SQLException {
+		String jsonString = "";
+		
+		String itemNoStr = req.getParameter("itemNo");
+		LOG.debug("┌--------------------------------┐");	
+		LOG.debug("|  itemNoStr = " + itemNoStr);
+		
+		List<ProductVO> list = new ArrayList<ProductVO>();
+		
+		// 다건 품절 처리
+		if(itemNoStr.indexOf(",") != -1) {
+			String[] itemArray = itemNoStr.split(",");
+			
+			for(String itemNo : itemArray) {
+				ProductVO tmpVO = new ProductVO();
+				tmpVO.setItemNo(Integer.parseInt(itemNo));
+				tmpVO.setQuantity(0);	// 제품 품절
+				
+				list.add(tmpVO);
+			}
+		} else {  // 한건 품절 처리
+			ProductVO tmpVO = new ProductVO();
+			tmpVO.setItemNo(Integer.parseInt(itemNoStr));
+			tmpVO.setQuantity(0);	// 제품 품절
+			
+			list.add(tmpVO);
+		}
+		
+		int soldOutCnt = prodService.upSoldOutAll(list);
+		
+		String msg = "";
+		if(0 == soldOutCnt) {
+			msg = "제품 품절에 실패했습니다.";
+		} else {
+			msg = itemNoStr + "제품 품절 성공!";
+		}
+		
+		jsonString = new Gson().toJson(new MessageVO(String.valueOf(soldOutCnt), msg));
+		
+		return jsonString;
+	}
+	
+	
+	@RequestMapping(value = "/upDeleteAll.do", method = RequestMethod.POST,
+			produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String upDeleteAll(HttpServletRequest req) throws SQLException {
+		String jsonString = "";
+		
+		String itemNoStr = req.getParameter("itemNo");
+		LOG.debug("┌--------------------------------┐");	
+		LOG.debug("|  itemNoStr = " + itemNoStr);
+		
+		List<ProductVO> list = new ArrayList<ProductVO>();
+		
+		// 다건 삭제
+		if(itemNoStr.indexOf(",") != -1) {
+			String[] itemArray = itemNoStr.split(",");
+			
+			for(String itemNo : itemArray) {
+				ProductVO tmpVO = new ProductVO();
+				tmpVO.setItemNo(Integer.parseInt(itemNo));
+				
+				list.add(tmpVO);
+			}
+		} else {  // 한건 삭제
+			ProductVO tmpVO = new ProductVO();
+			tmpVO.setItemNo(Integer.parseInt(itemNoStr));
+			
+			list.add(tmpVO);
+		}
+		
+		int delCnt = prodService.upDeleteAll(list);
+		
+		String msg = "";
+		if(0 == delCnt) {
+			msg = "제품 삭제에 실패했습니다.";
+		} else {
+			msg = itemNoStr + "제품 삭제 성공!";
+		}
+		
+		jsonString = new Gson().toJson(new MessageVO(String.valueOf(delCnt), msg));
+		
+		return jsonString;
+	}
+	
+	
+	// 목록 검색
 	@RequestMapping(value = "/doRetrieve.do", method = RequestMethod.GET,
 			produces = "application/json;charset=UTF-8")
 	@ResponseBody
@@ -72,6 +166,16 @@ public class AdminProductController {
 			inVO.setCateId(StringUtil.nvl(inVO.getCateId()));
 		}
 		
+		//카테고리ID
+		if(null !=inVO && null == inVO.getCateClass01()) {  
+			inVO.setCateClass01(StringUtil.nvl(inVO.getCateClass01()));
+		}
+		
+		//카테고리ID
+		if(null !=inVO && null == inVO.getCateClass02()) {  
+			inVO.setCateClass02(StringUtil.nvl(inVO.getCateClass02()));
+		}
+		
 		LOG.debug("┌-------------------------------------┐");
 		LOG.debug("|  inVO = " + inVO);
 		
@@ -85,7 +189,7 @@ public class AdminProductController {
 	}
 	
 	
-	// 제품 목록 화면
+	// 관리자 제품 관리 화면
 	@RequestMapping(value = "/productView.do", method = RequestMethod.GET)
 	public String productView(Model model, SearchVO inVO) throws SQLException { 
 		String VIEW_NAME = "admin/admin_product_mng";
@@ -108,6 +212,21 @@ public class AdminProductController {
 		//검색어
 		if(null !=inVO && null == inVO.getSearchWord()) {  
 			inVO.setSearchWord(StringUtil.nvl(inVO.getSearchWord()));
+		}
+		
+		//카테고리ID
+		if(null !=inVO && null == inVO.getCateId()) {  
+			inVO.setCateId(StringUtil.nvl(inVO.getCateId()));
+		}
+		
+		//1차분류
+		if(null !=inVO && null == inVO.getCateClass01()) {  
+			inVO.setCateClass01(StringUtil.nvl(inVO.getCateClass01()));
+		}
+		
+		//2차분류
+		if(null !=inVO && null == inVO.getCateClass02()) {  
+			inVO.setCateClass02(StringUtil.nvl(inVO.getCateClass02()));
 		}
 		
 		LOG.debug("┌-------------------------------------┐");	

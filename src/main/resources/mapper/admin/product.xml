@@ -6,24 +6,35 @@
 <mapper namespace="com.pcwk.ehr.product">
 
   <sql id="searchCondition">
-	  <choose>
-	      <when test="searchDiv == 'none' and '' != searchDiv">
-	        and c.top_no = #{cateId}
-	        <choose>
-	          <when test="'' != searchWord ">
-	            and p.name LIKE '%' || #{searchWord} || '%'
-	          </when>
-	        </choose>
-	      </when>
-	      <when test="searchDiv != 'none' and '' != searchDiv">
-	        and p.category_no = #{cateId}
-	        <choose>
-	          <when test="'' != searchWord ">
-	            and p.name LIKE '%' || #{searchWord} || '%'
-	          </when>
-	        </choose>
-	      </when>
-	  </choose>
+    <choose>
+      <when test="cateClass01 != 'none'">
+			  <choose>
+			      <when test="cateClass02 == 'none' and '' != cateClass02">
+			        and c.top_no = #{cateId}
+			        <choose>
+			          <when test="'' != searchWord ">
+			            and p.name LIKE '%' || #{searchWord} || '%'
+			          </when>
+			        </choose>
+			      </when>
+			      <when test="cateClass02 != 'none' and '' != cateClass02">
+			        and p.category_no = #{cateId}
+			        <choose>
+			          <when test="'' != searchWord ">
+			            and p.name LIKE '%' || #{searchWord} || '%'
+			          </when>
+			        </choose>
+			      </when>
+			  </choose>
+			</when>
+			<otherwise>
+			  <choose>
+	        <when test="'' != searchWord ">
+	          and p.name LIKE '%' || #{searchWord} || '%'
+	        </when>
+	      </choose>
+			</otherwise>
+	  </choose> 
   </sql>
     
   <select id="doRetrieve" resultType="ProductVO" parameterType="SearchVO">
@@ -63,7 +74,7 @@
             <![CDATA[ WHERE ROWNUM <= #{pageSize} * (#{pageNo} - 1) + #{pageSize} ]]>
           ) TT1
           -- 시작번호
-          <![CDATA[ WHERE ROWNUM >= #{pageSize} * (#{pageNo} - 1) + 1 ]]>
+          <![CDATA[ WHERE RNUM >= #{pageSize} * (#{pageNo} - 1) + 1 ]]>
       ) A
       CROSS JOIN
       (

@@ -20,6 +20,24 @@ public class ProductServiceImpl implements ProductService {
 	ProductDao prodDao;
 	
 	public ProductServiceImpl() {}
+	
+	@Override
+	public int upSoldOutAll(List<ProductVO> products) throws SQLException {
+		int cnt = 0;
+		
+		try {
+			for(ProductVO vo : products) {
+				cnt += prodDao.doUpdate(vo);
+			}
+		} catch(Exception e) {
+			LOG.debug("┌-------------------------------------------┐");
+			LOG.debug("|  rollback : " + e.getMessage());
+			LOG.debug("└-------------------------------------------┘");
+			throw e;
+		}
+		
+		return cnt;
+	}
 
 	@Override
 	public int upDeleteAll(List<ProductVO> products) throws SQLException {
