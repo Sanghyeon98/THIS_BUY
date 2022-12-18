@@ -16,8 +16,6 @@
   <meta name="description" content="pcwk html" >
   <meta name="keywords" content="html5, css3, javascipt6, jQuery">
   <meta charset="UTF-8">
-  <!-- favicon -->
-  <link rel="shortcut icon" type="images/x-icon" href="/PC_HTML/favicon.ico">
   <!-- jQuery -->
 <script src="${CP_RES}/js/jquery-1.12.4.js"></script>
 <!-- jQuery -->
@@ -130,8 +128,8 @@ width: 30px;
     <hr>
     </div>
     <div class="side">
-   <table class="cart__list">
-            <form class="cart__list">
+           
+  			 <table class="cart__list">
                 <thead>
                     <tr class="checkBox">
                         <td colspan="3"><input type="checkbox"> <button class="cart__list__optionbtn">전체선택</button>
@@ -158,7 +156,7 @@ width: 30px;
                     </tr>
                     <tr class="cart__list__detail">
                        <tr class="cart__list__detail">
-                        <td><input type="checkbox"></td>
+                        <td><input type="checkbox"></td>	   
                         <td><img src="" alt=""></td>
                         <td><a>따끈따끈 군밤</a></td>
                         <td class="cart__list__option">
@@ -170,6 +168,31 @@ width: 30px;
                         <td><span class="price">2,900원</span><br>
                         </td>
                     </tr>
+                    <c:choose>
+                  <c:when test="${list.size() > 0 }">
+                    <c:forEach var="vo" items="${list }">
+                      <tr>
+                        <td class="td_center"><input type="checkbox" name="chk" value="${vo.itemNo }"></td>
+                        <td class="td_center"><c:out value="${vo.imageNo}"/></td>
+                        <td><c:out value="${vo.name}"/></td>
+                        <td class="cart__list__option">
+                        <p><span><input class="amount_minus" type="button" value="-"></span>
+                        <input class="amount" type="number" min="1" value="${vo.quantity}">
+                        <span><input type="button" value="+"></span>
+                        </p>
+                        </td>
+                        <td style="display: none;"><c:out value="${vo.price}"/></td>
+                      </tr>
+                    </c:forEach>
+                  </c:when>
+                  <c:otherwise>
+                    <tr>
+                      <td class="text-center col-sm-12 col-md-12 col-lg-12" colspan="99">
+                          No data found
+                      </td>
+                    </tr>
+                  </c:otherwise>
+                </c:choose>
                 </tbody>
                 <tfoot>
                     <tr class="checkBox">
@@ -181,8 +204,8 @@ width: 30px;
                         <td></td>
                     </tr>
                 </tfoot>
-            </form>
         </table>
+           
         
       <div class= "content2">
         <div>
