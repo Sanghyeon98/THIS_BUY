@@ -117,6 +117,31 @@ width: 30px;
     		console.log("dodelete");
         });
     	
+    	
+    	   // 수량 버튼 조작
+        let quantity = $(".amount").val();
+        $(".amount_plus").on("click", function(){
+            $(".amount").val(++quantity);
+        });
+        $(".amount_minus").on("click", function(){
+            if(quantity > 1){
+                $(".amount").val(--quantity);   
+            }
+        });
+    	
+        //체크버튼
+        $("#checkAll").on("click", function() {
+            console.log("#checkAll");
+            //chk
+            //전체 체크
+            if ($("#checkAll").is(":checked") == true) {
+              $("input[name=chk]").prop("checked", true);
+              //체크 해제  
+            } else {
+              $("input[name=chk]").prop("checked", false);
+            }
+          });
+    	
     });  
   
   </script>
@@ -132,7 +157,7 @@ width: 30px;
   			 <table class="cart__list">
                 <thead>
                     <tr class="checkBox">
-                        <td colspan="3"><input type="checkbox"> <button class="cart__list__optionbtn">전체선택</button>
+                        <td colspan="3"><input id="checkAll" type="checkbox"> <button id="checkAll" class="cart__list__optionbtn">전체선택</button>
                             <button class="cart__list__optionbtn" id="dodelete">선택삭제</button>
                         </td>
                         <td></td>
@@ -142,7 +167,7 @@ width: 30px;
                 </thead>
                 <tbody>
                     <tr class="cart__list__detail">
-                        <td><input type="checkbox"></td>
+                        <td><input type="checkbox" name="chk"></td>
                         <td><img src="" alt=""></td>
                         <td><a>포도농장 포도쥬스</a></td>
                         <td class="cart__list__option">
@@ -156,18 +181,19 @@ width: 30px;
                     </tr>
                     <tr class="cart__list__detail">
                        <tr class="cart__list__detail">
-                        <td><input type="checkbox"></td>	   
+                        <td><input type="checkbox" name="chk"></td>	   
                         <td><img src="" alt=""></td>
                         <td><a>따끈따끈 군밤</a></td>
                         <td class="cart__list__option">
                         <p><span><input class="amount_minus" type="button" value="-"></span>
                         <input class="amount" type="number" min="1" value="1">
-                        <span><input type="button" value="+"></span>
+                        <span><input class="amount_plus" type="button" value="+"></span>
                         </p>
                         </td>
                         <td><span class="price">2,900원</span><br>
                         </td>
                     </tr>
+                    
                     <c:choose>
                   <c:when test="${list.size() > 0 }">
                     <c:forEach var="vo" items="${list }">
@@ -186,6 +212,7 @@ width: 30px;
                     </c:forEach>
                   </c:when>
                   <c:otherwise>
+                  
                     <tr>
                       <td class="text-center col-sm-12 col-md-12 col-lg-12" colspan="99">
                           No data found
