@@ -59,5 +59,6 @@ public interface BoardService {
 	 */
 	List<BoardVO> getALL(BoardVO inVO) throws SQLException;
 	
+
 	
 }

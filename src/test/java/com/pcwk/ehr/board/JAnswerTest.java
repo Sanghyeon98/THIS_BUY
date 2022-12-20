@@ -18,8 +18,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.pcwk.ehr.board.dao.AnswerDaoImpl;
-import com.pcwk.ehr.board.domain.AnswerVO;
+import com.pcwk.ehr.answer.dao.AnswerDaoImpl;
+import com.pcwk.ehr.answer.domain.AnswerVO;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)

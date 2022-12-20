@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.pcwk.ehr.admin.domain.CategoryVO;
-import com.pcwk.ehr.board.domain.AnswerVO;
+import com.pcwk.ehr.answer.domain.AnswerVO;
 import com.pcwk.ehr.board.domain.BoardSearchVO;
 import com.pcwk.ehr.board.domain.BoardVO;
 import com.pcwk.ehr.cmn.DTO;

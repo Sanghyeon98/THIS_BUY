@@ -302,8 +302,8 @@ ol, ul {
 	width: 120px;
 	height: 44px;
 	border-radius: 3px;
-	color: rgb(255, 255, 255);
-	background-color: blue;
+	color: black;
+	background-color: #b8c9df;
 	border: 0px none;
 }
 </style>
@@ -334,66 +334,108 @@ ol, ul {
 <title>목록</title>
 <script>
 	$(document).ready(function() {
-		console.log("document.ready");
-		initTableView();
+						console.log("document.ready");
+						initTableView();
+						doRetreive();
+						initAnswerView
+						/* 						doSelectOnee(); */
 
-		//paging
-		renderingPage('${pageTotal}', 1);
-		
-		//테이블 클릭
-	    $("#boardTable").on("click","a",function(e){
-	      console.log('boardTable');
-	      let tdArray = $(this).children();
-	      let boardSeq = tdArray.eq(1).text();
-	      
-	      console.log('boardSeq:'+boardSeq);
-	      console.log('boardTable');
-	      
-	      if(confirm("상세 조회를 하시겠습니까?")==false)return;
-	      //div,seql
-	      window.location.href = "${CP}/board/doSelectOne.do?div="+$("#div").val()+"&seq="+boardSeq;
-	      
-	      
-	    //#boardTable>tbody
-	    });
+						//paging
+						renderingPage('${pageTotal}', 1);
 
-		//등록화면으로 이동
-		$("#boardReg").on("click", function() {
+						//테이블 클릭
+						$("#boardTable").on("click",".cli",function(e) {
+											console.log('boardTable');
+											let divArray = $(this).children();
+											let boardSeq = divArray.eq(0).text();
 
-			console.log('moveTomoveToRegBoardReg');
+											console.log('boardSeq:' + boardSeq);
+											console.log('boardTable');
 
-			window.location.href = "${CP}/board/boardReg.do"
+											if (confirm("상세 조회를 하시겠습니까?") == false)
+												return;
+											//div,seql
+											window.location.href = "${CP}/board/boardMod.do?seq="+boardSeq;
 
-			//moveToReg
-		});
+											//#boardTable>tbody
+										});
 
-		//등록화면으로 이동
-		$("#questionReg").on("click", function() {
+						//등록화면으로 이동
+						$("#boardReg").on("click", function() {
 
-			console.log('moveToReg');
+							console.log('moveTomoveToRegBoardReg');
 
-			window.location.href = "${CP}/board/questionReg.do"
+							window.location.href = "${CP}/board/boardReg.do"
 
-			//moveToReg
-		});
+							//moveToReg
+						});
 
-		/*    const gubun = $("#gubun").value();
-		   if(gubun == 10){
-		      $("#questionButtonArea").hide();
-		   }else{
-		      $("#insertButtonArea").hide();
-		   }
-		 */
+						//등록화면으로 이동
+						$("#questionReg").on("click", function() {
 
-		$("#doRetreive").on("click", function() {
-			console.log('doRetreive');
+							console.log('moveToReg');
 
-			doRetrive(1);
+							window.location.href = "${CP}/board/questionReg.do"
 
-			//doRetrive
-		});
+							//moveToReg
+						});
 
-	});
+						/*    const gubun = $("#gubun").value();
+						   if(gubun == 10){
+						      $("#questionButtonArea").hide();
+						   }else{
+						      $("#insertButtonArea").hide();
+						   }
+						 */
+
+						//답변 등록
+						$("#doInsertButton").on("click",function(e) {
+											console.log("doInsertBtn");
+											e.preventDefault();
+
+											if (eUtil.ISEmpty($("#answer")
+													.val()) == true) {
+												alert("내용을 입력하세요");
+												$("#answer").focus();
+												return;
+											}
+
+											console.log($("#answer").val());
+
+											if (confirm("등록 하시겠습니까?") == false)
+												return;
+
+											let url = "answer/doInsert.do";
+											let parameters = {
+
+												"seq" : $("#seq")
+														.val(),
+												"aUser" : $("#regId").val(),
+												"contents" : $("#answer").val()
+											};
+
+											let method = "GET";
+											let async = true;
+
+											EClass.callAjax(url,parameters,method,async,function(data) {
+																console.log("data msgContents:"
+																				+ data.msgContents);
+
+																if ("1" == data.msgId) {//등록 성공
+																	alert(data.msgContents);
+																	doSelectOnee();
+																	$("#answer").val('');
+																} else { //등록 실패
+																	alert(data.msgId
+																			+ "\n"
+																			+ data.msgContents);
+																}
+
+															});
+
+										});
+
+					}); //document
 
 	function initTableView() {
 		if ("10" == $("#gubun").val()) {
@@ -404,6 +446,14 @@ ol, ul {
 			$("#insertButtonArea").css("display", "none");
 		}
 	}
+					
+	function initAnswerView() {
+	    if ("1" == $("#answerCheck").val()) {
+	      $("#answerTable").css("display", "");
+	    } else if ("0" == $("#gubun").val()) {
+	    	$("#answerTable").css("display", "none");
+	    }
+	  }
 
 	function doRetreive(page) {
 		console.log('doRetrive() page:' + page);
@@ -460,41 +510,23 @@ ol, ul {
 													function(index, value) {
 
 														htmlData += "<ul class='css-14'><li><a href='#'> <div class='css-15'>";
-														htmlData += "    <div class='css-15'"
-																+ <c:out value='value.seq'/>
-																+ "</div>";
-														htmlData += "    <div class='css-15'"
-																+ <c:out value='value.title'/>
-																+ "</div>";
-														htmlData += "    <div class='css-15'"
-																+ <c:out value='value.regId'/>
-																+ "</div>";
-														htmlData += "    <div class='css-15'"
-																+ <c:out value='value.regDt'/>
-																+ "</div>";
-														htmlData += "</tr>";
-													});
+														htmlData += "    <div class='css-15'"+ <c:out value='value.seq'/>+ "</div>";
+														htmlData += "    <div class='css-15'"+ <c:out value='value.title'/>+ "</div>";
+														htmlData += "    <div class='css-15'"+ <c:out value='value.regId'/>+ "</div>";
+														htmlData += "    <div class='css-15'"+ <c:out value='value.regDt'/>+ "</div>";
+														htmlData += "</ul>";});
 
 								} else if ("20" == $("#gubun").val()) {
-									$
-											.each(
+									$.each(
 													parsedJson,
 													function(index, value) {
 
 														htmlData += "<ul class='css-14'><li><a href='#'> <div class='css-15'>";
-														htmlData += "    <div class='css-15'"
-																+ <c:out value='value.seq'/>
-																+ "</div>";
-														htmlData += "    <div class='css-15'"
-																+ <c:out value='value.title'/>
-																+ "</div>";
-														htmlData += "    <div class='css-15'"
-																+ <c:out value='value.regDt'/>
-																+ "</div>";
-														htmlData += "    <div class='css-15'"
-																+ <c:out value='value.answerCheck'/>
-																+ "</div>";
-														htmlData += "</tr>";
+														htmlData += "    <div class='css-15'"+ <c:out value='value.seq'/>+ "</div>";
+														htmlData += "    <div class='css-15'"+ <c:out value='value.title'/>+ "</div>";
+														htmlData += "    <div class='css-15'"+ <c:out value='value.regDt'/>+ "</div>";
+														htmlData += "    <div class='css-15'"+ <c:out value='value.answerCheck'/>+ "</div>";
+														htmlData += "</ul>";
 													});
 								}
 							} else {
@@ -514,6 +546,66 @@ ol, ul {
 						});
 
 	}
+
+		//문의에 대한 답변 데이터 
+	 function doSelectOnee() {
+	 $
+	 .ajax({
+	 type : "GET",
+	 url : "/board/selectOne.do", 
+	 asyn : "true",
+	 dataType : "html",
+	 data : {
+	 "seq" : $("#seq").val()
+	 },
+
+	 success : function(data) {//통신 성공
+	 console.log("success data:" + data);
+
+	 var parseData = JSON.parse(data);
+
+	 $("#answerList").empty();
+	 //$("#answerForm").empty();
+	 var html = "";
+
+	 if (parseData.length > 0) {
+
+	 $
+	 .each(
+	 parseData,
+	 function(i, value) {
+	 console.log(i + ","
+	 + value.name);
+
+	 //---------------------------------------------------------------------------------------------
+	 htmlData += "<ul class='css-14'><li><a href='#'> <div class='css-15'>";
+     htmlData += "    <div class='css-15'"+ <c:out value='value.answerNO'/>+ "</div>";
+     htmlData += "    <div class='css-15'"+ <c:out value='value.title'/>+ "</div>";
+     htmlData += "    <div class='css-15'"+ <c:out value='value.regDt'/>+ "</div>";
+     htmlData += "</ul>";
+
+	 });
+
+	 } else { //data가 없는 경우
+	 //$("#answerForm").append(htmL);
+	 html += "<tr>";
+	 html += "  등록된 답변이 없습니다.";
+	 html += "</tr>";
+	 }
+
+	 //데이터 추가
+	 $("#answerTable").append(html);
+
+	 },
+	 error : function(data) {//실패시 처리
+	 console.log("error:" + data);
+	 },
+	 complete : function(data) {//성공/실패와 관계없이 수행!
+	 console.log("complete:" + data);
+	 }
+	 });
+
+	 }  
 
 	//paging
 	function renderingPage(pageTotal, page) {
@@ -589,11 +681,9 @@ ol, ul {
 												<c:when test="${vo.gubun == 10 }">
 													<ul class="css-14 ">
 														<li><a href="#">
-																<div class="css-15">
+																<div class="css-15 cli">
 																	<!-- 공지사항  -->
-																	<div class="css-16 ">
-																		<c:out value="${vo.seq }"></c:out>
-																	</div>
+																	<div class="css-16 "><c:out value="${vo.seq }"></c:out></div>
 																	<div class="css-17 ">
 																		<c:out value="${vo.title }"></c:out>
 																	</div>
@@ -624,10 +714,60 @@ ol, ul {
 																	<div class="css-19 ">
 																		<c:out value="${vo.answerCheck }"></c:out>
 																	</div>
-
 																</div>
 														</a></li>
 													</ul>
+													
+													<ul class="css-14 " id ="answerTable">
+                            <li><a href="#">
+                                <div class="css-15" >
+                                  <!-- 1:1문의  -->
+                                  <div class="css-16 ">
+                                    <c:out value="${vo.seq }"></c:out>
+                                  </div>
+                                  <div class="css-17 ">
+                                    <c:out value="${vo.title }"></c:out>
+                                  </div>
+                                  <div class="css-18 ">
+                                    <c:out value="${vo.regDt }"></c:out>
+                                  </div>
+                                </div>
+                            </a></li>
+                          </ul>
+													
+													<!-- answer -->
+													<input type="hidden" name="seq" id="seq" value="${seq }" />
+													<input type="hidden" name="regId" id="regId"
+														value="${sessionScope.member.uId}" />
+													<!-- 로그인시 나중에  -->
+
+													<!--- Form Begins -->
+													<section class="card" id="answerForm">
+
+														<div class="card-header"></div>
+														<div class="card-body">
+															<div class="tab-content">
+																<div class="form-group">
+																	<textarea class="form-control" id="answer" rows="7"
+																		placeholder="문의에 대한 답변을 달아주세요"></textarea>
+																</div>
+															</div>
+															<div class="text-right">
+																<button type="button" class="btn btn-primary"
+																	id="doInsertButton">답변등록</button>
+															</div>
+														</div>
+													</section>
+													<!--- Form Ends -->
+
+
+													<!--contents begins -->
+													<div class="answer-contents">
+														<section class="card mt-4">
+															<div id="answerList" class="border p-2"></div>
+														</section>
+													</div>
+													<!--contents  end -->
 												</c:otherwise>
 											</c:choose>
 										</c:forEach>

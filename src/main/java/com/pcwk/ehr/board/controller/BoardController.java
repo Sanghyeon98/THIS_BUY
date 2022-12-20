@@ -38,6 +38,7 @@ public class BoardController {
 		
 	}
 	
+	
 	@RequestMapping(value="/moveToReg.do",method = RequestMethod.GET)
 	public String moveToReg(Model model,SearchVO inVO) throws SQLException{
 		String VIEW_NAME = "board/board_reg";
@@ -161,6 +162,23 @@ public class BoardController {
 
 		return VIEW_NAME;
 	}
+	
+	// 상세조회
+		@RequestMapping(value = "/boardMod.do", method = RequestMethod.GET)
+		public String boardMod(Model model, BoardVO inVO) throws SQLException {
+			String VIEW_NAME = "board/board_mod";
+			LOG.debug("┌──────────────────────────────┐");
+			LOG.debug("│boardView ");
+			LOG.debug("│inVO "+inVO);
+			LOG.debug("└──────────────────────────────┘");
+			
+			List<BoardVO> list = boardService.getALL(inVO);
+			LOG.debug("│list "+list);
+			model.addAttribute("list", list);
+
+			return VIEW_NAME;
+		}
+
 
 	/**
 	 * 목록조회
