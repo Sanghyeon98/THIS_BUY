@@ -25,7 +25,7 @@
     <!-- String, Number, Date Util -->
     <script src="${CP_RES}/js/eUtil.js"></script>
     <!-- paging -->
-    <script src="${CP_RES}/js/jquery.bootpag.js"></script>
+    <script src="${CP_RES}/js/jquery.bootpag.js"></script>  
     <!-- bootstrap js -->
     <script src="${CP_RES}/js/bootstrap.min.js"></script>
 <title>회원가입</title>
@@ -35,18 +35,20 @@
  color:red;	
 }
 #signup{
-width: 640px;
 margin: 0 auto;
+width:640px;
 }
 .btn{
 background-color:#B8C9DF;
 color:white;
 }
-.col-md-3{
+.col-md-2{
 padding: 6px 0px 0px;
 }
 .row{
 padding: 10px 20px;
+width:640px;
+height:70px;
 }
 </style>
 
@@ -67,48 +69,74 @@ padding: 10px 20px;
     
     
     <div class="row">
-    <div class="col-md-3 text-centers">
+    <div class="col-md-2 text-centers">
       아이디<span class="r">*</span>
     </div>
-    <div class="col-md-7 text-centers">
+    <div class="col-md-6 text-centers">
       <input type="text" class="form-control" id="uId" name="uId" placeholder="아이디를 입력해주세요">
     </div>
-     <div class="col-md-2">
-      <button type="submit" class="btn btn-default">중복 확인</button>
+     <div class="col-md-2 text-centers">
+      <button type="submit" class="btn btn-default btn-block">중복 확인</button>
     </div>
     </div>
     
      <div class="row">
-    <div class="col-md-3 text-centers">
+    <div class="col-md-2 text-centers">
      비밀번호<span class="r">*</span>
     </div>
-    <div class="col-md-7 text-centers">
+    <div class="col-md-6 text-centers">
       <input type="text" class="form-control" id="passwd" name="passwd" placeholder="비밀번호를 입력해주세요">
     </div>
     </div>
     
      <div class="row">
-    <div class="col-md-3 text-centers">
+    <div class="col-md-2 text-centers">
      비밀번호 확인<span class="r">*</span>
     </div>
-    <div class="col-md-7 text-centers">
+    <div class="col-md-6 text-centers">
       <input type="text" class="form-control" id="passwd" name="passwd" placeholder="비밀번호를 한번 더 입력해주세요">
     </div>
     </div>
     
-     <div class="row">
+  <div class="row">
+    <div class="col-md-2 text-centers">
+             이름<span class="r">*</span>
+    </div>
+       <div class="col-md-6 text-centers">
+         <input type="text" class="form-control" id="name" name="name" placeholder="이름을 입력해주세요">
+       </div>
+   </div>
+ 
+   <div class="row">
+    <div class="col-md-2 text-centers">
+             이메일<span class="r">*</span>
+    </div>
+       <div class="col-md-6 text-centers">
+         <input type="text" maxlength="320" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요">
+       </div>
+        <div class="col-md-2">
+         <button type="submit" class="btn btn-default">중복 확인</button>
+        </div>
+   </div>
+   
+   <div class="row">
     <div class="col-md-3 text-centers">
-     이름<span class="r">*</span>
+           휴대폰<span class="r">*</span>
     </div>
-    <div class="col-md-7 text-centers">
-      <input type="text" class="form-control" id="name" name="name" placeholder="이름을 입력해주세요">
+       <div class="col-md-7 text-centers">
+         <input type="number"  class="form-control" id="email" name="email" placeholder="숫자만 입력해주세요">
+       </div>
+       <div class="col-md-2">
+         <button type="submit" class="btn btn-default">인증번호 받기</button>
+       </div>
+   </div>
+    
+    
+    
+    
+    
     </div>
-    </div>
- 
-    </div>
-          </div>
-      
- 
+  </div>
 </body>
 
 </html>
