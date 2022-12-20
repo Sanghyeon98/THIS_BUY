@@ -3,8 +3,8 @@ package com.pcwk.ehr.order.service;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.pcwk.ehr.cart.domain.CartJoinVO;
 import com.pcwk.ehr.cmn.DTO;
+
 import com.pcwk.ehr.order.domain.OrderVO;
 
 public interface OrderService {
@@ -23,7 +23,13 @@ public interface OrderService {
 	 * @throws SQLException
 	 */
 	int idCheck(OrderVO inVO) throws SQLException;
-
+	
+	/**
+	 * 신규 회원 등록 로직
+	 * 
+	 * @param inVO
+	 */
+	public int add(OrderVO inVO) throws SQLException;
 	/**
 	 * 주문상품 삭제
 	 * @param t
@@ -32,14 +38,24 @@ public interface OrderService {
 	 */
 	int doDelete(OrderVO inVO) throws SQLException;
 
+	
+	/**
+	 * 상품 수정
+	 * 
+	 * @param t
+	 * @return 1(성공)/0(실패)
+	 * @throws SQLException
+	 */
+	int doUpdate(OrderVO inVO) throws SQLException;
 	/**
 	 * 단건 조회
 	 * @param t
 	 * @return T
 	 * @throws SQLException
 	 */
+	
 	OrderVO doSelectOne(OrderVO inVO) throws SQLException;
-
+	
 	/**
 	 * 주문목록 조회
 	 * @param t
@@ -47,7 +63,6 @@ public interface OrderService {
 	 * @throws SQLException
 	 */
 	List<OrderVO> doRetrieve(DTO inVO) throws SQLException;
-
-	
+   
 }
 

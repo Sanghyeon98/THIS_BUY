@@ -16,6 +16,8 @@ public class OrderVO extends DTO{
 	private String    request;
 	private String    orderState;
 	private String    date;
+	
+	
 	public OrderVO(int orderNO, int sameOrder, String memberId, int itemNO, int price, int paymentId, String name,
 			String phone, String address, String request, String orderState, String date) {
 		super();
@@ -32,6 +34,7 @@ public class OrderVO extends DTO{
 		this.orderState = orderState;
 		this.date = date;
 	}
+	
 	public int getOrderNO() {
 		return orderNO;
 	}
@@ -104,6 +107,7 @@ public class OrderVO extends DTO{
 	public void setDate(String date) {
 		this.date = date;
 	}
+	
 	@Override
 	public String toString() {
 		return "OrderVO [orderNO=" + orderNO + ", sameOrder=" + sameOrder + ", memberId=" + memberId + ", itemNO="
