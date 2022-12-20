@@ -63,16 +63,22 @@ public class AdminProductController {
 			for(String itemNo : itemArray) {
 				ProductVO tmpVO = new ProductVO();
 				tmpVO.setItemNo(Integer.parseInt(itemNo));
-				tmpVO.setQuantity(0);	// 제품 품절
 				
-				list.add(tmpVO);
+				ProductVO tmpUpVO = prodService.doSelectOne(tmpVO);
+				
+				tmpUpVO.setQuantity(0);	// 제품 품절
+				
+				list.add(tmpUpVO);
 			}
 		} else {  // 한건 품절 처리
 			ProductVO tmpVO = new ProductVO();
 			tmpVO.setItemNo(Integer.parseInt(itemNoStr));
-			tmpVO.setQuantity(0);	// 제품 품절
 			
-			list.add(tmpVO);
+			ProductVO tmpUpVO = prodService.doSelectOne(tmpVO);
+			
+			tmpUpVO.setQuantity(0);	// 제품 품절
+			
+			list.add(tmpUpVO);
 		}
 		
 		int soldOutCnt = prodService.upSoldOutAll(list);
@@ -313,7 +319,34 @@ public class AdminProductController {
 	
 	// 제품 등록 화면 이동
 	@RequestMapping(value = "moveToReg.do", method = RequestMethod.GET)
-	public String moveToReg(Model model, SearchVO inVO) throws SQLException {
+	public String moveToReg(Model model) throws SQLException {
+		
+		// 카테고리 목록 조회 ---------------------------------------------------------
+		List<CategoryVO> allCateList = cateService.getALL();
+		
+		List<CategoryVO> cate01List = new ArrayList<CategoryVO>();
+		List<CategoryVO> cate02List = new ArrayList<CategoryVO>();
+		
+		for(CategoryVO vo : allCateList) {
+			if(vo.getTopNo() == 0) {	// 1차 분류이면
+				cate01List.add(vo);
+			} else {	// 2차 분류이면
+				cate02List.add(vo);
+			}
+		}
+		
+		// 2차 분류 json 전환
+		String cate02ListJson = new Gson().toJson(cate02List);
+		LOG.debug("|  cate02ListJson = " + cate02ListJson);
+		
+		String allCateJson = new Gson().toJson(allCateList);
+		LOG.debug("|  allCateJson = " + allCateJson);
+		// 카테고리 목록 조회 ---------------------------------------------------------
+
+		model.addAttribute("cate01List", cate01List);
+		model.addAttribute("cate02List", cate02List);
+		model.addAttribute("cate02ListJson", cate02ListJson);		
+				
 		return "admin/admin_product_reg";
 	}
 	
