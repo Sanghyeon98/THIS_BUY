@@ -6,7 +6,6 @@
   
 <insert id="doSave" parameterType="ImageVO">
 		INSERT INTO image (
-		    image_no,
 		    gubun,
 		    image_m,
 		    main_image,
@@ -20,7 +19,6 @@
 		    reg_dt,
 		    mod_dt
 		) VALUES (
-		    #{imageNo},
 		    #{gubun},
 		    #{imageM},
 		    #{mainImage},
@@ -38,31 +36,31 @@
 	
 	<delete id="doDelete" parameterType="ImageVO">
 		DELETE FROM image
-		WHERE image_no = #{imageNo}	
+		WHERE image_no = #{imageNo}
 	</delete>
 	
 	<select id="doRetrieve" parameterType="ImageVO" resultType="ImageVO">
-	SELECT
-	    image_no   AS imageNo,
-	    gubun      AS   gubun,
-	    image_m    AS imageM,
-	    main_image AS mainImage,
-	    org_name   AS orgName,
-	    save_name  AS saveName,
-	    path       AS path,
-	    file_size  AS fileSize,
-	    file_ext   AS fileExt,
-	    from_tb    AS fromTb,
-	    from_no    AS fromNo,
-	    reg_dt     AS regDt
-	FROM image
-	WHERE from_tb = #{fromTb}
-	AND from_no = #{fromNo}	
-</select>
+		SELECT
+		    image_no   AS imageNo,
+		    gubun      AS   gubun,
+		    image_m    AS imageM,
+		    main_image AS mainImage,
+		    org_name   AS orgName,
+		    save_name  AS saveName,
+		    path       AS path,
+		    file_size  AS fileSize,
+		    file_ext   AS fileExt,
+		    from_tb    AS fromTb,
+		    from_no    AS fromNo,
+		    reg_dt     AS regDt
+		FROM image
+		WHERE from_tb = #{fromTb}
+		AND from_no = #{fromNo}	
+  </select>
 
-<delete id="doDeleteOne" parameterType="ImageVO">
+  <delete id="doDeleteOne" parameterType="ImageVO">
 		DELETE FROM image
 		WHERE image_no = #{imageNo}	
 	</delete>
 	
-  </mapper>
+</mapper>

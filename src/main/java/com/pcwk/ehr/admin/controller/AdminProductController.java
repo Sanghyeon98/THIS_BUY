@@ -44,6 +44,33 @@ public class AdminProductController {
 	public AdminProductController() {}
 	
 	
+	@RequestMapping(value = "/doSave.do", method = RequestMethod.POST,
+			produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String doSave(ProductVO inVO) throws SQLException {
+		String jsonString = "";
+		LOG.debug("┌-------------------------------------┐");
+		
+		if(null != inVO && inVO.getDiscount() == 0) {
+			LOG.debug("doSave() getDiscount() 값!!!!! inVO.getDiscount() : " + inVO.getDiscount());
+			inVO.setDiscount(0);
+		}
+		
+		
+//	    discount,
+//	    final_price,
+//	    sales,
+
+		
+		
+		LOG.debug("|  jsonString : " + jsonString);
+		LOG.debug("└-------------------------------------┘");
+		
+		return jsonString;
+	}
+	
+	
+	// 상품 품절 처리
 	@RequestMapping(value = "/upSoldOutAll.do", method = RequestMethod.POST,
 			produces = "application/json;charset=UTF-8")
 	@ResponseBody
@@ -96,6 +123,7 @@ public class AdminProductController {
 	}
 	
 	
+	// 상품 삭제 처리
 	@RequestMapping(value = "/upDeleteAll.do", method = RequestMethod.POST,
 			produces = "application/json;charset=UTF-8")
 	@ResponseBody

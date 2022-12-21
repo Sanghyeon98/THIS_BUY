@@ -18,7 +18,7 @@
   <meta name="description" content="project product list" >
   <meta name="keywords" content="html5, css3, javascipt6, jQuery">
   <!-- favicon -->
-  <link rel="shortcut icon" type="images/x-icon" href="${CP}/favicon.ico">
+  <link rel="shortcut icon" type="images/x-icon" href="${CP_RES}/favicon.ico">
   <!-- jquery ui -->
   <link rel="stylesheet" href="${CP_RES}/css/admin_product_mng.css">
   
@@ -389,13 +389,13 @@
                   <select class="cate02List">
                     <option value='none'>==선택==</option>
                     <c:forEach var="vo" items="${cate02List}">
-                      <c:choose>
+                     <%--  <c:choose>
                           <c:when test="${vo.topNo == 1 }">
                             <option value='<c:out value="${vo.categoryNo}"/>'>
                                 <c:out value="${vo.categoryNm}"/>
                           </option>
                           </c:when>
-                      </c:choose>
+                      </c:choose> --%>
                     </c:forEach>
                   </select> 
                 </td>

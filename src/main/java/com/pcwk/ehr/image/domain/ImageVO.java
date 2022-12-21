@@ -1,9 +1,8 @@
 package com.pcwk.ehr.image.domain;
 
 public class ImageVO {
-	
 	private  int       	imageNo;      //이미지번호
-	private  int		gubun;        //구분
+	private  int		gubun;        //구분 (1: 상품, 2: 게시판)
 	private  int		imageM;       //공통이미지
 	private  int		mainImage;    //메인이미지 
 	private  String		orgName;      //원본파일명

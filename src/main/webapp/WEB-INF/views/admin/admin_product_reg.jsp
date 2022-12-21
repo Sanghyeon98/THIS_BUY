@@ -38,6 +38,62 @@
   <!-- javascript -->
   <script>
     $(document).ready(function(){
+    	
+    	
+    	// 상품 등록 버튼
+    	$("#prod_save_bt").on("click", function() {
+    		console.log("상품등록버튼");
+    		
+    		console.log("2차 분류  : " + $(".cate02List").val());
+    		
+    		if('none' == $(".cate01List").val()) {
+    			alert("1차 분류를 선택하세요.");
+    			return;
+    		}
+    		
+    		if('none' == $(".cate02List").val()) {
+    			alert("2차 분류를 선택하세요.");
+    			return;
+    		}
+    		
+    		let image = $("#imageNo").val();
+    		
+    		console.log("이미지 : " + image);
+    		console.log("lastIndexOf : " + image.lastIndexOf('\\'));
+    		console.log("substr : " + image.substr(image.lastIndexOf('\\')+1));
+    		
+    		let imgPathName = image.substr(image.lastIndexOf('\\')+1);
+    		
+    		console.log("imageName : " + imgPathName.split('.'));
+    		
+    		let method = "POST";
+    		let url = "/image/doSave.do";
+    		let async = true;
+    		let params = {
+    				
+    		};
+    		
+    		/* let method = "POST";
+    		let url = "/product/doSave.do";
+    		let async = true;
+    		let params = {
+    				name : $("#name").val(),
+    				price : $("#price").val(),
+    				production : $("#production").val(),
+    				weight : $("#weight").val(),
+    				expired : $("#expired").val(),
+ 		        quantity : $("#quantity").val(),
+ 		        detail : $("#detail").val(),
+ 		        imageNo : $("#imageNo").val()	
+    		}; */
+    		
+    		PClass.callAjax(method, url, async, params, function(data) {
+    			console.log(data);
+    			
+    		});
+    		
+    		
+    	});  // 상품 등록 버튼 END ---------------------------------------------------
 
     	
     	// 1차 분류 변경 시, 2차 분류 표출
@@ -110,37 +166,40 @@
                   </select>
                   <select class="cate02List">
                     <option value='none'>==선택==</option>
-                    <c:forEach var="vo" items="${cate02List}">
-                      <c:choose>
-                          <c:when test="${vo.topNo == 1 }">
-                            <option value='<c:out value="${vo.categoryNo}"/>'>
-                                <c:out value="${vo.categoryNm}"/>
-                            </option>
-                          </c:when>
-                      </c:choose>
-                    </c:forEach>
                   </select>
                 </td>
               </tr>
               <tr>
-                <td class="table_left"><label>상품명</label></td>
-                <td><input type="text" placeholder="상품명"></td>
+                <td class="table_left"><label for="name">상품명</label></td>
+                <td><input type="text" id="name" name="name" placeholder="상품명"></td>
               </tr>
               <tr>
-                <td class="table_left"><label>가격</label></td>
-                <td><input type="text" placeholder="가격"></td>
+                <td class="table_left"><label for="price">가격</label></td>
+                <td><input type="text" id="price" name="price" placeholder="가격"></td>
               </tr>
               <tr>
-                <td class="table_left"><label>상품 설명</label></td>
-                <td><textarea rows="" cols=""></textarea></td>
+                <td class="table_left"><label for="production">생산지</label></td>
+                <td><input type="text" id="production" name="production" placeholder="생산지"></td>
               </tr>
               <tr>
-                <td class="table_left"><label>이미지</label></td>
-                <td><input type="file"></div>
+                <td class="table_left"><label for="weight">무게</label></td>
+                <td><input type="text" id="weight" name="weight" placeholder="무게"></td>
               </tr>
               <tr>
-                <td class="table_left"><label>재고수량</label></td>
-                <td><input type="text" placeholder="재고수량"></td>
+                <td class="table_left"><label for="expired">유통기한</label></td>
+                <td><input type="text" id="expired" name="expired" placeholder="유통기한"></td>
+              </tr>
+              <tr>
+                <td class="table_left"><label for="quantity">재고수량</label></td>
+                <td><input type="text" id="quantity" name="quantity" placeholder="재고수량"></td>
+              </tr>
+              <tr>
+                <td class="table_left"><label for="detail">상품 설명</label></td>
+                <td><textarea rows="" cols="" id="detail" name="detail"></textarea></td>
+              </tr>
+              <tr>
+                <td class="table_left"><label for="imageNo">이미지</label></td>
+                <td><input type="file" id="imageNo" name="imageNo"></div>
               </tr>
             </table>
             <div class="reset">
@@ -149,7 +208,7 @@
           </form>
         </div>
         <div class="bt_area">
-          <button>상품 등록</button>
+          <button id="prod_save_bt">상품 등록</button>
         </div>
       </div>
       <!-- content END ---------------------------------------------------------->

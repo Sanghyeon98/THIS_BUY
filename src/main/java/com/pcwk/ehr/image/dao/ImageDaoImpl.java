@@ -30,7 +30,7 @@ public class ImageDaoImpl implements ImageDao {
 		String statement = NAMESPACE + DOT + "doSave";
 		LOG.debug("|  statement : " + statement);
 		
-		int flag = sqlSessionTemplate.delete(statement, inVO);
+		int flag = sqlSessionTemplate.insert(statement, inVO);
 		LOG.debug("|  flag : " + flag);
 		LOG.debug("└--------------------------------┘");
 		
