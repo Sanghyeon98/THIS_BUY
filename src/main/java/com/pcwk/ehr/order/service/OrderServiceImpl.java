@@ -4,11 +4,13 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.order.dao.OrderDao;
 import com.pcwk.ehr.order.domain.OrderVO;
 
+@Service("OrderService")
 public class OrderServiceImpl implements OrderService {
 
 	@Autowired
