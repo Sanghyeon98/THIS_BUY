@@ -27,11 +27,24 @@ public class DetailController {
 	}
 
 	@RequestMapping(value = "/view.do")
-	public String cartView() {
+	public String cartView(DetailVO inVO, Model model) throws SQLException {
 		System.out.println("=============================================");
 		System.out.println("==detailService=detailView====");
 		System.out.println("=============================================");
 
+		String jsonString = "";
+		LOG.debug("┌=============================┐");
+		LOG.debug("|inVO=" + inVO);
+		LOG.debug("└=============================┘");
+
+		DetailVO outVO = detailService.doSelectOne(inVO);
+
+		jsonString = new Gson().toJson(outVO);
+		LOG.debug("┌=============================┐");
+		LOG.debug("|outVO=" + outVO);
+		model.addAttribute("vo", outVO);
+		LOG.debug("└=============================┘");
+		
 		return "detail/detail";
 	}
 

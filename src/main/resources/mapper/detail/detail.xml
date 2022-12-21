@@ -25,7 +25,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<insert id="doSave" parameterType="DetailVO">
 		INSERT INTO product (
-		item_no,
 		name,
 		price,
 		category_no,
@@ -40,7 +39,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		reg_dt,
 		mod_dt
 		) VALUES (
-		#{itemNo},
 		#{name},
 		#{price},
 		#{categoryNo},

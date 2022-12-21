@@ -44,14 +44,14 @@ public class JDetailTest {
 		// String expired, String detail, int discount, int finalPrice, int sales,
 		// String regDt, String modDt) {
 
-		detailVO1 = new DetailVO(10, "몬스터", 2200, 6, 1, "생산지_02", 300, "20221201", "상품설명_02", 1, 2200, 1, "", "");
+		detailVO1 = new DetailVO(46, "안동에서 올라온 전통찜닭(2인용)", 16900, 6, 1, "생산지_02", 300, "20221201", "상품설명_02", 1, 2200, 1, "", "");
 	}
 
 	@Test
 	// @Ignore
 	public void doselectOne() throws Exception {
-		dao.doDelete(detailVO1);
-		dao.doSave(detailVO1);
+//		dao.doDelete(detailVO1);
+//		dao.doSave(detailVO1);
 
 		DetailVO outVO = dao.doSelectOne(detailVO1);
 		isSameData(outVO, detailVO1);
