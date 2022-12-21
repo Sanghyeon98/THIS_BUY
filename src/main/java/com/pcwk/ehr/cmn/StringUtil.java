@@ -9,8 +9,6 @@ import com.google.gson.Gson;
 
 public class StringUtil {
 	
-	
-	
 	/**
 	 * Backand 메시지 처리
 	 * @param msgId(1이 아니면 실패)
@@ -40,13 +38,21 @@ public class StringUtil {
 	}
 	
 	/**
-	 * 현재날자
-	 * @return YYYYMMDD
+	 * 패턴을 인자로 받아 날짜 형식을 돌려받는 함수
+	 * @param pattern
+	 * @return
 	 */
-	public static String getCurrentDate() {		
-		return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+	public static String getCurrentDate(String pattern) {
+		return LocalDateTime.now().format(DateTimeFormatter.ofPattern(pattern));
 	}
 	
+	/**
+	 * 현재 날짜
+	 * @return YYYYMMDD
+	 */
+	public static String getCurrentDate() {
+		return getCurrentDate("yyyyMMdd");
+	}
 	
 	/**
 	 * NULL처리

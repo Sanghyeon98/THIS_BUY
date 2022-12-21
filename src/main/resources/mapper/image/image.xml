@@ -11,7 +11,8 @@
 		    main_image,
 		    org_name,
 		    save_name,
-		    path,
+		    save_path,
+		    view_path,
 		    file_size,
 		    file_ext,
 		    from_tb,
@@ -24,13 +25,14 @@
 		    #{mainImage},
 		    #{orgName},
 		    #{saveName},
-		    #{path},
+		    #{savePath},
+		    #{viewPath},
 		    #{fileSize},
 		    #{fileExt},
 		    #{fromTb},
 		    #{fromNo},
-		    SYSDATE,
-		    SYSDATE
+		    LOCALTIMESTAMP,
+		    LOCALTIMESTAMP
 		)
 	</insert>
 	
@@ -39,15 +41,25 @@
 		WHERE image_no = #{imageNo}
 	</delete>
 	
+	<select id="doSelectOne" parameterType="ImageVO" resultType="ImageVO">
+		SELECT
+		    image_no AS imageNo
+		FROM image
+		WHERE 1=1
+		  AND save_name = #{saveName}
+		  AND org_name = #{orgName}	
+  </select>
+  
 	<select id="doRetrieve" parameterType="ImageVO" resultType="ImageVO">
 		SELECT
 		    image_no   AS imageNo,
-		    gubun      AS   gubun,
+		    gubun      AS gubun,
 		    image_m    AS imageM,
 		    main_image AS mainImage,
 		    org_name   AS orgName,
 		    save_name  AS saveName,
-		    path       AS path,
+		    save_path  AS savePath,
+		    view_path  AS viewPath,
 		    file_size  AS fileSize,
 		    file_ext   AS fileExt,
 		    from_tb    AS fromTb,

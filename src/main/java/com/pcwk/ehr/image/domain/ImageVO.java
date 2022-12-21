@@ -7,8 +7,9 @@ public class ImageVO {
 	private  int		mainImage;    //메인이미지 
 	private  String		orgName;      //원본파일명
 	private  String		saveName;     //저장파일명
-	private  String		path;         //경로
-	private	 int		fileSize;     //파일용량
+	private  String		savePath;     //저장경로
+	private  String		viewPath;     //이미지태그경로
+	private	 long		fileSize;     //파일용량
 	private  String		fileExt;      //확장자
 	private  int		fromTb;       //출처
 	private  int		fromNo;       //출처번호
@@ -17,8 +18,8 @@ public class ImageVO {
 	
 	public ImageVO() {}
 
-	public ImageVO(int imageNo, int gubun, int imageM, int mainImage, String orgName, String saveName, String path,
-			int fileSize, String fileExt, int fromTb, int fromNo, String regDt, String modDt) {
+	public ImageVO(int imageNo, int gubun, int imageM, int mainImage, String orgName, String saveName, String savePath,
+			String viewPath, long fileSize, String fileExt, int fromTb, int fromNo, String regDt, String modDt) {
 		super();
 		this.imageNo = imageNo;
 		this.gubun = gubun;
@@ -26,7 +27,8 @@ public class ImageVO {
 		this.mainImage = mainImage;
 		this.orgName = orgName;
 		this.saveName = saveName;
-		this.path = path;
+		this.savePath = savePath;
+		this.viewPath = viewPath;
 		this.fileSize = fileSize;
 		this.fileExt = fileExt;
 		this.fromTb = fromTb;
@@ -83,19 +85,27 @@ public class ImageVO {
 		this.saveName = saveName;
 	}
 
-	public String getPath() {
-		return path;
+	public String getSavePath() {
+		return savePath;
 	}
 
-	public void setPath(String path) {
-		this.path = path;
+	public void setSavePath(String savePath) {
+		this.savePath = savePath;
 	}
 
-	public int getFileSize() {
+	public String getViewPath() {
+		return viewPath;
+	}
+
+	public void setViewPath(String viewPath) {
+		this.viewPath = viewPath;
+	}
+
+	public long getFileSize() {
 		return fileSize;
 	}
 
-	public void setFileSize(int fileSize) {
+	public void setFileSize(long fileSize) {
 		this.fileSize = fileSize;
 	}
 
@@ -142,8 +152,9 @@ public class ImageVO {
 	@Override
 	public String toString() {
 		return "ImageVO [imageNo=" + imageNo + ", gubun=" + gubun + ", imageM=" + imageM + ", mainImage=" + mainImage
-				+ ", orgName=" + orgName + ", saveName=" + saveName + ", path=" + path + ", fileSize=" + fileSize
-				+ ", fileExt=" + fileExt + ", fromTb=" + fromTb + ", fromNo=" + fromNo + ", regDt=" + regDt + ", modDt="
-				+ modDt + ", toString()=" + super.toString() + "]";
+				+ ", orgName=" + orgName + ", saveName=" + saveName + ", savePath=" + savePath + ", viewPath="
+				+ viewPath + ", fileSize=" + fileSize + ", fileExt=" + fileExt + ", fromTb=" + fromTb + ", fromNo="
+				+ fromNo + ", regDt=" + regDt + ", modDt=" + modDt + ", toString()=" + super.toString() + "]";
 	}
+
 }

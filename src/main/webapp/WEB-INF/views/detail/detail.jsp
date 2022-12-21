@@ -91,59 +91,54 @@
 
 <title>상품 상세</title>
 
-  <!-- javascript -->
-  <script>
-    $(document).ready(function(){
-    	//console.log('Hello, world!');
-    	$("#down").on("click",function(){
-    		console.log('#down');
-    		if($("#p_num1").val() < 1){
-    			console.log("1이상");
-    			alert("수량을 확인하세요.");
-    		}else{
-    			console.log("1이하");
-    			console.log("$('#p_num1').val() : " + $("#p_num1").val());
-    			basket.changePNum(1);
-    		}
-    		
-    	})
-    });  
-    
- // 수량변경 - 이벤트 델리게이션으로 이벤트 종류 구분해 처리
-
-    document.querySelectorAll('.updown').forEach(
-
-        function(idx){
-
-            //수량 입력 필드 값 변경
-
-            item.querySelector('input').addEventListener('keyup', function(){
-
-                basket.changePNum(idx+1);
-
-            });
-
-            //수량 증가 화살표 클릭
-
-            item.children[1].addEventListener('click', function(){
-
-                basket.changePNum(idx+1);
-
-            });
-
-            //수량 감소 화살표 클릭
-
-            item.children[2].addEventListener('click', function(){
-
-                basket.changePNum(idx+1);
-
-            });
-
-        }
-
-    );
+<!-- javascript -->
+<script>
+  $(document).ready(function() {
+  	console.log('document.ready');
+  	
+  	const formform = document.getElementsByName("detailForm"); 
+  	
+  	let price = document.getElementById("price");
+  	let amount = document.getElementById("amount");
+  	let minus = document.getElementById("minus");
+  	let add = document.getElementById("add");
+  	let sum = document.getElementById("sum");
+  	
+  	if(formform) { // detailForm이 있으면 true
+  		console.log("formform!!");
+  		
+  		sum.value = price.value;  // 최초 합계 가격은 제품 가격과 동일
+  		
+  		let amountval = amount.value;
+  		let sumval = sum.value;
+  		let priceval = price.value;
+  		
+  		if(minus) { // id가 minus인 태그가 있으면 true
+  			console.log("minus!");
+  			minus.addEventListener('click', function() {
+  				if(amountval > 1) {
+  					amountval--;
+  					sumval = amountval * priceval;
+	          amount.value = amountval;  // 수량 변경
+	          sum.value = sumval;  // 최종 가격 변경
+  				}
+  			});
+  		}
+  		
+  		if(add) { // id가 add인 태그가 있으면 true 
+  			console.log("add!");
+  			add.addEventListener('click', function() {
+          amountval++;
+          sumval = amountval*priceval;
+          amount.value = amountval;  // 수량 변경
+          sum.value = sumval;  // 최종 가격 변경
+        });
+  		}
+  	}
+  	
+  });  // document.ready END ---------------------------------------------------
   
-  </script>
+</script>
 </head>
 <body>
   <div>  
@@ -151,41 +146,51 @@
       <div><img alt="이미지" src="${CP_RES }/imgs/spring.png"></div>
     <div class= "content2">
       <div>
-        <table>
-          <tr>
-            <td>상품 번호</td>
-            <td><input type="text" value="${vo.itemNo}" readonly="readonly"></td>
-          </tr>
-          <tr>
-            <td>상품명</td>
-            <td><input type="text" value="${vo.name}" readonly="readonly"></td>
-          </tr>
-          <tr>
-            <td>상품 가격</td>
-            <td><input type="text" value="${vo.price}" readonly="readonly"></td>
-          </tr>
-          <tr>
-            <td>생산지</td>
-            <td><input type="text" value="${vo.production}" readonly="readonly"></td>
-          </tr>
-          <tr>
-            <td>수량</td>
-             <td class="updown">
-                <button id="down" name="down"><i class="fas fa-arrow-alt-circle-up down">-</i></button>
-                  <input type="text" name="p_num1" id="p_num1" size="1" class="p_num" value="1">
-                <button id="up" name="up"><i class="fas fa-arrow-alt-circle-down up">+</i></button>
-             </td>
-          </tr>
-          <tr>
-            <td>중량/용량</td>
-            <td><input type="text" value="${vo.weight}" readonly="readonly"></td>
-          </tr>
-          <tr>
-            <td>최종 가격</td>
-            <td><div id="finalPrice">${vo.finalPrice}</div></td>
-            <%-- <td><input type="text" id="fin alPrice" value="${vo.finalPrice}" readonly="readonly"></td> --%>
-          </tr>
-        </table>
+        <form action="#" id="detailForm">
+	        <table>
+	          <tr>
+	            <td>상품 번호</td>
+	            <td><input type="text" value="${vo.itemNo}" readonly="readonly"></td>
+	          </tr>
+	          <tr>
+	            <td>상품명</td>
+	            <td><input type="text" value="${vo.name}" readonly="readonly"></td>
+	          </tr>
+	          <tr>
+	            <td>상품 가격</td>
+	            <td>
+	              <input type="text" name="price" id="price" value="${vo.price}" readonly="readonly">
+	            </td>
+	          </tr>
+	          <tr>
+	            <td>생산지</td>
+	            <td><input type="text" value="${vo.production}" readonly="readonly"></td>
+	          </tr>
+	          <tr>
+	            <td>수량</td>
+	            <td>
+	              <input type="button" name="minus" id="minus" value="-">
+	              <input type="text" name="amount" id="amount" value="1" size="2" readonly="readonly">
+	              <input type="button" name="add" id="add" value="+">
+	            </td>
+	            
+	             <!-- <td class="updown">
+	                <button id="down" name="down"><i class="fas fa-arrow-alt-circle-up down">-</i></button>
+	                  <input type="text" name="p_num1" id="p_num1" size="1" class="p_num" value="1">
+	                <button id="up" name="up"><i class="fas fa-arrow-alt-circle-down up">+</i></button>
+	             </td> -->
+	          </tr>
+	          <tr>
+	            <td>중량/용량</td>
+	            <td><input type="text" value="${vo.weight}" readonly="readonly"></td>
+	          </tr>
+	          <tr>
+	            <td>최종 가격</td>
+	            <td><input type="text" name="sum" id="sum" readonly></td>
+	            <%-- <td><input type="text" id="fin alPrice" value="${vo.finalPrice}" readonly="readonly"></td> --%>
+	          </tr>
+	        </table>
+        </form>
       </div>
 
       <div>

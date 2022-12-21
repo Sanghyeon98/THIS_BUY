@@ -56,7 +56,7 @@
     			return;
     		}
     		
-    		let image = $("#imageNo").val();
+    		let image = $("#imageName").val();
     		
     		console.log("이미지 : " + image);
     		console.log("lastIndexOf : " + image.lastIndexOf('\\'));
@@ -66,33 +66,109 @@
     		
     		console.log("imageName : " + imgPathName.split('.'));
     		
+    		
+    		let fileInput = $("#imageName")[0];
+    		console.log("fileInput.files.length : " + fileInput.files.length);
+
+    		if(fileInput.files.length === 0) { 
+          alert("파일을 선택해주세요.");
+          return;
+        }
+    		
+    		let formData = new FormData();
+
+    		for(let i=0; i < fileInput.files.length; i++) {
+          formData.append("image"+i, fileInput.files[i]);
+        }
+    		
+    		console.log("formData : " + formData);
+    		
+        // proccessData : true -> query string으로 데이터 전달! ex)http://localhost:8089?title-1234
+        // contentType : default값은 "application/x-www-form-urlencoded; charset-UTF-8"
+        //   --> multipart/form-data로 전송되도록 false 설정!
+        $.ajax({ 
+           type: "POST",
+           url: "${CP}/image/doSave.do",
+           processData: false,
+           contentType : false,
+           async: "true",
+           dataType: "html",
+           data: formData,
+           
+           success:function(data) {  // 이미지 등록 성공
+             console.log(data);  // data : ImageVO
+             let getImage = JSON.parse(data);
+             console.log("getImage.imageNo : " + getImage.imageNo);
+             console.log("parseInt(getImage.imageNo) : " + parseInt(getImage.imageNo));
+             
+             getImageNo = getImage.imageNo;
+             
+             // 제품 추가
+             let p_method = "POST";
+             let p_url = "/product/doSave.do";
+             let p_async = true;
+             let p_params = {
+               name : $("#name").val(),
+               price : $("#price").val(),
+               production : $("#production").val(),
+               weight : $("#weight").val(),
+               expired : $("#expired").val(),
+               quantity : $("#quantity").val(), 
+               detail : $("#detail").val(),
+               imageNo : getImageNo
+             };
+             
+             PClass.callAjax(p_method, p_url, p_async, p_params, function(p_data) {
+               console.log("in_PClass");
+               console.log("p_data : " + p_data);
+             });
+           }
+           
+        }); // ajax END --------------------------------------------------------
+           
+    		
+    		/*
     		let method = "POST";
     		let url = "/image/doSave.do";
     		let async = true;
     		let params = {
-    				
+    				gubun : 1
     		};
-    		
-    		/* let method = "POST";
-    		let url = "/product/doSave.do";
-    		let async = true;
-    		let params = {
-    				name : $("#name").val(),
-    				price : $("#price").val(),
-    				production : $("#production").val(),
-    				weight : $("#weight").val(),
-    				expired : $("#expired").val(),
- 		        quantity : $("#quantity").val(),
- 		        detail : $("#detail").val(),
- 		        imageNo : $("#imageNo").val()	
-    		}; */
-    		
     		PClass.callAjax(method, url, async, params, function(data) {
     			console.log(data);
-    			
+   			  let parsedJson = JSON.parse(data);
+   			  
+	   			if("0" != parsedJson.msgId) {  // 이미지 등록 성공
+	   				
+	   				// 추가된 이미지 번호 가져오기 (seq)
+	   				let i_method = ""
+	   				
+	   				
+	   				// 제품 추가
+	   				let p_method = "POST";
+	   			  let p_url = "/product/doSave.do";
+	   			  let p_async = true;
+	   			  let p_params = {
+	    				name : $("#name").val(),
+	    				price : $("#price").val(),
+	    				production : $("#production").val(),
+	    				weight : $("#weight").val(),
+	    				expired : $("#expired").val(),
+	 		        quantity : $("#quantity").val(), 
+	 		        detail : $("#detail").val()
+	 		        //imageNo : $("#imageName").val()
+	   			  };
+	   			  
+	   			  PClass.callAjax(p_method, p_url, p_async, p_params, function(p_data) {
+	   				  console.log("in_PClass");
+	   	        console.log(p_data);
+	   			  });
+	   				
+	   			} else {  // 이미지 등록 실패
+	   				
+	   			}
     		});
-    		
-    		
+    		*/
     	});  // 상품 등록 버튼 END ---------------------------------------------------
 
     	
@@ -151,7 +227,7 @@
           <p>관리자 > 상품 관리 > 상품 등록</p>
         </div>
         <div class="content_body">
-          <form action="#">
+          <form action="#" method="post" enctype="multipart/form-data">
             <table>
               <tr>
                 <td class="table_left"><label>분류선택</label></td>
@@ -198,8 +274,8 @@
                 <td><textarea rows="" cols="" id="detail" name="detail"></textarea></td>
               </tr>
               <tr>
-                <td class="table_left"><label for="imageNo">이미지</label></td>
-                <td><input type="file" id="imageNo" name="imageNo"></div>
+                <td class="table_left"><label for="imageName">이미지</label></td>
+                <td><input type="file" id="imageName" name="imageName"></div>
               </tr>
             </table>
             <div class="reset">

@@ -60,8 +60,19 @@ public class ImageDaoImpl implements ImageDao {
 
 	@Override
 	public ImageVO doSelectOne(ImageVO inVO) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		ImageVO outVO = null;
+		
+		LOG.debug("┌--------------------------------┐");
+		LOG.debug("|  param : " + inVO);
+		
+		String statement = NAMESPACE + DOT + "doSelectOne";
+		LOG.debug("|  statement : " + statement);
+		
+		outVO = sqlSessionTemplate.selectOne(statement, inVO);
+		LOG.debug("|  outVO : " + outVO);
+		LOG.debug("└--------------------------------┘");
+		
+		return outVO;
 	}
 
 	@Override

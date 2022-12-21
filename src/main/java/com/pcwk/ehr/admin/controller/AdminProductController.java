@@ -20,7 +20,6 @@ import com.pcwk.ehr.admin.domain.CategoryVO;
 import com.pcwk.ehr.admin.domain.ProductVO;
 import com.pcwk.ehr.admin.service.CategoryService;
 import com.pcwk.ehr.admin.service.ProductService;
-import com.pcwk.ehr.board.domain.BoardVO;
 import com.pcwk.ehr.cmn.MessageVO;
 import com.pcwk.ehr.cmn.SearchVO;
 import com.pcwk.ehr.cmn.StringUtil;
@@ -50,17 +49,6 @@ public class AdminProductController {
 	public String doSave(ProductVO inVO) throws SQLException {
 		String jsonString = "";
 		LOG.debug("┌-------------------------------------┐");
-		
-		if(null != inVO && inVO.getDiscount() == 0) {
-			LOG.debug("doSave() getDiscount() 값!!!!! inVO.getDiscount() : " + inVO.getDiscount());
-			inVO.setDiscount(0);
-		}
-		
-		
-//	    discount,
-//	    final_price,
-//	    sales,
-
 		
 		
 		LOG.debug("|  jsonString : " + jsonString);
