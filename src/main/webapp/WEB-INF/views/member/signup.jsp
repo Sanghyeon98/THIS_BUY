@@ -29,7 +29,34 @@
     <!-- bootstrap js -->
     <script src="${CP_RES}/js/bootstrap.min.js"></script>
 <title>회원가입</title>
+<script >
+$(document).ready(function(){            
+    var now = new Date();
+    var year = now.getFullYear();
+    var mon = (now.getMonth() + 1) > 9 ? ''+(now.getMonth() + 1) : '0'+(now.getMonth() + 1); 
+    var day = (now.getDate()) > 9 ? ''+(now.getDate()) : '0'+(now.getDate());           
+    //년도 selectbox만들기               
+    for(var i = 1900 ; i <= year ; i++) {
+        $('#year').append('<option value="' + i + '">' + i + '년</option>');    
+    }
 
+    // 월별 selectbox 만들기            
+    for(var i=1; i <= 12; i++) {
+        var mm = i > 9 ? i : "0"+i ;            
+        $('#month').append('<option value="' + mm + '">' + mm + '월</option>');    
+    }
+    
+    // 일별 selectbox 만들기
+    for(var i=1; i <= 31; i++) {
+        var dd = i > 9 ? i : "0"+i ;            
+        $('#day').append('<option value="' + dd + '">' + dd+ '일</option>');    
+    }
+    $("#year  > option[value="+year+"]").attr("selected", "true");        
+    $("#month  > option[value="+mon+"]").attr("selected", "true");    
+    $("#day  > option[value="+day+"]").attr("selected", "true");       
+  
+})
+</script>
 <style type="text/css">
 .r{
  color:red;	
@@ -46,9 +73,32 @@ color:white;
 padding: 6px 0px 0px;
 }
 .row{
-padding: 10px 20px;
 width:640px;
 height:70px;
+}
+.info#info__birth {
+  display: flex;
+}
+
+.info#info__birth select {
+  margin-left : 7px;
+}
+
+.info#info__birth select:first-child {
+  margin-left : 0px;
+}
+.info#info__birth select::-webkit-scrollbar {
+  width: 10px;
+}
+
+.info#info__birth select::-webkit-scrollbar-thumb {
+  background-color: #B8C9DF;
+  border-radius: 3px;
+}
+
+.info#info__birth select::-webkit-scrollbar-track {
+  background-color: #B8C9DF;
+  border-radius: 6px;
 }
 </style>
 
@@ -72,10 +122,10 @@ height:70px;
     <div class="col-md-2 text-centers">
       아이디<span class="r">*</span>
     </div>
-    <div class="col-md-6 text-centers">
+    <div class="col-md-7 text-centers">
       <input type="text" class="form-control" id="uId" name="uId" placeholder="아이디를 입력해주세요">
     </div>
-     <div class="col-md-2 text-centers">
+     <div class="col-md-3 text-centers">
       <button type="submit" class="btn btn-default btn-block">중복 확인</button>
     </div>
     </div>
@@ -84,7 +134,7 @@ height:70px;
     <div class="col-md-2 text-centers">
      비밀번호<span class="r">*</span>
     </div>
-    <div class="col-md-6 text-centers">
+    <div class="col-md-7 text-centers">
       <input type="text" class="form-control" id="passwd" name="passwd" placeholder="비밀번호를 입력해주세요">
     </div>
     </div>
@@ -93,7 +143,7 @@ height:70px;
     <div class="col-md-2 text-centers">
      비밀번호 확인<span class="r">*</span>
     </div>
-    <div class="col-md-6 text-centers">
+    <div class="col-md-7 text-centers">
       <input type="text" class="form-control" id="passwd" name="passwd" placeholder="비밀번호를 한번 더 입력해주세요">
     </div>
     </div>
@@ -102,7 +152,7 @@ height:70px;
     <div class="col-md-2 text-centers">
              이름<span class="r">*</span>
     </div>
-       <div class="col-md-6 text-centers">
+       <div class="col-md-7 text-centers">
          <input type="text" class="form-control" id="name" name="name" placeholder="이름을 입력해주세요">
        </div>
    </div>
@@ -111,32 +161,83 @@ height:70px;
     <div class="col-md-2 text-centers">
              이메일<span class="r">*</span>
     </div>
-       <div class="col-md-6 text-centers">
+       <div class="col-md-7 text-centers">
          <input type="text" maxlength="320" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요">
        </div>
-        <div class="col-md-2">
-         <button type="submit" class="btn btn-default">중복 확인</button>
+        <div class="col-md-3">
+         <button type="submit" class="btn btn-default btn-block">중복 확인</button>
         </div>
    </div>
    
    <div class="row">
-    <div class="col-md-3 text-centers">
+    <div class="col-md-2 text-centers">
            휴대폰<span class="r">*</span>
     </div>
        <div class="col-md-7 text-centers">
-         <input type="number"  class="form-control" id="email" name="email" placeholder="숫자만 입력해주세요">
+         <input type="text"  class="form-control" id="email" name="email" placeholder="숫자만 입력해주세요">
        </div>
-       <div class="col-md-2">
-         <button type="submit" class="btn btn-default">인증번호 받기</button>
+       <div class="col-md-3">
+         <button type="submit" class="btn btn-default btn-block ">인증번호 받기</button>
        </div>
    </div>
     
-    
-    
-    
-    
+    <div class="row">
+    <div class="col-md-2 text-centers">
+          주소<span class="r">*</span>
     </div>
-  </div>
+       <div class="col-md-7 text-centers">
+         <button type="submit" class="btn btn-default btn-block">주소 검색</button>
+         <small>배송지에 따라 상품 정보가 달라질 수 있습니다.</small>
+       </div>
+       
+       </div>
+      <div class="row">
+    <div class="col-md-2 text-centers">
+          성별
+    </div>
+           <div class="col-md-7 text-centers">
+           <label>
+           <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+           남자 
+           </label>
+
+           <label>
+           <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+          여자
+           </label>
+
+           <label>
+           <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+           선택 안함
+           </label>
+       </div>
+       </div>
+   
+     <div class="row">
+    <div class="col-md-2 text-centers">
+       생년 월일
+    </div>
+    <div class="col-md-7 text-centers">
+ <select name="yy" id="year"></select>년
+<select name="mm" id="month"></select>월
+<select name="dd" id="day"></select>일
+</div>
+</div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+   </div>
+   </div>
+ 
 </body>
 
 </html>
