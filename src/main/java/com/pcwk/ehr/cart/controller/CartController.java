@@ -29,10 +29,11 @@ public class CartController {
 	public CartController() {};
 	
 	@RequestMapping(value="/view.do")
-	public String cartView()throws SQLException {
+	public String cartView(Model model)throws SQLException {
 		System.out.println("=============================================");
 		System.out.println("==cartcontroller=cartView====");
 		System.out.println("=============================================");
+		
 		
 		return "cart/cart";
 	}

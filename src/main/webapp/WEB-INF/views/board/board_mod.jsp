@@ -113,7 +113,7 @@
     height: 42px;
     border-radius: 0px;
     color: rgb(255, 255, 255);
-    background-color: black;
+    background-color: #b8c9df;
     border: 0px none;
 }
 .css-d7qwpj span {
@@ -133,11 +133,20 @@
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="${CP_RES}/css/bootstrap.min.css">
 
+
 <!-- jQuery -->
 <script src="${CP_RES}/js/jquery-1.12.4.js"></script>
+<!-- callAjax -->
+<script src="${CP_RES}/js/callAjax.js"></script>
+<!-- String, Number, Date Util -->
+<script src="${CP_RES}/js/eUtil.js"></script>
+
+<!-- paging -->
+<script src="${CP_RES}/js/jquery.bootpag.js"></script>
 
 <!-- bootstrap js -->
 <script src="${CP_RES}/js/bootstrap.min.js"></script>
+
 <meta charset="UTF-8">
 <title>제목</title>
 <script >
@@ -149,37 +158,114 @@
 	      console.log("moveToList");
 	      moveToList();
 	    });
+	
+	  //수정
+	    $("#doUpdate").on("click", function() {
+
+	     
+
+	      //제목
+	      if (eUtil.ISEmpty($("#title").val()) == true) {
+	        alert("제목을 입력 하세요.");
+	        $("#title").focus();
+	        return;
+	      }
+
+	      //내용
+	      if (eUtil.ISEmpty($("#contents").val()) == true) {
+	        alert("내용을 입력 하세요.");
+	        $("#contents").focus();
+	        return;
+	      }
+
+	      if (confirm("수정 하시겠습니까?") == false)
+	        return;
+
+	      let method = "GET";
+	      let url = "/board/doUpdate.do";
+	      let async = true;
+	      let params = {
+	        gubun : 10,
+	        title : $("#title").val(),
+	        contents : $("#contents").val()
+	      };
+
+	      PClass.callAjax(method, url, async, params, function(data) {
+	        console.log(data);
+	        let parsedJson = JSON.parse(data);
+
+	        if ("1" == parsedJson.msgId) {
+	          alert(parsedJson.msgContents);
+	          moveToList();
+	        } else {
+	          alert(parsedJson.msgContents);
+	        }
+
+	      });
+
+	    });
+
+	    $("#doDelete").on("click", function() {
+	      console.log("doDelete");
+
+	      if (confirm("삭제 하시겠습니까?") == false)
+	        return;
+
+	      let method = "GET";
+	      let url = "/board/doDelete.do";
+	      let async = true;
+	      let params = {
+	    		  gubun : 10,
+	        seq : $("#seq").val()
+	      };
+
+	      PClass.callAjax(method, url, async, params, function(data) {
+	        console.log(data);
+	        let parsedJson = JSON.parse(data);
+	        if ("1" == parsedJson.msgId) {
+	          alert(parsedJson.msgContents);
+	          moveToList();
+	        } else {
+	          alert(parsedJson.msgContents);
+	        }
+
+	      });
+
+	      //doDelete  
+	    });
 
   });
   
   function moveToList() {
-	    window.location.href = "${CP}/board/boardView.do?gubun="
-	        + $("#gubun").val();
+	    window.location.href = "${CP}/board/boardView.do?gubun=10"
 	  }
 </script>
 
 </head>
 <body>
+      <input type="text" name="gubun" id="gubun" value="${vo.getgubun()}">
+      <input type="text" name="seq" id="seq" value="${vo.seq}">
      <div class="css-1i60c0e">
       <div class="css-1uvp5r6">
        <div class="css-qwe8mt">${title} </div>
        <div class="css-klb7h8">새로운 사항을 확인하세요</div>
       </div>
-      
+      list : ${list }
       
       <div class="css-1uvp5r6">
        <div class="css-1t45bai">
         <div class="css-1dhg94g">
          <div class="css-1xrh39a">제목</div> 
          <input type="text" class="css-8vgw34" id="title" name="title" 
-         value="<c:out value='${vo.title }' />" placeholder="제목을 입력하세요" maxlength="100"> 
+         value="<c:out value='${vo.title }' />" placeholder="제목을 입력하세요" maxlength="100">  
+         
         </div> 
         <div class="css-1dhg94g">
          <div class="css-1xrh39a">작성자</div>
          <input type="text"
           class="css-1xrh39a" id="regId" name="regId"
           value="<c:out value='${vo.regId }' />" readonly="readonly"
-          placeholder="등록자" maxlength="100">
+          placeholder="작성자" maxlength="100">
         </div> 
          <div class="css-1dhg94g">
          <div class="css-1xrh39a">작성일</div>
@@ -197,10 +283,12 @@
          <button class ="css-214ym4" type="button" width="150" height="42" radius="0" id="moveToList">
           <span class="css-ymwvow"> 목록</span>
          </button>
-         <button class ="css-214ym4" type="button" width="150" height="42" radius="0">
-          <span class="css-ymwvow"> 등록</span>
+         <button class ="css-214ym4" type="button" width="150" height="42" radius="0" id="doUpdate">
+          <span class="css-ymwvow"> 수정</span>
          </button>
-         
+         <button class ="css-214ym4" type="button" width="150" height="42" radius="0" id="doDelete">
+          <span class="css-ymwvow"> 삭제</span>
+         </button>
         </div>
         
    

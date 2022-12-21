@@ -4,8 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:set var="CP" value="${pageContext.request.contextPath}" /> <!-- ContextPath -->
-<c:set var="resources" value="/resources/css"/>
-<c:set var="CP_RES" value="${CP}${resources}"/>
+<c:set var="RES" value="/resources"/>
+<c:set var="CP_RES" value="${CP}${RES}"/>
 
 <fmt:bundle basename="message">
 <%@ include file="/WEB-INF/views/cmn/cache.jsp" %>
@@ -18,22 +18,26 @@
   <meta name="keywords" content="html5, css3, javascipt6, jQuery">
   <meta charset="UTF-8">
   <!-- favicon -->
-  <link rel="shortcut icon" type="images/x-icon" href="/PC_HTML/favicon.ico">
+  <link rel="shortcut icon" type="images/x-icon" href="${CP}/favicon.ico">
   <!-- jquery ui -->
-  <link rel="stylesheet" href="${CP_RES}/admin_category_mng.css">
-  <style>
-  </style>
+  <link rel="stylesheet" href="${CP_RES}/css/admin_category_mng.css">
 
+  <!-- jQuery -->
+  <script src="${CP_RES}/js/jquery-1.12.4.js"></script>
+  <!-- callAjax -->
+  <script src="${CP_RES}/js/callAjax.js"></script>
+  <!-- String, Number, Date Util -->
+  <script src="${CP_RES}/js/eUtil.js"></script>
+  <!-- paging -->
+  <script src="${CP_RES}/js/jquery.bootpag.js"></script>
+  <!-- bootstrap js -->
+  <script src="${CP_RES}/js/bootstrap.min.js"></script>
+  
   <title>제목</title>
   
   <!-- javascript --> 
   <script>
-    $(document).ready(function(){
-      
-    });
-    
-    function viewCon(e) {
-    }
+ 
   </script>
 </head>
 

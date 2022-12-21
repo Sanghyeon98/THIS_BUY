@@ -1,4 +1,4 @@
-package com.pcwk.ehr.board.dao;
+package com.pcwk.ehr.answer.dao;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -10,21 +10,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 
-import com.pcwk.ehr.board.domain.AnswerVO;
+import com.pcwk.ehr.answer.domain.AnswerVO;
 import com.pcwk.ehr.cmn.DTO;
 
 @Repository("answerDaoImpl")
 public class AnswerDaoImpl {
-	
+
 	final Logger LOG = LogManager.getLogger(getClass());
 
-	final String NAMESPACE = "com.pcwk.ehr.board";
+	final String NAMESPACE = "com.pcwk.ehr.answer";
 	final String DOT = ".";
 
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;// db연결객체
-	
-	public AnswerDaoImpl() {}
+
+	public AnswerDaoImpl() {
+	}
 
 	/**
 	 * 문의 답변 전체 목록 조회
@@ -33,7 +34,7 @@ public class AnswerDaoImpl {
 	 * @throws SQLException
 	 */
 	public List<AnswerVO> getAllList() throws SQLException {
-		String statement = this.NAMESPACE + ".getAllList";
+		String statement = this.NAMESPACE + DOT + "getAllList";
 
 		List<AnswerVO> list = sqlSessionTemplate.selectList(statement);
 
@@ -52,7 +53,7 @@ public class AnswerDaoImpl {
 	 */
 	public List<AnswerVO> doSelectOne(DTO inVO) throws SQLException {
 
-		String statement = NAMESPACE + ".doSelectOne";
+		String statement = NAMESPACE + DOT + "doSelectOne";
 		List<AnswerVO> list = sqlSessionTemplate.selectList(statement, inVO);
 
 		for (AnswerVO vo : list) {
@@ -65,7 +66,7 @@ public class AnswerDaoImpl {
 
 		AnswerVO outVO = null;
 
-		String statement = NAMESPACE + ".doSelectAnswer";
+		String statement = NAMESPACE + DOT + "doSelectAnswer";
 		LOG.debug("=inVO=" + inVO);
 		LOG.debug("=statement=" + statement);
 
@@ -95,7 +96,7 @@ public class AnswerDaoImpl {
 		int flag = 0;
 		AnswerVO answer = (AnswerVO) inVO;
 
-		String statement = NAMESPACE + ".doUpdate";
+		String statement = NAMESPACE + DOT + "doUpdate";
 
 		flag = sqlSessionTemplate.update(statement, answer);
 
@@ -112,7 +113,7 @@ public class AnswerDaoImpl {
 	 */
 	public int doDelete(AnswerVO inVO) throws SQLException {
 		int flag = 0;
-		String statement = NAMESPACE + ".doDelete";
+		String statement = NAMESPACE + DOT + "doDelete";
 
 		LOG.debug("=answer=" + inVO);
 		LOG.debug("=statement=" + statement);
@@ -125,6 +126,7 @@ public class AnswerDaoImpl {
 
 	/**
 	 * 문의답변등록
+	 * 
 	 * @param inVO
 	 * @return
 	 * @throws SQLException
@@ -132,7 +134,7 @@ public class AnswerDaoImpl {
 	public int doInsert(AnswerVO inVO) throws SQLException {
 		int flag = 0;
 
-		String statement = NAMESPACE + ".doInsert";
+		String statement = NAMESPACE + DOT + "doInsert";
 		LOG.debug("=answer=" + inVO);
 		LOG.debug("=statement=" + statement);
 

@@ -90,7 +90,7 @@
 		     TO_CHAR(reg_dt, 'YYYY-MM-DD HH24:MI:SS') regDt,
 	       reg_id
 		FROM board
-		WHERE gubun = #{gubun}
+		WHERE seq = #{seq}
 	</select> 
 
   

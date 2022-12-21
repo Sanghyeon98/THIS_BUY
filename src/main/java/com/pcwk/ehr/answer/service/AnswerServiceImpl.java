@@ -1,4 +1,4 @@
-package com.pcwk.ehr.board.service;
+package com.pcwk.ehr.answer.service;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -8,10 +8,10 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pcwk.ehr.board.dao.AnswerDaoImpl;
+import com.pcwk.ehr.answer.dao.AnswerDaoImpl;
+import com.pcwk.ehr.answer.domain.AnswerVO;
 import com.pcwk.ehr.board.dao.BoardDao;
 import com.pcwk.ehr.board.dao.BoardDaoImpl;
-import com.pcwk.ehr.board.domain.AnswerVO;
 import com.pcwk.ehr.cmn.DTO;
 
 @Service("answerService")
@@ -53,6 +53,11 @@ public class AnswerServiceImpl implements AnswerService {
 	public DTO doSelectAnswer(AnswerVO inVO) throws SQLException {
 
 		return answerDaoImpl.doSelectAnswer(inVO);
+	}
+
+	@Override
+	public List<AnswerVO> getAllList() throws SQLException {
+		return answerDaoImpl.getAllList();
 	}
 
 

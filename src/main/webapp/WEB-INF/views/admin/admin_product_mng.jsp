@@ -40,7 +40,10 @@
     
     $(document).ready(function(){
       
-      //paging
+    	// 최초 목록 조회
+    	doRetrieve(1);
+    	
+      // paging
       renderingPage('${totalPage}', 1);
       
       
@@ -436,28 +439,7 @@
                 </tr>
               </thead>
               <tbody>
-                <c:choose>
-                  <c:when test="${list.size() > 0 }">
-                    <c:forEach var="vo" items="${list }">
-                      <tr>
-                        <td class="td_center"><input type="checkbox" name="chk" value="${vo.itemNo }"></td>
-                        <td class="td_center"><c:out value="${vo.num }"/></td>
-                        <td><c:out value="${vo.name }"/></td>
-                        <td class="td_center"><c:out value="${vo.price }"/></td>
-                        <td class="td_center"><c:out value="${vo.quantity }"/></td>
-                        <td class="td_center"><c:out value="${vo.modDt }"/></td>
-                        <td style="display: none;"><c:out value="${vo.itemNo }"/></td>
-                      </tr>
-                    </c:forEach>
-                  </c:when>
-                  <c:otherwise>
-                    <tr>
-                      <td class="text-center col-sm-12 col-md-12 col-lg-12" colspan="99">
-                          No data found
-                      </td>
-                    </tr>
-                  </c:otherwise>
-                </c:choose>
+
 
               </tbody>
             </table>

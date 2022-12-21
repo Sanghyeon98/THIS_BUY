@@ -1,7 +1,7 @@
 <%--
 /**
-  Class Name:
-  Description:
+  Class Name: mypage_question
+  Description: 목록조회
   
   Modification information
   
@@ -16,33 +16,75 @@
  --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
 <c:set var="CP" value="${pageContext.request.contextPath }"></c:set>
-<c:set var="RES" value="/resources" ></c:set>
-<c:set var="CP_RES" value="${CP}${RES}" ></c:set>
+<c:set var="RES" value="/resources"/>
+<c:set var="CP_RES" value="${CP}${RES}"/>
+<fmt:bundle basename="message">
+<%@ include file="/WEB-INF/views/cmn/cache.jsp" %>
 <!DOCTYPE html>
-<html>  
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="shortcut icon" type="image/x-icon" href="${CP}/favicon.ico">   
-<!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet" href="${CP_RES}/css/bootstrap.min.css">
+<html>
 
-<!-- jQuery -->
-<script src="${CP_RES}/js/jquery-1.12.4.js"></script>
+<style>
+ul {
+	border: 1px solid crimson;
+	margin: 10px 110px; /* 바깥여백 */
+	padding: 10px; /* 안여백 */
+	list-style: none;
+}
 
-<!-- bootstrap js -->
-<script src="${CP_RES}/js/bootstrap.min.js"></script>
-<meta charset="UTF-8">
-<title>제목</title>
-<script >
-  $(document).ready(function(){
-	  console.log("document.ready");
-	  
-  });
-</script>
+.txt_center {
+	text-align: center; /* 가운데 정렬 */
+}
 
+.body {
+	display: flex;
+}
+
+.title {
+	display: flex;
+}
+
+.sp_select {
+	margin-left: 950px;
+}
+
+.sp_font {
+	margin-left: 100px;
+	font-size: 8px;
+}
+
+.sp_head {
+	font-size: 24px;
+}
+
+.tag {
+	margin: 50px 10px 50px;
+}
+
+.button {
+	height: 500px;
+	line-height: 500px;
+	text-align: center;
+	margin: 0 auto;
+}
+</style>
+
+
+<title></title>
+<script src="/PC_HTML/assets/js/jquery-3.6.1.js"></script>
+<script
+	src="/PC_HTML/assets/JQuery/jquery-ui-1.13.2.custom/jquery-ui.js"></script>
+<!-- javascript -->
+<script>
+   $(document).ready(function(){
+      console.log('Hello, world!');
+      
+      
+      
+    });
+  </script>
 </head>
 <body>
 	<div>
@@ -69,16 +111,11 @@
 			</ul>
 		</div>
 		<div>
-
-
 			<div class="title">
 				<div>
-
 					<span class="sp_head">상품문의</span> <span class="sp_font">-상품에
 						대한 문의를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로 이동될 수 있습니다.</span>
-
 					<hr>
-
 					<div>
 						<table>
 							<thead>
@@ -113,3 +150,4 @@
 	</div>
 </body>
 </html>
+</fmt:bundle>

@@ -1,4 +1,4 @@
-package com.pcwk.ehr.board.domain;
+package com.pcwk.ehr.answer.domain;
 
 import com.pcwk.ehr.cmn.DTO;
  

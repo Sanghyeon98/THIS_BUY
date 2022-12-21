@@ -10,9 +10,11 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.pcwk.ehr.admin.domain.ProductVO;
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.cmn.SearchVO;
 import com.pcwk.ehr.order.domain.OrderVO;
+
 
 @Repository("OrderDao")
 public class OrderDaoImpl implements OrderDao {
@@ -25,38 +27,6 @@ public class OrderDaoImpl implements OrderDao {
 	SqlSessionTemplate sqlSessionTemplate;
 
 	public OrderDaoImpl() {
-	}
-    
-	
-	
-	@Override
-	public int doDelete(DTO dto) throws SQLException {
-		LOG.debug("┌--------------------------------┐");
-		LOG.debug("|  param : " + dto);
-
-		String statement = NAMESPACE + DOT + "doInsert";
-		LOG.debug("|  statement : " + statement);
-
-		int flag = sqlSessionTemplate.insert(statement, dto);
-		LOG.debug("|  flag : " + flag);
-		LOG.debug("└--------------------------------┘");
-
-		return flag;
-	}
-
-	@Override
-	public int doSave(DTO dto) throws SQLException {
-		LOG.debug("┌--------------------------------┐");
-		LOG.debug("|  param : " + dto);
-
-		String statement = NAMESPACE + DOT + "doInsert";
-		LOG.debug("|  statement : " + statement);
-
-		int flag = sqlSessionTemplate.insert(statement, dto);
-		LOG.debug("|  flag : " + flag);
-		LOG.debug("└--------------------------------┘");
-
-		return flag;
 	}
 
 	@Override
@@ -78,7 +48,7 @@ public class OrderDaoImpl implements OrderDao {
 		LOG.debug("┌--------------------------------┐");
 		LOG.debug("|  param : " + inVO);
 
-		String statement = NAMESPACE + DOT + "doInsert";
+		String statement = NAMESPACE + DOT + "doSave";
 		LOG.debug("|  statement : " + statement);
 
 		int flag = sqlSessionTemplate.insert(statement, inVO);
@@ -88,28 +58,53 @@ public class OrderDaoImpl implements OrderDao {
 		return flag;
 	}
 
+	@Override
+	public OrderVO doSelectOne(OrderVO inVO) throws SQLException {
+		
+		return null;
+	
+	}
 
 
 	@Override
-	public OrderVO selectOne(OrderVO inVO) throws SQLException {
-		String statement = NAMESPACE + DOT + "doSelectOne";
-		OrderVO outVO = null;
-		
-		LOG.debug("================================");
+	public int doSave(OrderVO inVO) throws SQLException {
+		LOG.debug("┌--------------------------------┐");
 		LOG.debug("|  param : " + inVO);
-		LOG.debug("|  statement: " + statement);
-
-		outVO = sqlSessionTemplate.selectOne(statement, inVO);
-		LOG.debug("|  outVO : " + outVO);
-		LOG.debug("================================");
-
-		return outVO;
+		
+		String statement = NAMESPACE + DOT + "doSave";
+		LOG.debug("|  statement : " + statement);
+		
+		int flag = sqlSessionTemplate.insert(statement, inVO);
+		LOG.debug("|  flag : " + flag);
+		LOG.debug("└--------------------------------┘");
+		
+		return flag;
 	}
 
 	@Override
-	public int getCount(OrderVO inVO) throws SQLException {
+	public int doDelete(OrderVO inVO) throws SQLException {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public List<OrderVO> getALL(OrderVO inVO) throws SQLException {
+		List<OrderVO> list = null;
+		
+		String statement = NAMESPACE + DOT + "getALL";
+
+		LOG.debug("================================");
+		LOG.debug("|  param : " + inVO);
+		LOG.debug("|  statement: " + statement);
+		
+		list = sqlSessionTemplate.selectList(statement, inVO);
+		
+		for(OrderVO vo : list) {
+			LOG.debug("|  vo : " + vo);
+		}
+		LOG.debug("================================");
+		
+		return list;
 	}
 
 }

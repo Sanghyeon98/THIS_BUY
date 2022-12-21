@@ -1,6 +1,6 @@
 <%--
 /**
-  Class Name: bootList.jsp
+  Class Name: board_reg.jsp
   Description: 목록조회
   
   Modification information
@@ -417,7 +417,7 @@ ol, ul {
     });
     
     function moveToList(){
-      window.location.href= "${CP}/board/boardView.do?div=20";
+      window.location.href= "${CP}/board/boardView.do?div=10";
     }
     
    
