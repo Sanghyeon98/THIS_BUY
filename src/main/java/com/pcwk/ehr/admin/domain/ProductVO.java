@@ -21,6 +21,25 @@ public class ProductVO extends DTO {
 	
 	public ProductVO() {}
 	
+	public ProductVO(String name, int price, int quantity, int categoryNo, int imageNo, String production, int weight,
+			String expired, String detail, int discount, int finalPrice, int sales, String regDt, String modDt) {
+		super();
+		this.name = name;
+		this.price = price;
+		this.quantity = quantity;
+		this.categoryNo = categoryNo;
+		this.imageNo = imageNo;
+		this.production = production;
+		this.weight = weight;
+		this.expired = expired;
+		this.detail = detail;
+		this.discount = discount;
+		this.finalPrice = finalPrice;
+		this.sales = sales;
+		this.regDt = regDt;
+		this.modDt = modDt;
+	}
+
 	public ProductVO(int itemNo, String name, int price, int quantity, int categoryNo, int imageNo, String production,
 			int weight, String expired, String detail, int discount, int finalPrice, int sales, String regDt,
 			String modDt) {

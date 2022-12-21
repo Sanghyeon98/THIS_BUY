@@ -104,7 +104,7 @@
         TO_CHAR(reg_dt, 'YYYY-MM-DD HH24:MI:SS') AS regDt,
         TO_CHAR(mod_dt, 'YYYY-MM-DD HH24:MI:SS') AS modDt
       FROM product
-      WHERE name = #{name}
+      WHERE item_no = #{itemNo}
       ]]>
   </select> 
   
@@ -136,7 +136,8 @@
       FROM product
       WHERE category_no = #{categoryNo}
       ORDER BY category_no
-  </select>  
+  </select>
+
 
   <!-- itemNo(PK) 값으로 수정 -->
   <update id="doUpdate" parameterType="ProductVO">
@@ -163,7 +164,6 @@
   
   <insert id="doSave" parameterType="ProductVO">
 	  INSERT INTO product (
-		    item_no,
 		    name,
 		    price,
 		    quantity,
@@ -179,7 +179,6 @@
 		    reg_dt,
 		    mod_dt
 		) VALUES (
-		    #{itemNo},
 		    #{name},
 		    #{price},
 		    #{quantity},

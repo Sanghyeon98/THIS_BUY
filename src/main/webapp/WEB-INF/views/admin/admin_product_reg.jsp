@@ -21,18 +21,58 @@
   <link rel="shortcut icon" type="images/x-icon" href="/PC_HTML/favicon.ico">
   <!-- jquery ui -->
   <link rel="stylesheet" href="${CP_RES}/css/admin_product_reg.css">
-  <style>
-  </style>
+
+  <!-- jQuery -->
+  <script src="${CP_RES}/js/jquery-1.12.4.js"></script>
+  <!-- callAjax -->
+  <script src="${CP_RES}/js/callAjax.js"></script>
+  <!-- String, Number, Date Util -->
+  <script src="${CP_RES}/js/eUtil.js"></script>
+  <!-- paging -->
+  <script src="${CP_RES}/js/jquery.bootpag.js"></script>
+  <!-- bootstrap js -->
+  <script src="${CP_RES}/js/bootstrap.min.js"></script>
 
   <title>제목</title>
-  
-  <script src="/PC_HTML/assets/js/jquery-3.6.1.js"></script>
-  <script src="/PC_HTML/assets/js/jquery-ui.js"></script>
   
   <!-- javascript -->
   <script>
     $(document).ready(function(){
-      
+
+    	
+    	// 1차 분류 변경 시, 2차 분류 표출
+      $(".cate01List").on("change", function() {
+        console.log(".cate01List");
+        console.log("$(this).val() : " + $(this).val());
+        
+        // 선택된 1차 분류 value 값
+        let currentCateNo = $(this).val();
+        
+        $(".cate02List").empty();
+        
+        let cate02ListJson = JSON.parse('${cate02ListJson}');
+        console.log("cate02ListJson : " + cate02ListJson);
+        
+        let htmlData = "";
+        console.log("htmlData length : " + htmlData.length);
+        
+        htmlData += "<option value='none'>==선택==</option>";
+        
+        $.each(cate02ListJson, function(index, value) {
+            // 2차 분류의 topNo와 현재 선택된 1차 분류의 categoryNo가 같으면 (하위 카테고리이면~!)
+          if(value.topNo == currentCateNo) {
+              htmlData += "<option value='"+value.categoryNo+"'>" + value.categoryNm + "</option>";
+            }
+          });
+        
+        /* // 2차 분류에 값이 없으면 '==선택==' 표출
+        if(htmlData.length == 0) {
+          htmlData += "<option value='none'>==선택==</option>";
+        }
+         */
+        $(".cate02List").append(htmlData);
+      });  // 1차 분류 변경 시, 2차 분류 표출 -------------------------------------------
+        
     });
   </script>
 </head>
@@ -60,11 +100,25 @@
               <tr>
                 <td class="table_left"><label>분류선택</label></td>
                 <td>
-                  <select>
-                    <option>1차 분류</option>
+                  <select class="cate01List">
+                    <option value='none'>==선택==</option>
+                    <c:forEach var="vo" items="${cate01List}">
+                        <option value='<c:out value="${vo.categoryNo}"/>'>
+                            <c:out value="${vo.categoryNm}"/>
+                        </option>
+                    </c:forEach>
                   </select>
-                  <select>
-                    <option>2차 분류</option>
+                  <select class="cate02List">
+                    <option value='none'>==선택==</option>
+                    <c:forEach var="vo" items="${cate02List}">
+                      <c:choose>
+                          <c:when test="${vo.topNo == 1 }">
+                            <option value='<c:out value="${vo.categoryNo}"/>'>
+                                <c:out value="${vo.categoryNm}"/>
+                            </option>
+                          </c:when>
+                      </c:choose>
+                    </c:forEach>
                   </select>
                 </td>
               </tr>
