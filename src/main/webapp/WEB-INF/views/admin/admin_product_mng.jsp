@@ -54,9 +54,9 @@
     	  let tdArray = $(this).children();
     	  let productNo = tdArray.eq(6).text();
     	  
-    	  window.open("${CP}/product/moveToMod.do?itemNo=" + productNo, target="_blank", 
-    			           "width=1100, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes");
-    	  //window.location.href= "${CP}/product/moveToMod.do?itemNo=" + $("#chk").val();
+    	  //window.open("${CP}/product/moveToMod.do?itemNo=" + productNo, target="_blank", 
+    		//	           "width=1100, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes");
+    	  window.location.href= "${CP}/product/moveToMod.do?itemNo=" + productNo;
       });
       
       

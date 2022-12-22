@@ -38,7 +38,8 @@ public class ImageController {
 	
 	final String FILE_PATH = "C:\\upload"; //일반 파일
 	// 실제 서버상 파일 경로 : resources/upload/2022/12/202212120ce331f537b54c21a412138f9e3ca2d5.png
-	final String IMG_PATH  = "C:\\Users\\ITSC\\git\\THIS_BUY\\src\\main\\webapp\\resources\\img"; //이미지 파일
+//	final String IMG_PATH  = "C:\\Users\\ITSC\\git\\THIS_BUY\\src\\main\\webapp\\resources\\img"; //이미지 파일
+	final String IMG_PATH  = "C:\\Users\\yoon\\git\\THIS_BUY\\src\\main\\webapp\\resources\\img"; //이미지 파일
 	String IMG_VIEW_PATH = "/resources/img";
 	String addYYYYMMPath = "";
 	
@@ -214,7 +215,7 @@ public class ImageController {
 			LOG.debug("|  flag : " + flag);
 			
 			// 이미지 id 가져오기
-			ImageVO outVO = imgService.doSelectOne(saveVO);
+			ImageVO outVO = imgService.getImageNo(saveVO);
 			
 			LOG.debug("|  이미지 outVO : " + outVO);
 			

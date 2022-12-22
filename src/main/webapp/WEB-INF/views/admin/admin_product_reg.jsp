@@ -140,12 +140,22 @@
            data: formData,
            
            success:function(data) {  // 이미지 등록 성공
-             console.log(data);  // data : ImageVO
-             let getImage = JSON.parse(data);
-             console.log("getImage.imageNo : " + getImage.imageNo);
-             console.log("parseInt(getImage.imageNo) : " + parseInt(getImage.imageNo));
+             console.log("success data : " + data);  // data : ImageVO
              
-             getImageNo = getImage.imageNo;
+             let getImageNo = 0;  // 이미지 번호가 0이면 이미지 없음
+             
+             //if(null != data) {
+             if(data.length != 0) { // 등록된 이미지가 있으면 
+            	 console.log("null!!");
+	             let getImage = JSON.parse(data);
+	             
+	             console.log("getImage.imageNo : " + getImage.imageNo);
+	             console.log("parseInt(getImage.imageNo) : " + parseInt(getImage.imageNo));
+	             
+	             getImageNo = getImage.imageNo;
+             } else { // 등록된 이미지가 없으면
+            	 console.log("not null!!");
+             }
              
              // 제품 추가
              let p_method = "POST";
@@ -160,7 +170,7 @@
                quantity : $("#quantity").val(), 
                categoryNo : $(".cate02List").val(),
                detail : $("#detail").val(),
-               imageNo : getImageNo
+               imageNo : getImageNo  // 이미지 번호가 0이면 이미지 없음
              };
              
              PClass.callAjax(p_method, p_url, p_async, p_params, function(p_data) {

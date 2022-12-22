@@ -81,4 +81,21 @@ public class ImageDaoImpl implements ImageDao {
 		return null;
 	}
 
+	@Override
+	public ImageVO getImageNo(ImageVO inVO) throws SQLException {
+		ImageVO outVO = null;
+		
+		LOG.debug("┌--------------------------------┐");
+		LOG.debug("|  param : " + inVO);
+		
+		String statement = NAMESPACE + DOT + "getImageNo";
+		LOG.debug("|  statement : " + statement);
+		
+		outVO = sqlSessionTemplate.selectOne(statement, inVO);
+		LOG.debug("|  outVO : " + outVO);
+		LOG.debug("└--------------------------------┘");
+		
+		return outVO;
+	}
+
 }

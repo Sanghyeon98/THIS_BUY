@@ -41,13 +41,34 @@
 		WHERE image_no = #{imageNo}
 	</delete>
 	
+	<select id="getImageNo" parameterType="ImageVO" resultType="ImageVO">
+	  SELECT
+	    image_no AS imageNo
+	  FROM image
+	  WHERE 1=1
+	    AND save_name = #{saveName}
+	    AND org_name = #{orgName}
+	</select>
+	
 	<select id="doSelectOne" parameterType="ImageVO" resultType="ImageVO">
 		SELECT
-		    image_no AS imageNo
+	    image_no   AS imageNo,
+	    gubun      AS gubun,
+	    image_m    AS imageM,
+	    main_image AS mainImage,
+	    org_name   AS orgName,
+	    save_name  AS saveName,
+	    save_path  AS savePath,
+	    view_path  AS viewPath,
+	    file_size  AS fileSize,
+	    file_ext   AS fileExt,
+	    from_tb    AS fromTb,
+	    from_no    AS fromNo,
+	    reg_dt     AS regDt,
+	    mod_dt     AS modDt
 		FROM image
 		WHERE 1=1
-		  AND save_name = #{saveName}
-		  AND org_name = #{orgName}	
+		  AND image_no = #{imageNo}
   </select>
   
 	<select id="doRetrieve" parameterType="ImageVO" resultType="ImageVO">
@@ -64,7 +85,8 @@
 		    file_ext   AS fileExt,
 		    from_tb    AS fromTb,
 		    from_no    AS fromNo,
-		    reg_dt     AS regDt
+		    reg_dt     AS regDt,
+		    mod_dt     AS modDt
 		FROM image
 		WHERE from_tb = #{fromTb}
 		AND from_no = #{fromNo}	

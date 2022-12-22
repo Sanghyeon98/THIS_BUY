@@ -25,6 +25,8 @@ import com.pcwk.ehr.cmn.SearchVO;
 import com.pcwk.ehr.cmn.StringUtil;
 import com.pcwk.ehr.code.domain.CodeVO;
 import com.pcwk.ehr.code.service.CodeService;
+import com.pcwk.ehr.image.domain.ImageVO;
+import com.pcwk.ehr.image.service.ImageService;
 
 @Controller("adminProduct")
 @RequestMapping("product")
@@ -40,9 +42,40 @@ public class AdminProductController {
 	@Autowired
 	CodeService codeService;
 	
+	@Autowired
+	ImageService imgService;
+	
 	public AdminProductController() {}
 	
 	
+	// 상품 수정
+	@RequestMapping(value = "/doUpdate.do", method = RequestMethod.GET,
+			produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String doUpdate(ProductVO inVO) throws SQLException {
+		String jsonString = "";
+		LOG.debug("┌-------------------------------------┐");
+		LOG.debug("|  inVO = " + inVO);
+		
+		int flag = prodService.doUpdate(inVO);
+		LOG.debug("|  flag = " + flag);
+		
+		String msg = "";
+		if(0 == flag) {	// 수정 실패
+			msg = inVO.getName() + " 수정 실패"; 
+		} else {
+			msg = inVO.getName() + " 수정 성공"; 
+		}
+		
+		jsonString = new Gson().toJson(new MessageVO(String.valueOf(flag), msg));
+		
+		LOG.debug("|  jsonString : " + jsonString);
+		LOG.debug("└-------------------------------------┘");
+		return jsonString;
+	}
+	
+	
+	// 상품 등록
 	@RequestMapping(value = "/doSave.do", method = RequestMethod.POST,
 			produces = "application/json;charset=UTF-8")
 	@ResponseBody
@@ -345,6 +378,7 @@ public class AdminProductController {
 	}
 	
 	
+	// 제품 수정 화면 이동
 	@RequestMapping(value = "/moveToMod.do")
 	public String moveToMod(ProductVO inVO, Model model) throws SQLException {
 		
@@ -372,14 +406,24 @@ public class AdminProductController {
 		
 		// 제품 단건 조회
 		ProductVO outVO = prodService.doSelectOne(inVO);
+		LOG.debug("|  outVO = " + outVO);
+		
+		// 이미지 조회
+		ImageVO imgVO = new ImageVO();
+		imgVO.setImageNo(outVO.getImageNo());
+		
+		ImageVO outImgVO = imgService.doSelectOne(imgVO);
+		LOG.debug("|  outImgVO = " + outImgVO);
 		
 		model.addAttribute("cate01List", cate01List);
 		model.addAttribute("cate02List", cate02List);
 		model.addAttribute("cate02ListJson", cate02ListJson);	
 		model.addAttribute("vo", outVO);
+		model.addAttribute("imgVO", outImgVO);
 		
 		return "admin/admin_product_mod";
 	}
+	
 	
 	// 제품 등록 화면 이동
 	@RequestMapping(value = "/moveToReg.do", method = RequestMethod.GET)

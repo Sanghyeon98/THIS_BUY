@@ -18,5 +18,7 @@ public interface ImageService {
 	public ImageVO doSelectOne(ImageVO inVO) throws SQLException;
 	
 	public List<ImageVO> doRetrieve(DTO inVO) throws SQLException;
+	
+	public ImageVO getImageNo(ImageVO inVO) throws SQLException;
 
 }

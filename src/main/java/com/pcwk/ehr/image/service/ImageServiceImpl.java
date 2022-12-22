@@ -46,4 +46,9 @@ public class ImageServiceImpl implements ImageService {
 		return imgDao.doRetrieve(inVO);
 	}
 
+	@Override
+	public ImageVO getImageNo(ImageVO inVO) throws SQLException {
+		return imgDao.getImageNo(inVO);
+	}
+
 }

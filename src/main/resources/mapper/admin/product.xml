@@ -55,10 +55,10 @@
 			TT1.discount,
 			TT1.final_price AS finalPrice,
 			TT1.sales,
-			DECODE( TO_CHAR(SYSDATE,'YYYY-MM-DD'),  TO_CHAR(TT1.reg_dt,'YYYY-MM-DD')
+			DECODE( TO_CHAR(LOCALTIMESTAMP,'YYYY-MM-DD'),  TO_CHAR(TT1.reg_dt,'YYYY-MM-DD')
 			                ,TO_CHAR(TT1.reg_dt,'HH24:MI')
 			                ,TO_CHAR(TT1.reg_dt,'YYYY-MM-DD')) as regDt,
-			DECODE( TO_CHAR(SYSDATE,'YYYY-MM-DD'),  TO_CHAR(TT1.mod_dt,'YYYY-MM-DD')
+			DECODE( TO_CHAR(LOCALTIMESTAMP,'YYYY-MM-DD'),  TO_CHAR(TT1.mod_dt,'YYYY-MM-DD')
 			                ,TO_CHAR(TT1.mod_dt,'HH24:MI')
 			                ,TO_CHAR(TT1.mod_dt,'YYYY-MM-DD')) as modDt       
           FROM (
@@ -156,7 +156,7 @@
           discount = #{discount},
           final_price = #{finalPrice},
           sales = #{sales},
-          mod_dt = SYSDATE
+          mod_dt = LOCALTIMESTAMP
       WHERE
           item_no = #{itemNo}
       ]]>
