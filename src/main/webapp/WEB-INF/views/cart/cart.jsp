@@ -112,6 +112,8 @@ width: 30px;
   <script>
     $(document).ready(function(){
     	console.log('Hello, world!');
+    	getAll(1);
+    	
     	
     	$("#dodelete").on("click",function(e){
     		console.log("dodelete");
@@ -143,7 +145,53 @@ width: 30px;
           });
     	
     });  
-  
+ 
+    //doretrieve
+    function getAll(page) {
+      let method = "POST";
+      let url = "/cart/getAll.do";
+      let async = true;
+      
+      let params = {
+    		  memberId : "admin"
+      };
+      
+      
+      PClass.callAjax(method, url, async, params, function(data) {
+        console.log(data);
+        let parsedJson = JSON.parse(data);
+        let htmlData = "";
+        
+        $(".cart__list>tbody").empty();
+        
+        if (null != parsedJson && parsedJson.length > 0) {
+          
+            
+          $.each(parsedJson, function(index, value) {
+              htmlData += "<tr>";
+              htmlData += "    <td><input type='checkbox' name='chk'></td>";
+              htmlData += "    <td><img src='' alt=''></td>";
+              htmlData += "    <td><a>"+value.name+"</a></td>";
+              htmlData += "    <td><input type='button' name='minus' id='minus' value='-'>";
+              htmlData += "    <input type='text' name='amount' id='amount' value="+value.quantity+" size='2'>";
+              htmlData += "    <td><input type='button' name='add' id='add' value='+'>";
+              htmlData += "    <td>"+value.price+"원</td>";
+              htmlData += "</tr>";
+          });
+        } else {
+            htmlData += "<tr>";
+            htmlData += "  <td class='td_center' colspan='99'>";
+            htmlData += "   No data found ";
+            htmlData += "  </td>";
+            htmlData += "</tr>";
+        }
+        
+        // 데이터 출력
+        $(".cart__list>tbody").append(htmlData);
+       
+        
+      });  // PClass.callAjax END
+    }    
   </script>
 </head>
 <body>
@@ -157,7 +205,7 @@ width: 30px;
   			 <table class="cart__list">
                 <thead>
                     <tr class="checkBox">
-                        <td colspan="3"><input id="checkAll" type="checkbox"> <button id="checkAll" class="cart__list__optionbtn">전체선택</button>
+                        <td colspan="3"><input id="checkAll" type="checkbox" >
                             <button class="cart__list__optionbtn" id="dodelete">선택삭제</button>
                         </td>
                         <td></td>
@@ -221,16 +269,7 @@ width: 30px;
                   </c:otherwise>
                 </c:choose>
                 </tbody>
-                <tfoot>
-                    <tr class="checkBox">
-                        <td colspan="3"><input type="checkbox"> <button class="cart__list__optionbtn">전체선택</button>
-                            <button class="cart__list__optionbtn">선택삭제</button>
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tfoot>
+               
         </table>
            
         

@@ -114,8 +114,8 @@ public class CartController {
 	
 	@RequestMapping(value = "/getAll.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String doRetrieve(CartJoinVO inVO) throws SQLException{
-		LOG.debug("= doRetrieve() =");
+	public String getAll(CartJoinVO inVO) throws SQLException{
+		LOG.debug("= getAll() =");
 		LOG.debug("inVO : " + inVO);
 		
 		List<CartJoinVO> list = (List<CartJoinVO>) cartService.getAll(inVO);
