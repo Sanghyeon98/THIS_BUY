@@ -17,7 +17,7 @@
   <meta name="keywords" content="html5, css3, javascipt6, jQuery">
   <!-- favicon -->
   <link rel="shortcut icon" type="images/x-icon"  href="${CP_RES}/favicon.ico">
-  <link rel="stylesheet" href="${CP_RES}/css/bootstrap.min.css">
+  <link rel="stylesheet" href="${CP_RES}/css/signup.css">
   <!-- jQuery -->
   <script src="${CP_RES}/js/jquery-1.12.4.js"></script>
     <!-- callAjax -->
@@ -30,6 +30,11 @@
     <script src="${CP_RES}/js/bootstrap.min.js"></script>
 <title>회원가입</title>
 <script >
+
+
+
+
+//생년월일 select 활성화
 $(document).ready(function(){            
     var now = new Date();
     var year = now.getFullYear();
@@ -55,52 +60,149 @@ $(document).ready(function(){
     $("#month  > option[value="+mon+"]").attr("selected", "true");    
     $("#day  > option[value="+day+"]").attr("selected", "true");       
   
-})
+
+//생년월일 select 활성화
+
+
+
+//id중복체크   
+     $("#idCheck").on("click",function(){
+          console.log("#idCheck");
+          //id값 
+          if(eUtil.ISEmpty( $("#uId").val() ) == true){
+              alert("아이디를 입력하세요.");
+              $("#uId").focus();
+              return;
+          }
+          let method = "GET";
+          let url    = "/member/idCheck.do";
+          let async  = true;
+          let params = {"uId": $("#uId").val()};
+          
+          PClass.callAjax(method,url,async,params,function(data){
+              console.log("data:"+data);
+              
+              let parsedJson = JSON.parse(data);
+              //id사용 가능
+              if("0" == parsedJson.msgId){
+                  alert(parsedJson.msgContents);
+                  $("#idCheckYN").val("1");
+                  
+                  //아이디는 PK로 활성화
+                $("#uId").prop("disabled",true);
+                //id중복  
+              }else{
+                  alert(parsedJson.msgContents);
+                  $("#idCheckYN").val("0");
+              }
+          });
+     });
+     //id중복체크    
+     
+//등록
+     $("#add").on("click",function(){
+            console.log("#add");
+          if(eUtil.ISEmpty( $("#uId").val() ) == true){
+             alert("아이디를 입력 하세요.");
+             $("#uId").focus();
+             return;
+           }
+           
+          //$("#idCheckYN").val("0");          
+          if(eUtil.ISEmpty( $("#idCheckYN").val() ) == true){
+              alert("아이디중복를 체크 해주세요.");
+              $("#idCheck").focus();
+              return;
+          }
+          
+          if($("#idCheckYN").val() == "0"){
+              alert("아이디중복를 체크  해주세요.");
+              $("#idCheck").focus();
+              return;
+          }
+          
+          
+          if(eUtil.ISEmpty( $("#passwd").val() ) == true){
+               alert("비밀번호을 입력 하세요.");
+               $("#passwd").focus();
+               return;
+          }       
+
+           if(eUtil.ISEmpty( $("#name").val() ) == true){
+               alert("이름을 입력 하세요.");
+               $("#passwd").focus();
+               return;
+           }
+           
+          
+           if(eUtil.ISEmpty( $("#email").val() ) == true){
+               alert("이메일을 입력 하세요.");
+               $("#email").focus();
+               return;
+           }    
+           
+           if(eUtil.ISEmpty( $("#phone").val() ) == true){
+               alert("휴대폰 번호을 입력 하세요.");
+               $("#phone").focus();
+               return;
+           }   
+           
+           if(confirm("등록 하시겠습니까?")==false)return;
+           
+           let method = "POST";
+           let url    = "/member/add.do";
+           let async  = true;
+           let params = {
+               "uId"      : $("#uId").val(),
+               "passwd"   : $("#passwd").val(),
+               "name"     : $("#name").val(),
+               "email"    : $("#email").val(),
+               "phone"    : $("#phone").val(),
+               
+           };
+           
+           PClass.callAjax(method,url,async,params,function(data){
+               console.log("data:"+data);
+               let parsedJson = JSON.parse(data);
+               
+               if("1" == parsedJson.msgId){
+                  alert(parsedJson.msgContents);
+                  //입력 항목 초기화
+                  //아이디: enabled
+                  //등록버튼:enabled
+                  initControll();                  
+               }else{
+                   alert(parsedJson.msgId+","+parsedJson.msgContents);
+               }
+               
+           });           
+     });
+//등록    
+
+
+});
+//doc
+ //버튼, 등록 컨트롤 초기화
+    function initControll(){
+        const initValue = "";
+        //id중복체크 초기화
+        $("#idCheckYN").val(initValue);
+        
+        $("#uId").val(initValue);
+        $("#passwd").val(initValue);
+        $("#name").val(initValue);
+        $("#email").val(initValue);
+        $("#phone").val(initValue);
+        $("#regDt").val(initValue);
+        
+        //아이디는 PK로 활성화
+        $("#uId").prop("disabled",false);
+        //버튼 활성화
+        $("#add").prop("disabled",false);           
+    }
+
 </script>
-<style type="text/css">
-.r{
- color:red;	
-}
-#signup{
-margin: 0 auto;
-width:640px;
-}
-.btn{
-background-color:#B8C9DF;
-color:white;
-}
-.col-md-2{
-padding: 6px 0px 0px;
-}
-.row{
-width:640px;
-height:70px;
-}
-.info#info__birth {
-  display: flex;
-}
 
-.info#info__birth select {
-  margin-left : 7px;
-}
-
-.info#info__birth select:first-child {
-  margin-left : 0px;
-}
-.info#info__birth select::-webkit-scrollbar {
-  width: 10px;
-}
-
-.info#info__birth select::-webkit-scrollbar-thumb {
-  background-color: #B8C9DF;
-  border-radius: 3px;
-}
-
-.info#info__birth select::-webkit-scrollbar-track {
-  background-color: #B8C9DF;
-  border-radius: 6px;
-}
-</style>
 
  
 </head>
@@ -122,11 +224,12 @@ height:70px;
     <div class="col-md-2 text-centers">
       아이디<span class="r">*</span>
     </div>
+    <input type="hidden" name="idCheckYN" id="idCheckYN">
     <div class="col-md-7 text-centers">
       <input type="text" class="form-control" id="uId" name="uId" placeholder="아이디를 입력해주세요">
     </div>
      <div class="col-md-3 text-centers">
-      <button type="submit" class="btn btn-default btn-block">중복 확인</button>
+      <button type="button" class="btn btn-default btn-block" value="아이디 중복" id="idCheck">중복 확인</button>
     </div>
     </div>
     
@@ -135,16 +238,17 @@ height:70px;
      비밀번호<span class="r">*</span>
     </div>
     <div class="col-md-7 text-centers">
-      <input type="text" class="form-control" id="passwd" name="passwd" placeholder="비밀번호를 입력해주세요">
+      <input type="password"  class="form-control" id="passwd" name="passwd" placeholder="비밀번호를 입력해주세요">
     </div>
     </div>
     
+    <!-- 비밀번호 일치확인 -->
      <div class="row">
     <div class="col-md-2 text-centers">
      비밀번호 확인<span class="r">*</span>
     </div>
     <div class="col-md-7 text-centers">
-      <input type="text" class="form-control" id="passwd" name="passwd" placeholder="비밀번호를 한번 더 입력해주세요">
+      <input type="password" class="form-control" id="passwd" name="passwd" placeholder="비밀번호를 한번 더 입력해주세요">
     </div>
     </div>
     
@@ -157,30 +261,33 @@ height:70px;
        </div>
    </div>
  
+ <!-- emaillcheck만들기, email 인증-->
    <div class="row">
     <div class="col-md-2 text-centers">
              이메일<span class="r">*</span>
     </div>
        <div class="col-md-7 text-centers">
-         <input type="text" maxlength="320" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요">
+         <input type="numberOnly" maxlength="320" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요">
        </div>
         <div class="col-md-3">
          <button type="submit" class="btn btn-default btn-block">중복 확인</button>
         </div>
    </div>
    
+   <!-- 본인 인증 넣기 -->
    <div class="row">
     <div class="col-md-2 text-centers">
            휴대폰<span class="r">*</span>
     </div>
        <div class="col-md-7 text-centers">
-         <input type="text"  class="form-control" id="email" name="email" placeholder="숫자만 입력해주세요">
+         <input type="text"  class="form-control" id="phone" name="phone" placeholder="숫자만 입력해주세요">
        </div>
        <div class="col-md-3">
          <button type="submit" class="btn btn-default btn-block ">인증번호 받기</button>
        </div>
    </div>
     
+    <!--  주소 api -->
     <div class="row">
     <div class="col-md-2 text-centers">
           주소<span class="r">*</span>
@@ -189,30 +296,27 @@ height:70px;
          <button type="submit" class="btn btn-default btn-block">주소 검색</button>
          <small>배송지에 따라 상품 정보가 달라질 수 있습니다.</small>
        </div>
-       
        </div>
+       
+       <!-- 체크박스 값 받기 -->
       <div class="row">
     <div class="col-md-2 text-centers">
           성별
     </div>
-           <div class="col-md-7 text-centers">
-           <label>
-           <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-           남자 
-           </label>
-
-           <label>
-           <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-          여자
-           </label>
-
-           <label>
-           <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-           선택 안함
-           </label>
+           <div class="col-md-7 text-centers " style="display:flex;">
+           <label class="radio-inline">여자</label>
+           <input type="radio" name="optionsRadios1" id="optionsRadios1" value="option1" checked>
+            <div style="width:15%"></div>
+           <label class="radio-inline">남자</label>
+           <input type="radio" name="optionsRadios2" id="optionsRadios2" value="option2" >
+            <div style="width:15%"></div>
+           <label class="radio-inline">선택 안함</label>
+           <input type="radio" name="optionsRadios3" id="optionsRadios3" value="option3" >
+           
        </div>
        </div>
    
+   <!-- select 값 받기 -->
      <div class="row">
     <div class="col-md-2 text-centers">
        생년 월일
@@ -224,17 +328,14 @@ height:70px;
 </div>
 </div>
   
+  <div class="btn-signup">
+    
   
+  <button type="button" style="width: 240px;" class="btn btn-default btn-block " value="등록" id="add">가입하기</button>
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
+ 
+  </div>
+
    </div>
    </div>
  

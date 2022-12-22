@@ -164,24 +164,14 @@
         name  ,
         email ,
         phone ,
-        address ,
-        gender ,
-        birthdate ,
-        reg_dt ,
-        mod_dt ,
-        auth
+        reg_dt
         ) VALUES (
         #{uId},
         #{passwd},
         #{name},
         #{email},
         #{phone},
-        #{address},
-        #{gender},
-        SYSDATE,
-        SYSDATE,
-        SYSDATE,
-        #{auth}
+        SYSDATE
         )
     </insert>
 
