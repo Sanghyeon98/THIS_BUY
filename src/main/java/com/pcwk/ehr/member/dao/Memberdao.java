@@ -16,5 +16,8 @@ public interface Memberdao extends WorkDiv<MemberVO> {
 		List<MemberVO> doRetrieve(DTO inVO) throws SQLException;
 		int getCount(MemberVO inVO) throws SQLException;
 		int passCheck(MemberVO inVO) throws SQLException; 
+		public void createAuthKey(String memberEmail,String authKey) throws Exception;
+		
+		public void memberAuth(String memberEmail) throws Exception;
 
 }

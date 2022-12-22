@@ -2,7 +2,9 @@ package com.pcwk.ehr.member.dao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -176,6 +178,24 @@ final Logger LOG = LogManager.getFormatterLogger(getClass());
 		LOG.debug("|cnt:"+cnt );
 		LOG.debug("└--------------------------------┘");		
 		return cnt;
+	}
+
+
+	@Override
+	public void createAuthKey(String memberEmail, String authKey) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberEmail", memberEmail);
+		map.put("authKey", authKey);
+		//기존에 사용하던  sqlsessiontemplate으로 하면 haspmap 은 오류나나요
+		sqlSessionTemplate.selectOne("member.createAuthKey", map);
+		//member.createAuthKey 오류확인
+	}
+
+
+	@Override
+	public void memberAuth(String memberEmail) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 
 

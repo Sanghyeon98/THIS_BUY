@@ -3,6 +3,17 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pcwk.ehr.member">
+
+<!-- 메일 인증 확인 -->
+
+<insert id="createAuthKey">
+    insert into MP_MEMBER_AUTH values(#{memberEmail}, #{authKey})
+</insert>
+
+<update id="memberAuth">
+    <![CDATA[update HR_MEMBER set MAiL_AUTH = 1 where (select count(*) from HR_MEMBER_AUTH where EMAIL = #{memberEmail}) > 0]]>
+</update>
+
       <!-- 비번체크 -->
   <select id="passCheck" parameterType="UserVO" resultType="int">
 	  SELECT COUNT(*) cnt
