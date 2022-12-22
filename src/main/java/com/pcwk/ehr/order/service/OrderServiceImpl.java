@@ -62,4 +62,10 @@ public class OrderServiceImpl implements OrderService {
 		return orderdao.doRetrieve(inVO);
 	}
 
+	@Override
+	public int doSave(OrderVO inVO) throws SQLException {
+		
+		return orderdao.doSave(inVO);
+	}
+
 }

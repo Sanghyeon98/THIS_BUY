@@ -47,13 +47,22 @@ public interface OrderService {
 	 * @throws SQLException
 	 */
 	int doUpdate(OrderVO inVO) throws SQLException;
+	
+	
+	/**
+	 * 상품 추가
+	 * @param inVO
+	 * @return
+	 * @throws SQLException
+	 */
+	int doSave(OrderVO inVO) throws	SQLException;
+	
 	/**
 	 * 단건 조회
 	 * @param t
 	 * @return T
 	 * @throws SQLException
 	 */
-	
 	OrderVO doSelectOne(OrderVO inVO) throws SQLException;
 	
 	/**

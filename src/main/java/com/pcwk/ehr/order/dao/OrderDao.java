@@ -18,13 +18,6 @@ public interface OrderDao extends WorkDiv<OrderVO> {
 	// like 전체 데이터 리턴
 	List<OrderVO> getALL(OrderVO inVO) throws SQLException;
 
-
-	
-
-	
-
-;
-
 }
 
 

@@ -72,7 +72,7 @@ ul {
 </style>
 
 
-<title></title>
+<title>주문내역</title>
 <script src="/PC_HTML/assets/js/jquery-3.6.1.js"></script>
 <script
 	src="/PC_HTML/assets/JQuery/jquery-ui-1.13.2.custom/jquery-ui.js"></script>
