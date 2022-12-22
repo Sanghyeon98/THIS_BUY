@@ -44,7 +44,7 @@ public class DetailController {
 		LOG.debug("|outVO=" + outVO);
 		model.addAttribute("vo", outVO);
 		LOG.debug("└=============================┘");
-		
+
 		return "detail/detail";
 	}
 
