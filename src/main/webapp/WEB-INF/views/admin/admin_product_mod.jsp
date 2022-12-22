@@ -235,13 +235,14 @@
     <div id="container" class="clear">
       <!-- lnb -->
       <div class="lnb">
-        <jsp:include page="/WEB-INF/views/cmn/admin_left_menu.jsp"></jsp:include>
+        <%-- <jsp:include page="/WEB-INF/views/cmn/admin_left_menu.jsp"></jsp:include> --%>
       </div> 
-      <!-- lnb END -------------------------------------------------------->
+      <!-- lnb END ------------------------------------------------------------>
+      
       <!-- content -->
       <div class="content">
         <div class="content_nav">
-          <p>관리자 > 상품 관리 > 상품 등록</p>
+          <p>관리자 > 상품 관리 > 상품 수정</p>
         </div>
         <div class="content_body">
           <form action="#" method="post" enctype="multipart/form-data">
@@ -264,31 +265,31 @@
               </tr>
               <tr>
                 <td class="table_left"><label for="name">상품명</label></td>
-                <td><input type="text" id="name" name="name" placeholder="상품명"></td>
+                <td><input type="text" id="name" name="name" value="<c:out value='${vo.name}'></c:out>"></td>
               </tr>
               <tr>
                 <td class="table_left"><label for="price">가격</label></td>
-                <td><input type="number" id="price" name="price" placeholder="가격"></td>
+                <td><input type="number" id="price" name="price" value="<c:out value='${vo.price}'></c:out>"></td>
               </tr>
               <tr>
                 <td class="table_left"><label for="production">생산지</label></td>
-                <td><input type="text" id="production" name="production" placeholder="생산지"></td>
+                <td><input type="text" id="production" name="production" value="<c:out value='${vo.production}'></c:out>"></td>
               </tr>
               <tr>
                 <td class="table_left"><label for="weight">무게</label></td>
-                <td><input type="number" id="weight" name="weight" placeholder="무게"></td>
+                <td><input type="number" id="weight" name="weight" value="<c:out value='${vo.weight}'></c:out>"></td>
               </tr>
               <tr>
                 <td class="table_left"><label for="expired">유통기한</label></td>
-                <td><input type="text" id="expired" name="expired" placeholder="YYYYMMDD"></td>
+                <td><input type="text" id="expired" name="expired" value="<c:out value='${vo.expired}'></c:out>"></td>
               </tr>
               <tr>
                 <td class="table_left"><label for="quantity">재고수량</label></td>
-                <td><input type="number" id="quantity" name="quantity" placeholder="재고수량"></td>
+                <td><input type="number" id="quantity" name="quantity" value="<c:out value='${vo.quantity}'></c:out>"></td>
               </tr>
               <tr>
                 <td class="table_left"><label for="detail">상품 설명</label></td>
-                <td><textarea rows="" cols="" id="detail" name="detail"></textarea></td>
+                <td><textarea rows="" cols="" id="detail" name="detail"><c:out value='${vo.detail}'></c:out></textarea></td>
               </tr>
               <tr>
                 <td class="table_left"><label for="imageName">이미지</label></td>
@@ -301,7 +302,8 @@
           </form>
         </div>
         <div class="bt_area">
-          <button id="prod_save_bt">상품 등록</button>
+          <button id="prod_save_bt">수정</button>
+          <button id="prod_save_bt">취소</button>
         </div>
       </div>
       <!-- content END ---------------------------------------------------------->

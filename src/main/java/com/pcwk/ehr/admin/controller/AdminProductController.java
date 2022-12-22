@@ -49,7 +49,18 @@ public class AdminProductController {
 	public String doSave(ProductVO inVO) throws SQLException {
 		String jsonString = "";
 		LOG.debug("┌-------------------------------------┐");
+		LOG.debug("|  inVO = " + inVO);
 		
+		int flag = prodService.add(inVO);
+		
+		String msg = "";
+		if(0 == flag) {	// 상품 등록 실패
+			msg = inVO.getName() + " 등록에 실패했습니다.";
+		} else {
+			msg = inVO.getName() + " 등록에 성공했습니다.";
+		}
+		
+		jsonString = new Gson().toJson(new MessageVO(String.valueOf(flag), msg));
 		
 		LOG.debug("|  jsonString : " + jsonString);
 		LOG.debug("└-------------------------------------┘");
@@ -333,8 +344,45 @@ public class AdminProductController {
 		return VIEW_NAME;
 	}
 	
+	
+	@RequestMapping(value = "/moveToMod.do")
+	public String moveToMod(ProductVO inVO, Model model) throws SQLException {
+		
+		// 카테고리 목록 조회 ---------------------------------------------------------
+		List<CategoryVO> allCateList = cateService.getALL();
+		
+		List<CategoryVO> cate01List = new ArrayList<CategoryVO>();
+		List<CategoryVO> cate02List = new ArrayList<CategoryVO>();
+		
+		for(CategoryVO vo : allCateList) {
+			if(vo.getTopNo() == 0) {	// 1차 분류이면
+				cate01List.add(vo);
+			} else {	// 2차 분류이면
+				cate02List.add(vo);
+			}
+		}
+		
+		// 2차 분류 json 전환
+		String cate02ListJson = new Gson().toJson(cate02List);
+		LOG.debug("|  cate02ListJson = " + cate02ListJson);
+		
+		String allCateJson = new Gson().toJson(allCateList);
+		LOG.debug("|  allCateJson = " + allCateJson);
+		// 카테고리 목록 조회 ---------------------------------------------------------
+		
+		// 제품 단건 조회
+		ProductVO outVO = prodService.doSelectOne(inVO);
+		
+		model.addAttribute("cate01List", cate01List);
+		model.addAttribute("cate02List", cate02List);
+		model.addAttribute("cate02ListJson", cate02ListJson);	
+		model.addAttribute("vo", outVO);
+		
+		return "admin/admin_product_mod";
+	}
+	
 	// 제품 등록 화면 이동
-	@RequestMapping(value = "moveToReg.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/moveToReg.do", method = RequestMethod.GET)
 	public String moveToReg(Model model) throws SQLException {
 		
 		// 카테고리 목록 조회 ---------------------------------------------------------

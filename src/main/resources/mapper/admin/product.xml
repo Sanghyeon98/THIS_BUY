@@ -68,7 +68,7 @@
                 FROM product p, category c
                 WHERE p.category_no = c.category_no  -- 조인 조건
                <include refid="searchCondition"/>
-                ORDER BY item_no
+                ORDER BY p.mod_dt desc
             ) T1
             -- 종료 번호
             <![CDATA[ WHERE ROWNUM <= #{pageSize} * (#{pageNo} - 1) + #{pageSize} ]]>

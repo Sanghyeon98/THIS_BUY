@@ -47,6 +47,19 @@
       renderingPage('${totalPage}', 1);
       
       
+      // 제품 상세 페이지
+      $("#productTable>tbody").on("click", "tr", function() {
+    	  console.log("tr");
+    	  
+    	  let tdArray = $(this).children();
+    	  let productNo = tdArray.eq(6).text();
+    	  
+    	  window.open("${CP}/product/moveToMod.do?itemNo=" + productNo, target="_blank", 
+    			           "width=1100, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes");
+    	  //window.location.href= "${CP}/product/moveToMod.do?itemNo=" + $("#chk").val();
+      });
+      
+      
       // 품절 처리
       $("#upSoldOutAll").on("click", function(){
     	  console.log("upSoldOutAll");
@@ -281,13 +294,13 @@
             
           $.each(parsedJson, function(index, value) {
               htmlData += "<tr>";
-              htmlData += "  <td class='td_center'><input type='checkbox' name='chk' value='" + value.itemNo + "'></td>";
+              htmlData += "  <td class='td_center'><input type='checkbox' name='chk' id='chk' value='" + value.itemNo + "'></td>";
               htmlData += "  <td class='td_center'>" + value.num + "</td>";
               htmlData += "  <td>" + value.name + "</td>";
               htmlData += "  <td class='td_center'>" + value.price + "</td>";
               htmlData += "  <td class='td_center'>" + value.quantity + "</td>";
               htmlData += "  <td class='td_center'>" + value.modDt + "</td>";
-              htmlData += "  <td style='display: none;'>" + value.itemNo + "</td>";
+              htmlData += "  <td style='display: none;' >" + value.itemNo + "</td>";
               htmlData += "</tr>";
           });
         } else {
