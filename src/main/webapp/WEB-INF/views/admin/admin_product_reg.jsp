@@ -152,6 +152,8 @@
 	             console.log("getImage.imageNo : " + getImage.imageNo);
 	             console.log("parseInt(getImage.imageNo) : " + parseInt(getImage.imageNo));
 	             
+	             console.log("image value : " +  $("#imageName").val());
+	             
 	             getImageNo = getImage.imageNo;
              } else { // 등록된 이미지가 없으면
             	 console.log("not null!!");
@@ -181,7 +183,7 @@
                
                if("1" == parsedJson.msgId) {  // 제품 등록 성공
             	   alert(parsedJson.msgContents);
-            	   moveToReg();
+            	   //moveToReg();
                } else {
             	   alert(parsedJson.msgContents);
                }

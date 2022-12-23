@@ -18,7 +18,7 @@
   <meta name="keywords" content="html5, css3, javascipt6, jQuery">
   <meta charset="UTF-8">
   <!-- favicon -->
-  <link rel="shortcut icon" type="images/x-icon" href="${CP}/favicon.ico">
+  <link rel="shortcut icon" type="images/x-icon" href="${CP_RES}/favicon.ico">
   <!-- jquery ui -->
   <link rel="stylesheet" href="${CP_RES}/css/admin_category_mng.css">
 
@@ -33,11 +33,26 @@
   <!-- bootstrap js -->
   <script src="${CP_RES}/js/bootstrap.min.js"></script>
   
-  <title>제목</title>
+  <title>카테고리 관리</title>
   
   <!-- javascript --> 
   <script>
- 
+    $(document).ready(function() {
+    	
+    	// 1차 분류 클릭 이벤트 (누르면 2차분류 보이도록_토글)
+    	$("#cate_list>li").on("click", function() {
+    		console.log("click!!");
+    		console.log("$('#cate2').val() : " + $("#cate2").val());
+    		console.log("$(this).val() : " + $(this).val());
+    		
+    		if($("#cate2").val() == $(this).val()) {
+    			console.log("zzz");
+    			$("#cate2").toggle();
+    		}
+    	});
+    	
+    	
+    }); // document.ready END --------------------------------------------------
   </script>
 </head>
 
@@ -64,19 +79,21 @@
         <!-- content_nav ------------------------------------------------------>
         
         
-        <!-- content_body -->
+        <!-- content_body --> 
         <div class="content_body">
-          <div class="cate_list">
+          <div class="cate_list" id="cate_list">
             <c:choose>
               <c:when test="${list.size() > 0 }">
               
                 <c:forEach var="vo" items="${list }">
                   <c:choose>
                     <c:when test="${vo.topNo == 0 }"> <!-- 1차분류 -->
-			                <li onclick="viewCon(this)"><c:out value="${vo.categoryNm }"/></li>
+			                <li name="cate1" id="cate1" value="${vo.categoryNo}"><c:out value="${vo.categoryNm }"/></li>
                     </c:when>
                     <c:otherwise> <!-- 2차 분류 -->
-			                <li>└<c:out value="${vo.categoryNm }"/></li>
+			                <li style="display: none;" name="cate2" id="cate2" value="${vo.topNo}">
+			                  └<c:out value="${vo.categoryNm }"/>
+			                </li>
                     </c:otherwise>
                   </c:choose>
                   
@@ -86,7 +103,6 @@
                 <li>No Categories.</li>
               </c:otherwise>
             </c:choose>
-            
           </div>
           <div class="cate_create clear">
             <p>분류 생성/수정/삭제</p>
