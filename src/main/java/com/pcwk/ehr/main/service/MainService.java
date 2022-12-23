@@ -3,24 +3,25 @@ package com.pcwk.ehr.main.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.pcwk.ehr.admin.domain.CategoryVO;
 import com.pcwk.ehr.cmn.DTO;
-import com.pcwk.ehr.main.domain.MainJoinVO;
+import com.pcwk.ehr.main.domain.MainCateSearchVO;
 
 public interface MainService {
-	/**
-	 * 단건 조회
-	 * @param inVO
-	 * @return 
-	 * @throws SQLException
-	 */
-	MainJoinVO doSelectOne(MainJoinVO inVO) throws SQLException;
 	
 	/**
-	 * 목록 조회
-	 * @param inVO
-	 * @return 
+	 * 카테고리 목록조회
+	 * @param t
+	 * @return List<DTO>
 	 * @throws SQLException
 	 */
-	List<MainJoinVO> doRetrieve(DTO inVO) throws SQLException;
-
+	List<MainCateSearchVO> doRetrieve(DTO inVO) throws SQLException;
+	
+	
+	/**
+	 * 조건절 없이 모든 카테고리 목록 조회
+	 * @return
+	 * @throws SQLException
+	 */
+	List<MainCateSearchVO> getALL() throws SQLException;
 }
