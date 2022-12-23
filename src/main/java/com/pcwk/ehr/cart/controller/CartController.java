@@ -3,6 +3,8 @@ package com.pcwk.ehr.cart.controller;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import com.pcwk.ehr.cart.domain.CartJoinVO;
 import com.pcwk.ehr.cart.domain.CartVO;
 import com.pcwk.ehr.cart.service.CartService;
 import com.pcwk.ehr.cmn.Message;
+import com.pcwk.ehr.cmn.MessageVO;
 
 @Controller("CartController")
 @RequestMapping("cart")
@@ -89,23 +92,28 @@ public class CartController {
 	}
 	@RequestMapping(value = "/doDelete.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String doDelete(CartVO inVO)throws SQLException{
+	public String doDelete(HttpServletRequest req)throws SQLException{
+		
 		String jsonString = "";
+		String cartNoString= (String)req.getParameter("cartString");
 		LOG.debug("┌=============================┐");
-		LOG.debug("|inVO=" + inVO);
+		LOG.debug("|cartNoString=" + cartNoString);
 
-		int flag = cartService.doDelete(inVO);
+		String[] cartNoArray =cartNoString.split(",");
 
-		LOG.debug("|flag=" + flag);
-
-		String message = "";
-		if (1 == flag) {
-			message = "삭제 되었습니다.";
-		} else {
-			message = "삭제 실패!";
+		int flagCnt =0;
+		
+		for(String str : cartNoArray) {
+			CartVO inVO = new CartVO();
+			inVO.setCartNO(Integer.parseInt(str));
+		
+			flagCnt += cartService.doDelete(inVO);
+		
 		}
-
-		jsonString = new Gson().toJson(new Message(String.valueOf(flag), message));
+		
+		MessageVO messageVO = new MessageVO(flagCnt+"","삭제되었습니다."); 
+		
+		jsonString =new Gson().toJson(messageVO);
 		LOG.debug("|jsonString=" + jsonString);
 		LOG.debug("└=============================┘");
 

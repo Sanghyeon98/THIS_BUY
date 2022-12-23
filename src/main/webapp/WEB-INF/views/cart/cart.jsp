@@ -114,42 +114,110 @@ width: 30px;
     	console.log('Hello, world!');
     	getAll(1);
     	
+
     	
-    	
+    	//선택 삭제--------------------------------------------------------------------
     	$("#dodelete").on("click",function(e){
     		console.log("dodelete");
     		
-    		e.preventDefault();
-            //경고메세지
-            if(confirm("삭제하시겠습니까?") == false) return;
+    		let cartArray = [];
+    		
+    		 $("input:checkbox[name=chk]").each(function(i, element) {
+    	          // 체크된 데이터 uIdArray 추가
+    	          if ($(this).is(":checked") == true) {
+    	            console.log($(this).val());
+    	            cartArray.push($(this).val());
+    	          }
+    	          
+    	    });
+    	         
+    		let cartString = "";
+    		
+    		if(cartArray.length > 0) {  // 체크된 데이터가 있으면
+    			cartString = cartArray.toString();
+    	          console.log("cartString : " + cartString);
+    	        } else {
+    	          alert("삭제할 자료를 선택하세요.");
+    	          return;
+    	        }
+    		
+    		 if(confirm("삭제하시겠습니까?") == false) return;
+    		
             
             let method = "POST";
             let url = "/cart/doDelete.do";
             let async = true;
-            
             let params = {
-            		cartNO : $("#cartNO").val()
+            		cartString : cartString
             };
     		
             PClass.callAjax(method, url, async, params, function(data) {
+                alert(data);
+            	
+            	getAll(1);
+            });  
+            
+        });
+    	
+    	
+    	
+    	
+    	
+    	// 수량 버튼 조작-------------------------------------------------------------------------------
+        $(".cart__list>tbody").on("click", "#minus", function(e) {
+            console.log("minus");
+            
+            let quantity = $(this).closest("tr").find(":input[class='quantity']");
+            let cartNo = $(this).closest("tr").find(":input[class='cartNO']");
+            
+            if (parseInt($("#quantity").val()) <= 1){
+                return;
+            }
+            
+            let method = "POST";
+            let url = "/cart/doUpdate.do";
+            let async = true;
+            let params = {
+            		cartNO : $("#cartNO").val(),
+            		quantity: ($("#quantity").val()-1)
+            };
+            
+            PClass.callAjax(method, url, async, params, function(data) {
+                console.log(data);
                 getAll(1);
             });
             
         });
-    	
-    	
-    	   // 수량 버튼 조작
-        let quantity = $(".amount").val();
-        $(".amount_plus").on("click", function(){
-            $(".amount").val(++quantity);
+    	   
+        $(".cart__list>tbody").on("click", "#add", function(e) {
+            console.log("add");
+            
+            let quantity = $(this).closest("tr").find(":input[class='quantity']");
+            let cartNo = $(this).closest("tr").find(":input[class='cartNO']");
+            
+            
+            let method = "POST";
+            let url = "/cart/doUpdate.do";
+            let async = true;
+            let params = {
+                    cartNO : $("#cartNO").val(),
+                    quantity: ($("#quantity").val()+1)
+            };
+            
+            PClass.callAjax(method, url, async, params, function(data) {
+                console.log(data);
+                getAll(1);
+            });
+            
         });
-        $(".amount_minus").on("click", function(){
-            if(quantity > 1){
-                $(".amount").val(--quantity);   
-            }
-        });
-    	
-        //체크버튼
+    	   
+    	   
+    	   
+    	   
+        
+        
+        
+        //체크버튼-----------------------------------------------------------
         $("#checkAll").on("click", function() {
             console.log("#checkAll");
             //chk
@@ -164,7 +232,7 @@ width: 30px;
     	
     });  
  
-    //doretrieve
+    //getAll-------------------------------------------------------------------------
     function getAll(page) {
       let method = "POST";
       let url = "/cart/getAll.do";
@@ -172,9 +240,12 @@ width: 30px;
       
       let params = {
     		  memberId : "admin"
-      };
+          
+      };     //VO안에  memberId 
       
-      
+    //${sessetion.infor.uid}
+    //id =memberId  => $("#memberId").val(),
+    
       PClass.callAjax(method, url, async, params, function(data) {
         console.log(data);
         let parsedJson = JSON.parse(data);
@@ -183,15 +254,16 @@ width: 30px;
         $(".cart__list>tbody").empty();
         
         if (null != parsedJson && parsedJson.length > 0) {
-          
             
           $.each(parsedJson, function(index, value) {
               htmlData += "<tr>";
-              htmlData += "    <td><input type='checkbox' name='chk' id="+value.cartNO+"></td>";
+              htmlData += "    <td><input type='checkbox' name='chk' value="+value.cartNO+"></td>";
+              htmlData += "    <td><input type='hidden' class='memberId' id='memberId' name='memberId' value="+value.memberId+"></td>";
+              htmlData += "    <td><input type='hidden' class='cartNO' name='cartNO' id='cartNO' value="+value.cartNO+"></td>";
               htmlData += "    <td><img src='' alt=''></td>";
               htmlData += "    <td><a>"+value.name+"</a></td>";
               htmlData += "    <td><input type='button' name='minus' id='minus' value='-'>";
-              htmlData += "    <input type='text' name='amount' id='amount' value="+value.quantity+" size='2'>";
+              htmlData += "    <input type='text' class='quantity' name='quantity' id='quantity' value="+value.quantity+" size='2'>";
               htmlData += "    <td><input type='button' name='add' id='add' value='+'>";
               htmlData += "    <td>"+value.price+"원</td>";
               htmlData += "</tr>";
@@ -209,7 +281,8 @@ width: 30px;
        
         
       });  // PClass.callAjax END
-    }    
+      
+    }   //function 
   </script>
 </head>
 <body>
@@ -231,35 +304,7 @@ width: 30px;
                         <td></td>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr class="cart__list__detail">
-                        <td><input type="checkbox" name="chk"></td>
-                        <td><img src="" alt=""></td>
-                        <td><a>포도농장 포도쥬스</a></td>
-                        <td class="cart__list__option">
-                        <p><span><input class="amount_minus" type="button" value="-"></span>
-                        <input  class="amount" type="number" min="1" value="1">
-                        <span><input type="button" value="+"></span>
-                        </p>
-                        </td>
-                        <td><span class="price">5,600원</span><br>
-                        </td>
-                    </tr>
-                    <tr class="cart__list__detail">
-                       <tr class="cart__list__detail">
-                        <td><input type="checkbox" name="chk"></td>	   
-                        <td><img src="" alt=""></td>
-                        <td><a>따끈따끈 군밤</a></td>
-                        <td class="cart__list__option">
-                        <p><span><input class="amount_minus" type="button" value="-"></span>
-                        <input class="amount" type="number" min="1" value="1">
-                        <span><input class="amount_plus" type="button" value="+"></span>
-                        </p>
-                        </td>
-                        <td><span class="price">2,900원</span><br>
-                        </td>
-                    </tr>
-                    
+                <tbody >
                     <c:choose>
                   <c:when test="${list.size() > 0 }">
                     <c:forEach var="vo" items="${list }">
@@ -278,7 +323,6 @@ width: 30px;
                     </c:forEach>
                   </c:when>
                   <c:otherwise>
-                  
                     <tr>
                       <td class="text-center col-sm-12 col-md-12 col-lg-12" colspan="99">
                           No data found
