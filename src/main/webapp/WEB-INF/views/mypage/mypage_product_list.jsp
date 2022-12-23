@@ -72,16 +72,43 @@ ul {
 </style>
 
 
-<title>주문내역</title>
-<script src="/PC_HTML/assets/js/jquery-3.6.1.js"></script>
-<script
-	src="/PC_HTML/assets/JQuery/jquery-ui-1.13.2.custom/jquery-ui.js"></script>
-<!-- javascript -->
+<title>mypage</title>
+
+<!-- 뷰포트(반응형 웹)  -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="project product list">
+<meta name="keywords" content="html5, css3, javascipt6, jQuery">
+<!-- favicon -->
+<link rel="shortcut icon" type="images/x-icon"
+  href="/PC_HTML/favicon.ico">
+<!-- jquery ui -->
+<link rel="stylesheet" href="${CP_RES}/css/admin_product_mng.css">
+<!-- jQuery -->
+<script src="${CP_RES}/js/jquery-1.12.4.js"></script>
+<!-- callAjax -->
+<script src="${CP_RES}/js/callAjax.js"></script>
+<!-- String, Number, Date Util -->
+<script src="${CP_RES}/js/eUtil.js"></script>
+<!-- paging -->
+<script src="${CP_RES}/js/jquery.bootpag.js"></script>
+<!-- bootstrap js -->
+<script src="${CP_RES}/js/bootstrap.min.js"></script>
 <script>
    $(document).ready(function(){
       console.log('Hello, world!');
       
       
+      $("#doRetrieve").on("click",function(){
+          console.log('doRetrieve');
+   
+          
+        
+         
+
+          
+        //doRetrive
+        });        
       
     });
   </script>
@@ -105,49 +132,34 @@ ul {
 
 		<div>
 			<ul>
-				<li class="tag">주문내역</li>
+				<li id="doRetrieve" class="tag">주문내역</li>
 				<li class="tag">상품문의</li>
 				<li class="tag">개인정보수정</li>
 			</ul>
 		</div>
 		<div>
+		
+		${list }
 			<div class="title">
 				<div>
-					<span class="sp_head">상품문의</span> <span class="sp_font">-상품에
-						대한 문의를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로 이동될 수 있습니다.</span>
+					<span class="sp_head">주문내역 </span> <span class="sp_font"></span>
 					<hr>
-					<div>
-						<table>
-							<thead>
-								<tr>
-									<th>제목</th>
-									<th>작성일</th>
-									<th>답변상태</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>ㄴㅇㄹㄴㅁㅇㄹㄴㅁㅇㅁㄴㅇㄻㄴㅇㄻㄴㅇㄹ</td>
-									<td>2022/11/14</td>
-									<td>답변완료</td>
-								</tr>
-								<tr>
-									<td>ㄴㅇㄹㄴㅁㅇㄹㄴㅁㅇㅁㄴㅇㄻㄴㅇㄻㄴㅇㄹ</td>
-									<td>2022/11/12</td>
-									<td>답변완료</td>
-								</tr>
-								<tr>
-									<td>ㄴㅇㄹㄴㅁㅇㄹㄴㅁㅇㅁㄴㅇㄻㄴㅇㄻㄴㅇㄹ</td>
-									<td>2022/11/15</td>
-									<td>답변미완료</td>
-								</tr>
-							</tbody>
-						</table>
+				<div>
+			<div class="table-responsive">
+    <table id="boardTable" class="table table-striped table-bordered table-hover">
+      <thead class="bg-primary">
+        <tr>
+          <th class="text-center col-sm-1 col-md-1 col-lg-1">3개월</th>
+          <th class="text-center col-sm-6 col-md-6 col-lg-8">6개월</th>
+          <th class="text-center col-sm-2 col-md-2 col-lg-1">1년</th>
+          <th class="text-center col-sm-2 col-md-2 col-lg-1">2년</th>
+          <th class="text-center col-sm-1 col-md-1 col-lg-1">5년</th>
+          <th style='display:none;'>SEQ</th>
+        </tr>
+      </thead>
 					</div>
 				</div>
-			</div>
-		</div>
-	</div>
+		
 </body>
 </html>
 </fmt:bundle>

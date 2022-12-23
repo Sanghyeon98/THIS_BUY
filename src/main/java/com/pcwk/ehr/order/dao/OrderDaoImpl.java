@@ -41,7 +41,10 @@ public class OrderDaoImpl implements OrderDao {
 		LOG.debug("|  param:" + dto);
 		LOG.debug("|  statement:" + statement);
 		LOG.debug("└--------------------------------┘");
-		
+		list = sqlSessionTemplate.selectList(statement, orderSearchVO);
+		for(OrderVO vo : list) {
+			LOG.debug("|  vo : " + vo);
+		}
 		return list;
 	}
 

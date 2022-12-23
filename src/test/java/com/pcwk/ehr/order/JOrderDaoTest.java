@@ -28,7 +28,7 @@ import com.pcwk.ehr.order.domain.OrderVO;
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring/root-context.xml",
 		"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml" })
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class JOrderTest {
+public class JOrderDaoTest {
 	final Logger LOG = LogManager.getLogger(getClass());
 	@Autowired // 테스트 오브젝트가 만들어지고 나면 스프링 테스트 컨텍스트에 의해 자동으로 값으 주입된다.
 	ApplicationContext context;
@@ -47,8 +47,8 @@ public class JOrderTest {
 	public void setUp() throws Exception {
 
 		orderVO1 = new OrderVO(1, 8, "admin", 65, 1000, 50, "아무개", "01011111111", "서울시", "없음", "x", "20221111");
-		orderVO2 = new OrderVO(2, 90, "admin", 46, 1000, 51, "아무개", "01011111111", "서울시", "없음", "x", "20221111");
-		orderVO3 = new OrderVO(3, 90, "admin", 47, 1000, 52, "아무개", "01011111111", "서울시", "없음", "x", "20221111");
+		orderVO2 = new OrderVO(2, 9, "admin", 46, 1000, 51, "아무개", "01011111111", "서울시", "없음", "x", "20221111");
+		orderVO3 = new OrderVO(3, 10, "admin", 47, 1000, 52, "아무개", "01011111111", "서울시", "없음", "x", "20221111");
 
 		searchVO = new SearchVO(10, 1, "", "");
 	}
@@ -60,12 +60,8 @@ public class JOrderTest {
 		assertEquals(actUser.getPrice(), addUser.getPrice());
 	}
 
-	@Test
-	public void doSelectOne() throws SQLException{
-		
-		
-		
-	}
+	
+
 	
 	
 	@Test

@@ -37,7 +37,7 @@ public class OrderController {
 	public OrderController() {}
 	
 		
-	// 주문내역
+	// 상품내역
 	@RequestMapping(value= "/orderView.do")
 	public String orderView(Model model,OrderSearchVO inVO) throws SQLException{
 		String VIEW_NAME = "mypage/mypage_product_list";
@@ -94,7 +94,7 @@ public class OrderController {
 		model.addAttribute("pageTotal", (int) pageTotal);
 
 		model.addAttribute("PAGE_SIZE", pageSizeList);
-		model.addAttribute("BOARD_SEARCH", searchList);
+		model.addAttribute("ORDER_SEARCH", searchList);
 		return VIEW_NAME;
 	}
 	

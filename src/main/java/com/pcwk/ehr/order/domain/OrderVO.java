@@ -18,22 +18,22 @@ public class OrderVO extends DTO{
 	private String    date;
 	
 	
-	public OrderVO(int orderNO, int sameOrder, String memberId, int itemNO, int price, int paymentId, String name,
-			String phone, String address, String request, String orderState, String date) {
-		super();
-		this.orderNO = orderNO;
-		this.sameOrder = sameOrder;
-		this.memberId = memberId;
-		this.itemNO = itemNO;
-		this.price = price;
-		this.paymentId = paymentId;
-		this.name = name;
-		this.phone = phone;
-		this.address = address;
-		this.request = request;
-		this.orderState = orderState;
-		this.date = date;
-	}
+public OrderVO(int orderNO, int sameOrder, String memberId, int itemNO, int price, int paymentId, String name,
+		String phone, String address, String request, String orderState, String date) {
+	super();
+	this.orderNO = orderNO;
+	this.sameOrder = sameOrder;
+	this.memberId = memberId;
+	this.itemNO = itemNO;
+	this.price = price;
+	this.paymentId = paymentId;
+	this.name = name;
+	this.phone = phone;
+	this.address = address;
+	this.request = request;
+	this.orderState = orderState;
+	this.date = date;
+}
 	
 	public int getOrderNO() {
 		return orderNO;

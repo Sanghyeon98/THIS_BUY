@@ -9,7 +9,7 @@
 	<where>
 	   <choose>
 	       <when test="searchDiv == '10' and '' != searchDiv">
-	         order_no = #{searchDiv}
+	         order_no LIKE = #{searchDiv}
 	       </when>
 	       <when test="searchDiv == '20' and '' != searchDiv">
 	         name LIKE #{searchWord} || '%'
@@ -20,49 +20,47 @@
 
 
 
-  <select id="doRetrieve" resultType="OrderVO" parameterType="com.pcwk.ehr.order.domain.OrderSearchVO">
-      SELECT A.*,B.*
-      FROM(
-          SELECT 
-              TT1.order_no AS orderNO,
-              TT1.same_order AS sameOrder,
-              TT1.member_id AS memberId,
-              TT1.item_no AS itemNO,
-              TT1.price,
-              TT1.payment_id AS paymentId,
-              TT1.name,
-              TT1.phone,
-              TT1.address,
-              TT1.request,
-              TT1.order_state AS orderState,
-              TO_CHAR(TT1.order_date, 'YYYY-MM-DD HH24:MI:SS') AS orderDate,
-             
-              DECODE( TO_CHAR(LOCALTIMESTAMP,'YYYY-MM-DD'),  TO_CHAR(TT1.order_date,'YYYY-MM-DD')
-                              ,TO_CHAR(TT1.order_date,'HH24:MI')
-                              ,TO_CHAR(TT1.order_date,'YYYY-MM-DD')) as orderDate,   
-          FROM (
-              SELECT ROWNUM AS RNUM, T1.*
-              FROM (
-                  SELECT *
-                  FROM ordering
-                  -- WHERE 조건 (검색구분:''(전체), 10(order_nm), 20(status), 검색어)
-                 <include refid="searchCondition"/>
-                  ORDER BY order_no
-              ) T1
-              -- 종료 번호
-              <![CDATA[ WHERE ROWNUM <= #{pageSize} * (#{pageNo} - 1) + #{pageSize} ]]>
-          ) TT1
-          -- 시작번호
-          <![CDATA[ WHERE ROWNUM >= #{pageSize} * (#{pageNo} - 1) + 1 ]]>
-      ) A
-      CROSS JOIN
-      (
-          SELECT COUNT(*) totalCnt
-          FROM product
-          --WHERE 조건
-          <include refid="searchCondition"/>
-      ) B
-  </select>
+<select id="doRetrieve" resultType="OrderVO" parameterType="SearchVO">
+SELECT A.*,B.*
+FROM(
+  SELECT 
+    TT1.order_no AS orderNO,
+    TT1.same_order AS sameOrder,
+    TT1.member_id AS memberId,
+    TT1.item_no AS itemNO,
+    TT1.price,
+    TT1.payment_id AS paymentId,
+    TT1.name,
+    TT1.phone,
+    TT1.address,
+    TT1.request,
+    TT1.order_state AS orderState,
+    DECODE( TO_CHAR(LOCALTIMESTAMP,'YYYY-MM-DD'),  TO_CHAR(TT1.order_date,'YYYY-MM-DD')
+                    ,TO_CHAR(TT1.order_date,'HH24:MI')
+                    ,TO_CHAR(TT1.order_date,'YYYY-MM-DD')) as orderDate   
+FROM (
+    SELECT ROWNUM AS RNUM, T1.*
+    FROM (
+        SELECT *
+        FROM ordering
+        -- WHERE 조건 (검색구분:''(전체), 10(order_nm), 20(status), 검색어)
+       <include refid="searchCondition"/>
+        ORDER BY order_no
+    ) T1
+    -- 종료 번호
+    <![CDATA[ WHERE ROWNUM <= #{pageSize} * (#{pageNo} - 1) + #{pageSize} ]]>
+) TT1
+-- 시작번호
+<![CDATA[ WHERE ROWNUM >= #{pageSize} * (#{pageNo} - 1) + 1 ]]>
+    ) A
+    CROSS JOIN
+    (
+        SELECT COUNT(*) totalCnt
+        FROM product
+        --WHERE 조건
+        <include refid="searchCondition"/>
+    ) B
+</select>
 
 
 <select id="doSelectOne" parameterType="OrderVO" resultType="OrderVO">
@@ -121,50 +119,51 @@ ORDER BY order_no
 	<![CDATA[
 	UPDATE ordering
 	SET
-	  same_order  = #{sameOrder},
-	  member_id   = #{memberId},
-	  item_no     = #{itemNO},
-	  price       = #{price},
-	  payment_id  = #{paymentId},
-	  name        = #{name},
-	  phone       = #{phone},
-	  address     = #{address},
-	  request     = #{request},
-	  order_state = #{orderState},
-	  order_date  = LOCALTIMESTAMP
-	WHERE
-	  order_no = :#{orderNO}
+  same_order  = #{sameOrder},
+  member_id   = #{memberId},
+  item_no     = #{itemNO},
+  price       = #{price},
+  payment_id  = #{paymentId},
+  name        = #{name},
+  phone       = #{phone},
+  address     = #{address},
+  request     = #{request},
+  order_state = #{orderState},
+  order_date  = LOCALTIMESTAMP,
+  
+WHERE
+  order_no = :#{orderNO}
 	]]>
 </update>
     
 
 <select id="doSave" parameterType="OrderVO">
 	INSERT INTO ordering (
-		order_no,
-		same_order,
-		member_id,
-		item_no,
-		price,
-		payment_id,
-		name,
-		phone,
-		address,
-		request,
-		order_state,
-		order_date
-	) VALUES (
-		#{orderNO},
-		#{sameOrder},
-		#{memberId},
-		#{itemNO},
-		#{price},
-		#{paymentId},
-		#{name},
-		#{phone},
-		#{address},
-		#{request},
-		#{orderState},
-		LOCALTIMESTAMP
+	order_no,
+	same_order,
+	member_id,
+	item_no,
+	price,
+	payment_id,
+	name,
+	phone,
+	address,
+	request,
+	order_state,
+	order_date
+) VALUES (
+	#{orderNO},
+	#{sameOrder},
+	#{memberId},
+	#{itemNO},
+	#{price},
+	#{paymentId},
+	#{name},
+	#{phone},
+	#{address},
+	#{request},
+	#{orderState},
+	LOCALTIMESTAMP
 	)
 </select>
 

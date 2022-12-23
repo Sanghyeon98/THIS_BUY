@@ -72,14 +72,37 @@ ul {
 </style>
 
 
-<title></title>
-<script src="/PC_HTML/assets/js/jquery-3.6.1.js"></script>
-<script
-	src="/PC_HTML/assets/JQuery/jquery-ui-1.13.2.custom/jquery-ui.js"></script>
+<title>주문내역</title>
+<!-- 뷰포트(반응형 웹)  -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="project product list">
+<meta name="keywords" content="html5, css3, javascipt6, jQuery">
+<!-- favicon -->
+<link rel="shortcut icon" type="images/x-icon"
+  href="/PC_HTML/favicon.ico">
+<!-- jquery ui -->
+<link rel="stylesheet" href="${CP_RES}/css/admin_product_mng.css">
+<!-- jQuery -->
+<script src="${CP_RES}/js/jquery-1.12.4.js"></script>
+<!-- callAjax -->
+<script src="${CP_RES}/js/callAjax.js"></script>
+<!-- String, Number, Date Util -->
+<script src="${CP_RES}/js/eUtil.js"></script>
+<!-- paging -->
+<script src="${CP_RES}/js/jquery.bootpag.js"></script>
+<!-- bootstrap js -->
+<script src="${CP_RES}/js/bootstrap.min.js"></script>
 <!-- javascript -->
 <script>
    $(document).ready(function(){
       console.log('Hello, world!');
+   
+      /*  doSelecte(); */
+      
+      //paging
+     
+      
       
     });
   </script>
@@ -101,7 +124,7 @@ ul {
 
 	<div class="body">
 
-		<div>
+		<div class="list_body">
 			<ul>
 				<li class="tag">주문내역</li>
 				<li class="tag">상품문의</li>
