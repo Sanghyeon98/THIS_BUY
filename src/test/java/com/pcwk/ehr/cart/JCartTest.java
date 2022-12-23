@@ -49,9 +49,9 @@ public class JCartTest {
 		LOG.debug("dao:"+dao);
 		LOG.debug("==============================");
 		
-		cartVO1 = new CartVO(2,2,"test01",2);
-		cartVO2 = new CartVO(3,3,"test01",3);
-		cartVO3 = new CartVO(4,4,"test01",4);
+		cartVO1 = new CartVO(0,2,"admin",2);
+		cartVO2 = new CartVO(0,3,"admin",3);
+		cartVO3 = new CartVO(0,4,"admin",4);
 	
 		cartJoinVO1 = new CartJoinVO(1, 1, "admin", 1, "", "", "", 1, "", 0, 0);
 	}
@@ -80,7 +80,7 @@ public class JCartTest {
 	}
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void doUpdate() throws SQLException{
 		dao.doDelete(cartVO1);
 		dao.doDelete(cartVO2);
@@ -104,7 +104,7 @@ public class JCartTest {
 	}
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void beans() {
 		LOG.debug("==============================");
 		LOG.debug("context:"+context);	

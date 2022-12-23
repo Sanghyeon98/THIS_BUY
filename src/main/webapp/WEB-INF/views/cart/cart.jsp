@@ -115,8 +115,26 @@ width: 30px;
     	getAll(1);
     	
     	
+    	
     	$("#dodelete").on("click",function(e){
     		console.log("dodelete");
+    		
+    		e.preventDefault();
+            //경고메세지
+            if(confirm("삭제하시겠습니까?") == false) return;
+            
+            let method = "POST";
+            let url = "/cart/doDelete.do";
+            let async = true;
+            
+            let params = {
+            		cartNO : $("#cartNO").val()
+            };
+    		
+            PClass.callAjax(method, url, async, params, function(data) {
+                getAll(1);
+            });
+            
         });
     	
     	
@@ -169,7 +187,7 @@ width: 30px;
             
           $.each(parsedJson, function(index, value) {
               htmlData += "<tr>";
-              htmlData += "    <td><input type='checkbox' name='chk'></td>";
+              htmlData += "    <td><input type='checkbox' name='chk' id="+value.cartNO+"></td>";
               htmlData += "    <td><img src='' alt=''></td>";
               htmlData += "    <td><a>"+value.name+"</a></td>";
               htmlData += "    <td><input type='button' name='minus' id='minus' value='-'>";
@@ -287,7 +305,7 @@ width: 30px;
         <div>
         <div>
             <span>상품금액</span>
-            <span><input class="price1" type="text" ></span>
+            <span><input class="price" type="text" ></span>
             <span>원</span>
         </div>
         <div>
@@ -297,7 +315,7 @@ width: 30px;
         </div>
         <div>
             <span>결제예정금액</span>
-            <span><input class="price3" type="text" ></span>
+            <span><input class="sum" type="text" ></span>
             <span>원</span>
         </div>
         </div> 

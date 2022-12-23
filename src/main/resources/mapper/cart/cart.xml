@@ -31,7 +31,9 @@
     
     <select id="getAll" parameterType="com.pcwk.ehr.cart.domain.CartJoinVO"
     resultMap="CartMap">
-        SELECT c.item_no,
+        SELECT 
+            c.cart_no,
+            c.item_no,
             m.member_id,
             c.quantity,
             p.name,
@@ -60,7 +62,7 @@
 		item_no,
 		quantity
 		) VALUES (
-		#{cartNO},
+		cartNo_sequence.NEXTVAL,
 		#{memberId},
 		#{itemNO},
 		#{quantity}
