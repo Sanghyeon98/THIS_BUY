@@ -194,8 +194,7 @@ final Logger LOG = LogManager.getFormatterLogger(getClass());
 
 	@Override
 	public void memberAuth(String memberEmail) throws Exception {
-		// TODO Auto-generated method stub
-		
+		sqlSessionTemplate.update("memberMapper.memberAuth", memberEmail);
 	}
 
 

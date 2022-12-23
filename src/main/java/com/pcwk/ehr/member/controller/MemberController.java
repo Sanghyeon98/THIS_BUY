@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,7 +30,10 @@ public class MemberController {
 
 	@Autowired
 	MemberService memberService;
-
+	
+	@Autowired
+	private JavaMailSender mailSender;
+	
 	final String VIEW_NAME = "member/signup";
 
 	public MemberController() {

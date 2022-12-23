@@ -99,6 +99,9 @@ $(document).ready(function(){
      });
      //id중복체크    
      
+   //email_auth 체크 
+   //email_auth 체크 
+   
 //등록
      $("#add").on("click",function(){
             console.log("#add");
@@ -267,10 +270,10 @@ $(document).ready(function(){
              이메일<span class="r">*</span>
     </div>
        <div class="col-md-7 text-centers">
-         <input type="numberOnly" maxlength="320" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요">
+         <input type="email" maxlength="320" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요">
        </div>
         <div class="col-md-3">
-         <button type="submit" class="btn btn-default btn-block">중복 확인</button>
+         <button type="submit" class="btn btn-default btn-block" value="이메일 인증" id="emailCheck">이메일 인증</button>
         </div>
    </div>
    

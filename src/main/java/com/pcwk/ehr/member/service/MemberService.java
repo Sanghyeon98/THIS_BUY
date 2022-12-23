@@ -43,6 +43,7 @@ public interface MemberService {
 	 * 신규 회원 등록 로직
 	 * 
 	 * @param inVO
+	 * @return 
 	 */
 	public int add(MemberVO inVO) throws SQLException;
 
@@ -90,5 +91,10 @@ public interface MemberService {
 	 * @throws SQLException
 	 */
 	public int getCount(MemberVO inVO) throws SQLException;
+	
+	
+	public MemberVO checkLoginBefore(String value) throws Exception;
+	
+	public void memberAuth(String memberEmail) throws Exception;
 
 }

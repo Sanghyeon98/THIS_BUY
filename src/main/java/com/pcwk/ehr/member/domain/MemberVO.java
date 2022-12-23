@@ -14,6 +14,7 @@ public class MemberVO extends DTO {
 	private String regDt;// �����
 	private String modDt;// ������
 	private String auth;// ���� /������ 1 ȸ��2
+	private int mailauth;// ���� ��1 ��2
 	
 	public MemberVO() {}
 
@@ -121,11 +122,21 @@ public class MemberVO extends DTO {
 		this.auth = auth;
 	}
 
+	public int getMailauth() {
+		return mailauth;
+	}
+
+	public void setMailauth(int mailauth) {
+		this.mailauth = mailauth;
+	}
+
 	@Override
 	public String toString() {
 		return "MemberVO [uId=" + uId + ", passwd=" + passwd + ", name=" + name + ", email=" + email + ", phone="
 				+ phone + ", address=" + address + ", gender=" + gender + ", birthdate=" + birthdate + ", regDt="
-				+ regDt + ", modDt=" + modDt + ", auth=" + auth + ", toString()=" + super.toString() + "]";
+				+ regDt + ", modDt=" + modDt + ", auth=" + auth + ", mailauth=" + mailauth + "]";
 	}
+
+	
 
 }
