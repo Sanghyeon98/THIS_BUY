@@ -211,11 +211,7 @@ width: 30px;
             
         });
     	   
-    	   
-    	   
-    	   
-        
-        
+
         
         //체크버튼-----------------------------------------------------------
         $("#checkAll").on("click", function() {
@@ -265,7 +261,7 @@ width: 30px;
               htmlData += "    <td><input type='button' name='minus' id='minus' value='-'>";
               htmlData += "    <input type='text' class='quantity' name='quantity' id='quantity' value="+value.quantity+" size='2'>";
               htmlData += "    <td><input type='button' name='add' id='add' value='+'>";
-              htmlData += "    <td>"+value.price+"원</td>";
+              htmlData += "    <td>"+value.finalPrice+"원</td>";
               htmlData += "</tr>";
           });
         } else {
