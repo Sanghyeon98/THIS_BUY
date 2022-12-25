@@ -7,11 +7,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.pcwk.ehr.admin.domain.CategoryVO;
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.main.domain.MainCateSearchVO;
 
+@Repository("mainDao")
 public class MainDaoImpl implements MainDao {
 	
 	final Logger LOG = LogManager.getLogger(getClass());
