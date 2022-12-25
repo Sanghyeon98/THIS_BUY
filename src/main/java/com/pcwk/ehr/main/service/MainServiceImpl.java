@@ -8,8 +8,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pcwk.ehr.admin.dao.CategoryDao;
-import com.pcwk.ehr.admin.domain.CategoryVO;
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.main.dao.MainDao;
 import com.pcwk.ehr.main.domain.MainCateSearchVO;

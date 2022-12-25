@@ -1,7 +1,7 @@
 package com.pcwk.ehr.main.domain;
 
 import com.pcwk.ehr.cmn.DTO;
-
+ 
 public class MainJoinVO extends DTO {
 	private String categoryNm;	// 카테고리 이름
 	private int status;		    // 상태값 (1:사용, 0:미사용)

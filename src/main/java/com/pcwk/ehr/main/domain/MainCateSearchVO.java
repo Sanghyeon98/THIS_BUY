@@ -1,6 +1,6 @@
 package com.pcwk.ehr.main.domain;
 
-import com.pcwk.ehr.cmn.DTO;
+import com.pcwk.ehr.cmn.DTO; 
 
 public class MainCateSearchVO extends DTO{
 	
