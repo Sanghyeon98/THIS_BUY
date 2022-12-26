@@ -113,7 +113,6 @@ width: 30px;
     $(document).ready(function(){
     	console.log('Hello, world!');
     	getAll(1);
-    	
 
     	
     	//선택 삭제--------------------------------------------------------------------
@@ -161,25 +160,29 @@ width: 30px;
     	
     	
     	
-    	
-    	
     	// 수량 버튼 조작-------------------------------------------------------------------------------
-        $(".cart__list>tbody").on("click", "#minus", function(e) {
+        $(".cart__list>tbody").on("click", ".minus", function(e) {
             console.log("minus");
+            console.log($(this));
             
             let quantity = $(this).closest("tr").find(":input[class='quantity']");
-            let cartNo = $(this).closest("tr").find(":input[class='cartNO']");
+            let cartNO = $(this).closest("tr").find(":input[class='cartNO']");
             
-            if (parseInt($("#quantity").val()) <= 1){
+            cartNoVal = cartNO.val();
+            
+            if (parseInt($(".quantity").val()) <= 1){
                 return;
             }
+            
+            let quan = quantity.val();
+            let minusQuantity = --quan;
             
             let method = "POST";
             let url = "/cart/doUpdate.do";
             let async = true;
             let params = {
-            		cartNO : $("#cartNO").val(),
-            		quantity: ($("#quantity").val()-1)
+            		cartNO : cartNoVal,
+            		quantity: minusQuantity
             };
             
             PClass.callAjax(method, url, async, params, function(data) {
@@ -189,25 +192,32 @@ width: 30px;
             
         });
     	   
-        $(".cart__list>tbody").on("click", "#add", function(e) {
+        $(".cart__list>tbody").on("click", ".add", function(e) {
             console.log("add");
             
             let quantity = $(this).closest("tr").find(":input[class='quantity']");
-            let cartNo = $(this).closest("tr").find(":input[class='cartNO']");
+            let cartNO = $(this).closest("tr").find(":input[class='cartNO']");
             
+            cartNoVal = cartNO.val();
+            
+            console.log("cartNO : " + cartNO.val());
+            
+            
+            let quan = quantity.val();
+            let addQuantity = ++quan;
             
             let method = "POST";
             let url = "/cart/doUpdate.do";
             let async = true;
             let params = {
-                    cartNO : $("#cartNO").val(),
-                    quantity: ($("#quantity").val()+1)
+                    cartNO : cartNoVal,
+                    quantity: addQuantity
             };
             
             PClass.callAjax(method, url, async, params, function(data) {
                 console.log(data);
                 getAll(1);
-            });
+            }); 
             
         });
     	   
@@ -252,15 +262,15 @@ width: 30px;
         if (null != parsedJson && parsedJson.length > 0) {
             
           $.each(parsedJson, function(index, value) {
-              htmlData += "<tr>";
-              htmlData += "    <td><input type='checkbox' name='chk' value="+value.cartNO+"></td>";
-              htmlData += "    <td><input type='hidden' class='memberId' id='memberId' name='memberId' value="+value.memberId+"></td>";
-              htmlData += "    <td><input type='hidden' class='cartNO' name='cartNO' id='cartNO' value="+value.cartNO+"></td>";
+              htmlData += "<tr class='cartRow'>";
+              htmlData += "    <td><input type='checkbox' name='chk' value='"+value.cartNO+"'></td>";
+              htmlData += "    <td><input type='hidden' class='memberId' name='memberId' value='"+value.memberId+"'></td>";
+              htmlData += "    <td><input type='text' class='cartNO' name='cartNO' value='"+value.cartNO+"'></td>";
               htmlData += "    <td><img src='' alt=''></td>";
               htmlData += "    <td><a>"+value.name+"</a></td>";
-              htmlData += "    <td><input type='button' name='minus' id='minus' value='-'>";
-              htmlData += "    <input type='text' class='quantity' name='quantity' id='quantity' value="+value.quantity+" size='2'>";
-              htmlData += "    <td><input type='button' name='add' id='add' value='+'>";
+              htmlData += "    <td><input type='button' name='minus' class='minus' value='-'>";
+              htmlData += "    <input type='text' class='quantity' name='quantity' value='"+value.quantity+"' size='2'>";
+              htmlData += "    <td><input type='button' name='add' class='add' value='+'>";
               htmlData += "    <td>"+value.finalPrice+"원</td>";
               htmlData += "</tr>";
           });
