@@ -359,7 +359,10 @@
               </tr>
               <tr>
                 <td class="table_left"><label for="imageName">이미지</label></td>
-                <td>${imgVO.orgName }<input type="file" id="imageName" name="imageName"></div>
+                <td>
+                  ${imgVO.orgName }<input type="file" id="imageName" name="imageName">
+                  <img alt="이미지" src="${CP}${imgVO.viewPath}/${imgVO.saveName}">
+                </td>
               </tr>
             </table>
             <div class="reset">

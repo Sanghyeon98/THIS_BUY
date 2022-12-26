@@ -160,10 +160,12 @@ public class ImageController {
 				String yyyyFolder = StringUtil.getCurrentDate("yyyy");
 				String mmFolder = StringUtil.getCurrentDate("MM");
 				
+				// /resources/img/2022/12
 				String tomcatYearMonthFolder = IMG_VIEW_PATH + "/" + yyyyFolder + "/" + mmFolder;
 				LOG.debug("|  tomcatYearMonthFolder = " + tomcatYearMonthFolder);
 				
 				// Tomcat 실제 경로
+				// C:\JAVA\04_Spring\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\THIS_BUY\resources\img\2022\12
 				String tomcatRealPath = req.getServletContext().getRealPath(tomcatYearMonthFolder);
 				LOG.debug("|  tomcatRealPath = " + tomcatRealPath);
 
