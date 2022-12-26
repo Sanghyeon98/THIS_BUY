@@ -143,6 +143,26 @@ ul {
 			<div class="title">
 				<div>
 					<span class="sp_head">주문내역 </span> <span class="sp_font"></span>
+					 <!-- 제목 ------------------------------------------------------------------->
+    <!-- 검색 : 검색구분(select) 검색어(input) 페이지 사이즈(select)--> 
+    <form action="#" class="form-inline text-right" >
+      <input type="hidden" name="div" id="div" value="${divValue}" >  
+      <div class="form-group">
+        <select class="form-control input-sm" name="searchDiv" id="searchDiv">
+          <c:forEach var="code" items="${ORDER_SEARCH}">
+            <option value='<c:out value="${code.detCode }"/>' >
+              <c:out value="${code.detName }" />
+            </option>
+          </c:forEach>
+        </select>
+          <c:forEach var="code" items="${PAGE_SIZE}">
+            <option value='<c:out value="${code.detCode }"/>'>
+              <c:out value="${code.detName }" />
+            </option>
+          </c:forEach>            
+      </div>
+    </form> 
+    <!-- 검색 ------------------------------------------------------------------->
 					<hr>
 				<div>
 			<div class="table-responsive">
