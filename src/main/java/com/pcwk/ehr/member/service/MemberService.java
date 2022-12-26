@@ -95,6 +95,5 @@ public interface MemberService {
 	
 	public MemberVO checkLoginBefore(String value) throws Exception;
 	
-	public void memberAuth(String memberEmail) throws Exception;
 
 }

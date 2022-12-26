@@ -94,7 +94,7 @@ public class JMemberserviceTest {
 		
 		//3.
 		MemberVO inVO = members.get(0);
-		inVO.setuId("tkdeja");
+		inVO.setMemberid("tkdeja");
 		inVO.setPasswd("1234abc!");
 		
 		int flag = memberService.idPassCheck(inVO);

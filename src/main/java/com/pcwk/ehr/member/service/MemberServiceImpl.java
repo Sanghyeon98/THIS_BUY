@@ -9,12 +9,15 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.member.dao.MemberDaoImpl;
 import com.pcwk.ehr.member.dao.Memberdao;
 import com.pcwk.ehr.member.domain.MemberVO;
+import com.pcwk.ehr.member.mail.MailUtils;
+import com.pcwk.ehr.member.mail.TempKey;
 
 @Service("MemberService")
 public class MemberServiceImpl implements MemberService {
@@ -22,6 +25,9 @@ public class MemberServiceImpl implements MemberService {
 	final Logger LOG = LogManager.getLogger(getClass());
 	@Autowired
 	private Memberdao memberDao;
+
+	@Autowired
+	private JavaMailSender mailSender;
 	
 	
 	@Override
@@ -115,10 +121,7 @@ public class MemberServiceImpl implements MemberService {
 		return null;
 	}
 
-	@Override
-	public void memberAuth(String memberEmail) throws Exception {
-		memberDao.memberAuth(memberEmail);
-		
-	}
+
+	
 
 }

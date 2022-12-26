@@ -99,9 +99,51 @@ $(document).ready(function(){
      });
      //id중복체크    
      
-   //email_auth 체크 
-   //email_auth 체크 
-   
+   //email 인증
+   $('#emailCheck').click(function() {
+	   if(eUtil.ISEmpty( $("#email").val() ) == true){
+           alert("이메일을 입력하세요.");
+           $("#email").focus();
+           return;
+           }
+        const eamil = $('#email').val(); // 이메일 주소값 얻어오기!
+        console.log('완성된 이메일 : ' + eamil); // 이메일 오는지 확인
+        const checkInput = $('.mailcheckinput') // 인증번호 입력하는곳 
+        
+       
+          let method = "GET";
+          let url = "/member/mailCheck.do"; 
+          let async  = true;
+          let params = {
+             "email"    : $("#email").val(),
+          };
+          PClass.callAjax(method,url,async,params,function(data){// GET방식이라 Url 뒤에 email을 뭍힐수있다.       
+                console.log("data : " +  data);
+                checkInput.attr('disabled',false);
+                code =data;
+                alert('인증번호가 전송되었습니다.')
+                		
+                     
+        });
+   });// end ajax
+    // end send eamil
+
+ // 인증번호 비교 
+    // blur -> focus가 벗어나는 경우 발생
+    $('.mail-check-input').blur(function () {
+        const inputCode = $(this).val();
+        const $resultMsg = $('#mail-check-warn');
+        
+        if(inputCode === code){
+            $resultMsg.html('인증번호가 일치합니다.');
+            $resultMsg.css('color','green');
+            $('#mail-Check-Btn').attr('disabled',true);
+            $('#email').attr('readonly',true);
+        }else{
+            $resultMsg.html('인증번호가 불일치 합니다. 다시 확인해주세요!.');
+            $resultMsg.css('color','red');
+        }
+    });
 //등록
      $("#add").on("click",function(){
             console.log("#add");
@@ -142,7 +184,13 @@ $(document).ready(function(){
                alert("이메일을 입력 하세요.");
                $("#email").focus();
                return;
-           }    
+           }
+           
+           if(eUtil.ISEmpty( $("#mailauth").val() ) == true){
+               alert("이메일 인증을 해주세요.");
+               $("#mailauth").focus();
+               return;
+           }
            
            if(eUtil.ISEmpty( $("#phone").val() ) == true){
                alert("휴대폰 번호을 입력 하세요.");
@@ -171,7 +219,7 @@ $(document).ready(function(){
                if("1" == parsedJson.msgId){
                   alert(parsedJson.msgContents);
                   //입력 항목 초기화
-                  //아이디: enabled
+                  //아이디: enabledz
                   //등록버튼:enabled
                   initControll();                  
                }else{
@@ -195,8 +243,10 @@ $(document).ready(function(){
         $("#passwd").val(initValue);
         $("#name").val(initValue);
         $("#email").val(initValue);
+        $("#emailCheck").val(initValue);
         $("#phone").val(initValue);
         $("#regDt").val(initValue);
+        
         
         //아이디는 PK로 활성화
         $("#uId").prop("disabled",false);
@@ -264,19 +314,20 @@ $(document).ready(function(){
        </div>
    </div>
  
- <!-- emaillcheck만들기, email 인증-->
+ <!-- email 인증-->
    <div class="row">
     <div class="col-md-2 text-centers">
              이메일<span class="r">*</span>
     </div>
        <div class="col-md-7 text-centers">
-         <input type="email" maxlength="320" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요">
+         <input type="text" maxlength="320" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요">
        </div>
         <div class="col-md-3">
          <button type="submit" class="btn btn-default btn-block" value="이메일 인증" id="emailCheck">이메일 인증</button>
         </div>
    </div>
-   
+   <input class="form-control mailcheckinput" placeholder="인증번호 6자리를 입력해주세요!" disabled="disabled" maxlength="6">
+   <span id="mail-check-warn"></span>
    <!-- 본인 인증 넣기 -->
    <div class="row">
     <div class="col-md-2 text-centers">
@@ -341,7 +392,7 @@ $(document).ready(function(){
 
    </div>
    </div>
- 
+
 </body>
 
 </html>

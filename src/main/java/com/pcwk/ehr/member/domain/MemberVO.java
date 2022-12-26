@@ -3,7 +3,7 @@ package com.pcwk.ehr.member.domain;
 import com.pcwk.ehr.cmn.DTO;
 
 public class MemberVO extends DTO {
-	private String uId; // ����� ���̵�
+	private String memberid; // ����� ���̵�
 	private String passwd;// ��й�ȣ
 	private String name; // �̸�
 	private String email;// �̸���
@@ -14,14 +14,13 @@ public class MemberVO extends DTO {
 	private String regDt;// �����
 	private String modDt;// ������
 	private String auth;// ���� /������ 1 ȸ��2
-	private int mailauth;// ���� ��1 ��2
 	
 	public MemberVO() {}
 
-	public MemberVO(String uId, String passwd, String name, String email, String phone, String address, int gender,
+	public MemberVO(String memberid, String passwd, String name, String email, String phone, String address, int gender,
 			String birthdate, String regDt, String modDt, String auth) {
 		super();
-		this.uId = uId;
+		this.memberid = memberid;
 		this.passwd = passwd;
 		this.name = name;
 		this.email = email;
@@ -34,12 +33,19 @@ public class MemberVO extends DTO {
 		this.auth = auth;
 	}
 
-	public String getuId() {
-		return uId;
+	@Override
+	public String toString() {
+		return "MemberVO [memberid=" + memberid + ", passwd=" + passwd + ", name=" + name + ", email=" + email
+				+ ", phone=" + phone + ", address=" + address + ", gender=" + gender + ", birthdate=" + birthdate
+				+ ", regDt=" + regDt + ", modDt=" + modDt + ", auth=" + auth + "]";
 	}
 
-	public void setuId(String uId) {
-		this.uId = uId;
+	public String getMemberid() {
+		return memberid;
+	}
+
+	public void setMemberid(String memberid) {
+		this.memberid = memberid;
 	}
 
 	public String getPasswd() {
@@ -121,22 +127,5 @@ public class MemberVO extends DTO {
 	public void setAuth(String auth) {
 		this.auth = auth;
 	}
-
-	public int getMailauth() {
-		return mailauth;
-	}
-
-	public void setMailauth(int mailauth) {
-		this.mailauth = mailauth;
-	}
-
-	@Override
-	public String toString() {
-		return "MemberVO [uId=" + uId + ", passwd=" + passwd + ", name=" + name + ", email=" + email + ", phone="
-				+ phone + ", address=" + address + ", gender=" + gender + ", birthdate=" + birthdate + ", regDt="
-				+ regDt + ", modDt=" + modDt + ", auth=" + auth + ", mailauth=" + mailauth + "]";
-	}
-
-	
 
 }

@@ -77,7 +77,7 @@ public class JMemberdaoTest {
 		searchVO  = new SearchVO(10,1,"10","p99");
 	}
 	public void isSameUser(MemberVO actUser, MemberVO addUser) {
-		assertEquals(actUser.getuId(), addUser.getuId());
+		assertEquals(actUser.getMemberid(), addUser.getMemberid());
 		assertEquals(actUser.getPasswd(), addUser.getPasswd());
 		assertEquals(actUser.getEmail(), addUser.getEmail());
 	}

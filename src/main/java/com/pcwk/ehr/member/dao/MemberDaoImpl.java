@@ -181,26 +181,8 @@ final Logger LOG = LogManager.getFormatterLogger(getClass());
 	}
 
 
-	@Override
-	public void createAuthKey(String memberEmail, String authKey) throws Exception {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("memberEmail", memberEmail);
-		map.put("authKey", authKey);
-		//기존에 사용하던  sqlsessiontemplate으로 하면 haspmap 은 오류나나요
-		sqlSessionTemplate.selectOne("member.createAuthKey", map);
-		//member.createAuthKey 오류확인
-	}
-
-
-	@Override
-	public void memberAuth(String memberEmail) throws Exception {
-		sqlSessionTemplate.update("memberMapper.memberAuth", memberEmail);
-	}
-
-
-
-
-
+	
+	
 	}
 
 

@@ -4,21 +4,12 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pcwk.ehr.member">
 
-<!-- 메일 인증 확인 -->
-
-<insert id="createAuthKey">
-    insert into MP_MEMBER_AUTH values(#{memberEmail}, #{authKey})
-</insert>
-
-<update id="memberAuth">
-    <![CDATA[update HR_MEMBER set MAiL_AUTH = 1 where (select count(*) from HR_MEMBER_AUTH where EMAIL = #{memberEmail}) > 0]]>
-</update>
 
       <!-- 비번체크 -->
-  <select id="passCheck" parameterType="UserVO" resultType="int">
+  <select id="passCheck" parameterType="MemberVO" resultType="int">
 	  SELECT COUNT(*) cnt
 		FROM hr_member
-		WHERE u_id = #{uId}
+		WHERE member_id = #{memberid}
 		AND passwd = #{passwd}
   </select>
     
@@ -27,7 +18,7 @@
     <select id="idCheck" parameterType="MemberVO" resultType="int">
         SELECT COUNT(*) AS cnt
         FROM hr_member
-        WHERE u_Id = #{uId}
+        WHERE member_id = #{memberid}
     </select>
 
     <!-- 회원목록 조회 -->
@@ -35,7 +26,7 @@
         <where>
             <choose>
                 <when test=" '10' == searchDiv and '' != searchWord  ">
-                    u_Id LIKE #{searchWord} || '%'
+                    member_id LIKE #{searchWord} || '%'
                 </when>
                 <when test=" '20' == searchDiv and '' != searchWord  ">
                     name LIKE #{searchWord} || '%'
@@ -46,13 +37,13 @@
             </choose>
         </where>
     </sql>
-
+    
 
     <select id="doRetrieve"  parameterType="MemberVO" resultMap="userMap">
 
         SELECT A.*,B.*
         FROM (
-            SELECT TT1. u_id ,
+            SELECT TT1. member_id ,
                 TT1. name ,
                 TT1. email ,
                 TT1. phone ,
@@ -74,7 +65,7 @@
                 FROM (
                 SELECT *
                 FROM hr_member
-                --WHERE 조건(검색구분:''(전체),10(u_id),20(name),30(email), 검색어)
+                --WHERE 조건(검색구분:''(전체),10(member_id),20(name),30(email), 검색어)
                 <include refid="searchConditionMember" />
                 ORDER BY reg_dt DESC
                 )T1
@@ -107,13 +98,13 @@
             reg_dt = SYSDATE,
             mod_dt = SYSDATE,
             auth = #{auth}
-        WHERE u_id = #{uId}
+        WHERE member_id = #{memberid}
     </update>
 
     <!-- resultMap -->
     <!-- column : DB컬럼 property: VO 프로퍼티명 jdbcType: DB컬럼 타입 type: VO -->
     <resultMap type="MemberVO" id="userMap">
-        <result column="u_id" property="uId" />
+        <result column="member_id" property="memberid" />
         <result column="passwd" property="passwd" />
         <result column="name" property="name" />
         <result column="email" property="email" />
@@ -129,7 +120,7 @@
 
     <select id="doSelectOne" parameterType="MemberVO" resultMap="userMap">
         <![CDATA[ 
-         SELECT u_id        ,
+         SELECT member_id        ,
                 passwd      ,
                 email       ,
                 phone       ,
@@ -140,7 +131,7 @@
                 TO_CHAR(reg_dt,'yyyy-mm-dd hh24:mi:ss') AS mod_dt      ,
                 auth      
         FROM hr_member    
-        WHERE u_id = #{uId}
+        WHERE member_id = #{memberid}
         ]]>
     </select>
     <!-- parameterType, resultType 자바 타입의 내장된 별칭 사용 가능 Java Mybatis (소문자) String 
@@ -150,11 +141,11 @@
     <select id="getCount" parameterType="memberVO" resultType="int">
         SELECT COUNT(*) cnt
         FROM hr_member
-        WHERE u_id LIKE #{uId} || '%'
+        WHERE member_id LIKE #{memberid} || '%'
     </select>
     <select id="getAll" parameterType="memberVO"
         resultType="memberVO">
-        SELECT u_id AS "uId",
+        SELECT member_id AS "memberid",
         passwd,
         name,
         email,
@@ -164,20 +155,20 @@
         TO_CHAR(reg_dt,'yyyy-mm-dd hh24:mi:ss') AS birthdate,
         TO_CHAR(reg_dt,'yyyy-mm-dd hh24:mi:ss') AS regDt
         FROM hr_member
-        WHERE u_id like #{uId} || '%'
-        ORDER BY u_id
+        WHERE member_id like #{memberid} || '%'
+        ORDER BY member_id
     </select>
 
     <insert id="doSave" parameterType="memberVO">
         INSERT INTO hr_member (
-        u_id ,
+        member_id ,
         passwd ,
         name  ,
         email ,
         phone ,
         reg_dt
         ) VALUES (
-        #{uId},
+        #{memberid},
         #{passwd},
         #{name},
         #{email},
@@ -188,7 +179,7 @@
 
     <delete id="doDelete" parameterType="MemberVO">
         DELETE FROM hr_member
-        WHERE u_Id = #{uId}
+        WHERE member_id = #{memberid}
     </delete>
 
 </mapper>  
