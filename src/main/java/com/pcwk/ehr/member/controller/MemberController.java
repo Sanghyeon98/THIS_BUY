@@ -50,16 +50,7 @@ public class MemberController {
 		return VIEW_NAME;
 	}
 
-	//이메일 인증
-	@RequestMapping(value = "/mailCheck.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
-	@ResponseBody
-	public String mailCheck(String email) {
-		System.out.println("이메일 인증 요청이 들어옴!");
-		System.out.println("이메일 인증 이메일 : " + email);
-		return mailService.joinEmail(email);
-		
-			
-	}
+	
 	@RequestMapping(value = "upDeleteAll.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String upDeleteAll(HttpServletRequest req) throws SQLException {
@@ -125,7 +116,16 @@ public class MemberController {
 
 		return jsonString;
 	}
-	
+	//이메일 인증
+		@RequestMapping(value = "/mailCheck.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+		@ResponseBody
+		public String mailCheck(String email) {
+			System.out.println("이메일 인증 요청이 들어옴!");
+			System.out.println("이메일 인증 이메일 : " + email);
+			return mailService.joinEmail(email);
+			
+				
+		}
 
 
 	@RequestMapping(value = "/doRetrieve.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
