@@ -188,7 +188,7 @@
                
                if("1" == parsedJson.msgId) {  // 제품 수정 성공
             	   alert(parsedJson.msgContents);
-            	   moveToMng();
+            	   //moveToMng();
                } else {
             	   alert(parsedJson.msgContents);
                }

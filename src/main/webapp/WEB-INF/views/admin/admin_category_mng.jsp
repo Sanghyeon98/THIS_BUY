@@ -38,20 +38,19 @@
   <!-- javascript --> 
   <script>
     $(document).ready(function() {
-    	
-    	// 1차 분류 클릭 이벤트 (누르면 2차분류 보이도록_토글)
-    	$("#cate_list>li").on("click", function() {
-    		console.log("click!!");
-    		console.log("$('#cate2').val() : " + $("#cate2").val());
-    		console.log("$(this).val() : " + $(this).val());
-    		
-    		if($("#cate2").val() == $(this).val()) {
-    			console.log("zzz");
-    			$("#cate2").toggle();
-    		}
-    	});
-    	
-    	
+       
+      // 1차 분류 클릭 이벤트 (누르면 2차분류 보이도록_토글)
+      $(".cate1").on("click", function() { 
+        console.log("click!!"); 
+        console.log("$('.cate2').val() : " + $(".cate2").val());
+        console.log("$(this).val() : " + $(this).val()); 
+        
+        
+        $(this).next("ul").toggle("hide");
+        
+      });
+      
+      
     }); // document.ready END --------------------------------------------------
   </script>
 </head>
@@ -80,29 +79,39 @@
         
         
         <!-- content_body --> 
-        <div class="content_body">
-          <div class="cate_list" id="cate_list">
-            <c:choose>
-              <c:when test="${list.size() > 0 }">
-              
-                <c:forEach var="vo" items="${list }">
-                  <c:choose>
-                    <c:when test="${vo.topNo == 0 }"> <!-- 1차분류 -->
-			                <li name="cate1" id="cate1" value="${vo.categoryNo}"><c:out value="${vo.categoryNm }"/></li>
-                    </c:when>
-                    <c:otherwise> <!-- 2차 분류 -->
-			                <li style="display: none;" name="cate2" id="cate2" value="${vo.topNo}">
-			                  └<c:out value="${vo.categoryNm }"/>
-			                </li>
-                    </c:otherwise>
-                  </c:choose>
-                  
-                </c:forEach>
-              </c:when>
-              <c:otherwise>
-                <li>No Categories.</li>
-              </c:otherwise>
-            </c:choose>
+        <div class="content_body">  
+          <div class="cate_list" id="cate_list"> 
+            <ul>
+	            <c:choose>
+	              <c:when test="${list.size() > 0 }">
+	
+	                <c:forEach var="vo" items="${list }">
+	                  <c:choose>
+	                    <c:when test="${vo.topNo == 0 }">  <!-- 1차분류 -->
+	                      <li name="cate1" class="cate1" value="${vo.categoryNo}">
+	                        <c:out value="${vo.categoryNm }"/>
+	                      </li>
+	                      <ul>
+	                      <c:forEach var="vo2" items="${list }">  <!-- 2차분류 -->
+	                        <c:choose>
+		                         <c:when test="${vo2.topNo != 0 && vo2.topNo == vo.categoryNo}">
+		                           <li name="cate2" class="cate2 " value="${vo2.topNo}"> 
+		                             └<c:out value="${vo2.categoryNm }"/>
+		                           </li>
+		                         </c:when>
+	                        </c:choose>
+	                      </c:forEach>
+	                      </ul>
+	                    </c:when>
+	                  </c:choose>
+	                  
+	                </c:forEach>
+	              </c:when>
+	              <c:otherwise>
+	                <li>No Categories.</li>
+	              </c:otherwise>
+	            </c:choose>
+            </ul>
           </div>
           <div class="cate_create clear">
             <p>분류 생성/수정/삭제</p>

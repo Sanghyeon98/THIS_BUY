@@ -13,6 +13,10 @@ body, header, footer, div, h1, h2, ul, li, p {
   clear: both;   /* float 속성 초기화 */
 }
 
+.hide {
+	display:none;
+}
+
 li {
   list-style-type: none;   /* 불릿 제거 */ 
 }
