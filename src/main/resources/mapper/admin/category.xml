@@ -93,11 +93,9 @@
    
   <insert id="doSave" parameterType="CategoryVO">
     INSERT INTO category (
-      category_no,
       category_nm,
       top_no
     ) VALUES (
-      #{categoryNo},
       #{categoryNm},
       #{topNo}
     )
@@ -107,7 +105,6 @@
       <![CDATA[
       UPDATE category
       SET category_nm = #{categoryNm},
-          status  = #{status},
           top_no  = #{topNo},
           mod_dt = SYSDATE
       WHERE category_no = #{categoryNo}

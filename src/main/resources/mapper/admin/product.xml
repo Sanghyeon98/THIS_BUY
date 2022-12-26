@@ -137,18 +137,27 @@
       WHERE category_no = #{categoryNo}
       ORDER BY category_no
   </select>
+  
+  
+  
+  <sql id="updateImgFlag">
+    <choose>
+      <when test="imageNo != 0">
+        image_no = #{imageNo},
+      </when>
+    </choose>
+  </sql>
 
 
   <!-- itemNo(PK) 값으로 수정 -->
   <update id="doUpdate" parameterType="ProductVO">
-      <![CDATA[
       UPDATE product
       SET
           name = #{name},
           price = #{price},
           quantity = #{quantity},
           category_no = #{categoryNo},
-          image_no = #{imageNo},
+          <include refid="updateImgFlag"/>
           production = #{production},
           weight = #{weight},
           expired = TO_DATE( #{expired} , 'YYYYMMDD'),
@@ -159,7 +168,6 @@
           mod_dt = LOCALTIMESTAMP
       WHERE
           item_no = #{itemNo}
-      ]]>
   </update>
   
   <insert id="doSave" parameterType="ProductVO">

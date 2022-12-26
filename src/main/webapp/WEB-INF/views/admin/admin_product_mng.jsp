@@ -40,31 +40,31 @@
     
     $(document).ready(function(){
       
-    	// 최초 목록 조회
-    	doRetrieve(1);
-    	
+      // 최초 목록 조회
+      doRetrieve(1);
+      
       // paging
       renderingPage('${totalPage}', 1);
       
-      
+      /* 
       // 제품 상세 페이지
       $("#productTable>tbody").on("click", "tr", function() {
-    	  console.log("tr");
-    	  
-    	  let tdArray = $(this).children();
-    	  let productNo = tdArray.eq(6).text();
-    	  
-    	  //window.open("${CP}/product/moveToMod.do?itemNo=" + productNo, target="_blank", 
-    		//	           "width=1100, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes");
-    	  window.location.href= "${CP}/product/moveToMod.do?itemNo=" + productNo;
-      });
+        console.log("tr");
+        
+        let tdArray = $(this).children();
+        let productNo = tdArray.eq(6).text();
+        
+        //window.open("${CP}/product/moveToMod.do?itemNo=" + productNo, target="_blank", 
+        //             "width=1100, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes");
+        window.location.href= "${CP}/product/moveToMod.do?itemNo=" + productNo;
+      }); */
       
       
       // 품절 처리
       $("#upSoldOutAll").on("click", function(){
-    	  console.log("upSoldOutAll");
-    	  
-    	  let uIdArray = [];
+        console.log("upSoldOutAll");
+        
+        let uIdArray = [];
           
         $("input:checkbox[name=chk]").each(function(i, element) {
           // 체크된 데이터 uIdArray 추가
@@ -108,7 +108,7 @@
           }
           
         });
-    	  
+        
       }); // 품절 처리 ------------------------------------------------------------
       
       
@@ -150,11 +150,11 @@
           
           // 삭제 성공
           if("0" != parsedJson.msgId) {
-        	  alert(parsedJson.msgContents);
-        	  doRetrieve(1);
-        	  initControll();
+            alert(parsedJson.msgContents);
+            doRetrieve(1);
+            initControll();
           } else {
-        	  alert(parsedJson.msgId + "," + parsedJson.msgContents);
+            alert(parsedJson.msgId + "," + parsedJson.msgContents);
           }
           
         });
@@ -241,6 +241,17 @@
     }); // document.ready END --------------------------------------------------
     
     
+    //=============================doSelectOne함수
+    function doSelectOne(productNo) {
+      let url = "${CP}/product/moveToMod.do";
+
+      url = url + "?itemNo="+productNo;
+      console.log("url : "+url);
+      location.href = url;
+    }
+    //=============================doSelectOne함수 끝  
+    
+    
     // 목록 조회 함수
     function doRetrieve(page) {
       let method = "GET";
@@ -296,7 +307,7 @@
               htmlData += "<tr>";
               htmlData += "  <td class='td_center'><input type='checkbox' name='chk' id='chk' value='" + value.itemNo + "'></td>";
               htmlData += "  <td class='td_center'>" + value.num + "</td>";
-              htmlData += "  <td>" + value.name + "</td>";
+              htmlData += "  <td><a href='#' onClick='doSelectOne(" + value.itemNo + ")'>" + value.name + "</a></td>";
               htmlData += "  <td class='td_center'>" + value.price + "</td>";
               htmlData += "  <td class='td_center'>" + value.quantity + "</td>";
               htmlData += "  <td class='td_center'>" + value.modDt + "</td>";
@@ -324,11 +335,11 @@
     
     // 초기화
     function initControll() {
-    	const initValue = "";
-    	
-    	$(".cate01List").val("none");
-    	$(".cate02 List").val("none");
-    	$("#searchWord").val(initValue);
+      const initValue = "";
+      
+      $(".cate01List").val("none");
+      $(".cate02 List").val("none");
+      $("#searchWord").val(initValue);
     }
     
     

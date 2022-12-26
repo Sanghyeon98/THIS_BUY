@@ -18,6 +18,13 @@ public class CategoryVO extends DTO {
 		this.status = 1;	// default 1
 	}
 	
+	public CategoryVO(String categoryNm, int topNo) {
+		super();
+		this.categoryNm = categoryNm;
+		this.topNo = topNo;
+		this.status = 1;	// default 1
+	}
+	
 	public CategoryVO(int categoryNo, String categoryNm, int topNo) {
 		super();
 		this.categoryNo = categoryNo;
