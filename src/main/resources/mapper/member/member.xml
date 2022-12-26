@@ -5,123 +5,127 @@
 <mapper namespace="com.pcwk.ehr.member">
 
 
-      <!-- 비번체크 -->
-  <select id="passCheck" parameterType="MemberVO" resultType="int">
-	  SELECT COUNT(*) cnt
+	<!-- 비번체크 -->
+	<select id="passCheck" parameterType="MemberVO" resultType="int">
+		SELECT COUNT(*) cnt
 		FROM hr_member
 		WHERE member_id = #{memberid}
-		AND passwd = #{passwd}
-  </select>
-    
-    
-    <!-- id중복 체크 -->
-    <select id="idCheck" parameterType="MemberVO" resultType="int">
-        SELECT COUNT(*) AS cnt
-        FROM hr_member
-        WHERE member_id = #{memberid}
-    </select>
+		AND
+		passwd = #{passwd}
+	</select>
 
-    <!-- 회원목록 조회 -->
-    <sql id="searchConditionMember">
-        <where>
-            <choose>
-                <when test=" '10' == searchDiv and '' != searchWord  ">
-                    member_id LIKE #{searchWord} || '%'
-                </when>
-                <when test=" '20' == searchDiv and '' != searchWord  ">
-                    name LIKE #{searchWord} || '%'
-                </when>
-                <when test=" '30' == searchDiv and '' != searchWord  ">
-                    email LIKE #{searchWord} || '%'
-                </when>
-            </choose>
-        </where>
-    </sql>
-    
 
-    <select id="doRetrieve"  parameterType="MemberVO" resultMap="userMap">
+	<!-- id중복 체크 -->
+	<select id="idCheck" parameterType="MemberVO" resultType="int">
+		SELECT COUNT(*) AS cnt
+		FROM hr_member
+		WHERE member_id = #{memberid}
+	</select>
 
-        SELECT A.*,B.*
-        FROM (
-            SELECT TT1. member_id ,
-                TT1. name ,
-                TT1. email ,
-                TT1. phone ,
-                TT1. address ,
-                TT1. gender ,
-                --당일이면 시:분, 그렇치 않으면 년/월/일
-                DECODE( TO_CHAR(SYSDATE,'YYYY-MM-DD'), TO_CHAR(TT1.birthdate,'YYYY-MM-DD')
-                ,TO_CHAR(TT1.birthdate,'HH24:MI')
-                ,TO_CHAR(TT1.birthdate,'YYYY-MM-DD')) as birthdate,
-                DECODE( TO_CHAR(SYSDATE,'YYYY-MM-DD'), TO_CHAR(TT1.reg_dt,'YYYY-MM-DD')
-                ,TO_CHAR(TT1.reg_dt,'HH24:MI')
-                ,TO_CHAR(TT1.reg_dt,'YYYY-MM-DD')) as regDt,
-                DECODE( TO_CHAR(SYSDATE,'YYYY-MM-DD'),  TO_CHAR(TT1.mod_dt,'YYYY-MM-DD')
-                        ,TO_CHAR(TT1.mod_dt,'HH24:MI')
-                        ,TO_CHAR(TT1.mod_dt,'YYYY-MM-DD')) as modDt,
-                TT1. auth
-            FROM (
-                SELECT ROWNUM AS RNUM,T1.*
-                FROM (
-                SELECT *
-                FROM hr_member
-                --WHERE 조건(검색구분:''(전체),10(member_id),20(name),30(email), 검색어)
-                <include refid="searchConditionMember" />
-                ORDER BY reg_dt DESC
-                )T1
-                --종료 번호
+	<!-- 회원목록 조회 -->
+	<sql id="searchConditionMember">
+		<where>
+			<choose>
+				<when test=" '10' == searchDiv and '' != searchWord  ">
+					member_id LIKE #{searchWord} || '%'
+				</when>
+				<when test=" '20' == searchDiv and '' != searchWord  ">
+					name LIKE #{searchWord} || '%'
+				</when>
+				<when test=" '30' == searchDiv and '' != searchWord  ">
+					email LIKE #{searchWord} || '%'
+				</when>
+			</choose>
+		</where>
+	</sql>
+
+
+	<select id="doRetrieve" parameterType="MemberVO"
+		resultMap="userMap">
+
+		SELECT A.*,B.*
+		FROM (
+		SELECT TT1. member_id ,
+		TT1. name ,
+		TT1. email ,
+		TT1. phone ,
+		TT1. address ,
+		TT1. gender ,
+		--당일이면 시:분, 그렇치 않으면 년/월/일
+		DECODE( TO_CHAR(SYSDATE,'YYYY-MM-DD'), TO_CHAR(TT1.birthdate,'YYYY-MM-DD')
+		,TO_CHAR(TT1.birthdate,'HH24:MI')
+		,TO_CHAR(TT1.birthdate,'YYYY-MM-DD')) as birthdate,
+		DECODE( TO_CHAR(SYSDATE,'YYYY-MM-DD'), TO_CHAR(TT1.reg_dt,'YYYY-MM-DD')
+		,TO_CHAR(TT1.reg_dt,'HH24:MI')
+		,TO_CHAR(TT1.reg_dt,'YYYY-MM-DD')) as regDt,
+		DECODE( TO_CHAR(SYSDATE,'YYYY-MM-DD'), TO_CHAR(TT1.mod_dt,'YYYY-MM-DD')
+		,TO_CHAR(TT1.mod_dt,'HH24:MI')
+		,TO_CHAR(TT1.mod_dt,'YYYY-MM-DD')) as modDt,
+		TT1. auth
+		FROM (
+		SELECT ROWNUM AS RNUM,T1.*
+		FROM (
+		SELECT *
+		FROM hr_member
+		--WHERE 조건(검색구분:''(전체),10(member_id),20(name),30(email), 검색어)
+		<include refid="searchConditionMember" />
+		ORDER BY reg_dt DESC
+		)T1
+		--종료 번호
                 <![CDATA[  WHERE ROWNUM <= #{pageSize} * (#{pageNo} - 1) + #{pageSize} ]]>
-            )TT1
-            --시작번호
+		)TT1
+		--시작번호
                 <![CDATA[  WHERE RNUM >= #{pageSize} * (#{pageNo} - 1)+1 ]]>
-        )A
-        CROSS JOIN
-        (
-            SELECT COUNT(*) totalCnt
-            FROM hr_member
-            --WHERE 조건
-            <include refid="searchConditionMember" />
-        )B
+		)A
+		CROSS JOIN
+		(
+		SELECT COUNT(*) totalCnt
+		FROM hr_member
+		--WHERE 조건
+		<include refid="searchConditionMember" />
+		)B
 
-    </select>
+	</select>
 
-    <update id="doUpdate" parameterType="MemberVO">
-        UPDATE hr_member
-        SET 
-            passwd = #{passwd},
-            name = #{name},
-            email = #{email},
-            phone = #{phone},
-            address = #{address},
-            gender = #{gender},
-            birthdate = SYSDATE,
-            reg_dt = SYSDATE,
-            mod_dt = SYSDATE,
-            auth = #{auth}
-        WHERE member_id = #{memberid}
-    </update>
+	<update id="doUpdate" parameterType="MemberVO">
+		UPDATE hr_member
+		SET
+		passwd = #{passwd},
+		name = #{name},
+		email = #{email},
+		phone = #{phone},
+		address = #{address},
+		gender = #{gender},
+		birthdate = SYSDATE,
+		reg_dt = SYSDATE,
+		mod_dt = SYSDATE,
+		auth = #{auth}
+		WHERE member_id = #{memberid}
+	</update>
 
-    <!-- resultMap -->
-    <!-- column : DB컬럼 property: VO 프로퍼티명 jdbcType: DB컬럼 타입 type: VO -->
-    <resultMap type="MemberVO" id="userMap">
-        <result column="member_id" property="memberid" />
-        <result column="passwd" property="passwd" />
-        <result column="name" property="name" />
-        <result column="email" property="email" />
-        <result column="phone" property="phone" />
-        <result column="address" property="address" />
-        <result column="gender" property="gender" />
-        <result column="birthdate" property="birthdate" />
-        <result column="reg_dt" property="regDt" />
-        <result column="mod_dt" property="modDt" />
-        <result column="auth" property="auth" />
-    </resultMap>
+	<!-- resultMap -->
+	<!-- column : DB컬럼 property: VO 프로퍼티명 jdbcType: DB컬럼 타입 type: VO -->
+	<resultMap type="MemberVO" id="userMap">
+		<result column="member_id" property="memberid" />
+		<result column="passwd" property="passwd" />
+		<result column="name" property="name" />
+		<result column="email" property="email" />
+		<result column="phone" property="phone" />
+		<result column="address" property="address" />
+		<result column="gender" property="gender" />
+		<result column="birthdate" property="birthdate" />
+		<result column="reg_dt" property="regDt" />
+		<result column="mod_dt" property="modDt" />
+		<result column="auth" property="auth" />
+	</resultMap>
 
 
-    <select id="doSelectOne" parameterType="MemberVO" resultMap="userMap">
+	<select id="doSelectOne" parameterType="MemberVO"
+		resultMap="userMap">
         <![CDATA[ 
          SELECT member_id        ,
                 passwd      ,
+                name        ,
                 email       ,
                 phone       ,
                 address     ,
@@ -133,53 +137,53 @@
         FROM hr_member    
         WHERE member_id = #{memberid}
         ]]>
-    </select>
-    <!-- parameterType, resultType 자바 타입의 내장된 별칭 사용 가능 Java Mybatis (소문자) String 
-        -> string Integer -> int, integer Map -> map HashMap -> hashmap Collection 
-        -> collection ArrayList -> arraylist 파라메터 설정 ${}, #{} ${} : 자동으로 데이터 타입 처리(PreparedStatement방식) 
-        #{} : 문자열 처리를 해주지 않는다.(Statement방식) -->
-    <select id="getCount" parameterType="memberVO" resultType="int">
-        SELECT COUNT(*) cnt
-        FROM hr_member
-        WHERE member_id LIKE #{memberid} || '%'
-    </select>
-    <select id="getAll" parameterType="memberVO"
-        resultType="memberVO">
-        SELECT member_id AS "memberid",
-        passwd,
-        name,
-        email,
-        phone,
-        address,
-        gender,
-        TO_CHAR(reg_dt,'yyyy-mm-dd hh24:mi:ss') AS birthdate,
-        TO_CHAR(reg_dt,'yyyy-mm-dd hh24:mi:ss') AS regDt
-        FROM hr_member
-        WHERE member_id like #{memberid} || '%'
-        ORDER BY member_id
-    </select>
+	</select>
+	<!-- parameterType, resultType 자바 타입의 내장된 별칭 사용 가능 Java Mybatis (소문자) String 
+		-> string Integer -> int, integer Map -> map HashMap -> hashmap Collection 
+		-> collection ArrayList -> arraylist 파라메터 설정 ${}, #{} ${} : 자동으로 데이터 타입 처리(PreparedStatement방식) 
+		#{} : 문자열 처리를 해주지 않는다.(Statement방식) -->
+	<select id="getCount" parameterType="memberVO" resultType="int">
+		SELECT COUNT(*) cnt
+		FROM hr_member
+		WHERE member_id LIKE #{memberid} || '%'
+	</select>
+	<select id="getAll" parameterType="memberVO"
+		resultType="memberVO">
+		SELECT member_id AS "memberid",
+		passwd,
+		name,
+		email,
+		phone,
+		address,
+		gender,
+		TO_CHAR(reg_dt,'yyyy-mm-dd hh24:mi:ss') AS birthdate,
+		TO_CHAR(reg_dt,'yyyy-mm-dd hh24:mi:ss') AS regDt
+		FROM hr_member
+		WHERE member_id like #{memberid} || '%'
+		ORDER BY member_id
+	</select>
 
-    <insert id="doSave" parameterType="memberVO">
-        INSERT INTO hr_member (
-        member_id ,
-        passwd ,
-        name  ,
-        email ,
-        phone ,
-        reg_dt
-        ) VALUES (
-        #{memberid},
-        #{passwd},
-        #{name},
-        #{email},
-        #{phone},
-        SYSDATE
-        )
-    </insert>
+	<insert id="doSave" parameterType="memberVO">
+		INSERT INTO hr_member (
+		member_id ,
+		passwd ,
+		name ,
+		email ,
+		phone ,
+		reg_dt
+		) VALUES (
+		#{memberid},
+		#{passwd},
+		#{name},
+		#{email},
+		#{phone},
+		SYSDATE
+		)
+	</insert>
 
-    <delete id="doDelete" parameterType="MemberVO">
-        DELETE FROM hr_member
-        WHERE member_id = #{memberid}
-    </delete>
+	<delete id="doDelete" parameterType="MemberVO">
+		DELETE FROM hr_member
+		WHERE member_id = #{memberid}
+	</delete>
 
 </mapper>  
