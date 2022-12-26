@@ -162,15 +162,13 @@ width: 30px;
     	
     	// 수량 버튼 조작-------------------------------------------------------------------------------
         $(".cart__list>tbody").on("click", ".minus", function(e) {
-            console.log("minus");
-            console.log($(this));
             
             let quantity = $(this).closest("tr").find(":input[class='quantity']");
             let cartNO = $(this).closest("tr").find(":input[class='cartNO']");
             
             cartNoVal = cartNO.val();
             
-            if (parseInt($(".quantity").val()) <= 1){
+            if (parseInt(quantity.val()) <= 1){
                 return;
             }
             
@@ -193,7 +191,6 @@ width: 30px;
         });
     	   
         $(".cart__list>tbody").on("click", ".add", function(e) {
-            console.log("add");
             
             let quantity = $(this).closest("tr").find(":input[class='quantity']");
             let cartNO = $(this).closest("tr").find(":input[class='cartNO']");
@@ -235,6 +232,11 @@ width: 30px;
               $("input[name=chk]").prop("checked", false);
             }
           });
+        
+        
+        $.each()
+        
+        
     	
     });  
  
@@ -259,19 +261,25 @@ width: 30px;
         
         $(".cart__list>tbody").empty();
         
+        let sumprice =0;
+        
+        
         if (null != parsedJson && parsedJson.length > 0) {
             
           $.each(parsedJson, function(index, value) {
-              htmlData += "<tr class='cartRow'>";
+        	    sumprice += parseInt(value.finalPrice);
+        	  
+        	  htmlData += "<tr class='cartRow'>";
               htmlData += "    <td><input type='checkbox' name='chk' value='"+value.cartNO+"'></td>";
               htmlData += "    <td><input type='hidden' class='memberId' name='memberId' value='"+value.memberId+"'></td>";
               htmlData += "    <td><input type='text' class='cartNO' name='cartNO' value='"+value.cartNO+"'></td>";
               htmlData += "    <td><img src='' alt=''></td>";
-              htmlData += "    <td><a>"+value.name+"</a></td>";
+              htmlData += "    <td><a href='#' onClick='doSelectOne("+<c:out value='value.itemNO '/>+")'>"+value.name+"</a></td>";
               htmlData += "    <td><input type='button' name='minus' class='minus' value='-'>";
               htmlData += "    <input type='text' class='quantity' name='quantity' value='"+value.quantity+"' size='2'>";
               htmlData += "    <td><input type='button' name='add' class='add' value='+'>";
               htmlData += "    <td>"+value.finalPrice+"원</td>";
+              htmlData += "    <td><input type='hidden'  value='"+sumprice+"'></td>";
               htmlData += "</tr>";
           });
         } else {
@@ -281,7 +289,7 @@ width: 30px;
             htmlData += "  </td>";
             htmlData += "</tr>";
         }
-        
+        $("#sumprice").val(sumprice);
         // 데이터 출력
         $(".cart__list>tbody").append(htmlData);
        
@@ -289,6 +297,19 @@ width: 30px;
       });  // PClass.callAjax END
       
     }   //function 
+    
+    //=============================doSelectOne함수
+    function doSelectOne(itemNO){
+         let url = "${CP}/detail/view.do";
+
+      url = url + "?itemNo="+itemNO;
+      console.log("url : "+url);
+      location.href = url;
+    }
+    //=============================doSelectOne함수 끝  
+
+    
+    
   </script>
 </head>
 <body>
@@ -355,7 +376,7 @@ width: 30px;
         <div>
         <div>
             <span>상품금액</span>
-            <span><input class="price" type="text" ></span>
+            <span><input class="price" id="sumprice" type="text"></span>
             <span>원</span>
         </div>
         <div>

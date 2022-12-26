@@ -17,18 +17,15 @@
 <meta name="keywords" content="html5, css3, javascipt6, jQuery">
 <meta charset="UTF-8">
   <!-- jQuery -->
-<script src="${CP_RES}/js/jquery-1.12.4.js"></script>
-<!-- jQuery -->
-<script src="${CP_RES}/js/jquery-1.12.4.js"></script>
-<!-- callAjax -->
-<script src="${CP_RES}/js/callAjax.js"></script>
-<!-- String,number -->
-<script src="${CP_RES}/js/eUtil.js"></script>
-
-<!-- paging -->
-<script src="${CP_RES}/js/jquery.bootpag.js"></script>
-<!-- bootstrap js -->
-<script src="${CP_RES}/js/bootstrap.min.js"></script>
+  <script src="${CP_RES}/js/jquery-1.12.4.js"></script>
+  <!-- callAjax -->
+  <script src="${CP_RES}/js/callAjax.js"></script>
+  <!-- String, Number, Date Util -->
+  <script src="${CP_RES}/js/eUtil.js"></script>
+  <!-- paging -->
+  <script src="${CP_RES}/js/jquery.bootpag.js"></script>
+  <!-- bootstrap js -->
+  <script src="${CP_RES}/js/bootstrap.min.js"></script>
 <style>
 
 .order_sheet{
@@ -81,16 +78,80 @@ width: 30px;
 }
 </style>
 <title>제목</title>
-  <script src="/PC_HTML/assets/js/jquery-3.6.1.js"></script>
-  <script src="/PC_HTML/assets/js/jquery-ui.js"></script>
   <!-- jquery-ui가 jquery 뒤에 와야됨 -->
   
   <!-- javascript -->
   <script>
   $(document).ready(function () {
 	 console.log('Hello,world!')
-
+	 cartgetAll(1);
+	 
+	 
+	 
+	//체크버튼-----------------------------------------------------------
+	  $("#checkAll").on("click", function() {
+	      console.log("#checkAll");
+	      //chk
+	      //전체 체크
+	      if ($("#checkAll").is(":checked") == true) {
+	        $("input[name=chk]").prop("checked", true);
+	        //체크 해제  
+	      } else {
+	        $("input[name=chk]").prop("checked", false);
+	      }
+	    });
+	 
+	 
   });
+  
+  
+  function cartgetAll(page) {
+      let method = "POST";
+      let url = "/orderSheet/cartgetAll.do";
+      let async = true;
+      
+      let params = {
+              memberId : "admin"
+          
+      };     //VO안에  memberId 
+      
+    //${sessetion.infor.uid}
+    //id =memberId  => $("#memberId").val(),
+    
+      PClass.callAjax(method, url, async, params, function(data) {
+        console.log(data);
+        let parsedJson = JSON.parse(data);
+        let htmlData = "";
+        
+        $(".cart__list__detail>tbody").empty();
+        
+        if (null != parsedJson && parsedJson.length > 0) {
+            
+          $.each(parsedJson, function(index, value) {
+              htmlData += "<tr>";
+              htmlData += "    <td><input type='hidden' class='memberId' id='memberId' name='memberId' value="+value.memberId+"></td>";
+              htmlData += "    <td><input type='hidden' class='cartNO' name='cartNO' id='cartNO' value="+value.cartNO+"></td>";
+              htmlData += "    <td><img src='' alt=''></td>";
+              htmlData += "    <td><a>"+value.name+"</a></td>";
+              htmlData += "    <td><input type='text' class='quantity' name='quantity' id='quantity' value="+value.quantity+" readonly='readonly' size='2'>개<td>";
+              htmlData += "    <td>"+value.finalPrice+"원</td>";
+              htmlData += "</tr>";
+          });
+        } else {
+            htmlData += "<tr>";
+            htmlData += "  <td class='td_center' colspan='99'>";
+            htmlData += "   No data found ";
+            htmlData += "  </td>";
+            htmlData += "</tr>";
+        }
+        
+        // 데이터 출력
+        $(".cart__list__detail>tbody").append(htmlData);
+       
+        
+      });  // PClass.callAjax END
+      
+    }   //function 
   
   </script>
 </head>
@@ -101,14 +162,13 @@ width: 30px;
         <h2>주문서</h2>
     </div>
     
-  
         <div>
         <h3>주문 상품</h3>
             <hr/>
         </div>
         
        <div> 
-        <table>
+        <table class="cart__list__detail">
             <form action="">
             <tboby>
                 <tr class="cart__list__detail">
@@ -143,6 +203,7 @@ width: 30px;
         </table>
        </div>
         
+        ${vo}
         <div>
         <h3>주문자 정보</h3>
             <hr/>
@@ -153,15 +214,15 @@ width: 30px;
                 <form action="">
                     <tr>
                        <td>보내는분</td>
-                       <td><input type= text></td>
+                       <td><input type= text value="${vo.name}"></td>
                     </tr>
                     <tr>
                        <td>휴대폰</td>
-                       <td><input type= text></td>
+                       <td><input type= text value="${vo.phone}"></td>
                     </tr>
                     <tr>
                        <td>이메일</td>
-                       <td><input type= text></td>
+                       <td><input type= text value="${vo.email}"></td>
                     </tr>
                 </form>
             </table>
@@ -177,7 +238,7 @@ width: 30px;
                 <form action="">
                     <tr>
                        <td>배송지</td>
-                       <td><input type= text>
+                       <td><input type= text value="${vo.address}"></td>
                         <span><button>배송지변경</button></span>
                        </td>
                     </tr>
@@ -244,25 +305,23 @@ width: 30px;
         </div>
         <div>
             <table>
-                <form action="">
                     <tr>
-                       <th><input type="checkbox"></th>
+                       <th><input type="checkbox" id="checkAll"></th>
                        <th> 결제 진행 필수 전체동의
                        </th>
                     </tr>
                     <tr>
-                       <td><input type="checkbox"></td>
+                       <td><input type="checkbox" name="chk"></td>
                        <td>(필수)개인정보 수집*이용 및처리동의</td>
                     </tr>
                     <tr>
-                       <td><input type="checkbox"></td>
+                       <td><input type="checkbox" name="chk"></td>
                        <td>(필수)개인정보 제 3자 제공 동의</td>
                     </tr>
                     <tr>
-                       <td><input type="checkbox"></td>
+                       <td><input type="checkbox" name="chk"></td>
                        <td>(필수)전자지급 결제 대행 서비스 이용 약관 동의</td>
                     </tr>
-                </form>
             </table>
         </div>
         

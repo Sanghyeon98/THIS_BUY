@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.pcwk.ehr.cart.domain.CartJoinVO;
 import com.pcwk.ehr.cart.service.CartService;
+import com.pcwk.ehr.member.domain.MemberVO;
 import com.pcwk.ehr.member.service.MemberService;
 
 @Controller("OrderSheetController")
@@ -29,11 +30,17 @@ public class OrderSheetController {
 	MemberService memberService;
 	
 	@RequestMapping(value="/view.do")
-	public String cartView(Model model)throws SQLException {
-		System.out.println("=============================================");
-		System.out.println("==cartcontroller=cartView====");
-		System.out.println("=============================================");
-		
+	public String cartView(MemberVO inVO, Model model)throws SQLException {
+		String jsonString = "";
+		LOG.debug("┌=============================┐");
+		LOG.debug("|inVO=" + inVO);
+
+		MemberVO outVO = memberService.doSelectOne(inVO);
+
+		jsonString = new Gson().toJson(outVO);
+		LOG.debug("|jsonString=" + jsonString);
+		model.addAttribute("vo",outVO);
+		LOG.debug("└=============================┘");
 		
 		return "orderSheet/orderSheet";
 	}
@@ -53,5 +60,23 @@ public class OrderSheetController {
 		
 		return jsonList;
 		
+	}
+	
+	
+	@RequestMapping(value = "/doSelectOne.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+	@ResponseBody // 비동기 처리를 하는 경우, HTTP 요청 부분의 body부분이 그대로 브라우저에 전달된다.
+	public String doSelectOne(MemberVO inVO, Model model) throws SQLException {
+		String jsonString = "";
+		LOG.debug("┌=============================┐");
+		LOG.debug("|inVO=" + inVO);
+
+		MemberVO outVO = memberService.doSelectOne(inVO);
+
+		jsonString = new Gson().toJson(outVO);
+		LOG.debug("|jsonString=" + jsonString);
+		model.addAttribute("vo",outVO);
+		LOG.debug("└=============================┘");
+		
+		return jsonString;
 	}
 }

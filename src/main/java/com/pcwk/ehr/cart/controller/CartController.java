@@ -130,7 +130,6 @@ public class CartController {
 		for(CartJoinVO vo : list) {
 			LOG.debug(vo.toString());
 		}
-		
 		String jsonList =new Gson().toJson(list);
 		
 		return jsonList;

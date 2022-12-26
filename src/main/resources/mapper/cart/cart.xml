@@ -39,7 +39,7 @@
             p.name,
             p.price,            
             (c.quantity * p.price) finalPrice
-        FROM cart c, product p, member m
+        FROM cart c, product p, hr_member m
         WHERE 1=1
         and c.item_no = p.item_no
         and c.member_id = m.member_id
