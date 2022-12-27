@@ -47,8 +47,8 @@ public class LoginController {
 		LOG.debug("|doLogout=                    |");
 		LOG.debug("└=============================┘");
 		
-		if(null != session.getAttribute("userInfo") ) {
-			session.removeAttribute("userInfo");
+		if(null != session.getAttribute("memberInfo") ) {
+			session.removeAttribute("memberInfo");
 			session.invalidate();
 			LOG.debug("|session.invalidate()     |");
 		}
@@ -103,7 +103,7 @@ public class LoginController {
 			MemberVO loginInfo = memberservice.doSelectOne(inVO);
 			//접속자 수가 적은 경우(내부사이트)
 			if(null !=loginInfo) {
-				session.setAttribute("userInfo", loginInfo);
+				session.setAttribute("memberInfo", loginInfo);
 			}
 			
 			

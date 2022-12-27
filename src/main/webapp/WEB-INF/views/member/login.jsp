@@ -95,8 +95,16 @@ $(document).ready(function(){
     	window.location.href = "${CP}/signup/signup.do";
     });
     
+   
+    
   //document  
 });
+
+function enterkey() {
+	if (window.event.keyCode == 13) {
+    	// 엔터키가 눌렸을 때
+    }
+}
 </script>
 
 </head>
@@ -107,7 +115,7 @@ $(document).ready(function(){
 
       <input type="text" class="login1" id="memberid" name="memberid" placeholder="아이디를 입력해주세요">
 
-      <input type="password"  class="login1" id="passwd" name="passwd" placeholder="비밀번호를 입력해주세요">
+      <input type="password" onkeyup="enterkey()" class="login1" id="passwd" name="passwd" placeholder="비밀번호를 입력해주세요">
         
 <div class="text-right sc">아이디 찾기 ｜ 비밀번호 찾기</div>
       <button type="button" class="bt1 btn btn-default btn-block text-center btn-block"   id="Login">로그인</button>

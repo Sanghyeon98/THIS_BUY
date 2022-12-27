@@ -224,7 +224,7 @@ $(document).ready(function(){
                   //입력 항목 초기화
                   //아이디: enabledz
                   //등록버튼:enabled
-                  initControll();                  
+                  window.location.href = "${CP}/login/login.do";
                }else{
                    alert(parsedJson.msgId+","+parsedJson.msgContents);
                }
