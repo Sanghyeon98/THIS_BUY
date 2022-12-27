@@ -53,7 +53,7 @@ public interface BoardService {
 	
 
 	/**
-	 * 조건절 없이 모든 카테고리 목록 조회
+	 * 목록 조회
 	 * @return
 	 * @throws SQLException
 	 */

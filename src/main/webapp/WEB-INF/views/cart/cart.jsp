@@ -252,7 +252,7 @@ width: 30px;
     });  
  
     //getAll-------------------------------------------------------------------------
-    function getAll(page) {
+    function getAll(page) { 
       let method = "POST";
       let url = "/cart/getAll.do";
       let async = true;
