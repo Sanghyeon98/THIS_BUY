@@ -3,4 +3,76 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.pcwk.ehr.main">
+  
+  <sql id="searchCriteria">
+    <if test="searchWord != null">
+      p.name like '%' || #{searchWord} || '%'
+    </if> 
+  </sql>
+  
+  <!-- 상품 검색 -->
+  <select id="getGoodsList" parameterType="SearchVO" resultType="ProductImgVO">
+    SELECT A.*,B.*
+    FROM(
+         SELECT
+                TT1.rnum AS num,
+                TT1.item_no AS itemNo,
+                TT1.name,
+                TT1.price,
+                TT1.image_no AS imageNo,
+                TT1.save_name AS saveName,
+                TT1.view_path AS viewPath
+         FROM (
+               SELECT ROWNUM AS RNUM,T1.*
+               FROM (
+                     SELECT p.*, i.save_name, i.view_path
+                     FROM product p, image i
+                     WHERE p.image_no = i.image_no --조인 조건
+                     <include refid="searchCriteria"/>
+                     ORDER BY p.reg_dt DESC
+                    )T1
+               --종료 번호
+               <![CDATA[  WHERE ROWNUM <= #{pageSize} * (#{pageNum} - 1) + #{pageSize} ]]>
+              )TT1
+          --시작번호
+          <![CDATA[  WHERE RNUM >= #{pageSize} * (#{pageNum} - 1)+1 ]]>
+        )A
+    CROSS JOIN
+    (
+     SELECT COUNT(*) totalCnt
+     FROM product p, image i
+     WHERE p.image_no = i.image_no     --조인 조건
+     <include refid="searchCriteria"/>
+    )B
+  </select>
+  
+  <!-- 메인 : 상품 표시-->
+  <select id="getALL" parameterType="ProductVO" resultType="ProductImgVO">
+		SELECT rownum, a.*
+		FROM (
+		  SELECT
+		    p.item_no AS itemNo,
+		    name,
+		    price,
+		    quantity,
+		    category_no AS categoryNo,
+		    p.image_no AS imageNo,
+		    production,
+		    weight,
+		    TO_CHAR(expired, 'YYYY-MM-DD HH24:MI:SS') AS expired,
+		    detail,
+		    discount,
+		    final_price AS finalPrice,
+		    sales,
+		    TO_CHAR(p.reg_dt, 'YYYY-MM-DD HH24:MI:SS') AS regDt,
+		    TO_CHAR(p.mod_dt, 'YYYY-MM-DD HH24:MI:SS') AS modDt,
+		    i.save_name AS saveName,
+		    i.view_path AS viewPath
+		  FROM product p, image i
+		  WHERE p.image_no = i.image_no
+		  ORDER BY p.reg_dt desc
+		) a
+    <![CDATA[WHERE rownum <= 20]]>
+  </select>
+
   </mapper>

@@ -8,9 +8,9 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pcwk.ehr.cmn.DTO;
+import com.pcwk.ehr.admin.domain.ProductVO;
 import com.pcwk.ehr.main.dao.MainDao;
-import com.pcwk.ehr.main.domain.MainCateSearchVO;
+import com.pcwk.ehr.main.domain.ProductImgVO;
 
 @Service("mainServiceImpl")
 public class MainServiceImpl implements MainService {
@@ -18,20 +18,26 @@ public class MainServiceImpl implements MainService {
 	final Logger LOG = LogManager.getLogger(getClass());
 	
 	@Autowired
-	MainDao mainDao;
+	MainDao maindao;
 	
 	public MainServiceImpl() {}
 
 	@Override
-	public List<MainCateSearchVO> doRetrieve(DTO inVO) throws SQLException {
-		// TODO Auto-generated method stub
-		return mainDao.doRetrieve(inVO);
+	public List<ProductImgVO> getAll() throws SQLException {
+		return maindao.getAll();
+	}
+	
+	@Override
+	public List<ProductVO> getGoodsList(ProductImgVO inVO) throws SQLException {
+		
+		return maindao.doRetrieve(inVO);
 	}
 
 	@Override
-	public List<MainCateSearchVO> getALL() throws SQLException {
-		
-		return mainDao.getALL();
+	public int getCount() throws SQLException {
+		return maindao.getCount();
 	}
+
+	
 
 }

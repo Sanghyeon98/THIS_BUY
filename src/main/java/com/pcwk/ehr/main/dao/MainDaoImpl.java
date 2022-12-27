@@ -1,6 +1,7 @@
 package com.pcwk.ehr.main.dao;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -9,8 +10,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.pcwk.ehr.admin.domain.ProductVO;
 import com.pcwk.ehr.cmn.DTO;
-import com.pcwk.ehr.main.domain.MainCateSearchVO;
+import com.pcwk.ehr.cmn.SearchVO;
+import com.pcwk.ehr.main.domain.ProductImgVO;
 
 @Repository("mainDao")
 public class MainDaoImpl implements MainDao {
@@ -24,38 +27,63 @@ public class MainDaoImpl implements MainDao {
 	SqlSessionTemplate sqlSessionTemplate;
 
 	@Override
-	public int doSave(MainCateSearchVO inVO) throws SQLException {
+	public List<ProductVO> doRetrieve(DTO inVO) throws SQLException {
+		
+		SearchVO search = (SearchVO) inVO;
+		List<ProductVO> list = new ArrayList<ProductVO>();
+		
+        String statement = NAMESPACE + DOT + "doRetrieve";
+        LOG.debug("================================");
+		LOG.debug("|  param:" + inVO );        
+		LOG.debug("|  statement:" + statement );  
+		
+		list = sqlSessionTemplate.selectList(statement, search);
+		
+		for(ProductVO vo : list) {
+			LOG.debug("|  vo : " + vo );
+		}
+		LOG.debug("================================");
+		
+		return list;
+	}
+
+
+
+	@Override
+	public int doSave(ProductVO inVO) throws SQLException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+
+
 	@Override
-	public int doDelete(MainCateSearchVO inVO) throws SQLException {
+	public int doDelete(ProductVO inVO) throws SQLException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+
+
 	@Override
-	public int doUpdate(MainCateSearchVO inVO) throws SQLException {
+	public int doUpdate(ProductVO inVO) throws SQLException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+
+
 	@Override
-	public MainCateSearchVO doSelectOne(MainCateSearchVO inVO) throws SQLException {
+	public ProductVO doSelectOne(ProductVO inVO) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public List<MainCateSearchVO> doRetrieve(DTO inVO) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
-	public List<MainCateSearchVO> getALL() throws SQLException {
-		List<MainCateSearchVO> list = null;
+	public List<ProductImgVO> getAll() throws SQLException {
+		List<ProductImgVO> list = null;
 		
 		String statement = NAMESPACE + DOT + "getALL";
 
@@ -64,7 +92,7 @@ public class MainDaoImpl implements MainDao {
 		
 		list = sqlSessionTemplate.selectList(statement);
 		
-		for(MainCateSearchVO vo : list) {
+		for(ProductImgVO vo : list) {
 			LOG.debug("|  vo : " + vo);
 		}
 		LOG.debug("================================");
@@ -72,4 +100,22 @@ public class MainDaoImpl implements MainDao {
 		return list;
 	}
 
+
+
+	@Override
+	public int getCount() throws SQLException {
+        int count = 0;
+		
+		String statement = NAMESPACE + DOT + "getCount";
+		LOG.debug("================================");
+		LOG.debug("|  param : ");
+		LOG.debug("|  statement: " + statement);
+		
+		count = sqlSessionTemplate.selectOne(statement);
+		LOG.debug("================================");
+		
+		return count;
+	}
+
+	
 }

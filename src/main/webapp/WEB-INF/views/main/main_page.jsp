@@ -241,45 +241,6 @@
 <body>
   <!-- 메인페이지 전체 -->
   <div>
-    <!-- 상단 -->
-    <div class="top">이 웹페이지는 교육용입니다.</div>
-    
-    <!-- 로고, 메뉴 -->
-    <div>
-      <div class="top1">
-        <a class="sub">회원가입</a>
-        <div class="css-1qgm48u eo7pjfk0"></div>
-        <a class="login">로그인</a>
-        <div class="css-1qgm48u eo7pjfk0"></div>
-        <a class="c_center">고객센터</a>
-      </div>
-      <div class="top2">
-        <div>
-          <img src="/PC_HTML/THIS_BUY/image/logo.png" alt="로고" class="logo">
-        </div>
-        <div class="search">
-          <input id="gnb_search" class="search_input" placeholder="검색어를 입력해주세요" required="required">
-          <button type="submit" class="search_bnt"></button>
-        </div>
-        <div>
-          <button class="like_bnt"></button>
-          <button class="cart_bnt"></button>
-        </div>
-      </div>
-      <div class="top3">
-        <div class="categori">
-          <ul>
-            <li><span><a href="#">〓</a></span></li>
-            <li><span><a href="#">카테고리</a></span></li>
-          </ul>
-        </div>
-        <div class="top3_1">
-          <span class="menu"><a href="#">신상품</a></span>
-          <span class="menu"><a href="#">베스트</a></span>
-          <span class="menu"><a href="#">특가상품</a></span>
-        </div>
-      </div>
-    </div>
     <!-- 미들 -->
     <div class="middle">
       <div class= "goods_list">
@@ -345,10 +306,7 @@
       </div>
       
     </div>
-    
-    <!-- 하단 -->
-    <div class="bottom">
-    </div>
+
   </div>
 </body>
 </html>
