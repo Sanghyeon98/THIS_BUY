@@ -23,9 +23,9 @@ import com.pcwk.ehr.cmn.StringUtil;
 import com.pcwk.ehr.member.domain.MemberVO;
 import com.pcwk.ehr.member.service.MemberService;
 
-@Controller("memberController")
-@RequestMapping("member")
-public class MemberController {
+@Controller("signupController")
+@RequestMapping("signup")
+public class SignupController {
 
 	final Logger LOG = LogManager.getLogger(getClass());
 
@@ -37,14 +37,14 @@ public class MemberController {
 	
 	final String VIEW_NAME = "member/signup";
 
-	public MemberController() {
+	public SignupController() {
 	}
 
 	// 화면
 	@RequestMapping(value = "/signup.do")
 	public String singup() {
 		LOG.debug("┌=============================┐");
-		LOG.debug("|signup=                        |");
+		LOG.debug("|signup=                      |");
 		LOG.debug("└=============================┘");
 
 		return VIEW_NAME;
