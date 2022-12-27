@@ -70,7 +70,6 @@
 		    i.view_path AS viewPath
 		  FROM product p, image i
 		  WHERE p.image_no = i.image_no
-		  AND p.item_no = #{itemNo}
 		  
 		  ORDER BY p.reg_dt desc
 		) a
