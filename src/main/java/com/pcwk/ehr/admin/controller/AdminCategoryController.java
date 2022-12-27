@@ -31,7 +31,7 @@ public class AdminCategoryController {
 	
 	@RequestMapping(value = "categoryView.do", method = RequestMethod.GET)
 	public String categoryView(Model model, CategoryVO inVO) throws SQLException {
-		String VIEW_NAME = "admin/admin_category_mng";
+		String VIEW_NAME = "category/admin_category_mng";
 		
 		List<CategoryVO> list = cateService.getALL();
 		

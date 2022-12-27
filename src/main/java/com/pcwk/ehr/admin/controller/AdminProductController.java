@@ -258,7 +258,7 @@ public class AdminProductController {
 	// 관리자 제품 관리 화면
 	@RequestMapping(value = "/productView.do", method = RequestMethod.GET)
 	public String productView(Model model, SearchVO inVO) throws SQLException { 
-		String VIEW_NAME = "admin/admin_product_mng";
+		String VIEW_NAME = "product/admin_product_mng";
 		
 		//페이지 번호
 		if(null !=inVO && inVO.getPageNo()==0) {
@@ -421,7 +421,7 @@ public class AdminProductController {
 		model.addAttribute("vo", outVO);
 		model.addAttribute("imgVO", outImgVO);
 		
-		return "admin/admin_product_mod";
+		return "product/admin_product_mod";
 	}
 	
 	
@@ -455,7 +455,7 @@ public class AdminProductController {
 		model.addAttribute("cate02List", cate02List);
 		model.addAttribute("cate02ListJson", cate02ListJson);		
 				
-		return "admin/admin_product_reg";
+		return "product/admin_product_reg";
 	}
 	
 }

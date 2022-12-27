@@ -9,26 +9,35 @@
     http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
     http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
-	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
-	
-	<!-- Enables the Spring MVC @Controller programming model -->
-	<annotation-driven />
-	 
-	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
-	<resources mapping="/resources/**" location="/resources/" />
-
-  <!-- tiles config :order:1 -->
+  <!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
   
+  <!-- Enables the Spring MVC @Controller programming model -->
+  <annotation-driven />
+   
+  <!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+  <resources mapping="/resources/**" location="/resources/" />
 
-	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<beans:property name="prefix" value="/WEB-INF/views/" />
-		<beans:property name="suffix" value=".jsp" />
-	</beans:bean>
+  <!-- tiles config : 우선순위가 가장 높아야한다. -> 페이지를 만들어 보낼때 header, menus, footer를 먼저 붙이기 위함! -->
+  <beans:bean id="tilesViewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver">
+    <beans:property name="order" value="1"></beans:property>  <!-- ViewResolver 우선순위 설정 -->
+  </beans:bean>
+  
+  <!-- tiles main config -->
+  <beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+    <beans:property name="definitions">   <!-- definitions 기본값은 /WEB-INF/tiles.xml -->
+      <beans:list>
+        <beans:value>/WEB-INF/views/tiles/tiles.xml</beans:value> <!-- tiles 메인 설정파일 위치 : 외부에서 접근할 수 없도록 WEB-INF 하위 -->
+      </beans:list>
+    </beans:property>
+  </beans:bean>
 
-	
-	<context:component-scan base-package="com.pcwk.ehr" />
-	
-	
-	
+  <!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+  <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <beans:property name="prefix" value="/WEB-INF/views/" />
+    <beans:property name="suffix" value=".jsp" />
+    <beans:property name="order" value="2"></beans:property>
+  </beans:bean>
+  
+  <context:component-scan base-package="com.pcwk.ehr" />
+  
 </beans:beans>
