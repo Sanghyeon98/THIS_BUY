@@ -55,24 +55,24 @@ public class SignupController {
 	@ResponseBody
 	public String upDeleteAll(HttpServletRequest req) throws SQLException {
 		String jsonString = "";
-		String uIdStr = req.getParameter("uId");
+		String memberidStr = req.getParameter("memberid");
 		LOG.debug("┌=============================┐");
-		LOG.debug("|uId=" + uIdStr);
+		LOG.debug("|memberid=" + memberidStr);
 		List<MemberVO> list = new ArrayList<MemberVO>();
 
 		// 다건
-		if (uIdStr.indexOf(",") != -1) {
-			String[] userArray = uIdStr.split(",");
-			for (String uId : userArray) {
+		if (memberidStr.indexOf(",") != -1) {
+			String[] userArray = memberidStr.split(",");
+			for (String memberid : userArray) {
 				MemberVO tmpVO = new MemberVO();
-				tmpVO.setMemberid(uId);
+				tmpVO.setMemberid(memberid);
 
 				list.add(tmpVO);
 			}
 			// 한건
 		} else {
 			MemberVO tmpVO = new MemberVO();
-			tmpVO.setMemberid(uIdStr);
+			tmpVO.setMemberid(memberidStr);
 
 			list.add(tmpVO);
 		}
@@ -83,7 +83,7 @@ public class SignupController {
 		if (0 == delCnt) {
 			message = "삭제 실패!";
 		} else {
-			message = uIdStr + "가 삭제 되었습니다.";
+			message = memberidStr + "가 삭제 되었습니다.";
 		}
 
 		jsonString = new Gson().toJson(new MessageVO(String.valueOf(delCnt), message));
@@ -242,15 +242,15 @@ public class SignupController {
 
 		LOG.debug("┌=============================┐");
 
-		String uId = req.getParameter("uId");
-		LOG.debug("|uId=" + uId);
+		String memberid = req.getParameter("memberid");
+		LOG.debug("|memberid=" + memberid);
 
 		// Command객체
 		// ajax{uId:'p99_01'},form(name="uId")
 		//
 		LOG.debug("|inVO=" + inVO);
 		MemberVO inpuVO = new MemberVO();
-		inpuVO.setMemberid(uId);
+		inpuVO.setMemberid(memberid);
 
 		LOG.debug("|inpuVO=" + inpuVO);
 

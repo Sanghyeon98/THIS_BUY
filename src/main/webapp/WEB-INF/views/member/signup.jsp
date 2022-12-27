@@ -69,15 +69,18 @@ $(document).ready(function(){
      $("#idCheck").on("click",function(){
           console.log("#idCheck");
           //id값 
-          if(eUtil.ISEmpty( $("#uId").val() ) == true){
+          if(eUtil.ISEmpty( $("#memberid").val() ) == true){
               alert("아이디를 입력하세요.");
-              $("#uId").focus();
+              $("#memberid").focus();
               return;
           }
           let method = "GET";
-          let url    = "/member/idCheck.do";
+          let url    = "/signup/idCheck.do";
           let async  = true;
-          let params = {"uId": $("#uId").val()};
+          let params = {
+        		  "memberid": $("#memberid").val()
+        		  };
+          
           
           PClass.callAjax(method,url,async,params,function(data){
               console.log("data:"+data);
@@ -89,7 +92,7 @@ $(document).ready(function(){
                   $("#idCheckYN").val("1");
                   
                   //아이디는 PK로 활성화
-                $("#uId").prop("disabled",true);
+                $("#memberid").prop("disabled",true);
                 //id중복  
               }else{
                   alert(parsedJson.msgContents);
@@ -112,10 +115,10 @@ $(document).ready(function(){
         
        
           let method = "GET";
-          let url = "/member/mailCheck.do"; 
+          let url = "/signup/mailCheck.do"; 
           let async  = true;
           let params = {
-             "email"    : $("#email").val(),
+             "email"    : $("#email").val()
           };
           PClass.callAjax(method,url,async,params,function(data){// GET방식이라 Url 뒤에 email을 뭍힐수있다.       
                 console.log("data : " +  data);
@@ -147,9 +150,9 @@ $(document).ready(function(){
 //등록
      $("#add").on("click",function(){
             console.log("#add");
-          if(eUtil.ISEmpty( $("#uId").val() ) == true){
+          if(eUtil.ISEmpty( $("#memberid").val() ) == true){
              alert("아이디를 입력 하세요.");
-             $("#uId").focus();
+             $("#memberid").focus();
              return;
            }
            
@@ -201,10 +204,10 @@ $(document).ready(function(){
            if(confirm("등록 하시겠습니까?")==false)return;
            
            let method = "POST";
-           let url    = "/member/add.do";
+           let url    = "/signup/add.do";
            let async  = true;
            let params = {
-               "uId"      : $("#uId").val(),
+               "memberid"      : $("#memberid").val(),
                "passwd"   : $("#passwd").val(),
                "name"     : $("#name").val(),
                "email"    : $("#email").val(),
@@ -239,7 +242,7 @@ $(document).ready(function(){
         //id중복체크 초기화
         $("#idCheckYN").val(initValue);
         
-        $("#uId").val(initValue);
+        $("#memberid").val(initValue);
         $("#passwd").val(initValue);
         $("#name").val(initValue);
         $("#email").val(initValue);
@@ -249,7 +252,7 @@ $(document).ready(function(){
         
         
         //아이디는 PK로 활성화
-        $("#uId").prop("disabled",false);
+        $("#memberid").prop("disabled",false);
         //버튼 활성화
         $("#add").prop("disabled",false);           
     }
@@ -279,7 +282,7 @@ $(document).ready(function(){
     </div>
     <input type="hidden" name="idCheckYN" id="idCheckYN">
     <div class="col-md-7 text-centers">
-      <input type="text" class="form-control" id="uId" name="uId" placeholder="아이디를 입력해주세요">
+      <input type="text" class="form-control" id="memberid" name="memberid" placeholder="아이디를 입력해주세요">
     </div>
      <div class="col-md-3 text-centers">
       <button type="button" class="btn btn-default btn-block" value="아이디 중복" id="idCheck">중복 확인</button>
