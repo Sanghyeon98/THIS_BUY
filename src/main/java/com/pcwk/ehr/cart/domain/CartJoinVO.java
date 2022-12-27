@@ -10,14 +10,14 @@ public class CartJoinVO extends DTO {
 	private int         quantity; 				// 상품 수량
 	private  String		orgName;                //원본파일명
 	private  String		saveName;               //저장파일명
-	private  String		path;                   //경로
+	private  String		viewpath;                   //경로
 	private int 		imageNo;		        // 이미지 번호
 	private String      name;		            // 상품명
 	private int         price;			        // 가격_default 0
 	private int         finalPrice;	            // 최종가격_default 0
 	public CartJoinVO () {}
 	public CartJoinVO(int cartNO, int itemNO, String memberId, int quantity, String orgName, String saveName,
-			String path, int imageNo, String name, int price, int finalPrice) {
+			String viewpath, int imageNo, String name, int price, int finalPrice) {
 		super();
 		this.cartNO = cartNO;
 		this.itemNO = itemNO;
@@ -25,7 +25,7 @@ public class CartJoinVO extends DTO {
 		this.quantity = quantity;
 		this.orgName = orgName;
 		this.saveName = saveName;
-		this.path = path;
+		this.viewpath = viewpath;
 		this.imageNo = imageNo;
 		this.name = name;
 		this.price = price;
@@ -67,11 +67,11 @@ public class CartJoinVO extends DTO {
 	public void setSaveName(String saveName) {
 		this.saveName = saveName;
 	}
-	public String getPath() {
-		return path;
+	public String getviewpath() {
+		return viewpath;
 	}
-	public void setPath(String path) {
-		this.path = path;
+	public void setviewpath(String viewpath) {
+		this.viewpath = viewpath;
 	}
 	public int getImageNo() {
 		return imageNo;
@@ -100,7 +100,7 @@ public class CartJoinVO extends DTO {
 	@Override
 	public String toString() {
 		return "CartJoinVO [cartNO=" + cartNO + ", itemNO=" + itemNO + ", memberId=" + memberId + ", quantity="
-				+ quantity + ", orgName=" + orgName + ", saveName=" + saveName + ", path=" + path + ", imageNo="
+				+ quantity + ", orgName=" + orgName + ", saveName=" + saveName + ", viewpath=" + viewpath + ", imageNo="
 				+ imageNo + ", name=" + name + ", price=" + price + ", finalPrice=" + finalPrice + ", toString()="
 				+ super.toString() + "]";
 	}

@@ -16,6 +16,8 @@
   <meta name="description" content="pcwk html" >
   <meta name="keywords" content="html5, css3, javascipt6, jQuery">
   <meta charset="UTF-8">
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="${CP_RES}/css/bootstrap.min.css">  
   <!-- jQuery -->
 <script src="${CP_RES}/js/jquery-1.12.4.js"></script>
 <!-- jQuery -->
@@ -29,9 +31,13 @@
 <script src="${CP_RES}/js/jquery.bootpag.js"></script>
 <!-- bootstrap js -->
 <script src="${CP_RES}/js/bootstrap.min.js"></script>
+
 <meta charset="UTF-8">
 <style>       
 
+.cart__list__optionbtn{
+    background-color: #B8C9DF
+}
 
 .title {
     width: 1050px;
@@ -49,10 +55,10 @@ position: relative;
     
 }
 
-.cart__list{
+/* .cart__list{
     background-color: grey;
     margin: 
-}
+} */
 .side{
     display: flex;
     width: 1050px; 
@@ -114,6 +120,11 @@ width: 30px;
     	console.log('Hello, world!');
     	getAll(1);
 
+    	$("#moveOrder").on("click",function(e){
+    		console.log("moveOrder");
+    		moveOrder("admin");
+    		
+    	});
     	
     	//선택 삭제--------------------------------------------------------------------
     	$("#dodelete").on("click",function(e){
@@ -262,24 +273,31 @@ width: 30px;
         $(".cart__list>tbody").empty();
         
         let sumprice =0;
+        let delivery =2500;
+        let finalsumprice = sumprice+2500;
         
         
         if (null != parsedJson && parsedJson.length > 0) {
             
           $.each(parsedJson, function(index, value) {
         	    sumprice += parseInt(value.finalPrice);
-        	  
+        	    
+        	    if(sumprice>30000){
+        	    delivery=0;
+        	    }
+        	    
+        	    finalsumprice = sumprice+delivery;
+        	    
         	  htmlData += "<tr class='cartRow'>";
               htmlData += "    <td><input type='checkbox' name='chk' value='"+value.cartNO+"'></td>";
               htmlData += "    <td><input type='hidden' class='memberId' name='memberId' value='"+value.memberId+"'></td>";
-              htmlData += "    <td><input type='text' class='cartNO' name='cartNO' value='"+value.cartNO+"'></td>";
-              htmlData += "    <td><img src='' alt=''></td>";
+              htmlData += "    <td><input type='hidden' class='cartNO' name='cartNO' value='"+value.cartNO+"'></td>";
+//              htmlData += "    <td><img src='"+${CP_RES }/value.viewpath+"' alt='"value.saveName"'></td>";
               htmlData += "    <td><a href='#' onClick='doSelectOne("+<c:out value='value.itemNO '/>+")'>"+value.name+"</a></td>";
               htmlData += "    <td><input type='button' name='minus' class='minus' value='-'>";
               htmlData += "    <input type='text' class='quantity' name='quantity' value='"+value.quantity+"' size='2'>";
               htmlData += "    <td><input type='button' name='add' class='add' value='+'>";
               htmlData += "    <td>"+value.finalPrice+"원</td>";
-              htmlData += "    <td><input type='hidden'  value='"+sumprice+"'></td>";
               htmlData += "</tr>";
           });
         } else {
@@ -290,6 +308,8 @@ width: 30px;
             htmlData += "</tr>";
         }
         $("#sumprice").val(sumprice);
+        $("#delivery").val(delivery);
+        $("#finalsumprice").val(finalsumprice);
         // 데이터 출력
         $(".cart__list>tbody").append(htmlData);
        
@@ -307,7 +327,13 @@ width: 30px;
       location.href = url;
     }
     //=============================doSelectOne함수 끝  
+    function moveOrder(memberId){
+         let url = "${CP}/orderSheet/view.do";
 
+      url = url + "?memberid="+memberId;
+      console.log("url : "+url);
+      location.href = url;
+    }
     
     
   </script>
@@ -320,11 +346,11 @@ width: 30px;
     </div>
     <div class="side">
            
-  			 <table class="cart__list">
+  			 <table class="cart__list table">
                 <thead>
                     <tr class="checkBox">
                         <td colspan="3"><input id="checkAll" type="checkbox" >
-                            <button class="cart__list__optionbtn" id="dodelete">선택삭제</button>
+                            <button class="cart__list__optionbtn btn btn-Navy" id="dodelete">선택삭제</button>
                         </td>
                         <td></td>
                         <td></td>
@@ -373,26 +399,26 @@ width: 30px;
                 <button class="address">주소검색</button>
             </div>
         </div>
-        <div>
-        <div>
+        <div class="row g-3 align-items-center">
+        <div class="col-auto">
             <span>상품금액</span>
             <span><input class="price" id="sumprice" type="text"></span>
             <span>원</span>
         </div>
-        <div>
+        <div class="col-auto">
             <span>배송비</span>
-            <span><input class="price2" type="text" ></span>
+            <span><input class="delivery" id="delivery" type="text" ></span>
             <span>원</span>
         </div>
-        <div>
-            <span>결제예정금액</span>
-            <span><input class="sum" type="text" ></span>
+        <div class="col-auto">
+            <span class="form-text" >결제예정금액</span>
+            <span><input class="finalsumprice form-control " id="finalsumprice" type="text"  ></span>
             <span>원</span>
         </div>
         </div> 
         
         <div>
-            <button class="address"><span class="css-ymwvow e4nu7ef1">주문결제</span></button>
+            <button class="address" id="moveOrder" ><span class="css-ymwvow e4nu7ef1">주문결제</span></button>
         </div>
                      
     </div>

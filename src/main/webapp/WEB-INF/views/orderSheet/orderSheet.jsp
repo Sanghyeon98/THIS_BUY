@@ -118,16 +118,32 @@ width: 30px;
     //${sessetion.infor.uid}
     //id =memberId  => $("#memberId").val(),
     
+    
+    
       PClass.callAjax(method, url, async, params, function(data) {
         console.log(data);
         let parsedJson = JSON.parse(data);
         let htmlData = "";
+    
+        
+        let sumprice =0;
+        let delivery =2500;
+        let finalsumprice = sumprice+2500;
+        
         
         $(".cart__list__detail>tbody").empty();
         
         if (null != parsedJson && parsedJson.length > 0) {
             
           $.each(parsedJson, function(index, value) {
+        	  sumprice += parseInt(value.finalPrice);
+              
+              if(sumprice>30000){
+              delivery=0;
+              }
+              
+              finalsumprice = sumprice+delivery;
+        	  
               htmlData += "<tr>";
               htmlData += "    <td><input type='hidden' class='memberId' id='memberId' name='memberId' value="+value.memberId+"></td>";
               htmlData += "    <td><input type='hidden' class='cartNO' name='cartNO' id='cartNO' value="+value.cartNO+"></td>";
@@ -145,6 +161,9 @@ width: 30px;
             htmlData += "</tr>";
         }
         
+        $("#sumprice").val(sumprice);
+        $("#delivery").val(delivery);
+        $("#finalsumprice").val(finalsumprice);
         // 데이터 출력
         $(".cart__list__detail>tbody").append(htmlData);
        
@@ -169,7 +188,6 @@ width: 30px;
         
        <div> 
         <table class="cart__list__detail">
-            <form action="">
             <tboby>
                 <tr class="cart__list__detail">
                         <td><input type="checkbox"></td>
@@ -199,11 +217,10 @@ width: 30px;
                         </td>
                     </tr>
                 </tboby>
-            </form>
         </table>
        </div>
         
-        ${vo}
+     
         <div>
         <h3>주문자 정보</h3>
             <hr/>
@@ -211,7 +228,6 @@ width: 30px;
         
         <div>
             <table>
-                <form action="">
                     <tr>
                        <td>보내는분</td>
                        <td><input type= text value="${vo.name}"></td>
@@ -224,7 +240,6 @@ width: 30px;
                        <td>이메일</td>
                        <td><input type= text value="${vo.email}"></td>
                     </tr>
-                </form>
             </table>
         </div>
         
@@ -235,7 +250,6 @@ width: 30px;
         
         <div>
             <table>
-                <form action="">
                     <tr>
                        <td>배송지</td>
                        <td><input type= text value="${vo.address}"></td>
@@ -246,7 +260,6 @@ width: 30px;
                        <td>배송 메모</td>
                        <td><input type= text></td>
                     </tr>
-                </form>
             </table>
         </div>
         
@@ -257,7 +270,6 @@ width: 30px;
         
         <div class="pay_table">
             <table>
-                <form action="">
                     <tr>
                        <td>결제수단 선택</td>
                        <td><button>신용카드</button>
@@ -271,30 +283,27 @@ width: 30px;
                         <span><button>카카오페이</button></span>
                         </td>
                     </tr>
-                </form>
             </table>
             
             <table class="pay_table2">
-                <form action="">
                     <tr>
                        <td>상품금액</td>
-                       <td><input class="price1" type="text" ></span>
+                       <td><input class="sumprice" id="sumprice" type="text" ></span>
                             <span>원</span>
                        </td>
                     </tr>
                     <tr>
                        <td>배송비</td>
-                       <td><input class="price1" type="text" ></span>
+                       <td><input class="delivery" id="delivery" type="text" ></span>
                             <span>원</span>
                         </td>
                     </tr>
                     <tr class="sum_price">
                        <td>결제예정금액</td>
-                       <td><input class="price1" type="text" ></span>
+                       <td><input class="finalsumprice" id="finalsumprice" type="text" ></span>
                             <span>원</span>
                         </td>
                     </tr>
-                </form>
             </table>
             
         </div>
