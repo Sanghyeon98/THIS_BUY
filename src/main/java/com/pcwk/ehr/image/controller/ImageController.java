@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 import java.util.Iterator;
 
@@ -39,7 +40,7 @@ public class ImageController {
 	final String FILE_PATH = "C:\\upload"; //일반 파일
 	// 실제 서버상 파일 경로 : resources/upload/2022/12/202212120ce331f537b54c21a412138f9e3ca2d5.png
 //	final String IMG_PATH  = "C:\\Users\\ITSC\\git\\THIS_BUY\\src\\main\\webapp\\resources\\img"; //이미지 파일
-	final String IMG_PATH  = "C:\\Users\\yoon\\git\\THIS_BUY\\src\\main\\webapp\\resources\\img"; //이미지 파일
+	final String IMG_PATH  = "C:\\Users\\ITSC\\git\\THIS_BUY\\src\\main\\webapp\\resources\\img"; //이미지 파일
 	String IMG_VIEW_PATH = "/resources/img";
 	String addYYYYMMPath = "";
 	
@@ -160,15 +161,17 @@ public class ImageController {
 				String yyyyFolder = StringUtil.getCurrentDate("yyyy");
 				String mmFolder = StringUtil.getCurrentDate("MM");
 				
+				// /resources/img/2022/12
 				String tomcatYearMonthFolder = IMG_VIEW_PATH + "/" + yyyyFolder + "/" + mmFolder;
 				LOG.debug("|  tomcatYearMonthFolder = " + tomcatYearMonthFolder);
 				
 				// Tomcat 실제 경로
+				// C:\JAVA\04_Spring\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\THIS_BUY\resources\img\2022\12
 				String tomcatRealPath = req.getServletContext().getRealPath(tomcatYearMonthFolder);
 				LOG.debug("|  tomcatRealPath = " + tomcatRealPath);
 
-				// savePath = tomcatRealPath;
-				savePath = this.IMG_PATH + addYYYYMMPath;
+				savePath = tomcatRealPath;
+				//savePath = this.IMG_PATH + addYYYYMMPath;
 				
 				saveVO.setViewPath(tomcatYearMonthFolder);
 				LOG.debug("|  getImageViewPath = " + saveVO.getViewPath());
@@ -186,9 +189,11 @@ public class ImageController {
 			
 			// 파일 객체 생성
 			File saveFileObj = new File(saveVO.getSavePath(), saveVO.getSaveName());
+			//File viewFileObj = new File(saveVO.getViewPath(), saveVO.getSaveName());
 			
 			// 파일 전송(이동)
 			mf.transferTo(saveFileObj);
+			//mf.transferTo(viewFileObj);
 			
 			// 이미지 파일인지 판단 (s_저장파일명)
 			if(isImageFile(saveFileObj)) {
@@ -201,6 +206,20 @@ public class ImageController {
 					throw e;
 				}
 			}
+			
+			
+			// 20221227
+			// 로컬에 저장된 파일을 /resources/img 로 복사
+			File newFile = new File(this.IMG_PATH + addYYYYMMPath, saveVO.getSaveName());
+			File newThumFile = new File(this.IMG_PATH + addYYYYMMPath, "th_" + saveVO.getSaveName());
+			
+			LOG.debug("|  saveFileObj.toPath() : " + saveFileObj.toPath());
+			LOG.debug("|  newFile.toPath() : " + newFile.toPath());
+			LOG.debug("|  newThumFile.toPath() : " + newThumFile.toPath());
+			
+			Files.copy(saveFileObj.toPath(), newFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+			Files.copy(saveFileObj.toPath(), newThumFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+			
 			
 			// 이미지 저장
 			flag = imgService.doSave(saveVO);

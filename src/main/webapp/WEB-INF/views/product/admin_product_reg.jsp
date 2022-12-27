@@ -8,7 +8,6 @@
 <c:set var="CP_RES" value="${CP}${RES}"/>
 
 <fmt:bundle basename="message">
-<%@ include file="/WEB-INF/views/cmn/cache.jsp" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -17,21 +16,8 @@
   <meta name="description" content="pcwk html" >
   <meta name="keywords" content="html5, css3, javascipt6, jQuery">
   <meta charset="UTF-8">
-  <!-- favicon -->
-  <link rel="shortcut icon" type="images/x-icon" href="${CP_RES}/favicon.ico"> 
   <!-- jquery ui -->
   <link rel="stylesheet" href="${CP_RES}/css/admin_product_reg.css">
-
-  <!-- jQuery -->
-  <script src="${CP_RES}/js/jquery-1.12.4.js"></script>
-  <!-- callAjax -->
-  <script src="${CP_RES}/js/callAjax.js"></script>
-  <!-- String, Number, Date Util -->
-  <script src="${CP_RES}/js/eUtil.js"></script>
-  <!-- paging -->
-  <script src="${CP_RES}/js/jquery.bootpag.js"></script>
-  <!-- bootstrap js -->
-  <script src="${CP_RES}/js/bootstrap.min.js"></script>
 
   <title>제목</title>
   
@@ -40,15 +26,9 @@
     $(document).ready(function(){
     	
     	
-    	// 수정 취소 버튼
-    	$("#prod_cancel_bt").on("click", function() {
-    		moveToMng();
-    	});
-    	
-    	
-    	// 상품 수정 버튼
+    	// 상품 등록 버튼
     	$("#prod_save_bt").on("click", function() {
-    		console.log("상품수정버튼");
+    		console.log("상품등록버튼");
     		
     		console.log("2차 분류  : " + $(".cate02List").val());
     		
@@ -146,38 +126,39 @@
            data: formData,
            
            success:function(data) {  // 이미지 등록 성공
-        	   console.log("success data : " + data);  // data : ImageVO
-               
+             console.log("success data : " + data);  // data : ImageVO
+             
              let getImageNo = 0;  // 이미지 번호가 0이면 이미지 없음
              
              //if(null != data) {
              if(data.length != 0) { // 등록된 이미지가 있으면 
-               console.log("null!!");
-               let getImage = JSON.parse(data);
-               
-               console.log("getImage.imageNo : " + getImage.imageNo);
-               console.log("parseInt(getImage.imageNo) : " + parseInt(getImage.imageNo));
-               
-               getImageNo = getImage.imageNo;
+            	 console.log("null!!");
+	             let getImage = JSON.parse(data);
+	             
+	             console.log("getImage.imageNo : " + getImage.imageNo);
+	             console.log("parseInt(getImage.imageNo) : " + parseInt(getImage.imageNo));
+	             
+	             console.log("image value : " +  $("#imageName").val());
+	             
+	             getImageNo = getImage.imageNo;
              } else { // 등록된 이미지가 없으면
-               console.log("not null!!");
+            	 console.log("not null!!");
              }
              
              // 제품 추가
-             let p_method = "GET";
-             let p_url = "/product/doUpdate.do";
+             let p_method = "POST";
+             let p_url = "/product/doSave.do";
              let p_async = true;
              let p_params = {
-            	 itemNo : $("#itemNo").val(),
                name : $("#name").val(),
                price : $("#price").val(),
-               quantity : $("#quantity").val(), 
-               categoryNo : $(".cate02List").val(),
-               imageNo : getImageNo,  // 이미지 번호가 0이면 이미지 없음
                production : $("#production").val(),
                weight : $("#weight").val(),
                expired : $("#expired").val(),
-               detail : $("#detail").val()
+               quantity : $("#quantity").val(), 
+               categoryNo : $(".cate02List").val(),
+               detail : $("#detail").val(),
+               imageNo : getImageNo  // 이미지 번호가 0이면 이미지 없음
              };
              
              PClass.callAjax(p_method, p_url, p_async, p_params, function(p_data) {
@@ -186,9 +167,9 @@
                
                let parsedJson = JSON.parse(p_data);
                
-               if("1" == parsedJson.msgId) {  // 제품 수정 성공
+               if("1" == parsedJson.msgId) {  // 제품 등록 성공
             	   alert(parsedJson.msgContents);
-            	   //moveToMng();
+            	   //moveToReg();
                } else {
             	   alert(parsedJson.msgContents);
                }
@@ -240,10 +221,6 @@
     function moveToReg() {
     	window.location.href= "${CP}/product/moveToReg.do";
     }
-    
-    function moveToMng() {
-    	window.location.href= "${CP}/product/productView.do";
-    }
   </script>
 </head>
 
@@ -258,108 +235,62 @@
       <div class="lnb">
         <jsp:include page="/WEB-INF/views/cmn/admin_left_menu.jsp"></jsp:include>
       </div> 
-      <!-- lnb END ------------------------------------------------------------>
-      
+      <!-- lnb END -------------------------------------------------------->
       <!-- content -->
       <div class="content">
         <div class="content_nav">
-          <p>관리자 > 상품 관리 > 상품 수정</p>
+          <p>관리자 > 상품 관리 > 상품 등록</p>
         </div>
         <div class="content_body">
           <form action="#" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="itemNo" id="itemNo" value="${vo.itemNo}"> 
             <table>
               <tr>
                 <td class="table_left"><label>분류선택</label></td>
                 <td>
-                  <!-- 1차 분류 -->
                   <select class="cate01List">
                     <option value='none'>==선택==</option>
-                    <c:forEach var="cateVO2" items="${cate02List}">
-                      <c:choose>
-                        <c:when test="${vo.categoryNo == cateVO2.categoryNo }">
-                          <c:forEach var="cateVO1" items="${cate01List}">
-                            <c:choose>
-                              <c:when test="${cateVO2.topNo == cateVO1.categoryNo}">
-				                        <option selected="selected" value='<c:out value="${cateVO1.categoryNo}"/>'>
-				                            <c:out value="${cateVO1.categoryNm}"/>
-				                        </option>
-                              </c:when>
-                              <c:otherwise>
-				                        <option value='<c:out value="${cateVO1.categoryNo}"/>'>
-				                            <c:out value="${cateVO1.categoryNm}"/>
-				                        </option>
-                              </c:otherwise>
-                            </c:choose>
-                          </c:forEach>
-                        </c:when>
-                      </c:choose>
+                    <c:forEach var="vo" items="${cate01List}">
+                        <option value='<c:out value="${vo.categoryNo}"/>'>
+                            <c:out value="${vo.categoryNm}"/>
+                        </option>
                     </c:forEach>
                   </select>
-                  
-                  <!-- 2차 분류 --> 
                   <select class="cate02List">
                     <option value='none'>==선택==</option>
-                    <c:forEach var="cateVO2" items="${cate02List}">
-                      <c:choose>
-                        <c:when test="${vo.categoryNo == cateVO2.categoryNo }">
-                          <c:forEach var="cateVO2_2" items="${cate02List }">
-                            <c:choose>
-                              <c:when test="${cateVO2.topNo == cateVO2_2.topNo }">
-                                <c:choose>
-                                  <c:when test="${vo.categoryNo == cateVO2_2.categoryNo}">
-						                        <option selected="selected" value='<c:out value="${cateVO2_2.categoryNo}"/>'>
-						                            <c:out value="${cateVO2_2.categoryNm}"/>
-						                        </option> 
-                                  </c:when>
-                                  <c:otherwise>
-						                        <option value='<c:out value="${cateVO2_2.categoryNo}"/>'>
-						                            <c:out value="${cateVO2_2.categoryNm}"/>
-						                        </option> 
-                                  </c:otherwise>
-                                </c:choose>
-                              </c:when>
-                              <c:otherwise>
-                              </c:otherwise>
-                            </c:choose>
-                          </c:forEach>
-                        </c:when>
-                      </c:choose>
-                    </c:forEach>
                   </select>
                 </td>
               </tr>
               <tr>
                 <td class="table_left"><label for="name">상품명</label></td>
-                <td><input type="text" id="name" name="name" value="<c:out value='${vo.name}'></c:out>"></td>
+                <td><input type="text" id="name" name="name" placeholder="상품명"></td>
               </tr>
               <tr>
                 <td class="table_left"><label for="price">가격</label></td>
-                <td><input type="number" id="price" name="price" value="<c:out value='${vo.price}'></c:out>"></td>
+                <td><input type="number" id="price" name="price" placeholder="가격"></td>
               </tr>
               <tr>
                 <td class="table_left"><label for="production">생산지</label></td>
-                <td><input type="text" id="production" name="production" value="<c:out value='${vo.production}'></c:out>"></td>
+                <td><input type="text" id="production" name="production" placeholder="생산지"></td>
               </tr>
               <tr>
                 <td class="table_left"><label for="weight">무게</label></td>
-                <td><input type="number" id="weight" name="weight" value="<c:out value='${vo.weight}'></c:out>"></td>
+                <td><input type="number" id="weight" name="weight" placeholder="무게"></td>
               </tr>
               <tr>
                 <td class="table_left"><label for="expired">유통기한</label></td>
-                <td><input type="text" id="expired" name="expired" value="<c:out value='${vo.expired}'></c:out>"></td>
+                <td><input type="text" id="expired" name="expired" placeholder="YYYYMMDD"></td>
               </tr>
               <tr>
                 <td class="table_left"><label for="quantity">재고수량</label></td>
-                <td><input type="number" id="quantity" name="quantity" value="<c:out value='${vo.quantity}'></c:out>"></td>
+                <td><input type="number" id="quantity" name="quantity" placeholder="재고수량"></td>
               </tr>
               <tr>
                 <td class="table_left"><label for="detail">상품 설명</label></td>
-                <td><textarea rows="" cols="" id="detail" name="detail"><c:out value='${vo.detail}'></c:out></textarea></td>
+                <td><textarea rows="" cols="" id="detail" name="detail"></textarea></td>
               </tr>
               <tr>
                 <td class="table_left"><label for="imageName">이미지</label></td>
-                <td>${imgVO.orgName }<input type="file" id="imageName" name="imageName"></div>
+                <td><input type="file" id="imageName" name="imageName"></div>
               </tr>
             </table>
             <div class="reset">
@@ -368,8 +299,7 @@
           </form>
         </div>
         <div class="bt_area">
-          <button id="prod_save_bt">수정</button>
-          <button id="prod_cancel_bt">취소</button>
+          <button id="prod_save_bt">상품 등록</button>
         </div>
       </div>
       <!-- content END ---------------------------------------------------------->

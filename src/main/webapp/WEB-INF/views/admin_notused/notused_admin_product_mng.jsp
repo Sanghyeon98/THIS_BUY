@@ -8,7 +8,6 @@
 <c:set var="CP_RES" value="${CP}${RES}"/>
 
 <fmt:bundle basename="message">
-<%@ include file="/WEB-INF/views/cmn/cache.jsp" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -17,22 +16,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="project product list" >
   <meta name="keywords" content="html5, css3, javascipt6, jQuery">
-  <!-- favicon -->
-  <link rel="shortcut icon" type="images/x-icon" href="${CP_RES}/favicon.ico">
   <!-- jquery ui -->
   <link rel="stylesheet" href="${CP_RES}/css/admin_product_mng.css">
-  
-  <!-- jQuery -->
-  <script src="${CP_RES}/js/jquery-1.12.4.js"></script>
-  <!-- callAjax -->
-  <script src="${CP_RES}/js/callAjax.js"></script>
-  <!-- String, Number, Date Util -->
-  <script src="${CP_RES}/js/eUtil.js"></script>
-  <!-- paging -->
-  <script src="${CP_RES}/js/jquery.bootpag.js"></script>
-  <!-- bootstrap js -->
-  <script src="${CP_RES}/js/bootstrap.min.js"></script>
-    
+
   <title>제품 목록</title>
   
   <!-- javascript -->
@@ -40,31 +26,31 @@
     
     $(document).ready(function(){
       
-    	// 최초 목록 조회
-    	doRetrieve(1);
-    	
+      // 최초 목록 조회
+      doRetrieve(1);
+      
       // paging
       renderingPage('${totalPage}', 1);
       
-      
+      /* 
       // 제품 상세 페이지
       $("#productTable>tbody").on("click", "tr", function() {
-    	  console.log("tr");
-    	  
-    	  let tdArray = $(this).children();
-    	  let productNo = tdArray.eq(6).text();
-    	  
-    	  //window.open("${CP}/product/moveToMod.do?itemNo=" + productNo, target="_blank", 
-    		//	           "width=1100, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes");
-    	  window.location.href= "${CP}/product/moveToMod.do?itemNo=" + productNo;
-      });
+        console.log("tr");
+        
+        let tdArray = $(this).children();
+        let productNo = tdArray.eq(6).text();
+        
+        //window.open("${CP}/product/moveToMod.do?itemNo=" + productNo, target="_blank", 
+        //             "width=1100, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes");
+        window.location.href= "${CP}/product/moveToMod.do?itemNo=" + productNo;
+      }); */
       
       
       // 품절 처리
       $("#upSoldOutAll").on("click", function(){
-    	  console.log("upSoldOutAll");
-    	  
-    	  let uIdArray = [];
+        console.log("upSoldOutAll");
+        
+        let uIdArray = [];
           
         $("input:checkbox[name=chk]").each(function(i, element) {
           // 체크된 데이터 uIdArray 추가
@@ -108,7 +94,7 @@
           }
           
         });
-    	  
+        
       }); // 품절 처리 ------------------------------------------------------------
       
       
@@ -150,11 +136,11 @@
           
           // 삭제 성공
           if("0" != parsedJson.msgId) {
-        	  alert(parsedJson.msgContents);
-        	  doRetrieve(1);
-        	  initControll();
+            alert(parsedJson.msgContents);
+            doRetrieve(1);
+            initControll();
           } else {
-        	  alert(parsedJson.msgId + "," + parsedJson.msgContents);
+            alert(parsedJson.msgId + "," + parsedJson.msgContents);
           }
           
         });
@@ -241,6 +227,17 @@
     }); // document.ready END --------------------------------------------------
     
     
+    //=============================doSelectOne함수
+    function doSelectOne(productNo) {
+      let url = "${CP}/product/moveToMod.do";
+
+      url = url + "?itemNo="+productNo;
+      console.log("url : "+url);
+      location.href = url;
+    }
+    //=============================doSelectOne함수 끝  
+    
+    
     // 목록 조회 함수
     function doRetrieve(page) {
       let method = "GET";
@@ -296,7 +293,7 @@
               htmlData += "<tr>";
               htmlData += "  <td class='td_center'><input type='checkbox' name='chk' id='chk' value='" + value.itemNo + "'></td>";
               htmlData += "  <td class='td_center'>" + value.num + "</td>";
-              htmlData += "  <td>" + value.name + "</td>";
+              htmlData += "  <td><a href='#' onClick='doSelectOne(" + value.itemNo + ")'>" + value.name + "</a></td>";
               htmlData += "  <td class='td_center'>" + value.price + "</td>";
               htmlData += "  <td class='td_center'>" + value.quantity + "</td>";
               htmlData += "  <td class='td_center'>" + value.modDt + "</td>";
@@ -324,11 +321,11 @@
     
     // 초기화
     function initControll() {
-    	const initValue = "";
-    	
-    	$(".cate01List").val("none");
-    	$(".cate02 List").val("none");
-    	$("#searchWord").val(initValue);
+      const initValue = "";
+      
+      $(".cate01List").val("none");
+      $(".cate02 List").val("none");
+      $("#searchWord").val(initValue);
     }
     
     
@@ -369,8 +366,6 @@
 <body>
   <!-- wrap -->
   <div id="wrap">
-    <header>
-    </header>
     <!-- container -->
     <div id="container" class="clear">
     
@@ -476,8 +471,7 @@
       
     </div>
     <!-- container END -------------------------------------------------------->
-    <footer>
-    </footer>
+
   </div>
   <!-- wrap END --------------------------------------------------------------->
 </body>
