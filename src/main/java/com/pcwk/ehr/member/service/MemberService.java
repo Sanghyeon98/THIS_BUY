@@ -84,7 +84,7 @@ public interface MemberService {
 	List<MemberVO> doRetrieve(DTO inVO) throws SQLException;
 
 	/**
-	 * uId조회 건수 조회
+	 * memberid조회 건수 조회
 	 * 
 	 * @param inVO
 	 * @return

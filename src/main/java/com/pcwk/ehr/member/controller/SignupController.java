@@ -246,7 +246,6 @@ public class SignupController {
 		LOG.debug("|memberid=" + memberid);
 
 		// Command객체
-		// ajax{uId:'p99_01'},form(name="uId")
 		//
 		LOG.debug("|inVO=" + inVO);
 		MemberVO inpuVO = new MemberVO();

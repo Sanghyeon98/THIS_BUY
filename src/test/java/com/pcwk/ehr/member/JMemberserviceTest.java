@@ -76,7 +76,7 @@ public class JMemberserviceTest {
 	}
 	@Test
 	//@Ignore
-	public void idPassCheck()throws SQLException{
+	public void idCheck()throws SQLException{
 		//1.기존데이터 삭제
 		//2.데이터 입력
 
@@ -97,7 +97,7 @@ public class JMemberserviceTest {
 		inVO.setMemberid("tkdeja");
 		inVO.setPasswd("1234abc!");
 		
-		int flag = memberService.idPassCheck(inVO);
+		int flag = memberService.idCheck(inVO);
 		LOG.debug("┌-------------------------------------------┐");
 		LOG.debug("|flag:"+flag);
 		LOG.debug("└-------------------------------------------┘");		
@@ -105,7 +105,7 @@ public class JMemberserviceTest {
 		
 	}
 	@Test
-	//@Ignore
+	@Ignore
 	public void upDeleteAll()throws SQLException{
 		//1.기존데이터 삭제
 		//2.데이터 입력
@@ -140,7 +140,7 @@ public class JMemberserviceTest {
 		
 	}
 	@Test
-	//@Ignore
+	@Ignore
 	public void add() throws SQLException {
 		//3. 각각 추가
 		//4. 각각 데이터 조회

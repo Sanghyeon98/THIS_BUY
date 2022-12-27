@@ -91,7 +91,7 @@ $(document).ready(function(){
       //doLogin      
     });
     
-    ("#gosignup").on("click",function(){
+    $("#gosignup").on("click",function(){
     	window.location.href = "${CP}/signup/signup.do";
     });
     

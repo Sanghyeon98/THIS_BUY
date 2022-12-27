@@ -22,7 +22,7 @@ import com.pcwk.ehr.member.domain.MemberVO;
 public class MemberDaoImpl implements Memberdao {
 final Logger LOG = LogManager.getFormatterLogger(getClass());
     
-	final String NAMESPACE = "com.pcwk.ehr.member";
+	final String NAMESPACE = "com.pcwk.ehr.signup";
 	final String DOT       = ".";
 	
 	@Autowired

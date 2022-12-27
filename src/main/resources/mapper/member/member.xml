@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.pcwk.ehr.member">
+<mapper namespace="com.pcwk.ehr.signup">
 
 
 	<!-- 비번체크 -->
@@ -182,8 +182,8 @@
 	</insert>
 
 	<delete id="doDelete" parameterType="MemberVO">
-		DELETE FROM hr_member
-		WHERE member_id = #{memberid}
-	</delete>
+       DELETE FROM hr_member
+        WHERE member_id = #{memberid}
+    </delete>
 
 </mapper>  

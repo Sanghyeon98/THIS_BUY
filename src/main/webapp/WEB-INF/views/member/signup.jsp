@@ -237,25 +237,7 @@ $(document).ready(function(){
 });
 //doc
  //버튼, 등록 컨트롤 초기화
-    function initControll(){
-        const initValue = "";
-        //id중복체크 초기화
-        $("#idCheckYN").val(initValue);
-        
-        $("#memberid").val(initValue);
-        $("#passwd").val(initValue);
-        $("#name").val(initValue);
-        $("#email").val(initValue);
-        $("#emailCheck").val(initValue);
-        $("#phone").val(initValue);
-        $("#regDt").val(initValue);
-        
-        
-        //아이디는 PK로 활성화
-        $("#memberid").prop("disabled",false);
-        //버튼 활성화
-        $("#add").prop("disabled",false);           
-    }
+    
 
 </script>
 
