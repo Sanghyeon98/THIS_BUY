@@ -59,7 +59,7 @@ public class JDetailTest {
 	}
 
 	public void isSameData(DetailVO actual, DetailVO expected) {
-		assertEquals(actual.getImageNo(), expected.getImageNo());
+		assertEquals(actual.getItemNo(), expected.getItemNo());
 		assertEquals(actual.getName(), expected.getName());
 		assertEquals(actual.getPrice(), expected.getPrice());
 

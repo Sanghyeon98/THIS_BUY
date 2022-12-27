@@ -52,4 +52,10 @@
     <put-attribute name="body" value="/WEB-INF/views/orderSheet/{1}.jsp"/> <!-- {1} : 어떤 jsp파일이 와도 상관 X -->
   </definition>
   
+  <!-- /detail/view.do -->
+  <definition name="detail/*" extends="base-definition"> <!-- base-definition 상속 받음 -->
+    <put-attribute name="title" value="상품 상세"/>
+    <put-attribute name="body" value="/WEB-INF/views/detail/{1}.jsp"/> <!-- {1} : 어떤 jsp파일이 와도 상관 X -->
+  </definition>
+  
 </tiles-definitions>

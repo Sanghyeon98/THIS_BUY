@@ -16,6 +16,8 @@
 <meta name="description" content="pcwk html">
 <meta name="keywords" content="html5, css3, javascipt6, jQuery">
 <meta charset="UTF-8">
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="${CP_RES}/css/bootstrap.min.css">
 <!-- favicon -->
 <link rel="shortcut icon" type="image/x-icon"
 	href="${CP_RES }/favicon.ico">
