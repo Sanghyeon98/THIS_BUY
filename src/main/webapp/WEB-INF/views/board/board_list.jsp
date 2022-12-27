@@ -39,7 +39,7 @@ request.setAttribute("title", title);
 request.setAttribute("gubun1", gubun1);
 request.setAttribute("gubun2", gubun2);
 request.setAttribute("divValue", divValue);
-%>
+%>	
 <c:set var="CP" value="${pageContext.request.contextPath}" />
 <!-- ContextPath -->
 <c:set var="RES" value="/resources" />

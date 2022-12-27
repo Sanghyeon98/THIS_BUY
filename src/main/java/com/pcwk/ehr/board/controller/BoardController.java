@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.pcwk.ehr.answer.domain.AnswerVO;
+import com.pcwk.ehr.answer.service.AnswerService;
 import com.pcwk.ehr.board.domain.BoardSearchVO;
 import com.pcwk.ehr.board.domain.BoardVO;
 import com.pcwk.ehr.board.service.BoardService;
@@ -30,6 +32,9 @@ public class BoardController {
 
 	@Autowired
 	BoardService boardService;
+	
+	@Autowired
+	AnswerService answerService;
 
 	@Autowired
 	CodeService codeService;
@@ -128,18 +133,77 @@ public class BoardController {
 		return VIEW_NAME;
 	}
 
-//	// 등록화면보여주기
-//	@RequestMapping(value = "/questionView.do")
-//	public String questionView(Model model, BoardVO inVO) throws SQLException {
-//		String VIEW_NAME = "board/board_question";
-//		LOG.debug("┌──────────────────────────────┐");
-//		LOG.debug("│boardView ");
-//		LOG.debug("└──────────────────────────────┘");
-//		List<BoardVO> list = boardService.getALL(inVO);
-//
-//		model.addAttribute("list", list);
-//		return VIEW_NAME;
-//	}
+	// 등록화면보여주기
+	@RequestMapping(value = "/questionView.do")
+	public String questionView(Model model, BoardSearchVO inVO, AnswerVO in) throws SQLException {
+		String VIEW_NAME = "board/question_list";
+		LOG.debug("┌──────────────────────────────┐");
+		LOG.debug("│boardView ");
+		LOG.debug("└──────────────────────────────┘");
+		// 페이지 번호
+				if (null != inVO && inVO.getPageNo() == 0) {
+					inVO.setPageNo(1);
+				}
+
+				// 페이지사이즈
+				if (null != inVO && inVO.getPageSize() == 0) {
+					inVO.setPageSize(10);
+				}
+
+				// 10공지,20 자유게시판
+				if (null != inVO && null == inVO.getGubun()) {
+					inVO.setGubun(StringUtil.nvl(inVO.getGubun(), "30"));
+				}
+
+				LOG.debug("┌=============================┐");
+				LOG.debug("|inVO=" + inVO);
+
+				List<BoardVO> list = boardService.doRetrieve(inVO);
+				List<AnswerVO> list01 = answerService.doSelectOne(in);
+
+				// code목록 조회
+				List<String> codeList = new ArrayList<String>();
+				codeList.add("PAGE_SIZE");
+				codeList.add("BOARD_SEARCH");
+
+				List<CodeVO> outCodeList = codeService.doRetrieve(codeList);
+				// 검색조건
+				List<CodeVO> searchList = new ArrayList<CodeVO>();
+
+				// 페이지사이즈
+				List<CodeVO> pageSizeList = new ArrayList<CodeVO>();
+				for (CodeVO vo : outCodeList) {
+					if (vo.getMstCode().equals("PAGE_SIZE") == true) {
+						pageSizeList.add(vo);
+					}
+
+					if (vo.getMstCode().equals("BOARD_SEARCH") == true) {
+						searchList.add(vo);
+					}
+				}
+				int totalCnt = 0;// 총글수
+				double pageTotal = 0;// 총페이지수
+
+				if (null != list && list.size() > 0) {
+					totalCnt = list.get(0).getTotalCnt();
+
+					pageTotal = Math.ceil((totalCnt / (inVO.getPageSize() * 1.0)));
+					LOG.debug("|Math.ceil=" + (totalCnt / (inVO.getPageSize() * 1.0)));
+					LOG.debug("|totalCnt=" + totalCnt);
+					LOG.debug("|pageTotal=" + pageTotal);
+					LOG.debug("|PageSize=" + inVO.getPageSize());
+				}
+
+				LOG.debug("|outCodeList=" + outCodeList);
+				model.addAttribute("list", list);
+				model.addAttribute("list01", in);
+				model.addAttribute("totalCnt", totalCnt);
+				model.addAttribute("pageTotal", (int) pageTotal);
+
+				model.addAttribute("PAGE_SIZE", pageSizeList);
+				model.addAttribute("BOARD_SEARCH", searchList);
+				return VIEW_NAME;
+	}
 
 	// board화면 등록화면보여주기
 	@RequestMapping(value = "/questionReg.do", method = RequestMethod.GET)
@@ -187,9 +251,9 @@ public class BoardController {
 	 * @return JSON(String)
 	 * @throws SQLException
 	 */
-	@RequestMapping(value = "/doRetrive.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = "/doRetrieve.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	public String doRetrive(BoardSearchVO inVO) throws SQLException {
+	public String doRetrieve(BoardSearchVO inVO) throws SQLException {
 		String jsonString = "";
 
 		// 페이지 번호
@@ -209,7 +273,7 @@ public class BoardController {
 		LOG.debug("┌──────────────────────────────┐");
 		LOG.debug("│inVO = " + inVO);
 
-		List<BoardVO> list = boardService.doRetrieve(inVO);
+		List<BoardVO> list = (this).boardService.doRetrieve(inVO);
 
 		jsonString = new Gson().toJson(list);
 		LOG.debug("│jsonString = " + jsonString);
