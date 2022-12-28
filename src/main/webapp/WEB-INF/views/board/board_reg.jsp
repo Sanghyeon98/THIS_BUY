@@ -396,7 +396,7 @@ ol, ul {
             gubun : $("#gubun").val(),
             title : $("#title").val(),
             contents : $("#contents").val(),
-            regDt : "ddd",
+            regDt : "",
             regId : "관리자",
             answerCheck : 0
         };

@@ -434,7 +434,8 @@ ol, ul {
      <div class="css-3 ">고객센터</div>
      <ul class="css-4 ">
      <li class="css-0 "><a class=" css-20 " href="${CP}/board/boardView.do?gubun=10" >공지사항</a></li>
-     <li class="css-0 "><a class=" css-20 " href="${CP}/board/boardView.do?gubun=20">1:1 문의</a></li>
+     <li class="css-0 "><a class=" css-20 " href="${CP}/board/boardView.do?gubun=30" >자주묻는질문</a></li>
+     <li class="css-0 "><a class=" css-20 " href="${CP}/board/questionView.do?gubun=20">1:1 문의</a></li>
      </ul>
    </div>
     

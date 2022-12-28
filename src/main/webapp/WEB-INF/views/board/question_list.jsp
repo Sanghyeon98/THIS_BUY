@@ -320,9 +320,9 @@ ol, ul {
 		//-------------------------------- 한건조회 (상세조회) 테이블 클릭 
 	      
 		  //테이블 클릭
-		            $("#boardTable>div").on("click","ul",function(e) {
+		            $("#boardTable").on("click",".cli",function(e) {
 		                      console.log('boardTable');
-		                      let divArray = $(this).find("li>div");
+		                      let divArray = $(this).children();
 		                      let boardSeq = divArray.eq(0).text();
 
 		                      console.log('boardSeq:' + boardSeq);
@@ -331,15 +331,28 @@ ol, ul {
 		                          if (confirm("상세 조회를 하시겠습니까?") == false)
 		                            return;
 		                          //div,seq
-		                          window.location.href = "${CP}/board/doSelectOne.do?gubun=10&seq="
+		                          window.location.href = "${CP}/board/doSelectOne.do?gubun=20&seq="
 		                              + boardSeq;
 		  
 		                          console.log("boardSeq: "+ boardSeq);
 
 		                      
 		                });
+		
+		    
 
 		//-------------------------------- 한건조회 (상세조회) 테이블 클릭  끝
+		
+		
+		  //등록화면으로 이동
+        $("#questionReg").on("click", function() {
+
+          console.log('moveToReg');
+
+          window.location.href = "${CP}/board/questionReg.do"
+
+          //moveToReg
+        });
 	}); //document
 
  	function doRetrieve(page) {
@@ -454,14 +467,13 @@ ol, ul {
 								<li class="css-0 "><a class=" css-20 "
 									href="${CP}/board/boardView.do?gubun=10">공지사항</a></li>
 								<li class="css-0 "><a class=" css-20 "
-									href="${CP}/board/boardView.do?gubun=20">1:1 문의</a></li>
-								<li class="css-0 "><a class=" css-20 "
                   href="${CP}/board/boardView.do?gubun=30">자주하는 질문</a></li>
+                 <li class="css-0 "><a class=" css-20 "
+                  href="${CP}/board/questionView.do?gubun=20">1:1 문의</a></li>
 							</ul>
 						</div>
 
- 			
- 						여기는 : ${list01 }
+
 						<div class="css-5 ">
 							<div class="css-6 ">
 								<div class="css-7 ">
@@ -479,29 +491,27 @@ ol, ul {
 						          <c:when test="${list.size()>0 }">
 						             <c:forEach var="vo" items="${list }"  >
 									       <ul class="css-14 ">
-												<li><a href="#">
-														<div class="css-15">
+												<li>
+														<div class="css-15 cli">
 															<!-- 1:1문의  -->
-															<div class="css-16 "><c:out value="${vo.seq }"></c:out></div>
-															<div class="css-17 "><c:out value="${vo.title }"></c:out></div>
-															<div class="css-18 "><c:out value="${vo.regDt }"></c:out></div>
-															<div class="css-19 "><c:out value="${vo.answerCheck }"></c:out></div>
+															<div style="display: none;"><c:out value="${vo.seq }"></c:out></div>
+                              <div class="css-16 " ><c:out value="${vo.num }"></c:out></div>
+                              <div class="css-17 " ><c:out value="${vo.title }"></c:out></div>
+                              <div class="css-18 ">관리자</div>
+                              <div class="css-19 "><c:out value="${vo.regDt }"></c:out></div>
 														</div>
-												</a></li>
+												</li>
 											</ul>
 											 </c:forEach>
 						          </c:when>
 						          <c:otherwise>
 						            <div>
-						              <div class="text-center col-sm-12 col-md-12 col-lg-12" colspan="99">
 						                  No data found
-						              </div>
 						            </div>
 						          </c:otherwise>
 						        </c:choose>
-
 							</div>
-
+							
 
 
 

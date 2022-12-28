@@ -622,7 +622,7 @@ ol, ul {
 							<ul class="css-4 ">
 								<li class="css-0 "><a class=" css-20 "href="${CP}/board/boardView.do?gubun=10">공지사항</a></li>
 								<li class="css-0 "><a class=" css-20 " href="${CP}/board/boardView.do?gubun=30">자주하는 질문</a></li>
-								<li class="css-0 "><a class=" css-20 "href="${CP}/board/boardView.do?gubun=20">1:1 문의</a></li>
+								<li class="css-0 "><a class=" css-20 "href="${CP}/board/questionView.do?gubun=20">1:1 문의</a></li>
 							</ul>
 						</div>
 
@@ -677,9 +677,9 @@ ol, ul {
 													</ul>	
 													<ul class="css-14 css-answer1">
                            <li  id="${vo.seq }" value="${vo.seq }" >
-                             <div class="css-answer3"><c:out value="${vo.title }"></c:out></div>
+                             <div class="css-answer3">&nbsp;&nbsp;&nbsp;<c:out value="${vo.title }"></c:out></div>
                 
-                             <div class="css-answer7 "><c:out value="${vo.contents }"></c:out></div>
+                             <div class="css-answer7 ">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${vo.contents }"></c:out></div>
                            </li> </ul>
 												</div>									
 						        </c:otherwise>

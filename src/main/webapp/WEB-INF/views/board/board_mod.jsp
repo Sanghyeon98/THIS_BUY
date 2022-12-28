@@ -160,6 +160,11 @@
 	      moveToList();
 	    });
 	
+	    $("#moveToListquestion").on("click", function() {
+	        console.log("moveToList");
+	        window.location.href = "${CP}/board/questionView.do?gubun=20"
+	      });
+	
 	
 	  //답글 달기로 이동 
 	   $("#answerbutton").on("click", function() {
@@ -251,17 +256,21 @@
 	    if ("10" == $("#gubun").val()) {
 	      $("#updatebutton").css("display", "");
 	      $("#answerbutton").css("display", "none");
+	      $("#moveToList").css("display", "");
+	      $("#moveToListquestion").css("display", "none");
 	    } else if ("20" == $("#gubun").val()) {
 	      $("#updatebutton").css("display", "none");
 	      $("#answerbutton").css("display", "");
+	      $("#moveToList").css("display", "none");
+	      $("#moveToListquestion").css("display", "");
 	    }
 	  }
 </script>
 
 </head>
 <body>
-      <input type="text" name="gubun" id="gubun" value="${vo.gubun}">
-      <input type="text" name="seq" id="seq" value="${vo.seq}">
+      <input type="hidden" name="gubun" id="gubun" value="${vo.gubun}">
+      <input type="hidden" name="seq" id="seq" value="${vo.seq}">
      <div class="css-1i60c0e">
       <div class="css-1uvp5r6">
        <div class="css-qwe8mt">${title} </div>
@@ -300,6 +309,9 @@
         
         <div class="css-d7qwpj">
          <button class ="css-214ym4" type="button" width="150" height="42" radius="0" id="moveToList">
+          <span class="css-ymwvow"> 목록</span>
+         </button>
+         <button class ="css-214ym4" type="button" width="150" height="42" radius="0" id="moveToListquestion">
           <span class="css-ymwvow"> 목록</span>
          </button>
          <div id ="updatebutton">
