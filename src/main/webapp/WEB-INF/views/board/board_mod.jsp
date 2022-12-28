@@ -41,91 +41,7 @@
 <%@ include file="/WEB-INF/views/cmn/cache.jsp" %>
 <!DOCTYPE html>
 <html>  
-<style>
-.css-1i60c0e {
-    width: 1050px;
-    margin: 0px auto;
-}
-.css-1uvp5r6 {
-    width: 100%;
-    padding: 50px 0px;
-}
-.css-qwe8mt {
-    font-weight: 700;
-    font-size: 28px;
-    color: rgb(51, 51, 51);
-    line-height: 35px;
-    text-align: center;
-    letter-spacing: -1px;
-}
-.css-klb7h8 {
-    margin-top: 5px;
-    color: rgb(153, 153, 153);
-    line-height: 20px;
-    letter-spacing: -0.1px;
-    text-align: center;
-}
-.css-1uvp5r6 {
-    width: 100%;
-    padding: 50px 0px;
-}
-.css-1t45bai {
-    margin-top: 20px;
-    border-top: 2px solid rgb(51, 51, 51);
-    color: rgb(51, 51, 51);
-}
-.css-1dhg94g {
-    display: flex;
-    flex-direction: row;
-    border-bottom: 1px solid rgb(244, 244, 244);
-}
-.css-1xrh39a {
-    width: 130px;
-    padding: 13px 0px 13px 20px;
-    background-color: rgb(247, 245, 248);
-    border-top: 1px solid rgb(244, 244, 244);
-    text-align: left;
-    font-weight: 500;
-}
-.css-8vgw34 {
-    padding-left: 25px;
-    align-self: center;
-}
-   .css-1xvp3jp {
-    padding: 30px 10px 100px;
-    border-bottom: 1px solid rgb(128, 128, 128);
-}
-      
-      .css-d7qwpj {
-    display: flex;
-    width: 100%;
-    padding: 20px 0px;
-    -webkit-box-pack: end;
-    justify-content: flex-end;
-}  
-
-.css-214ym4 {
-    display: block;
-    padding: 0px 10px;
-    text-align: center;
-    overflow: hidden;
-    width: 150px;
-    height: 42px;
-    border-radius: 0px;
-    color: rgb(255, 255, 255);
-    background-color: #b8c9df;
-    border: 0px none;
-}
-.css-d7qwpj span {
-    font-size: 13px;
-}
-
-.css-ymwvow {
-    display: inline-block;
-    font-size: 16px;
-    font-weight: 500;
-}
-</style>
+<link rel="stylesheet" href="${CP_RES}/css/board_mod.css">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -271,63 +187,63 @@
 <body>
       <input type="hidden" name="gubun" id="gubun" value="${vo.gubun}">
       <input type="hidden" name="seq" id="seq" value="${vo.seq}">
-     <div class="css-1i60c0e">
-      <div class="css-1uvp5r6">
-       <div class="css-qwe8mt">${title} </div>
-       <div class="css-klb7h8">새로운 사항을 확인하세요</div>
+     <div class="css-mod1">
+      <div class="css-mod2">
+       <div class="css-mod3">${title} </div>
+       <div class="css-mod4">새로운 사항을 확인하세요</div>
       </div>
       
-      <div class="css-1uvp5r6">
-       <div class="css-1t45bai">
-        <div class="css-1dhg94g">
-         <div class="css-1xrh39a">제목</div> 
-         <input type="text" class="css-8vgw34" id="title" name="title" 
+      <div class="css-mod2">
+       <div class="css-mod5">
+        <div class="css-mod6">
+         <div class="css-mod7">제목</div> 
+         <input type="text" class="css-mod8" id="title" name="title" 
          value="<c:out value='${vo.title }' />" placeholder="제목을 입력하세요" maxlength="100">  
          
         </div> 
-        <div class="css-1dhg94g">
-         <div class="css-1xrh39a">작성자</div>
+        <div class="css-mod6">
+         <div class="css-mod7">작성자</div>
          <input type="text"
-          class="css-1xrh39a" id="regId" name="regId"
+          class="css-mod7" id="regId" name="regId"
           value="<c:out value='${vo.regId }' />" readonly="readonly"
           placeholder="작성자" maxlength="100">
         </div> 
-         <div class="css-1dhg94g">
-         <div class="css-1xrh39a">작성일</div>
+         <div class="css-mod6">
+         <div class="css-mod7">작성일</div>
          <input type="text"
-          class="css-8vgw34" id="regDt" name="regDt"
+          class="css-mod8" id="regDt" name="regDt"
           value="<c:out value='${vo.regDt }' />" readonly="readonly"
           placeholder="등록일" maxlength="100">   
         </div> 
-        <div class="css-1xvp3jp">
-         <div> <textarea class="css-8vgw34" rows="10" id="contents"
+        <div class="css-mod9">
+         <div> <textarea class="css-mod8" rows="10" id="contents"
           name="contents"><c:out value="${vo.contents}" /></textarea>
          </div>
         </div>
         
         
         
-        <div class="css-d7qwpj">
-         <button class ="css-214ym4" type="button" width="150" height="42" radius="0" id="moveToList">
-          <span class="css-ymwvow"> 목록</span>
+        <div class="css-mod10">
+         <button class ="css-mod11" type="button" width="150" height="42" radius="0" id="moveToList">
+          <span class="css-mod11"> 목록</span>
          </button>
-         <button class ="css-214ym4" type="button" width="150" height="42" radius="0" id="moveToListquestion">
-          <span class="css-ymwvow"> 목록</span>
+         <button class ="css-mod11" type="button" width="150" height="42" radius="0" id="moveToListquestion">
+          <span class="css-mod11"> 목록</span>
          </button>
          <div id ="updatebutton">
-         <button class ="css-214ym4" type="button" width="150" height="42" radius="0" id="doUpdate">
-          <span class="css-ymwvow"> 수정</span>
+         <button class ="css-mod11" type="button" width="150" height="42" radius="0" id="doUpdate">
+          <span class="css-mod11"> 수정</span>
          </button>
          </div>
          
          <div id ="answerbutton">
-         <button class ="css-214ym4" type="button" width="150" height="42" radius="0" id="answer" value="${vo.seq}">
-          <span class="css-ymwvow"> 답글</span>
+         <button class ="css-mod11" type="button" width="150" height="42" radius="0" id="answer" value="${vo.seq}">
+          <span class="css-mod11"> 답글</span>
          </button>
          </div>
          
-         <button class ="css-214ym4" type="button" width="150" height="42" radius="0" id="doDelete">
-          <span class="css-ymwvow"> 삭제</span>
+         <button class ="css-mod11" type="button" width="150" height="42" radius="0" id="doDelete">
+          <span class="css-mod11"> 삭제</span>
          </button>
         </div>
         

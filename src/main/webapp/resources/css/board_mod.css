@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+.css-mod1 {
+    width: 1050px;
+    margin: 0px auto;
+}
+.css-mod2 {
+    width: 100%;
+    padding: 50px 0px;
+}
+.css-mod3 {
+    font-weight: 700;
+    font-size: 28px;
+    color: rgb(51, 51, 51);
+    line-height: 35px;
+    text-align: center;
+    letter-spacing: -1px;
+}
+.css-mod4 {
+    margin-top: 5px;
+    color: rgb(153, 153, 153);
+    line-height: 20px;
+    letter-spacing: -0.1px;
+    text-align: center;
+}
+
+.css-mod5 {
+    margin-top: 20px;
+    border-top: 2px solid rgb(51, 51, 51);
+    color: rgb(51, 51, 51);
+}
+.css-mod6 {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid rgb(244, 244, 244);
+}
+.css-mod7 {
+    width: 130px;
+    padding: 13px 0px 13px 20px;
+    background-color: rgb(247, 245, 248);
+    border-top: 1px solid rgb(244, 244, 244);
+    text-align: left;
+    font-weight: 500;
+}
+.css-mod8 {
+    padding-left: 25px;
+    align-self: center;
+}
+   .css-mod9 {
+    padding: 30px 10px 100px;
+    border-bottom: 1px solid rgb(128, 128, 128);
+}
+      
+      .css-mod10 {
+    display: flex;
+    width: 100%;
+    padding: 20px 0px;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+}  
+
+.css-mod11 {
+    display: block;
+    padding: 0px 10px;
+    text-align: center;
+    overflow: hidden;
+    width: 150px;
+    height: 42px;
+    border-radius: 0px;
+    color: rgb(255, 255, 255);
+    background-color: #b8c9df;
+    border: 0px none;
+}
+.css-mod10 span {
+    font-size: 13px;
+}
+
+.css-mod11 {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 500;
+}
