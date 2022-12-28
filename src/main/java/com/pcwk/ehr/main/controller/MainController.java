@@ -99,7 +99,7 @@ public class MainController {
 		if (null != inVO && null == inVO.getCateClass01()) {
 			inVO.setCateClass01(StringUtil.nvl(inVO.getCateClass01()));
 		}
-
+ 
 		// 카테고리ID
 		if (null != inVO && null == inVO.getCateClass02()) {
 			inVO.setCateClass02(StringUtil.nvl(inVO.getCateClass02()));

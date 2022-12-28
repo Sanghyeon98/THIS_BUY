@@ -316,7 +316,7 @@
 		});
 		
 		
-		
+		 
 		// 1차 분류 선택 시, 해당 카테고리에 맞는 2차 분류 보여주기
 //		$("#categoryMenu").on("mouseenter",'.cate01list', function() {
 		$("#categoryMenu").on("click",'.cate01list', function() {
