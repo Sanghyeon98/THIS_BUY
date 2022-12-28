@@ -16,6 +16,8 @@
 <meta name="description" content="pcwk html" >
 <meta name="keywords" content="html5, css3, javascipt6, jQuery">
 <meta charset="UTF-8">
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="${CP_RES}/css/bootstrap.min.css"> 
   <!-- jQuery -->
   <script src="${CP_RES}/js/jquery-1.12.4.js"></script>
   <!-- callAjax -->
@@ -50,7 +52,7 @@
 }
 .pay_table2{
     margin-left: 250px;
-    background-color:pink;
+    background-color:#B8C9DF;
     position: relative;
     width: 330px;
     height: 110px;
@@ -64,8 +66,8 @@
     width: 240px;
     height: 56px;
     border-radius: 3px;
-    color: rgb(255, 255, 255);
-    background-color: rgb(95, 0, 128);
+    color: rgb(0, 0, 0);
+    background-color: #B8C9DF;
     border: 0px none;
     margin: 40px auto 30px;
     font-weight: 500;
@@ -77,6 +79,10 @@ width: 30px;
     margin-top: 30px;
 }
 </style>
+
+<!-- 토스페이먼츠 API 테스트 -->
+<script src="https://js.tosspayments.com/v1/payment"></script>
+  
 <title>제목</title>
   <!-- jquery-ui가 jquery 뒤에 와야됨 -->
   
@@ -85,6 +91,33 @@ width: 30px;
   $(document).ready(function () {
 	 console.log('Hello,world!')
 	 cartgetAll(1);
+	 
+	 
+	 // 결제하기
+	 $(".address").on("click", function() {
+		console.log("결제하기"); 
+		console.log("최종결제금액 : " + $("#finalsumprice").val());
+		
+		let finalSum = $("#finalsumprice").val();
+		let orderName= ${vo.name};
+				
+		var clientKey = 'test_ck_D5GePWvyJnrK0W0k6q8gLzN97Eoq';
+		var tossPayments = TossPayments(clientKey);
+		
+		var button = document.getElementById('payment-button'); // 결제하기 버튼
+		
+		//button.addEventListener('click', function () {
+		  tossPayments.requestPayment('카드', {
+		    amount: finalSum,
+		    orderId: 'qYGNIWZ68TzK3CAOBSzAw',
+		    orderName: '토스 티셔츠 외 2건',
+		    customerName: '박토스',
+		    successUrl: 'http://localhost:8089/success',
+		    failUrl: 'http://localhost:8089/fail',
+		  });
+		//});
+		
+	 });
 	 
 	 
 	 
@@ -147,7 +180,7 @@ width: 30px;
               htmlData += "<tr>";
               htmlData += "    <td><input type='hidden' class='memberId' id='memberId' name='memberId' value="+value.memberId+"></td>";
               htmlData += "    <td><input type='hidden' class='cartNO' name='cartNO' id='cartNO' value="+value.cartNO+"></td>";
-              htmlData += "    <td><img src='' alt=''></td>";
+              htmlData += "    <td><img src='${CP}"+value.viewpath+"/th_"+value.saveName+"' alt='이미지' width='80'></td>";
               htmlData += "    <td><a>"+value.name+"</a></td>";
               htmlData += "    <td><input type='text' class='quantity' name='quantity' id='quantity' value="+value.quantity+" readonly='readonly' size='2'>개<td>";
               htmlData += "    <td>"+value.finalPrice+"원</td>";
@@ -272,7 +305,7 @@ width: 30px;
             <table>
                     <tr>
                        <td>결제수단 선택</td>
-                       <td><button>신용카드</button>
+                       <td><button><i class="bi bi-cart2"></i>신용카드</button>
                         <span><button>간편결제</button></span>
                         <span><button>휴대폰</button></span>
                        </td>

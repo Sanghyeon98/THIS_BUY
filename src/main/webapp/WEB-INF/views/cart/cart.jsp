@@ -49,10 +49,8 @@
     text-align: center;
 }
 .content2{
-background-color:pink;
-position: relative;
-    width: 284px;
-    
+background-color: #B8C9DF;
+margin: 0 auto;
 }
 
 /* .cart__list{
@@ -79,16 +77,19 @@ position: relative;
     font-weight: 500;
 }
 .price1{
+border: none;
     margin-left:50px;
-    width: 80px;
+    width: 50px;
 }
 .price2{
+border: none;
     margin-left:65px;
-    width: 80px;
+    width: 50px;
 }
 .price3{
+    border: none;
     margin-left:18px;
-    width: 80px;
+    width: 50px;
 }
 .address{
     display: block;
@@ -106,10 +107,10 @@ position: relative;
 width: 30px;
 }
 .price{
-    margin-left: 100px;
+    margin-left: 50px;
 }
 .amount_minus{
-    margin-left: 150px;
+    margin-left: 50px;
     }
 </style>
 <title>제목</title>
@@ -290,9 +291,9 @@ width: 30px;
         	    
         	  htmlData += "<tr class='cartRow'>";
               htmlData += "    <td><input type='checkbox' name='chk' value='"+value.cartNO+"'></td>";
+              htmlData += "    <td><img src='${CP}"+value.viewpath+"/th_"+value.saveName+"' alt='이미지' width='100'></td>";
               htmlData += "    <td><input type='hidden' class='memberId' name='memberId' value='"+value.memberId+"'></td>";
               htmlData += "    <td><input type='hidden' class='cartNO' name='cartNO' value='"+value.cartNO+"'></td>";
-              htmlData += "    <td><img src='"+${CP_RES }/value.viewpath+"' alt='"value.saveName"'></td>";
               htmlData += "    <td><a href='#' onClick='doSelectOne("+<c:out value='value.itemNO '/>+")'>"+value.name+"</a></td>";
               htmlData += "    <td><input type='button' name='minus' class='minus' value='-'>";
               htmlData += "    <input type='text' class='quantity' name='quantity' value='"+value.quantity+"' size='2'>";
@@ -345,7 +346,7 @@ width: 30px;
     <hr>
     </div>
     <div class="side">
-           
+      
   			 <table class="cart__list table">
                 <thead>
                     <tr class="checkBox">
