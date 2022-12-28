@@ -68,10 +68,10 @@ public class JBoardController {
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 		
 		board = Arrays.asList(
-				 new BoardVO(178, 10, 10, "제목10", "내용10" , "d", "d", 1)
-				,new BoardVO(278, 20, 10, "제목10", "내용10" , "d", "d", 1)
-				,new BoardVO(378, 10, 10, "제목10", "내용10" , "d", "d", 1)
-				,new BoardVO(478, 20, 10, "제목10", "내용10" , "d", "d", 1)		
+				 new BoardVO(178, 10, 10, "제목10", "내용10" , "d", "d", 1,3)
+				,new BoardVO(278, 20, 10, "제목10", "내용10" , "d", "d", 1,2)
+				,new BoardVO(378, 10, 10, "제목10", "내용10" , "d", "d", 1,1)
+				,new BoardVO(478, 20, 10, "제목10", "내용10" , "d", "d", 1, 0)		
 				);
 		
 		search = new BoardSearchVO(1, 1, "10", "10", "10", "20");

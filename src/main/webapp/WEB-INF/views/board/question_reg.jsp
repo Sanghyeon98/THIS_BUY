@@ -355,7 +355,7 @@ ol, ul {
       
       //  
       });   
-      
+    
       //등록
       $("#doSave").on("click",function(){
         console.log("doSave");
@@ -370,17 +370,16 @@ ol, ul {
             alert("내용을 입력 하세요.");
             $("#contents").focus();
             return;
-        }       
-          
+        } 
+                      
+              
         if(confirm("등록 하시겠습니까?")==false)return;
         
         let method = "GET";
         let url    = "/board/doSave.do";
         let async  = true;
         let params = {
-        		seq : 400,
         		gubun : 20,
-        		gubunQuestion : 10,
             title : $("#title").val(),
             contents : $("#contents").val(),
             regDt : "ddd",
@@ -404,7 +403,7 @@ ol, ul {
         });
         
         
-      });
+      });//문의등록 end 
       
       //목록으로 이동
       $("#boardView").on("click",function(){
@@ -448,6 +447,23 @@ ol, ul {
        </div>
       </div>
       <form>
+      
+      <div class="css-21">
+        <div class="css-22">
+         <label>유형</label>
+        </div>
+        <div class="css-23">
+         <div class="css-24">
+           <select height="44" class="css-25">
+            <option class="css-26" value="10">주문/결제/반품/교환문의</option>
+            <option class="css-26" value="20">배송문의</option>
+            <option class="css-26" value="30">상품문의</option>
+           </select>
+         </div>
+        </div>
+        </div>
+        
+      
        <div class="css-21">
         <div class="css-22">
          <label>제목</label>
@@ -485,7 +501,8 @@ ol, ul {
           <div class="css-42">
            <div class="css-43">
             <div>
-             <label>첨부파일</label>
+             <label for="imageName">첨부파일</label>
+             <input type="file" id="imageName" name="imageName">
             </div>
            </div>
           </div>

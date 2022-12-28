@@ -32,41 +32,40 @@ public class BoardController {
 
 	@Autowired
 	BoardService boardService;
+
+	@Autowired
+	CodeService codeService;
 	
 	@Autowired
 	AnswerService answerService;
 
-	@Autowired
-	CodeService codeService;
-
 	public BoardController() {
-		
+
 	}
-	
-	
-	@RequestMapping(value="/moveToReg.do",method = RequestMethod.GET)
-	public String moveToReg(Model model,SearchVO inVO) throws SQLException{
+
+	@RequestMapping(value = "/moveToReg.do", method = RequestMethod.GET)
+	public String moveToReg(Model model, SearchVO inVO) throws SQLException {
 		String VIEW_NAME = "board/board_reg";
-		LOG.debug("┌=============================┐");	
-		LOG.debug("|inVO="+inVO);		
-		LOG.debug("|VIEW_NAME="+VIEW_NAME);		
-		
-		//code목록 조회
-		List<String>  codeList=new ArrayList<String>();
+		LOG.debug("┌=============================┐");
+		LOG.debug("|inVO=" + inVO);
+		LOG.debug("|VIEW_NAME=" + VIEW_NAME);
+
+		// code목록 조회
+		List<String> codeList = new ArrayList<String>();
 		codeList.add("BOARD_DIV");
-		
+
 		List<CodeVO> outCodeList = codeService.doRetrieve(codeList);
-		
-		LOG.debug("|outCodeList="+outCodeList);		
-		LOG.debug("└=============================┘");	
-		
+
+		LOG.debug("|outCodeList=" + outCodeList);
+		LOG.debug("└=============================┘");
+
 		model.addAttribute("BOARD_DIV", outCodeList);
 		model.addAttribute("vo", inVO);
 		return VIEW_NAME;
 	}
 
 	// board화면 보여주기
-	@RequestMapping(value = "/boardView.do")
+	@RequestMapping(value = "/boardView.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	public String boardView(Model model, BoardSearchVO inVO) throws SQLException {
 		String VIEW_NAME = "board/board_list";
 
@@ -80,7 +79,7 @@ public class BoardController {
 			inVO.setPageSize(10);
 		}
 
-		// 10공지,20 자유게시판
+		// 10공지,20 문의사항
 		if (null != inVO && null == inVO.getGubun()) {
 			inVO.setGubun(StringUtil.nvl(inVO.getGubun(), "10"));
 		}
@@ -98,6 +97,7 @@ public class BoardController {
 		List<CodeVO> outCodeList = codeService.doRetrieve(codeList);
 		// 검색조건
 		List<CodeVO> searchList = new ArrayList<CodeVO>();
+		
 
 		// 페이지사이즈
 		List<CodeVO> pageSizeList = new ArrayList<CodeVO>();
@@ -110,6 +110,7 @@ public class BoardController {
 				searchList.add(vo);
 			}
 		}
+		
 		int totalCnt = 0;// 총글수
 		double pageTotal = 0;// 총페이지수
 
@@ -117,6 +118,7 @@ public class BoardController {
 			totalCnt = list.get(0).getTotalCnt();
 
 			pageTotal = Math.ceil((totalCnt / (inVO.getPageSize() * 1.0)));
+			
 			LOG.debug("|Math.ceil=" + (totalCnt / (inVO.getPageSize() * 1.0)));
 			LOG.debug("|totalCnt=" + totalCnt);
 			LOG.debug("|pageTotal=" + pageTotal);
@@ -125,6 +127,8 @@ public class BoardController {
 
 		LOG.debug("|outCodeList=" + outCodeList);
 		model.addAttribute("list", list);
+
+		
 		model.addAttribute("totalCnt", totalCnt);
 		model.addAttribute("pageTotal", (int) pageTotal);
 
@@ -133,77 +137,18 @@ public class BoardController {
 		return VIEW_NAME;
 	}
 
-	// 등록화면보여주기
-	@RequestMapping(value = "/questionView.do")
-	public String questionView(Model model, BoardSearchVO inVO, AnswerVO in) throws SQLException {
-		String VIEW_NAME = "board/question_list";
-		LOG.debug("┌──────────────────────────────┐");
-		LOG.debug("│boardView ");
-		LOG.debug("└──────────────────────────────┘");
-		// 페이지 번호
-				if (null != inVO && inVO.getPageNo() == 0) {
-					inVO.setPageNo(1);
-				}
-
-				// 페이지사이즈
-				if (null != inVO && inVO.getPageSize() == 0) {
-					inVO.setPageSize(10);
-				}
-
-				// 10공지,20 자유게시판
-				if (null != inVO && null == inVO.getGubun()) {
-					inVO.setGubun(StringUtil.nvl(inVO.getGubun(), "30"));
-				}
-
-				LOG.debug("┌=============================┐");
-				LOG.debug("|inVO=" + inVO);
-
-				List<BoardVO> list = boardService.doRetrieve(inVO);
-				List<AnswerVO> list01 = answerService.doSelectOne(in);
-
-				// code목록 조회
-				List<String> codeList = new ArrayList<String>();
-				codeList.add("PAGE_SIZE");
-				codeList.add("BOARD_SEARCH");
-
-				List<CodeVO> outCodeList = codeService.doRetrieve(codeList);
-				// 검색조건
-				List<CodeVO> searchList = new ArrayList<CodeVO>();
-
-				// 페이지사이즈
-				List<CodeVO> pageSizeList = new ArrayList<CodeVO>();
-				for (CodeVO vo : outCodeList) {
-					if (vo.getMstCode().equals("PAGE_SIZE") == true) {
-						pageSizeList.add(vo);
-					}
-
-					if (vo.getMstCode().equals("BOARD_SEARCH") == true) {
-						searchList.add(vo);
-					}
-				}
-				int totalCnt = 0;// 총글수
-				double pageTotal = 0;// 총페이지수
-
-				if (null != list && list.size() > 0) {
-					totalCnt = list.get(0).getTotalCnt();
-
-					pageTotal = Math.ceil((totalCnt / (inVO.getPageSize() * 1.0)));
-					LOG.debug("|Math.ceil=" + (totalCnt / (inVO.getPageSize() * 1.0)));
-					LOG.debug("|totalCnt=" + totalCnt);
-					LOG.debug("|pageTotal=" + pageTotal);
-					LOG.debug("|PageSize=" + inVO.getPageSize());
-				}
-
-				LOG.debug("|outCodeList=" + outCodeList);
-				model.addAttribute("list", list);
-				model.addAttribute("list01", in);
-				model.addAttribute("totalCnt", totalCnt);
-				model.addAttribute("pageTotal", (int) pageTotal);
-
-				model.addAttribute("PAGE_SIZE", pageSizeList);
-				model.addAttribute("BOARD_SEARCH", searchList);
-				return VIEW_NAME;
-	}
+//	// 등록화면보여주기
+//	@RequestMapping(value = "/questionView.do")
+//	public String questionView(Model model, BoardVO inVO) throws SQLException {
+//		String VIEW_NAME = "board/board_question";
+//		LOG.debug("┌──────────────────────────────┐");
+//		LOG.debug("│boardView ");
+//		LOG.debug("└──────────────────────────────┘");
+//		List<BoardVO> list = boardService.getALL(inVO);
+//
+//		model.addAttribute("list", list);
+//		return VIEW_NAME;
+//	}
 
 	// board화면 등록화면보여주기
 	@RequestMapping(value = "/questionReg.do", method = RequestMethod.GET)
@@ -226,23 +171,24 @@ public class BoardController {
 
 		return VIEW_NAME;
 	}
+
 	
-	// 상세조회
-		@RequestMapping(value = "/boardMod.do", method = RequestMethod.GET)
-		public String boardMod(Model model, BoardVO inVO) throws SQLException {
-			String VIEW_NAME = "board/board_mod";
-			LOG.debug("┌──────────────────────────────┐");
-			LOG.debug("│boardView ");
-			LOG.debug("│inVO "+inVO);
-			LOG.debug("└──────────────────────────────┘");
-			
-			List<BoardVO> list = boardService.getALL(inVO);
-			LOG.debug("│list "+list);
-			model.addAttribute("list", list);
-
-			return VIEW_NAME;
-		}
-
+	 // 상세조회
+	 
+	 @RequestMapping(value = "/questionMod.do", method = RequestMethod.GET) public
+	 String boardMod(Model model, BoardVO inVO) throws SQLException { 
+		 String VIEW_NAME = "board/question_mod"; 
+	 LOG.debug("┌──────────────────────────────┐");
+	 LOG.debug("│boardView "); 
+	 LOG.debug("│inVO "+inVO);
+	 LOG.debug("└──────────────────────────────┘");
+	 
+	 List<BoardVO> list = boardService.getALL(inVO); 
+	 LOG.debug("│list "+list);
+	 model.addAttribute("list", list);
+	 
+	 return VIEW_NAME; 
+	 }
 
 	/**
 	 * 목록조회
@@ -251,7 +197,8 @@ public class BoardController {
 	 * @return JSON(String)
 	 * @throws SQLException
 	 */
-	@RequestMapping(value = "/doRetrieve.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = "/doRetrieve.do", method = RequestMethod.GET
+			, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String doRetrieve(BoardSearchVO inVO) throws SQLException {
 		String jsonString = "";
@@ -273,8 +220,9 @@ public class BoardController {
 		LOG.debug("┌──────────────────────────────┐");
 		LOG.debug("│inVO = " + inVO);
 
-		List<BoardVO> list = (this).boardService.doRetrieve(inVO);
-
+		List<BoardVO> list = boardService.doRetrieve(inVO);
+		
+		
 		jsonString = new Gson().toJson(list);
 		LOG.debug("│jsonString = " + jsonString);
 		LOG.debug("└──────────────────────────────┘");
@@ -307,29 +255,33 @@ public class BoardController {
 	}
 
 	/**
-	 * 검색
+	 * 
+	 * doSelectOne
 	 * 
 	 * @param inVO
 	 * @param model
-	 * @return
+	 * @return "board/board_mod"
 	 * @throws SQLException
 	 */
 	@RequestMapping(value = "/doSelectOne.do", method = RequestMethod.GET)
 	public String doSelectOne(BoardVO inVO, Model model) throws SQLException {
 		String jsonString = "";
-		LOG.debug("┌=============================┐");
-		LOG.debug("|inVO=" + inVO);
-		LOG.debug("└=============================┘");
+		LOG.debug("┌──────────────────────────────┐");
+		LOG.debug("│inVO = "+inVO);
+		LOG.debug("└──────────────────────────────┘");
+
 
 		BoardVO outVO = boardService.doSelectOne(inVO);
-
-		jsonString = new Gson().toJson(outVO);
-		LOG.debug("┌=============================┐");
-		LOG.debug("|outVO=" + outVO);
+		LOG.debug("┌──────────────────────────────┐");
+		LOG.debug("│outVO = "+outVO);
+		String message = "";
+		
 		model.addAttribute("vo", outVO);
-		LOG.debug("└=============================┘");
-
-		return jsonString;
+		
+		LOG.debug("└──────────────────────────────┘");
+		
+		
+		return "board/board_mod";
 	}
 
 	/**

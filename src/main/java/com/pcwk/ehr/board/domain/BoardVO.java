@@ -12,11 +12,12 @@ public class BoardVO extends DTO {
 	private String regDt;		// 등록일
 	private String regId;		// 등록자
 	private int answerCheck;	// 답변 체크
+	private int imageNO; //이미지 번호 
 	
 	public BoardVO() {}
 
 	public BoardVO(int seq, int gubun, int gubunQuestion, String title, String contents, String regDt, String regId,
-			int answerCheck) {
+			int answerCheck, int imageNO) {
 		super();
 		this.seq = seq;
 		this.gubun = gubun;
@@ -26,6 +27,7 @@ public class BoardVO extends DTO {
 		this.regDt = regDt;
 		this.regId = regId;
 		this.answerCheck = answerCheck;
+		this.imageNO = imageNO;
 	}
 
 	public int getSeq() {
@@ -92,13 +94,21 @@ public class BoardVO extends DTO {
 		this.answerCheck = answerCheck;
 	}
 
+	public int getImageNO() {
+		return imageNO;
+	}
+
+	public void setImageNO(int imageNO) {
+		this.imageNO = imageNO;
+	}
+
 	@Override
 	public String toString() {
 		return "BoardVO [seq=" + seq + ", gubun=" + gubun + ", gubunQuestion=" + gubunQuestion + ", title=" + title
 				+ ", contents=" + contents + ", regDt=" + regDt + ", regId=" + regId + ", answerCheck=" + answerCheck
-				+ "]";
+				+ ", imageNO=" + imageNO + "]";
 	}
-	
+
 	
 
 

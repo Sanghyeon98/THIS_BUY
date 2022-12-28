@@ -353,9 +353,10 @@ ol, ul {
           $("#count").text(currnetLength);
         }
       
-      //  
+      //contents end   
       });   
       
+             
       //등록
       $("#doSave").on("click",function(){
         console.log("doSave");
@@ -372,24 +373,73 @@ ol, ul {
             return;
         }       
           
-        if(confirm("등록 하시겠습니까?")==false)return;
+        let image = $("#imageName").val();
         
-        let method = "GET";
-        let url    = "/board/doSave.do";
-        let async  = true;
-        let params = {
-            seq : 4005,
-            gubun : 20,
-            gubunQuestion : 10,
+        console.log("이미지 : " + image);
+        console.log("lastIndexOf : " + image.lastIndexOf('\\'));
+        console.log("substr : " + image.substr(image.lastIndexOf('\\')+1));
+        
+        let imgPathName = image.substr(image.lastIndexOf('\\')+1);
+        
+        console.log("imageName : " + imgPathName.split('.'));
+        
+        
+        let fileInput = $("#imageName")[0];
+        console.log("fileInput.files.length : " + fileInput.files.length);
+
+        let formData = new FormData();
+
+        for(let i=0; i < fileInput.files.length; i++) {
+          formData.append("image"+i, fileInput.files[i]);
+        }
+        
+        console.log("formData : " + formData);
+        
+        $.ajax({ 
+            type: "GET",
+            url: "${CP}/image/doSave.do",
+            processData: false,
+            contentType : false,
+            async: "true",
+            dataType: "html",
+            data: formData,
+            
+            success:function(data) {  // 이미지 등록 성공
+              console.log("success data : " + data);  // data : ImageVO
+              
+              let getImageNo = 0;  // 이미지 번호가 0이면 이미지 없음
+              
+              //if(null != data) {
+              if(data.length != 0) { // 등록된 이미지가 있으면 
+                console.log("null!!");
+                let getImage = JSON.parse(data);
+                
+                console.log("getImage.imageNo : " + getImage.imageNo);
+                console.log("parseInt(getImage.imageNo) : " + parseInt(getImage.imageNo));
+                
+                console.log("image value : " +  $("#imageName").val());
+                
+                getImageNo = getImage.imageNo;
+              } else { // 등록된 이미지가 없으면
+                console.log("not null!!");
+              }
+              
+        //문의동록 
+        let b_method = "GET";
+        let b_url    = "/board/doSave.do";
+        let b_async  = true;
+        let b_params = {
+            gubun : 10,
             title : $("#title").val(),
             contents : $("#contents").val(),
             regDt : "ddd",
             regId : "ddd",
-            answerCheck : 0
+            answerCheck : 0,
+            imageNo : getImageNo
         };
         
-        PClass.callAjax(method,url,async,params,function(data){
-          console.log(data);
+        PClass.callAjax(b_method,b_url,b_async,b_params,function(b_data){
+          console.log(b_data);
         //JSON.parse() 메서드는 JSON 문자열의 구문을 분석하고, 
         //그 결과에서 JavaScript 값이나 객체를 생성합니다.
           let parsedJson = JSON.parse(data);
@@ -403,21 +453,25 @@ ol, ul {
         
         });
         
+        }
+         
+        });//ajax END
         
-      });
+      });//문의등록 end
+      
+      
       
       //목록으로 이동
       $("#boardView").on("click",function(){
         console.log("boardView");
         moveToList();
-      //boardView  
-      });
+      });//boardView  
       
     //document  
     });
     
     function moveToList(){
-      window.location.href= "${CP}/board/boardView.do?div=10";
+      window.location.href= "${CP}/board/boardView.do?gubun=10";
     }
     
    
@@ -435,8 +489,8 @@ ol, ul {
      <div class="css-2 ">
      <div class="css-3 ">고객센터</div>
      <ul class="css-4 ">
-     <li class="css-0 "><a class=" css-20 " href="${CP}/board/boardView.do" >공지사항</a></li>
-     <li class="css-0 "><a class=" css-20 " href="${CP}/board/questionView.do">1:1 문의</a></li>
+     <li class="css-0 "><a class=" css-20 " href="${CP}/board/boardView.do?gubun=10" >공지사항</a></li>
+     <li class="css-0 "><a class=" css-20 " href="${CP}/board/boardView.do?gubun=30">자주묻는질문</a></li>
      </ul>
    </div>
     
@@ -485,7 +539,8 @@ ol, ul {
           <div class="css-42">
            <div class="css-43">
             <div>
-             <label>첨부파일</label>
+             <label for="imageName">첨부파일</label>
+             <input type="file" id="imageName" name="imageName">
             </div>
            </div>
           </div>

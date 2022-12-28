@@ -152,12 +152,20 @@
 <script >
   $(document).ready(function(){
 	  console.log("document.ready");
+	  initTableView();
 	  
 	//목록으로 이동
 	    $("#moveToList").on("click", function() {
 	      console.log("moveToList");
 	      moveToList();
 	    });
+	
+	
+	  //답글 달기로 이동 
+	   $("#answerbutton").on("click", function() {
+		      
+		      window.location.href = "${CP}/answer/answerView.do?gubun=20&seq="+$("#seq").val();
+      });
 	
 	  //수정
 	    $("#doUpdate").on("click", function() {
@@ -185,7 +193,7 @@
 	      let url = "/board/doUpdate.do";
 	      let async = true;
 	      let params = {
-	        gubun : 10,
+	        gubun : $("#gubun").val(),
 	        title : $("#title").val(),
 	        contents : $("#contents").val()
 	      };
@@ -215,7 +223,6 @@
 	      let url = "/board/doDelete.do";
 	      let async = true;
 	      let params = {
-	    		  gubun : 10,
 	        seq : $("#seq").val()
 	      };
 
@@ -237,20 +244,29 @@
   });
   
   function moveToList() {
-	    window.location.href = "${CP}/board/boardView.do?gubun=10"
+	    window.location.href = "${CP}/board/boardView.do?gubun="+$("#gubun").val();
+	  }
+  
+  function initTableView() {
+	    if ("10" == $("#gubun").val()) {
+	      $("#updatebutton").css("display", "");
+	      $("#answerbutton").css("display", "none");
+	    } else if ("20" == $("#gubun").val()) {
+	      $("#updatebutton").css("display", "none");
+	      $("#answerbutton").css("display", "");
+	    }
 	  }
 </script>
 
 </head>
 <body>
-      <input type="text" name="gubun" id="gubun" value="${vo.getgubun()}">
+      <input type="text" name="gubun" id="gubun" value="${vo.gubun}">
       <input type="text" name="seq" id="seq" value="${vo.seq}">
      <div class="css-1i60c0e">
       <div class="css-1uvp5r6">
        <div class="css-qwe8mt">${title} </div>
        <div class="css-klb7h8">새로운 사항을 확인하세요</div>
       </div>
-      list : ${list }
       
       <div class="css-1uvp5r6">
        <div class="css-1t45bai">
@@ -279,13 +295,25 @@
           name="contents"><c:out value="${vo.contents}" /></textarea>
          </div>
         </div>
+        
+        
+        
         <div class="css-d7qwpj">
          <button class ="css-214ym4" type="button" width="150" height="42" radius="0" id="moveToList">
           <span class="css-ymwvow"> 목록</span>
          </button>
+         <div id ="updatebutton">
          <button class ="css-214ym4" type="button" width="150" height="42" radius="0" id="doUpdate">
           <span class="css-ymwvow"> 수정</span>
          </button>
+         </div>
+         
+         <div id ="answerbutton">
+         <button class ="css-214ym4" type="button" width="150" height="42" radius="0" id="answer" value="${vo.seq}">
+          <span class="css-ymwvow"> 답글</span>
+         </button>
+         </div>
+         
          <button class ="css-214ym4" type="button" width="150" height="42" radius="0" id="doDelete">
           <span class="css-ymwvow"> 삭제</span>
          </button>

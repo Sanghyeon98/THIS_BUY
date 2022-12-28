@@ -39,7 +39,13 @@ request.setAttribute("title", title);
 request.setAttribute("gubun1", gubun1);
 request.setAttribute("gubun2", gubun2);
 request.setAttribute("divValue", divValue);
-%>	
+%>
+<%
+
+/* 게시물 제목을 클릭했을때 내용을 불러오기위한 게시물번호 입니다. */
+String seq = request.getParameter("seq");
+int faq_no = (seq == null)? -1 : Integer.parseInt(seq);
+%>
 <c:set var="CP" value="${pageContext.request.contextPath}" />
 <!-- ContextPath -->
 <c:set var="RES" value="/resources" />
@@ -306,6 +312,48 @@ ol, ul {
 	background-color: #b8c9df;
 	border: 0px none;
 }
+.css-answer1 {
+    /* overflow: hidden; */
+    display: none;
+}
+.css-answer2 {
+    padding: 20px 20px 30px;
+    background-color: rgb(250, 250, 250);
+}                            
+             
+ .css-answer3 {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    line-height: 20px;
+    letter-spacing: -0.075em;
+    margin-bottom: 20px;
+}       
+
+.css-answer4 {
+    font-size: 14px;
+    font-family: "Noto Sans", serif;
+    color: rgb(153, 153, 153);
+} 
+.css-answer5 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}       
+.css-answer6 {
+    background-image: url("/WEB-INF/favicon.ico")
+     background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 24px;
+    height: 24px;
+}
+.css-answer7 {
+    width: 744px;
+    margin-top: 3px;
+    margin-left: 12px;
+}
 </style>
 
 <head>
@@ -336,29 +384,47 @@ ol, ul {
 	$(document).ready(function() {
 						console.log("document.ready");
 						initTableView();
-						doRetreive();
-						initAnswerView
-						/* 						doSelectOnee(); */
+			/* 			answerboard(); */
+						
+						//=================================================paging
+					    renderingPage('${pageTotal}',1)
+		
 
-						//paging
-						renderingPage('${pageTotal}', 1);
 
-						//테이블 클릭
-						$("#boardTable").on("click",".cli",function(e) {
+//-------------------------------- 한건조회 (상세조회) 테이블 클릭 
+			
+	//테이블 클릭
+						$("#boardTable>div").on("click","ul",function(e) {
 											console.log('boardTable');
-											let divArray = $(this).children();
+											let divArray = $(this).find("li>div");
 											let boardSeq = divArray.eq(0).text();
 
 											console.log('boardSeq:' + boardSeq);
 											console.log('boardTable');
 
-											if (confirm("상세 조회를 하시겠습니까?") == false)
-												return;
-											//div,seql
-											window.location.href = "${CP}/board/boardMod.do?seq="+boardSeq;
+											 if ("10" == $("#gubun").val()) {
+													if (confirm("상세 조회를 하시겠습니까?") == false)
+														return;
+													//div,seq
+													window.location.href = "${CP}/board/doSelectOne.do?gubun=10&seq="
+															+ boardSeq;
+	
+													console.log("boardSeq: "+ boardSeq);
 
-											//#boardTable>tbody
-										});
+											} else if ("20" == $("#gubun").val()) {
+					
+					                 if (confirm("상세 조회를 하시겠습니까?") == false)
+					                   return;
+					                 //div,seq
+					                 window.location.href = "${CP}/board/doSelectOne.do?gubun=20&seq="
+					                     + boardSeq;
+					
+						               console.log("boardSeq: "+ boardSeq);
+							             
+							        }
+								});
+
+//-------------------------------- 한건조회 (상세조회) 테이블 클릭  끝
 
 						//등록화면으로 이동
 						$("#boardReg").on("click", function() {
@@ -388,52 +454,7 @@ ol, ul {
 						   }
 						 */
 
-						//답변 등록
-						$("#doInsertButton").on("click",function(e) {
-											console.log("doInsertBtn");
-											e.preventDefault();
-
-											if (eUtil.ISEmpty($("#answer")
-													.val()) == true) {
-												alert("내용을 입력하세요");
-												$("#answer").focus();
-												return;
-											}
-
-											console.log($("#answer").val());
-
-											if (confirm("등록 하시겠습니까?") == false)
-												return;
-
-											let url = "answer/doInsert.do";
-											let parameters = {
-
-												"seq" : $("#seq")
-														.val(),
-												"aUser" : $("#regId").val(),
-												"contents" : $("#answer").val()
-											};
-
-											let method = "GET";
-											let async = true;
-
-											EClass.callAjax(url,parameters,method,async,function(data) {
-																console.log("data msgContents:"
-																				+ data.msgContents);
-
-																if ("1" == data.msgId) {//등록 성공
-																	alert(data.msgContents);
-																	doSelectOnee();
-																	$("#answer").val('');
-																} else { //등록 실패
-																	alert(data.msgId
-																			+ "\n"
-																			+ data.msgContents);
-																}
-
-															});
-
-										});
+						
 
 					}); //document
 
@@ -446,19 +467,19 @@ ol, ul {
 			$("#insertButtonArea").css("display", "none");
 		}
 	}
-					
-	function initAnswerView() {
-	    if ("1" == $("#answerCheck").val()) {
-	      $("#answerTable").css("display", "");
-	    } else if ("0" == $("#gubun").val()) {
-	    	$("#answerTable").css("display", "none");
-	    }
-	  }
+
+	/* 	function initAnswerView() {
+	 if ("1" == $("#answerCheck").val()) {
+	 $("#answerTable").css("display", "");
+	 } else if ("0" == $("#gubun").val()) {
+	 $("#answerTable").css("display", "none");
+	 }
+	 }  */
 
 	function doRetreive(page) {
-		console.log('doRetrive() page:' + page);
+		console.log('doRetreive() page:' + page);
 		let method = "GET";
-		let url = "/board/doRetreive.do";
+		let url = "/board/doRetrieve.do";
 		let async = true;
 
 		//전체
@@ -474,8 +495,7 @@ ol, ul {
 			pageNo : page
 		};
 
-		PClass
-				.callAjax(
+		PClass.callAjax(
 						method,
 						url,
 						async,
@@ -510,21 +530,25 @@ ol, ul {
 													function(index, value) {
 
 														htmlData += "<ul class='css-14'><li><a href='#'> <div class='css-15'>";
-														htmlData += "    <div class='css-15'"+ <c:out value='value.seq'/>+ "</div>";
+														htmlData += "    <div style='display: none;'"+ <c:out value='value.seq'/>+ "</div>";
+														htmlData += "    <div class='css-15'"+ <c:out value='value.num'/>+ "</div>";
 														htmlData += "    <div class='css-15'"+ <c:out value='value.title'/>+ "</div>";
 														htmlData += "    <div class='css-15'"+ <c:out value='value.regId'/>+ "</div>";
 														htmlData += "    <div class='css-15'"+ <c:out value='value.regDt'/>+ "</div>";
-														htmlData += "</ul>";});
+														htmlData += "</ul>";
+													});
 
 								} else if ("20" == $("#gubun").val()) {
-									$.each(
+									$
+											.each(
 													parsedJson,
 													function(index, value) {
 
 														htmlData += "<ul class='css-14'><li><a href='#'> <div class='css-15'>";
-														htmlData += "    <div class='css-15'"+ <c:out value='value.seq'/>+ "</div>";
+														htmlData += "    <div style='display: none;'"+ <c:out value='value.seq'/>+ "</div>";
+														htmlData += "    <div class='css-15'"+ <c:out value='value.num'/>+ "</div>";
 														htmlData += "    <div class='css-15'"+ <c:out value='value.title'/>+ "</div>";
-														htmlData += "    <div class='css-15'"+ <c:out value='value.regDt'/>+ "</div>";
+														htmlData += "    <div class='css-15'"+ <c:out value='value.regDt'/>	+ "</div>";
 														htmlData += "    <div class='css-15'"+ <c:out value='value.answerCheck'/>+ "</div>";
 														htmlData += "</ul>";
 													});
@@ -546,66 +570,6 @@ ol, ul {
 						});
 
 	}
-
-		//문의에 대한 답변 데이터 
-	 function doSelectOnee() {
-	 $
-	 .ajax({
-	 type : "GET",
-	 url : "/board/selectOne.do", 
-	 asyn : "true",
-	 dataType : "html",
-	 data : {
-	 "seq" : $("#seq").val()
-	 },
-
-	 success : function(data) {//통신 성공
-	 console.log("success data:" + data);
-
-	 var parseData = JSON.parse(data);
-
-	 $("#answerList").empty();
-	 //$("#answerForm").empty();
-	 var html = "";
-
-	 if (parseData.length > 0) {
-
-	 $
-	 .each(
-	 parseData,
-	 function(i, value) {
-	 console.log(i + ","
-	 + value.name);
-
-	 //---------------------------------------------------------------------------------------------
-	 htmlData += "<ul class='css-14'><li><a href='#'> <div class='css-15'>";
-     htmlData += "    <div class='css-15'"+ <c:out value='value.answerNO'/>+ "</div>";
-     htmlData += "    <div class='css-15'"+ <c:out value='value.title'/>+ "</div>";
-     htmlData += "    <div class='css-15'"+ <c:out value='value.regDt'/>+ "</div>";
-     htmlData += "</ul>";
-
-	 });
-
-	 } else { //data가 없는 경우
-	 //$("#answerForm").append(htmL);
-	 html += "<tr>";
-	 html += "  등록된 답변이 없습니다.";
-	 html += "</tr>";
-	 }
-
-	 //데이터 추가
-	 $("#answerTable").append(html);
-
-	 },
-	 error : function(data) {//실패시 처리
-	 console.log("error:" + data);
-	 },
-	 complete : function(data) {//성공/실패와 관계없이 수행!
-	 console.log("complete:" + data);
-	 }
-	 });
-
-	 }  
 
 	//paging
 	function renderingPage(pageTotal, page) {
@@ -634,7 +598,7 @@ ol, ul {
 			firstClass : 'first'
 		}).on("page", function(event, num) {
 			console.log("num:" + num);
-			doRetrive(num);
+			doRetrieve(num);
 		});
 	}
 </script>
@@ -671,113 +635,55 @@ ol, ul {
 								<div class="css-12 ">제목</div>
 								<div width="100" class="css-13">${gubun1}</div>
 								<div width="100" class="css-13 ">${gubun2}</div>
+								<div style="display: none;">SEQ</div>
 							</div>
 
 							<div id="boardTable">
-								<c:choose>
+
+							<c:choose>
 									<c:when test="${list.size()>0 }">
 										<c:forEach var="vo" items="${list }">
 											<c:choose>
 												<c:when test="${vo.gubun == 10 }">
+												 <div>
 													<ul class="css-14 ">
-														<li><a href="#">
-																<div class="css-15 cli">
+														<li class="css-15"><!-- <a href="#"> -->
 																	<!-- 공지사항  -->
-																	<div class="css-16 "><c:out value="${vo.seq }"></c:out></div>
-																	<div class="css-17 ">
-																		<c:out value="${vo.title }"></c:out>
-																	</div>
-																	<div class="css-18 ">
-																		<c:out value="${vo.regId }"></c:out>
-																	</div>
-																	<div class="css-19 ">
-																		<c:out value="${vo.regDt }"></c:out>
-																	</div>
-																</div>
-														</a></li>
-													</ul>
+																	<div style="display: none;"><c:out value="${vo.seq }"></c:out></div>
+																	<div class="css-16"><c:out value="${vo.num }"></c:out></div>
+																	<div class="css-17 "><c:out value="${vo.title }"></c:out></div>
+																	<div class="css-18 "><c:out value="${vo.regId }"></c:out></div>
+																	<div class="css-19 "><c:out value="${vo.regDt }"></c:out></div>
+														<!-- </a> -->
+														</li>
+													 </ul>
+													</div>
 												</c:when>
 												<c:otherwise>
-													<ul class="css-14 ">
-														<li><a href="#">
-																<div class="css-15">
-																	<!-- 1:1문의  -->
-																	<div class="css-16 ">
-																		<c:out value="${vo.seq }"></c:out>
-																	</div>
-																	<div class="css-17 ">
-																		<c:out value="${vo.title }"></c:out>
-																	</div>
-																	<div class="css-18 ">
-																		<c:out value="${vo.regDt }"></c:out>
-																	</div>
-																	<div class="css-19 ">
-																		<c:out value="${vo.answerCheck }"></c:out>
-																	</div>
-																</div>
-														</a></li>
-													</ul>
-													
-													<ul class="css-14 " id ="answerTable">
-                            <li><a href="#">
-                                <div class="css-15" >
-                                  <!-- 1:1문의  -->
-                                  <div class="css-16 ">
-                                    <c:out value="${vo.seq }"></c:out>
-                                  </div>
-                                  <div class="css-17 ">
-                                    <c:out value="${vo.title }"></c:out>
-                                  </div>
-                                  <div class="css-18 ">
-                                    <c:out value="${vo.regDt }"></c:out>
-                                  </div>
-                                </div>
-                            </a></li>
-                          </ul>
-													
-													<!-- answer -->
-													<input type="hidden" name="seq" id="seq" value="${seq }" />
-													<input type="hidden" name="regId" id="regId"
-														value="${sessionScope.member.uId}" />
-													<!-- 로그인시 나중에  -->
-
-													<!--- Form Begins -->
-													<section class="card" id="answerForm">
-
-														<div class="card-header"></div>
-														<div class="card-body">
-															<div class="tab-content">
-																<div class="form-group">
-																	<textarea class="form-control" id="answer" rows="7"
-																		placeholder="문의에 대한 답변을 달아주세요"></textarea>
-																</div>
-															</div>
-															<div class="text-right">
-																<button type="button" class="btn btn-primary"
-																	id="doInsertButton">답변등록</button>
-															</div>
-														</div>
-													</section>
-													<!--- Form Ends -->
-
-
-													<!--contents begins -->
-													<div class="answer-contents">
-														<section class="card mt-4">
-															<div id="answerList" class="border p-2"></div>
-														</section>
-													</div>
-													<!--contents  end -->
-												</c:otherwise>
+												<%-- 	<a  href="#"   value="${vo.seq }"> --%>
+												<div>
+														<ul class="css-14 ">
+															<li class="css-15">
+																		<!-- 1:1문의  -->
+																		<div style="display: none;"><c:out value="${vo.seq }"></c:out></div>
+																		<div class="css-16 " ><c:out value="${vo.num }"></c:out></div>
+																		<div class="css-17 " ><c:out value="${vo.title }"></c:out></div>
+																		<div class="css-18 "><c:out value="${vo.regDt }"></c:out></div>
+																		<div class="css-19 "><c:out value="${vo.answerCheck }"></c:out></div>
+															</li>
+													</ul>	
+												</div>									
+						        </c:otherwise>
 											</c:choose>
 										</c:forEach>
+		
 									</c:when>
 									<c:otherwise>
 										<div>
 											<div>No data found</div>
 										</div>
 									</c:otherwise>
-								</c:choose>
+								</c:choose> 
 
 							</div>
 
@@ -792,6 +698,10 @@ ol, ul {
 								<button class="css-Button" type="button" width="120" height="44"
 									radius="3" id="questionReg">문의하기</button>
 							</div>
+
+<div id="answerTable">
+ <div></div>
+</div>
 
 
 

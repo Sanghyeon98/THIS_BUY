@@ -45,7 +45,7 @@ public class AnswerServiceImpl implements AnswerService {
 
 
 	@Override
-	public List<AnswerVO> doSelectOne(DTO inVO) throws SQLException {
+	public List<AnswerVO> doSelectOne(AnswerVO inVO) throws SQLException {
 		return answerDaoImpl.doSelectOne(inVO);
 	}
 

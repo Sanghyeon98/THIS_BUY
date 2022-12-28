@@ -49,7 +49,7 @@ public interface AnswerService {
 	 * @return T
 	 * @throws SQLException
 	 */
-	List<AnswerVO> doSelectOne(DTO inVO) throws SQLException;
+	List<AnswerVO> doSelectOne(AnswerVO inVO) throws SQLException;
 	
 	/**
 	 * 목록조회

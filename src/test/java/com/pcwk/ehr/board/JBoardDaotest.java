@@ -67,17 +67,17 @@ public class JBoardDaotest {
 		
 		//BoardVO(int seq, int gubun, int gubunQuestion, String title, String contents, String regDt, String regId,
 		//int answerCheck)
-		board01 = new BoardVO (1, 10, 10, "제목10", "내용10" , "d", "d", 1);
-		board02 = new BoardVO (2, 20, 20, "제목10", "내용10" , "d", "d", 1);
-		board03 = new BoardVO (3, 20, 30, "제목10", "내용10" , "d", "d", 1);
+		board01 = new BoardVO (1, 10, 10, "제목10", "내용10" , "d", "d", 1,0);
+		board02 = new BoardVO (2, 20, 20, "제목10", "내용10" , "d", "d", 1,1);
+		board03 = new BoardVO (3, 20, 30, "제목10", "내용10" , "d", "d", 1,2);
 	
 		//int pageSize, int pageNo, String searchDiv, String searchWord, String gubun, String gubunQuestion
 		search = new BoardSearchVO(1, 1, "10", "10", "10", "20");
 	}
 	
 	@Test
-	//@Ignore
-	public void doRetrive()throws SQLException{
+	@Ignore
+	public void doRetreive()throws SQLException{
 		//1.
 		dao.doDelete(board01);
 		dao.doDelete(board02);
@@ -94,7 +94,7 @@ public class JBoardDaotest {
 	}
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void list() throws SQLException {
 
 		
@@ -112,7 +112,7 @@ public class JBoardDaotest {
 		//dao.doSelectOne(board03);
 		
 		
-	}
+	} 
 	
 	
 	
@@ -169,7 +169,7 @@ public class JBoardDaotest {
 		
 	}
 	@Test
-	//@Ignore
+	@Ignore
 	public void add() throws SQLException {
 		LOG.debug("==============================");
 		LOG.debug("=== add() ===");
@@ -177,11 +177,11 @@ public class JBoardDaotest {
 		// 1. 기존데이터 3건 삭제
 				// 2. 신규데이터 3건 입력
 				// 3. 데이터 수정하기 (UPDATE)
-				
-				// 1. 
-		    dao.doDelete(board01);
-		    dao.doDelete(board02);
-		    dao.doDelete(board03);
+	
+		   dao.doDelete(board01); 
+		   dao.doDelete(board02); 
+		   dao.doDelete(board03);
+		 
 		    //2
 			dao.doSave(board01);
 			dao.doSave(board02);

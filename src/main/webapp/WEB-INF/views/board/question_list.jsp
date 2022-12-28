@@ -450,7 +450,7 @@ ol, ul {
 							<div id="boardTable">
 							  <c:choose>
 						          <c:when test="${list.size()>0 }">
-						             <c:forEach var="vo" items="${list }" >
+						             <c:forEach var="vo" items="${list }"  varStatus="status">
 									       <ul class="css-14 ">
 												<li><a href="#">
 														<div class="css-15">
@@ -462,15 +462,30 @@ ol, ul {
 														</div>
 												</a></li>
 											</ul>
-						              
+											 <c:when test="${vo. seq } == ${list01[status.index].seq}">
+											   <ul class="css-14 ">
+                        <li><a href="#">
+                            <div class="css-15">
+                              <!-- 1:1문의  -->
+                              <div class="css-16 "><c:out value="${list01[status.index].seq }"></c:out></div>
+                              <div class="css-17 "><c:out value="${list01[status.index].title}"></c:out></div>
+                              <div class="css-18 "><c:out value="${list01[status.index].regId }"></c:out></div>
+                              <div class="css-19 "><c:out value="${list01[status.index].regDt }"></c:out></div>
+                            </div>
+                        </a></li>
+                      </ul>
+											 </c:when>
+						            <c:otherwise>
+						               <div>답변글이 존재 하지 않습니다. </div>
+						            </c:otherwise>   
 						             </c:forEach>
 						          </c:when>
 						          <c:otherwise>
-						            <tr>
-						              <td class="text-center col-sm-12 col-md-12 col-lg-12" colspan="99">
+						            <div>
+						              <div class="text-center col-sm-12 col-md-12 col-lg-12" colspan="99">
 						                  No data found
-						              </td>
-						            </tr>
+						              </div>
+						            </div>
 						          </c:otherwise>
 						        </c:choose>
 

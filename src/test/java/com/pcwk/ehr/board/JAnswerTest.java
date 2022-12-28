@@ -43,8 +43,8 @@ public class JAnswerTest {
 		LOG.debug("=@Before=");
 		LOG.debug("=======================");	
 
-		answer01 = new AnswerVO(2, 1, "제목", "내용","","관리자");
-		answer02 = new AnswerVO(3, 2, "제목", "내용","","관리자");
+		answer01 = new AnswerVO(47, 48, "제목", "내용","","관리자");
+		answer02 = new AnswerVO(48, 47, "제목", "내용","","관리자");
 		
 	}
 	

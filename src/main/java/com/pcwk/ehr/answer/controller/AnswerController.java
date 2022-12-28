@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.pcwk.ehr.answer.domain.AnswerVO;
 import com.pcwk.ehr.answer.service.AnswerService;
+import com.pcwk.ehr.board.domain.BoardVO;
 import com.pcwk.ehr.cmn.Message;
 
 
@@ -38,7 +39,7 @@ public class AnswerController {
 		LOG.debug("=================");
 		
 		model.addAttribute("seq", seq);
-		return "board/answer";
+		return "answer/answer_reg";
 	}
 	
 	@RequestMapping(value = "/answerMoview.do",  method = RequestMethod.GET)
@@ -88,7 +89,7 @@ public class AnswerController {
 	 * @throws RuntimeException
 	 * @throws SQLException
 	 */
-	@RequestMapping(value = "Selectone.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = "selectOne.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String doSelectOne(AnswerVO answer) throws SQLException {
 		List<AnswerVO> list = (List<AnswerVO>) answerService.doSelectOne(answer);
@@ -106,23 +107,7 @@ public class AnswerController {
 		return jsonList;
 	}
 	
-   
-	@RequestMapping(value = "SelectAnswer.do",method = RequestMethod.GET
-			,produces = "application/json;charset=UTF-8")
-	@ResponseBody	
-	public String doSelectAnswer(AnswerVO answer) throws SQLException {
-		LOG.debug("param:"+answer);
-		
-		AnswerVO outVO = (AnswerVO) answerService.doSelectAnswer(answer);
-		
-		LOG.debug("outVO:"+outVO);
-		
-		Gson gson = new Gson();
-		String jsonStr = gson.toJson(outVO);
-		LOG.debug("jsonStr:"+jsonStr);
-		
-		return jsonStr;
-	}
+  
 	
 	
 	/**
