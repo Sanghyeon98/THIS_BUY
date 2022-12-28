@@ -125,6 +125,10 @@
 		});
 		
 	});
+	 function doLogout() {
+	        if(confirm('로그아웃 하시겠습니까?')==false)return;
+	        window.location.href= "${CP}/login/doLogout.do";
+	      }
 </script>
 </head>
 
@@ -140,7 +144,7 @@
         
         <c:choose>
 					<c:when test="${null != sessionScope.memberInfo || not empty sessionScope.memberInfo }">   <!-- session 값이 있으면 -->
-						<a href="${CP}/login/loginout.do" id="login">로그아웃</a>
+						<a href="javascript:doLogout();" id="loginout">로그아웃</a>
 					</c:when>
 					<c:otherwise>
 		        <a href="${CP}/signup/signup.do" id="singup">회원가입</a>
