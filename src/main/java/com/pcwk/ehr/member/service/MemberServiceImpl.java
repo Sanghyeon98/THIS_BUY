@@ -16,8 +16,6 @@ import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.member.dao.MemberDaoImpl;
 import com.pcwk.ehr.member.dao.Memberdao;
 import com.pcwk.ehr.member.domain.MemberVO;
-import com.pcwk.ehr.member.mail.MailUtils;
-import com.pcwk.ehr.member.mail.TempKey;
 
 @Service("MemberService")
 public class MemberServiceImpl implements MemberService {
