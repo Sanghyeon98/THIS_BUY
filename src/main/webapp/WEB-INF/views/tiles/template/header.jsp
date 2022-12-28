@@ -18,6 +18,23 @@
 <script>
 	$(document).ready(function(){
 		
+		// 검색어 엔터
+		$("#gnb_search").on("keypress", function(e) {
+			if(13==e.which){
+        e.preventDefault();
+        //event trigger발생
+        $('#search_bnt').trigger('click');
+      }
+		});
+		
+		
+		// 검색어 버튼 클릭
+		$("#search_bnt").on("click", function() {
+			console.log("검색어 버튼");
+			
+	  });
+		
+		
 		// 페이지 로딩 시 최초 한 번 카테고리 목록 가져오기
 		$.ajax({ 
 			type: "GET",
@@ -125,8 +142,8 @@
           <a href="${CP}/main/main_page.do"><img src="${CP_RES}/image/logo.png" alt="로고" class="logo"></a>
         </div>
         <div class="search">
-          <input id="gnb_search" class="search_input" placeholder="검색어를 입력해주세요" required="required">
-          <button type="submit" class="search_bnt"></button>
+          <input id="gnb_search" class="search_input" placeholder="검색어를 입력해주세요">
+          <button id="search_bnt"></button>
         </div>
         <div>
           <button class="like_bnt"></button>

@@ -99,7 +99,7 @@ width: 30px;
 		console.log("최종결제금액 : " + $("#finalsumprice").val());
 		
 		let finalSum = $("#finalsumprice").val();
-		let orderName= ${vo.name};
+		let orderName= $("#name").val();
 				
 		var clientKey = 'test_ck_D5GePWvyJnrK0W0k6q8gLzN97Eoq';
 		var tossPayments = TossPayments(clientKey);
@@ -263,7 +263,7 @@ width: 30px;
             <table>
                     <tr>
                        <td>보내는분</td>
-                       <td><input type= text value="${vo.name}"></td>
+                       <td><input type= text id="name" value="${vo.name}"></td>
                     </tr>
                     <tr>
                        <td>휴대폰</td>
