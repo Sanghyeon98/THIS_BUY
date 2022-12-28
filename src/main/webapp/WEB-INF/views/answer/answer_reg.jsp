@@ -95,6 +95,8 @@
             return;
         }       
           
+        if(confirm("등록 하시겠습니까?")==false)return;
+        
         //문의동록 
         let b_method = "GET";
         let b_url    = "/answer/doInsert.do";
@@ -110,7 +112,7 @@
           console.log(b_data);
         //JSON.parse() 메서드는 JSON 문자열의 구문을 분석하고, 
         //그 결과에서 JavaScript 값이나 객체를 생성합니다.
-          let parsedJson = JSON.parse(data);
+          let parsedJson = JSON.parse(b_data);
         
           if("1" == parsedJson.msgId){
             alert(parsedJson.msgContents);

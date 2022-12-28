@@ -121,12 +121,12 @@
             regId : "관리자",
             answerCheck : 0
         };
-        
+
         PClass.callAjax(b_method,b_url,b_async,b_params,function(b_data){
           console.log(b_data);
         //JSON.parse() 메서드는 JSON 문자열의 구문을 분석하고, 
         //그 결과에서 JavaScript 값이나 객체를 생성합니다.
-          let parsedJson = JSON.parse(data);
+          let parsedJson = JSON.parse(b_data);
         
           if("1" == parsedJson.msgId){
             alert(parsedJson.msgContents);
@@ -151,7 +151,7 @@
     });
     
     function moveToList(){
-      window.location.href= "${CP}/board/boardView.do?gubun="+$("gubun").val;
+      window.location.href= "${CP}/board/boardView.do?gubun=10";
     }
     
    
