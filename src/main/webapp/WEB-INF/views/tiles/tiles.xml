@@ -63,6 +63,11 @@
     <put-attribute name="title" value="메인 페이지"/>
     <put-attribute name="body" value="/WEB-INF/views/main/{1}.jsp"/> <!-- {1} : 어떤 jsp파일이 와도 상관 X -->
   </definition>
+    <!-- /signup/signup.do -->
+  <definition name="member/*" extends="base-definition"> <!-- base-definition 상속 받음 -->
+    <put-attribute name="title" value="회원가입"/>
+    <put-attribute name="body" value="/WEB-INF/views/member/{1}.jsp"/> <!-- {1} : 어떤 jsp파일이 와도 상관 X -->
+  </definition>
   
   
 </tiles-definitions>
