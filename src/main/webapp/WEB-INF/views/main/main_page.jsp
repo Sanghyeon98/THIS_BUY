@@ -10,8 +10,25 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
+<style>
+  .main_itemList {
+    width : 186px;
+    margin-left: 36px;
+    align-items: center;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 35px;
+    /* margin: 0 auto; */
+  }
+
+  .price_font {
+    font-weight: bold;
+    font-size: 16px;
+  }
+</style>
 
 <link rel="stylesheet" href="${CP_RES}/css/main.css">
+
 
 <title>제목</title>
   <!-- javascript -->
@@ -29,10 +46,10 @@
     <div class= "goods_list">
       <div class="goods">
         <c:forEach var="vo" items="${list}">
-          <figure class="itemList">
+          <figure class="main_itemList">
             <a href="${CP}/detail/view.do?itemNo=${vo.itemNo}"><img alf="이미지" width="170" src="${CP}${vo.viewPath}/${vo.saveName}"></a>
             <a href="${CP}/detail/view.do?itemNo=${vo.itemNo}"><figcaption>${vo.name}</figcaption></a>
-            <a href="${CP}/detail/view.do?itemNo=${vo.itemNo}"><figcaption>${vo.price}원</figcaption></a>
+            <a href="${CP}/detail/view.do?itemNo=${vo.itemNo}"><figcaption class="price_font">${vo.price}원</figcaption></a>
           </figure>
         </c:forEach> 
       </div>
