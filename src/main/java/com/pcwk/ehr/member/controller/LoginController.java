@@ -2,6 +2,7 @@ package com.pcwk.ehr.member.controller;
 
 import java.sql.SQLException;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
@@ -129,6 +130,7 @@ public class LoginController {
 		LOG.debug("└=============================┘");		
 		return jsonString;
 	}
+	
 	
 	
 }

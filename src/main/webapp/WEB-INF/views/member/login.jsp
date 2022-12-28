@@ -94,7 +94,7 @@ $(document).ready(function(){
               alert(parsedJson.msgContents);
               
               //TODO: main.jsp//admin
-              window.location.href = "${CP}/category/categoryView.do";
+              window.location.href = "${CP}/product/productView.do";
           }else if("30" ==parsedJson.msgId){
         	  alert(parsedJson.msgContents);
         	  window.location.href = "${CP}/main/main_page.do";

@@ -31,6 +31,8 @@
       <beans:ref bean="loginInterceptor"/>
      </mvc:interceptor>  
   </mvc:interceptors>
+   
+   
   
   
   <!-- Enables the Spring MVC @Controller programming model -->
