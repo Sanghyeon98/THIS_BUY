@@ -24,74 +24,19 @@
 </head>
 
 <body>
-  <!-- 메인페이지 전체 -->
-  <div>  
-    <!-- 미들 -->
-    <div class="middle">
-      <div class= "goods_list">
-        <div>
-          <h2 class= "title">이 상품 어때요?</h2>
-        </div>
-        <div class="goods">
-          <figure>
-           <img alf="이미지" src="${CP_RES}/image/spring.png">
-           <figcaption> 상품 이름 &#124; 가격</figcaption>
+  <!-- 미들 -->
+  <div id="wrap">
+    <div class= "goods_list">
+      <div class="goods">
+        <c:forEach var="vo" items="${list}">
+          <figure class="itemList">
+            <a href="${CP}/detail/view.do?itemNo=${vo.itemNo}"><img alf="이미지" width="170" src="${CP}${vo.viewPath}/${vo.saveName}"></a>
+            <a href="${CP}/detail/view.do?itemNo=${vo.itemNo}"><figcaption>${vo.name}</figcaption></a>
+            <a href="${CP}/detail/view.do?itemNo=${vo.itemNo}"><figcaption>${vo.price}원</figcaption></a>
           </figure>
-          
-          <figure>
-           <img alf="이미지" src="${CP_RES}/image/spring.png">
-           <figcaption>상품 이름 &#124; 가격</figcaption>
-          </figure>
-          
-          <figure>
-           <img alf="이미지" src="${CP_RES}/image/spring.png">
-           <figcaption>상품 이름 &#124; 가격</figcaption>
-          </figure>
-        </div>
-  
-        <div class= "title">
-          <h2>놓치면 후회할 가격</h2>
-        </div>
-        <div class="goods">
-          <figure>
-           <img alf="이미지" src="${CP_RES}/image/spring.png">
-           <figcaption><span>10&#37;</span> 상품 이름 &#124; 가격</figcaption>
-          </figure>
-          
-          <figure>
-           <img alf="이미지" src="${CP_RES}/image/spring.png">
-           <figcaption><span>15&#37;</span> 상품 이름 &#124; 가격</figcaption>
-          </figure>
-          
-          <figure>
-           <img alf="이미지" src="${CP_RES}/image/spring.png">
-           <figcaption><span>13&#37;</span> 상품 이름 &#124; 가격</figcaption>
-          </figure>
-        </div>
-        <div class= "title">
-          <h2>지금 핫한 상품</h2>
-        </div> 
-        <div class="goods">
-          <figure>
-           <img alf="이미지" src="${CP_RES}/image/spring.png">
-           <figcaption> 상품 이름 &#124; 가격</figcaption>
-          </figure>
-          
-          <figure>
-           <img alf="이미지" src="${CP_RES}/image/spring.png">
-           <figcaption>상품 이름 &#124; 가격</figcaption>
-          </figure>
-          
-          <figure>
-           <img alf="이미지" src="${CP_RES}/image/spring.png">
-           <figcaption>상품 이름 &#124; 가격</figcaption>
-          </figure>
-        </div>
-        
+        </c:forEach> 
       </div>
-      
     </div>
-
   </div>
 </body>
 </html>
