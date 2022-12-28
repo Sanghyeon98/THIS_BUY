@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,6 +28,7 @@ import com.pcwk.ehr.code.domain.CodeVO;
 import com.pcwk.ehr.code.service.CodeService;
 import com.pcwk.ehr.image.domain.ImageVO;
 import com.pcwk.ehr.image.service.ImageService;
+import com.pcwk.ehr.member.domain.MemberVO;
 
 @Controller("adminProduct")
 @RequestMapping("product")
@@ -257,8 +259,21 @@ public class AdminProductController {
 	
 	// 관리자 제품 관리 화면
 	@RequestMapping(value = "/productView.do", method = RequestMethod.GET)
-	public String productView(Model model, SearchVO inVO) throws SQLException { 
+	public String productView(Model model, SearchVO inVO, HttpSession session) throws SQLException { 
 		String VIEW_NAME = "product/admin_product_mng";
+		
+		
+		// 세션으로 권한(auth)가 관리자(1)가 아니면 관리화면 접근 불가 처리 ------------------------
+		MemberVO memberSession = (MemberVO) session.getAttribute("memberInfo");
+		LOG.debug("|  memberSession = " + memberSession);
+		LOG.debug("|  memberSession.getAuth() = " + memberSession.getAuth());
+		
+		if(!"1".equals(memberSession.getAuth())) {	// 관리자가 아니면
+			LOG.debug("|  not Admin ");
+			return "product/moveToMain";
+		}
+		// 세션으로 권한(auth)가 관리자(1)가 아니면 관리화면 접근 불가 처리 ------------------------
+		
 		
 		//페이지 번호
 		if(null !=inVO && inVO.getPageNo()==0) {
@@ -380,7 +395,18 @@ public class AdminProductController {
 	
 	// 제품 수정 화면 이동
 	@RequestMapping(value = "/moveToMod.do")
-	public String moveToMod(ProductVO inVO, Model model) throws SQLException {
+	public String moveToMod(ProductVO inVO, Model model, HttpSession session) throws SQLException {
+		
+		// 세션으로 권한(auth)가 관리자(1)가 아니면 관리화면 접근 불가 처리 ------------------------
+		MemberVO memberSession = (MemberVO) session.getAttribute("memberInfo");
+		LOG.debug("|  memberSession = " + memberSession);
+		LOG.debug("|  memberSession.getAuth() = " + memberSession.getAuth());
+		
+		if(!"1".equals(memberSession.getAuth())) {	// 관리자가 아니면
+			LOG.debug("|  not Admin ");
+			return "product/moveToMain";
+		}		
+		// 세션으로 권한(auth)가 관리자(1)가 아니면 관리화면 접근 불가 처리 ------------------------
 		
 		// 카테고리 목록 조회 ---------------------------------------------------------
 		List<CategoryVO> allCateList = cateService.getALL();
@@ -427,7 +453,18 @@ public class AdminProductController {
 	
 	// 제품 등록 화면 이동
 	@RequestMapping(value = "/moveToReg.do", method = RequestMethod.GET)
-	public String moveToReg(Model model) throws SQLException {
+	public String moveToReg(Model model, HttpSession session) throws SQLException {
+		
+		// 세션으로 권한(auth)가 관리자(1)가 아니면 관리화면 접근 불가 처리 ------------------------
+		MemberVO memberSession = (MemberVO) session.getAttribute("memberInfo");
+		LOG.debug("|  memberSession = " + memberSession);
+		LOG.debug("|  memberSession.getAuth() = " + memberSession.getAuth());
+		
+		if(!"1".equals(memberSession.getAuth())) {	// 관리자가 아니면
+			LOG.debug("|  not Admin ");
+			return "product/moveToMain";
+		}		
+		// 세션으로 권한(auth)가 관리자(1)가 아니면 관리화면 접근 불가 처리 ------------------------
 		
 		// 카테고리 목록 조회 ---------------------------------------------------------
 		List<CategoryVO> allCateList = cateService.getALL();

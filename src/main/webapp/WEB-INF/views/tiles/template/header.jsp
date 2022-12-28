@@ -18,6 +18,18 @@
 <script>
 	$(document).ready(function(){
 		
+    $("#loginName").on("mouseenter", function() {
+      console.log("on~~~!");
+      
+      $(".loginInfo").show();
+      //$(".loginInfo").removeClass('hide');
+    }).on("mouseleave", function() {
+      console.log("off~~~!");
+      
+      $(".loginInfo").hide();
+      //$(".loginInfo").addClass('hide');
+    });
+		
 		// 검색어 엔터
 		$("#gnb_search").on("keypress", function(e) {
 			if(13==e.which){
@@ -125,10 +137,11 @@
 		});
 		
 	});
-	 function doLogout() {
-	        if(confirm('로그아웃 하시겠습니까?')==false)return;
-	        window.location.href= "${CP}/login/doLogout.do";
-	      }
+		
+	function doLogout() {
+	  if(confirm('로그아웃 하시겠습니까?')==false)return;
+	  window.location.href= "${CP}/login/doLogout.do";
+	}
 </script>
 </head>
 
@@ -140,10 +153,18 @@
     <!-- 로고, 메뉴 -->
     <div>
       <div class="top1">
-        <a href="#">${sessionScope.memberInfo.name}</a> 
-        
         <c:choose>
 					<c:when test="${null != sessionScope.memberInfo || not empty sessionScope.memberInfo }">   <!-- session 값이 있으면 -->
+		        <div>
+		          <ul>
+		            <li id="loginName"><a href="#">${sessionScope.memberInfo.name} 님</a></li>
+		            <ul id="loginInfoList">
+			            <li class="loginInfo hide"><a href="#">주문 내역</a></li>
+			            <li class="loginInfo hide"><a href="#">상품 문의</a></li>
+			            <li class="loginInfo hide"><a href="#">개인 정보 수정</a></li>
+		            </ul>
+		          </ul>
+		        </div> 
 						<a href="javascript:doLogout();" id="loginout">로그아웃</a>
 					</c:when>
 					<c:otherwise>
