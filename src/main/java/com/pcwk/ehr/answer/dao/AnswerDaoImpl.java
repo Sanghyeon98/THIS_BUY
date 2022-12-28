@@ -62,7 +62,7 @@ public class AnswerDaoImpl {
 		return list;
 	}
 
-	public DTO doSelectAnswer(AnswerVO inVO) throws SQLException {
+	public AnswerVO doSelectAnswer(AnswerVO inVO) throws SQLException {
 
 		AnswerVO outVO = null;
 

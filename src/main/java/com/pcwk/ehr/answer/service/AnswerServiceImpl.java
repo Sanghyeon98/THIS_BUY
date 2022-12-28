@@ -12,6 +12,7 @@ import com.pcwk.ehr.answer.dao.AnswerDaoImpl;
 import com.pcwk.ehr.answer.domain.AnswerVO;
 import com.pcwk.ehr.board.dao.BoardDao;
 import com.pcwk.ehr.board.dao.BoardDaoImpl;
+import com.pcwk.ehr.board.domain.BoardVO;
 import com.pcwk.ehr.cmn.DTO;
 
 @Service("answerService")
@@ -50,9 +51,11 @@ public class AnswerServiceImpl implements AnswerService {
 	}
 
 	@Override
-	public DTO doSelectAnswer(AnswerVO inVO) throws SQLException {
+	public AnswerVO doSelectAnswer(AnswerVO inVO) throws SQLException {
 
-		return answerDaoImpl.doSelectAnswer(inVO);
+		AnswerVO outVO = answerDaoImpl.doSelectAnswer(inVO);
+		
+		return outVO;
 	}
 
 	@Override

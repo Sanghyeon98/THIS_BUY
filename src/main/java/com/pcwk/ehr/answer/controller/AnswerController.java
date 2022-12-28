@@ -41,16 +41,6 @@ public class AnswerController {
 		model.addAttribute("seq", seq);
 		return "answer/answer_reg";
 	}
-	
-	@RequestMapping(value = "/answerMoview.do",  method = RequestMethod.GET)
-	public String view02(Model model, @RequestParam(value = "answerNo", required = false)String answerNo) throws Exception {
-		LOG.debug("=================");
-		LOG.debug("=answer view=");
-		LOG.debug("=================");
-		
-		model.addAttribute("answerNo", answerNo);
-		return "board/answer_mod";
-	}
 
 
 	/**
@@ -82,7 +72,7 @@ public class AnswerController {
 	}
 
 	/**
-	 * 문의 별 답변 조회
+	 * 전체조회
 	 * 
 	 * @param dto
 	 * @return JSON(Item)
@@ -107,6 +97,37 @@ public class AnswerController {
 		return jsonList;
 	}
 	
+	
+	/**
+	 * 
+	 *  문의 별 답변 조회
+	 * 
+	 * @param inVO
+	 * @param model
+	 * @return "board/board_mod"
+	 * @throws SQLException
+	 */
+	@RequestMapping(value = "/doSelectAnswer.do", method = RequestMethod.GET)
+	public String doSelectOne(AnswerVO inVO, Model model) throws SQLException {
+		String jsonString = "";
+		LOG.debug("┌──────────────────────────────┐");
+		LOG.debug("│inVO = "+inVO);
+		LOG.debug("└──────────────────────────────┘");
+
+
+		AnswerVO outVO = answerService.doSelectAnswer(inVO);
+		LOG.debug("┌──────────────────────────────┐");
+		LOG.debug("│outVO = "+outVO);
+		String message = "";
+		
+		model.addAttribute("vo", outVO);
+		
+		LOG.debug("└──────────────────────────────┘");
+		
+		
+		return "answer/answer_mod";
+	}
+	
   
 	
 	
@@ -117,7 +138,6 @@ public class AnswerController {
 	 * @throws RuntimeException
 	 * @throws SQLException 
 	 */     
-	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "/Update.do",method = RequestMethod.GET
 			,produces = "application/json;charset=UTF-8")
 	@ResponseBody       

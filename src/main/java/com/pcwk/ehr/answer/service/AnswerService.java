@@ -65,6 +65,6 @@ public interface AnswerService {
 	 * @return
 	 * @throws SQLException
 	 */
-	DTO doSelectAnswer(AnswerVO inVO) throws SQLException; 
+	AnswerVO doSelectAnswer(AnswerVO inVO) throws SQLException; 
 	
 }
