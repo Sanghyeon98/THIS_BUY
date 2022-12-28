@@ -190,7 +190,7 @@ public class BoardController {
 					}
 					LOG.debug("|outCodeList=" + outCodeList);
 					model.addAttribute("list", list);
-					model.addAttribute("list01", in);
+					model.addAttribute("list01", list01);
 					model.addAttribute("totalCnt", totalCnt);
 					model.addAttribute("pageTotal", (int) pageTotal);
 					model.addAttribute("PAGE_SIZE", pageSizeList);

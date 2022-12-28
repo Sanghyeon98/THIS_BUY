@@ -490,19 +490,47 @@ ol, ul {
 							  <c:choose>
 						          <c:when test="${list.size()>0 }">
 						             <c:forEach var="vo" items="${list }"  >
-									       <ul class="css-14 ">
-												<li>
-														<div class="css-15 cli">
-															<!-- 1:1문의  -->
-															<div style="display: none;"><c:out value="${vo.seq }"></c:out></div>
-                              <div class="css-16 " ><c:out value="${vo.num }"></c:out></div>
-                              <div class="css-17 " ><c:out value="${vo.title }"></c:out></div>
-                              <div class="css-18 ">관리자</div>
-                              <div class="css-19 "><c:out value="${vo.regDt }"></c:out></div>
-														</div>
-												</li>
-											</ul>
-											 </c:forEach>
+										       <ul class="css-14 ">
+															<li>
+																	<div class="css-15 cli">
+																		<!-- 1:1문의  -->
+																		<div style="display: none;"><c:out value="${vo.seq }"></c:out></div>
+			                              <div class="css-16 " ><c:out value="${vo.num }"></c:out></div>
+			                              <div class="css-17 " ><c:out value="${vo.title }"></c:out></div>
+			                              <div class="css-18 ">관리자</div>
+			                              <div class="css-19 "><c:out value="${vo.regDt }"></c:out></div>
+																	</div>
+															</li>
+														</ul>
+														
+														<c:choose>
+                              <c:when test="${list01.size()>0 }">
+                                <c:forEach var="vo01" items="${list01 }">
+                                 <c:choose>
+                                  <c:when test="${vo.seq == vo01.seq}">
+		                                <ul class="css-14 ">
+				                              <li>
+				                                  <div class="css-15 cli">
+				                                    <!-- 1:1문의  -->
+				                                    <div style="display: none;"><c:out value="${vo01.seq }"></c:out></div>
+				                                    <div class="css-16 ">└</div>
+				                                    <div class="css-17 " ><c:out value="${vo01.title }"></c:out></div>
+				                                    <div class="css-18 ">관리자</div>
+				                                    <div class="css-19 "><c:out value="${vo01.regDt }"></c:out></div>
+				                                  </div>
+				                              </li>
+				                            </ul>
+		                             </c:when>
+		                             </c:choose>
+																</c:forEach>
+                              </c:when>
+														</c:choose>
+														
+														
+													</c:forEach>
+											 
+				
+                       
 						          </c:when>
 						          <c:otherwise>
 						            <div>

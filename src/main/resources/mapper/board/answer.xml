@@ -48,7 +48,6 @@
             ELSE TO_CHAR(reg_dt,'YYYY/MM/DD') END regDt,
             reg_id as regId
     FROM answer
-    WHERE seq = #{seq}
 
   </select>
 
@@ -75,7 +74,7 @@
         reg_dt,
         reg_id
     ) VALUES (
-        #{answerNo},
+        SEQ_ANSWER_NO.NEXTVAL,
         #{seq},
         #{title},
         #{contents},
