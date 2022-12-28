@@ -169,7 +169,7 @@
                
                if("1" == parsedJson.msgId) {  // 제품 등록 성공
             	   alert(parsedJson.msgContents);
-            	   //moveToReg();
+            	   moveToReg();
                } else {
             	   alert(parsedJson.msgContents);
                }

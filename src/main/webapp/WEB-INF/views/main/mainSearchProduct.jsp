@@ -25,12 +25,15 @@
 <body>
 	<!-- 미들 -->
 	<div id="wrap">
+	  <div>
+	  </div>
 	  <div class= "goods_list">
 	    <div class="goods">
 	      <c:forEach var="vo" items="${list}">
 		      <figure class="itemList">
 		        <a href="${CP}/detail/view.do?itemNo=${vo.itemNo}"><img alf="이미지" width="170" src="${CP}${vo.viewPath}/${vo.saveName}"></a>
-		        <a href="${CP}/detail/view.do?itemNo=${vo.itemNo}"><figcaption>${vo.name} &#124; ${vo.price}</figcaption></a>
+		        <a href="${CP}/detail/view.do?itemNo=${vo.itemNo}"><figcaption>${vo.name}</figcaption></a>
+		       <a href="${CP}/detail/view.do?itemNo=${vo.itemNo}"><figcaption>${vo.price}원</figcaption></a> 
 		      </figure> 
 	        
 	      </c:forEach> 

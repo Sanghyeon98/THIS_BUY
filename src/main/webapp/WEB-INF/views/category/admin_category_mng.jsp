@@ -58,7 +58,7 @@
     	// 수정 버튼
     	$("#cate_mod_bt").on("click", function() {
     		
-    		if($("#catelist").val() == 'none') {
+    		if($("#categoryList").val() == 'none') {
     			alert("분류를 선택하세요.");
     			return
     		}
@@ -70,7 +70,7 @@
     		}
     		
     		let currCateNo = $("#currCateNo").val();
-    		let top = $("select[name=catelist]").val();
+    		let top = $("select[name=categoryList]").val();
     		
     		let method = "GET";
         let url = "/category/doUpdate.do";
@@ -109,6 +109,8 @@
     		let cateNo = $(this).attr('id');  // 2차분류 본인 카테고리 번호
     		let topNo = $(this).val();  // 상위 카테고리 번호
     		
+    		console.log("topNo : " + topNo);
+    		
     		let method = "GET";
         let url = "/category/doSelectOne.do";
         let async = true;
@@ -120,7 +122,7 @@
         	console.log("data:" + data);
         	let parsedJson = JSON.parse(data);
         	
-        	$("#catelist").val(topNo).prop("selected", true);
+        	$("#categoryList").val(topNo).prop("selected", true);
           $("#categoryNm").val(parsedJson.categoryNm);
           $("#currCateNo").val(parsedJson.categoryNo);
           
@@ -137,7 +139,7 @@
     	$("#cate_save_bt").on("click", function() {
     		console.log("cate_save_bt");
     		
-    		console.log("1차분류 카테고리 번호 : " + $("#catelist").val());
+    		console.log("1차분류 카테고리 번호 : " + $("#categoryList").val());
     		console.log("카테고리 이름 : " + $("#categoryNm").val());
     		
     		let method = "GET";
@@ -145,7 +147,7 @@
     		let async = true;
     		let params = {
     				categoryNm : $("#categoryNm").val(),
-    				topNo : $("#catelist").val()
+    				topNo : $("#categoryList").val()
     		};
     		
     		
@@ -251,7 +253,7 @@
 	                <tr>
 	                  <td>분류</td>
 	                  <td>
-	                    <select id="catelist" name="catelist">
+	                    <select id="categoryList" name="categoryList">
 	                      <option value="none">==선택==</option>
 	                      <c:forEach var="vo" items="${list }">
 	                        <c:choose>

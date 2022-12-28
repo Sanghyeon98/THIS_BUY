@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+body, header, footer, div, h1, h2, ul, li, p {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;  /* padding, border를 width에 포함 */
+}
+
 #wrap {
   width: 1050px;
   margin: 0 auto; /* 좌우 가운데 정렬 */
