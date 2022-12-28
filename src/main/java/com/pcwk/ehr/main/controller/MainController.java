@@ -65,7 +65,8 @@ public class MainController {
 	}
 
 	// 상품 검색
-	@RequestMapping(value = "/doRetrieve.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = "/doRetrieve.do", method = RequestMethod.GET, 
+			produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String doRetrieve(SearchVO inVO) throws SQLException {
 		String jsonString = "";
@@ -120,6 +121,7 @@ public class MainController {
 	
 	@RequestMapping(value = "/mainTop.do", method = RequestMethod.GET,
             produces = "application/json;charset=UTF-8")
+	@ResponseBody
     public String mainTop(Model model) throws SQLException {
         String jsonString = "";
         

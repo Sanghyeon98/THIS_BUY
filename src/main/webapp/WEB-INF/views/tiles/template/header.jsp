@@ -11,259 +11,8 @@
 <head>
 <meta charset="UTF-8">
 
-<style>       
-  div {
-    margin:0;
-    padding:0;
-    display : block;
-    box-sizing: border-box;
-  }
-  
-  ul {
-    list-style-type: none;
-  }
-  
-  .top {
-    width:100%;
-    height:40px;
-    line-hieght:40px;
-    text-align:center;
-    background-color:#B8C9DF;
-    color:white;
-    margin: 0 auto;
-    top: 0px;
-    left: 0px;
-  }
-  
-  a {
-    background-color: transparent;
-    text-decoration: none;
-    color: inherit;
-  }
-  
-  .top1 {
-    padding-top : 10px;
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    z-index: 100;
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-    font-size: 12px;
-  }
-  
-  .top1 > a {
-    margin-right: 10px;
-  }
-  
-  .top2 {
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-    height: 63px;
-    width:1050px;
-    margin: 0 auto;
-  }
-  
-  .search {
-    display: flex;
-    align-items: center;
-    margin: 0 auto;
-    justify-content: space-between;
-    left: 325px;
-    top: -55px;
-    width: 400px;
-    height: 48px;
-    padding-left: 14px;
-    border: 2px solid #B8C9DF; 
-    border-radius: 6px;
-    background-color: rgb(255, 255, 255);
-    box-shadow: rgb(247 247 247) 0px 0px 0px 1px inset;
-  }
-  
-  .search_input {
-    width: 300px;
-    background-color: inherit;
-    border: none;
-    outline: none;
-    font-size: 16px;
-    letter-spacing: -0.33px;
-  }
-  
-  .search_bnt {
-    position: relative;
-    width: 30px;
-    height: 30px;
-    margin: 10px;
-    bottom: 3px;
-    line-height:30px;
-    background:url(${CP_RES}/img/common/searchicon.png) 60px 60px;
-  }
-  
-  .like_bnt {
-    width: 30px;
-    height: 30px;
-    line-height:30px;
-    background: url(${CP_RES}/image/like_icon.png);
-  }
-  
-  .cart_bnt {
-    width: 30px;
-    height: 30px;
-    line-height:30px;
-    background: url(${CP_RES}/image/cart_icon.png);
-  }
-  
-  .top3 {
-    background-color: #F6F6F6;
-    border-radius: 6px;
-    position: relative;
-    display: flex;
-    -webkit-box-pack: justify;
-    justify-content: space-between;
-    width: 1050px;
-    height: 56px;
-    margin: 0px auto;
-    margin-bottom:10px;
-  }
-  
-  .categori {
-    color: white;
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-    height: 63px;
-  }
-  
-  
-  .top3_1 {
-    display: flex;
-    margin-left: 30px;
-  }
-  
-  .menu {
-    display: flex;
-    -webkit-box-pack: center;
-    justify-content: center;
-    width: 150px;
-    height: 55px;
-    padding-top: 18px;
-    line-height: 20px;
-    text-align: center;
-    color: white;
-  }
-  
-  .menu2{
-    min-width: 1050px;
-    letter-spacing: -0.3px;
-    background-color: #CA8A8B;
-    border-radius: 6px;
-    position: relative;
-    box-shadow: rgb(0 0 0 / 7%) 0px 3px 4px 0px;
-    width: 100%;
-    position: fixed;
-    z-index: 101;
-    top: 0px;
-    left: 0px;
-    
-  }
-  
-  .logo a{
-    color : white;
-  }
-  
-  .middle {
-    width:100%;
-    height:2000px;
-  }
-  
-  .goods{
-    position: relative;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    display: flex;
-    transition-property: transform;
-    box-sizing: content-box;
-  }
+<link rel="stylesheet" href="${CP_RES}/css/main.css">
 
-  .list{
-    width: 1050px;
-    margin: 0 auto;
-    padding: 50px 0 48px;
-    font-weight: 500;
-    font-size: 28px;
-    line-height: 35px;
-    align-items: center;
-  }
-
-  .button_left{
-    float: left;
-  }
-  .button_right{
-     float: right;
-  }
-  
-  .title{
-    margin: 0 auto;
-  }
-  .goods_list{
-    width: 1050px;
-    margin: 0px auto;
-    padding: 50px 0 48px;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 35px;
-    text-align: center;
-  }
-  
-  .bottom {
-    width:100%;
-    background-color:#5B6D5B;
-    position: relative;
-    height:500px;
-  }
-  
-  .hide {
-    display:none;
-  }
-  
-  #categoryMenu {
-    padding-top: 17px;
-    padding-left: 5px; 
-  }
-  
-  #catelist {
-    margin-top: 18px;
-  }
-  
-  /* 1차 카테고리 */
-  .cate01list {
-    background-color: #D9E5FF;
-    padding: 5px;
-    width: 200px;
-  }
-  
-  .cate01list:hover {
-    background-color: #C4DEFF;
-  }
- 
-  /* 2차 카테고리 */
-  .cate02list {
-    background-color: #FFFFFF;
-    padding: 3px; 
-  }
-  
-  .cate02list:hover {
-    background-color: #F6F6F6;
-  }
-  
-  
- 
-   
-
-</style>
 <title>제목</title>
 
 <script>
@@ -301,8 +50,9 @@
 				$("#catelist").append(htmlData);
 				
 			},
-			error:function(data){//실패
+			error : function(request,status,error){
 			  console.log("error");
+				alert("@@code:"+request.status+"\n"+"@@message:"+request.responseText+"\n"+"@@error:"+error);
 			},
 			complete:function(data){//성공, 실패 관계 없이 출력
 			  console.log("complete");
@@ -313,6 +63,25 @@
 		// 2차분류 클릭 이벤트
 		$("#categoryMenu").on("click", '.cate02list', function() {
 			console.log("2차 분류..");
+			
+			console.log("2차분류 카테고리 ID : " + $(this).val());
+			
+			let cate02Id = $(this).val();
+			
+			let method = "GET";
+      let url = "/main/doRetrieve.do";
+      let async = true;
+      let params = { 
+    		  searchDiv : 20,       // searchDiv = 20이면 2차 분류로 검색 
+    		  cateId : cate02Id
+      };
+	    
+      
+	        
+	    /* PClass.callAjax(method, url, async, params, function(data) {
+	    
+	    }); */
+	    
 		});
 		
 		

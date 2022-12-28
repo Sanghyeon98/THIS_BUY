@@ -5,9 +5,13 @@
   <mapper namespace="com.pcwk.ehr.main">
   
   <sql id="searchCriteria">
-    <if test="searchWord != null">
-      p.name like '%' || #{searchWord} || '%'
-    </if> 
+    <choose>
+      <when test='searchDiv != null and searchDiv == "20"'> <!-- 2차분류 검색 -->
+        and p.category_no = #{cateId}
+      </when>
+      <otherwise>
+      </otherwise>
+    </choose>
   </sql>
   
   <!-- 상품 검색 -->
@@ -48,31 +52,31 @@
   
   <!-- 메인 : 상품 표시-->
   <select id="getALL" parameterType="ProductVO" resultType="ProductImgVO">
-		SELECT rownum, a.*
-		FROM (
-		  SELECT
-		    p.item_no AS itemNo,
-		    name,
-		    price,
-		    quantity,
-		    category_no AS categoryNo,
-		    p.image_no AS imageNo,
-		    production,
-		    weight,
-		    TO_CHAR(expired, 'YYYY-MM-DD HH24:MI:SS') AS expired,
-		    detail,
-		    discount,
-		    final_price AS finalPrice,
-		    sales,
-		    TO_CHAR(p.reg_dt, 'YYYY-MM-DD HH24:MI:SS') AS regDt,
-		    TO_CHAR(p.mod_dt, 'YYYY-MM-DD HH24:MI:SS') AS modDt,
-		    i.save_name AS saveName,
-		    i.view_path AS viewPath
-		  FROM product p, image i
-		  WHERE p.image_no = i.image_no
-		  
-		  ORDER BY p.reg_dt desc
-		) a
+    SELECT rownum, a.*
+    FROM (
+      SELECT
+        p.item_no AS itemNo,
+        name,
+        price,
+        quantity,
+        category_no AS categoryNo,
+        p.image_no AS imageNo,
+        production,
+        weight,
+        TO_CHAR(expired, 'YYYY-MM-DD HH24:MI:SS') AS expired,
+        detail,
+        discount,
+        final_price AS finalPrice,
+        sales,
+        TO_CHAR(p.reg_dt, 'YYYY-MM-DD HH24:MI:SS') AS regDt,
+        TO_CHAR(p.mod_dt, 'YYYY-MM-DD HH24:MI:SS') AS modDt,
+        i.save_name AS saveName,
+        i.view_path AS viewPath
+      FROM product p, image i
+      WHERE p.image_no = i.image_no
+      
+      ORDER BY p.reg_dt desc
+    ) a
     <![CDATA[WHERE rownum <= 20]]>
   </select>
 
