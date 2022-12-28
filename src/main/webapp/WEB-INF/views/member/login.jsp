@@ -90,11 +90,14 @@ $(document).ready(function(){
             }
             
             //로그인 성공
-          if("30" == parsedJson.msgId){             
+          if("60" == parsedJson.msgId){             
               alert(parsedJson.msgContents);
               
-              //TODO: main.jsp
-              window.location.href = "${CP}/main/main_page.do";
+              //TODO: main.jsp//admin
+              window.location.href = "${CP}/category/categoryView.do";
+          }else if("30" ==parsedJson.msgId){
+        	  alert(parsedJson.msgContents);
+        	  window.location.href = "${CP}/main/main_page.do";
           }
       
         });

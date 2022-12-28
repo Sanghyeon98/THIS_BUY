@@ -45,6 +45,13 @@ public class MemberServiceImpl implements MemberService {
 			LOG.debug("└-------------------------------------------┘");					
 			return 20;
 		}
+		flag = memberDao.authCheck(inVO);
+		if(1 == flag) {
+			LOG.debug("┌-------------------------------------------┐");
+			LOG.debug("|관리자                                    ");
+			LOG.debug("└-------------------------------------------┘");					
+			return 60;
+		}
 		
 		
 		LOG.debug("┌-------------------------------------------┐");

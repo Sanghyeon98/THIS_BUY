@@ -179,6 +179,20 @@ final Logger LOG = LogManager.getFormatterLogger(getClass());
 		LOG.debug("└--------------------------------┘");		
 		return cnt;
 	}
+	
+	@Override
+	public int authCheck(MemberVO inVO) throws SQLException {
+		int cnt = 0;
+		String statement = NAMESPACE+DOT+"authCheck";
+		LOG.debug("┌--------------------------------┐");
+		LOG.debug("|param:"+inVO );        
+		LOG.debug("|statement:"+statement );		
+		
+		cnt = sqlSessionTemplate.selectOne(statement, inVO);
+		LOG.debug("|cnt:"+cnt );
+		LOG.debug("└--------------------------------┘");		
+		return cnt;
+	}
 
 
 	

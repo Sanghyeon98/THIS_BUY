@@ -105,6 +105,16 @@ public class LoginController {
 			if(null !=loginInfo) {
 				session.setAttribute("memberInfo", loginInfo);
 			}
+			}else if(60 == loginStatus) {
+				message = "관리자"+inVO.getMemberid()+"가 로그인 되었습니다.";
+				//------------------------------------------------
+				//로그인 정보 조회
+				//-----------------------------------------------
+				MemberVO loginInfo1 = memberservice.doSelectOne(inVO);
+				//접속자 수가 적은 경우(내부사이트)
+				if(null !=loginInfo1) {
+					session.setAttribute("memberInfo", loginInfo1);
+				}
 			
 			
 		}else {
@@ -122,3 +132,4 @@ public class LoginController {
 	
 	
 }
+	
