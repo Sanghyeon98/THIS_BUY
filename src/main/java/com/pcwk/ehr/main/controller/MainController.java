@@ -108,7 +108,7 @@ public class MainController {
 		LOG.debug("┌-------------------------------------┐");
 		LOG.debug("|  inVO = " + inVO);
 
-		List<ProductVO> list = prodService.doRetrieve(inVO);
+		List<ProductImgVO> list = mainService.doRetrieve(inVO);
 
 		jsonString = new Gson().toJson(list);
 		LOG.debug("|  jsonString = " + jsonString);

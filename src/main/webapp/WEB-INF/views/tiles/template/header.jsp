@@ -31,7 +31,12 @@
 		// 검색어 버튼 클릭
 		$("#search_bnt").on("click", function() {
 			console.log("검색어 버튼");
+			console.log("검색어 : " + $("#gnb_search").val());
 			
+			let gnb_search = $("#gnb_search").val();
+			 
+			// div가 10이면 검색어로 검색, 없으면 메인/카테고리 목록 표출
+			window.location.href= "${CP}/main/mainSearchProduct.do?div=10&searchWord=" + gnb_search;
 	  });
 		
 		

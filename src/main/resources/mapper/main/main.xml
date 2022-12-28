@@ -6,10 +6,21 @@
   
   <sql id="searchCriteria">
     <choose>
-      <when test='searchDiv != "" and searchDiv == "20"'> <!-- 2차분류 검색 -->
-        and p.category_no = #{cateId}
+      <when test='div != "" and div == "10"'>  <!-- 검색어로 검색인 경우. -->
+        <choose>
+          <when test='searchWord != ""'>
+            and p.name LIKE '%' || #{searchWord} || '%'
+          </when>
+        </choose>
       </when>
-      <otherwise>
+      <otherwise>  <!-- 검색이 아닌 메인, 카테고리 선택 시 보여줌 -->
+		    <choose>
+		      <when test='searchDiv != "" and searchDiv == "20"'> <!-- 2차분류 검색 -->
+		        and p.category_no = #{cateId}
+		      </when>
+		      <otherwise>
+		      </otherwise>
+		    </choose>
       </otherwise>
     </choose>
   </sql>
