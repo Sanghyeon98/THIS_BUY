@@ -53,4 +53,9 @@ public class CartServiceImpl implements CartService {
 		return cartDao.cartCheck(inVO);
 	}
 
+	@Override
+	public int deleteAll(CartVO inVO) throws SQLException {
+		return cartDao.deleteAll(inVO);
+	}
+
 }

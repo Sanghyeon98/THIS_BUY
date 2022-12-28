@@ -49,6 +49,12 @@
         and m.member_id = #{memberId}    
     </select>
 
+	<delete id="deleteAll" parameterType="com.pcwk.ehr.cart.domain.CartVO">
+		DELETE
+		FROM cart
+		WHERE member_id = #{memberId}
+	</delete>
+
 
 
 	<delete id="doDelete"

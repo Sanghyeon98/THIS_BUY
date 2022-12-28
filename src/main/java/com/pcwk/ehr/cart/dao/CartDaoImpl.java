@@ -134,4 +134,21 @@ public class CartDaoImpl implements CartDao {
 		return flag;
 	}
 
+
+	@Override
+	public int deleteAll(CartVO inVO) throws SQLException {
+		
+		LOG.debug("┌--------------------------------┐");
+		LOG.debug("|  param : " + inVO);
+		
+		String statement = NAMESPACE + DOT + "deleteAll";
+		LOG.debug("|  statement : " + statement);
+		
+		int flag = sqlSessionTemplate.delete(statement, inVO);
+		LOG.debug("|  flag : " + flag);
+		LOG.debug("└--------------------------------┘");  
+		
+		return flag;
+	}
+
 }

@@ -41,4 +41,6 @@ public interface CartService {
 	List<CartJoinVO> getAll(CartJoinVO inVO) throws SQLException;
 	
 	int cartCheck(CartVO inVO) throws SQLException;
+	
+	int deleteAll(CartVO inVO) throws SQLException ;
 }

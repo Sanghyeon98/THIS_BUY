@@ -106,16 +106,18 @@ width: 30px;
 		
 		var button = document.getElementById('payment-button'); // 결제하기 버튼
 		
-		//button.addEventListener('click', function () {
+		
 		  tossPayments.requestPayment('카드', {
 		    amount: finalSum,
 		    orderId: 'qYGNIWZ68TzK3CAOBSzAw',
 		    orderName: '토스 티셔츠 외 2건',
-		    customerName: '박토스',
+		    customerName: orderName,
 		    successUrl: 'http://localhost:8089/success',
 		    failUrl: 'http://localhost:8089/fail',
 		  });
-		//});
+		
+		
+		
 		
 	 });
 	 
