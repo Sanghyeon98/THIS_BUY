@@ -129,7 +129,7 @@ public class CartDaoImpl implements CartDao {
 	@Override
 	public int cartCheck(CartVO inVO) throws SQLException {
 		//String statement =NAMESPACE+DOT+"getAll";
-				String statement = NAMESPACE + DOT + "carCheck";
+				String statement = NAMESPACE + DOT + "cartCheck";
 				int flag = sqlSessionTemplate.update(statement, inVO);
 		return flag;
 	}
