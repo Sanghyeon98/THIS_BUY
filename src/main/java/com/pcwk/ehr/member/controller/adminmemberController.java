@@ -1,6 +1,7 @@
 package com.pcwk.ehr.member.controller;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import com.google.gson.Gson;
+import com.pcwk.ehr.admin.domain.ProductVO;
 import com.pcwk.ehr.cmn.MessageVO;
 import com.pcwk.ehr.cmn.SearchVO;
 import com.pcwk.ehr.cmn.StringUtil;
@@ -44,7 +46,7 @@ public class adminmemberController {
 		LOG.debug("└=============================┘");
 		return VIEW_NAME;		
 	}
-	@RequestMapping(value = "/doRetrive.do",method=RequestMethod.GET
+	@RequestMapping(value = "/doRetrieve.do",method=RequestMethod.GET
 			,produces = "application/json;charset=UTF-8")
 	@ResponseBody //비동기 처리를 하는 경우, HTTP 요청 부분의 body부분이 그대로 브라우저에 전달된다.	
 	public String doRetrive(SearchVO inVO)throws SQLException{
@@ -96,44 +98,47 @@ public class adminmemberController {
 		LOG.debug("└=============================┘");		
 		return jsonString;
 	}
-	@RequestMapping(value = "/doDelete.do",method = RequestMethod.GET
-			,produces = "application/json;charset=UTF-8"
-			)
-	@ResponseBody
-	public String doDelete(HttpServletRequest req, MemberVO inVO)throws SQLException{
-		String jsonString = "";
-		
-		LOG.debug("┌=============================┐");		
-		
-		String uId = req.getParameter("uId");
-		LOG.debug("|uId="+uId);
-		
-		//Command객체
-		//ajax{uId:'p99_01'},form(name="uId")
-		//
-		LOG.debug("|inVO="+inVO);
-		MemberVO inpuVO =new MemberVO();
-		inpuVO.setMemberid(uId);
-		
-		LOG.debug("|inpuVO="+inpuVO);
-		
-		int flag = memberservice.doDelete(inpuVO);
-		
-		LOG.debug("|flag="+flag);
-		
-		String message = "";
-		if(1==flag) {
-			message = inpuVO.getMemberid()+"가 삭제 되었습니다.";
-		}else {
-			message = inpuVO.getMemberid()+" 삭제 실패!";
+	// 상품 삭제 처리
+		@RequestMapping(value = "/upDeleteAll.do", method = RequestMethod.GET,
+				produces = "application/json;charset=UTF-8")
+		@ResponseBody
+		public String upDeleteAll(HttpServletRequest req) throws SQLException {
+			String jsonString = "";
+			
+			String memberidStr = req.getParameter("memberid");
+			LOG.debug("┌--------------------------------┐");	
+			LOG.debug("|  memberidStr = " + memberidStr);
+			
+			List<MemberVO> list = new ArrayList<MemberVO>();
+			
+			// 다건 삭제
+			if(memberidStr.indexOf(",") != -1) {
+				String[] memberArray = memberidStr.split(",");
+				
+				for(String memberid : memberArray) {
+					MemberVO tmpVO = new MemberVO();
+					tmpVO.setMemberid(memberidStr);
+					
+					list.add(tmpVO);
+				}
+			} else {  // 한건 삭제
+				MemberVO tmpVO = new MemberVO();
+				tmpVO.setMemberid(memberidStr);
+				
+				list.add(tmpVO);
+			}
+			
+			int delCnt = memberservice.upDeleteAll(list);
+			
+			String msg = "";
+			if(0 == delCnt) {
+				msg = "제품 삭제에 실패했습니다.";
+			} else {
+				msg = memberidStr + "제품 삭제 성공!";
+			}
+			
+			jsonString = new Gson().toJson(new MessageVO(String.valueOf(delCnt), msg));
+			
+			return jsonString;
 		}
-		
-		MessageVO  messageVO=new MessageVO(String.valueOf(flag),message);
-		
-		jsonString = new Gson().toJson(messageVO);
-		
-		LOG.debug("|jsonString="+jsonString);
-		LOG.debug("└=============================┘");		
-		return jsonString;
-	}
 }

@@ -51,16 +51,9 @@
 		TT1. phone ,
 		TT1. address ,
 		TT1. gender ,
-		--당일이면 시:분, 그렇치 않으면 년/월/일
-		DECODE( TO_CHAR(SYSDATE,'YYYY-MM-DD'), TO_CHAR(TT1.birthdate,'YYYY-MM-DD')
-		,TO_CHAR(TT1.birthdate,'HH24:MI')
-		,TO_CHAR(TT1.birthdate,'YYYY-MM-DD')) as birthdate,
-		DECODE( TO_CHAR(SYSDATE,'YYYY-MM-DD'), TO_CHAR(TT1.reg_dt,'YYYY-MM-DD')
-		,TO_CHAR(TT1.reg_dt,'HH24:MI')
-		,TO_CHAR(TT1.reg_dt,'YYYY-MM-DD')) as regDt,
-		DECODE( TO_CHAR(SYSDATE,'YYYY-MM-DD'), TO_CHAR(TT1.mod_dt,'YYYY-MM-DD')
-		,TO_CHAR(TT1.mod_dt,'HH24:MI')
-		,TO_CHAR(TT1.mod_dt,'YYYY-MM-DD')) as modDt,
+		TT1. birthdate,
+		TT1. reg_dt,
+		TO_CHAR(SYSDATE,'YYYY-MM-DD') modDt,
 		TT1. auth
 		FROM (
 		SELECT ROWNUM AS RNUM,T1.*

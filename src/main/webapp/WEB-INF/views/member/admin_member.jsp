@@ -74,11 +74,11 @@
         
         if(confirm("삭제하시겠습니까?") == false) return;
         
-        let method = "POST";
-        let url = "/product/upDeleteAll.do";
+        let method = "GET";
+        let url = "/admin/upDeleteAll.do";
         let async = true;
         let params = { 
-            itemNo : uIdString 
+            memberid : uIdString 
         };
         
         
@@ -99,7 +99,7 @@
         
       }); // 다건 삭제 END --------------------------------------------------------
       
-      
+     
       // 전체 선택/해제
       $("#checkAll").on("click", function() {
         console.log("#checkAll");
@@ -135,46 +135,6 @@
       }); // doRetrieve --------------------------------------------------------
 
       
-      // 1차 분류 변경 시, 2차 분류 표출
-      $(".cate01List").on("change", function() {
-        console.log(".cate01List");
-        console.log("$(this).val() : " + $(this).val());
-        
-        // 선택된 1차 분류 value 값
-        let currentCateNo = $(this).val();
-        
-        $(".cate02List").empty();
-        
-        let cate02ListJson = JSON.parse('${cate02ListJson}');
-        console.log("cate02ListJson : " + cate02ListJson);
-        
-        let htmlData = "";
-        console.log("htmlData length : " + htmlData.length);
-        
-        htmlData += "<option value='none'>==선택==</option>";
-        
-        $.each(cate02ListJson, function(index, value) {
-            // 2차 분류의 topNo와 현재 선택된 1차 분류의 categoryNo가 같으면 (하위 카테고리이면~!)
-          if(value.topNo == currentCateNo) {
-            htmlData += "<option value='"+value.categoryNo+"'>" + value.categoryNm + "</option>";
-          }
-        });
-        
-        /* // 2차 분류에 값이 없으면 '==선택==' 표출
-        if(htmlData.length == 0) {
-          htmlData += "<option value='none'>==선택==</option>";
-        }
-         */
-        $(".cate02List").append(htmlData);
-      });  // 1차 분류 변경 시, 2차 분류 표출 -------------------------------------------
-      
-      
-      // '상품 등록' 버튼 클릭 시, 상품등록 페이지로 이동
-      $("#prod_reg_bt").on("click", function() {
-          console.log("#prod_reg_bt");
-          
-          window.location.href = "${CP}/product/moveToReg.do";
-      });  // '상품 등록' 버튼 클릭 시, 상품등록 페이지로 이동 ------------------------------
       
     }); // document.ready END --------------------------------------------------
     
@@ -193,16 +153,19 @@
     // 목록 조회 함수
     function doRetrieve(page) {
     	let method ="GET";
-        let url    ="/member/doRetrieve.do";
+        let url    ="/admin/doRetrieve.do";
         let async  = true;
         let params = {
             searchDiv : $("#searchDiv").val(),
             searchWord: $("#searchWord").val(),
             pageSize : $("#pageSize").val(),
-            pageNo: page
+            pageNo: page,
+            memberid   : $("#memberid").val(),
+            name       : $("#name").val(),
+            phone      : $("#phone").val(),
     };
         PClass.callAjax(method,url,async,params,function(data){
-            console.log("data:"+data);
+            console.log("member:"+data);
           //JSON.parse() 메서드는 JSON 문자열의 구문을 분석하고, 그 결과에서 JavaScript 값이나 객체를 생성합니다.
           let parsedJson = JSON.parse(data);
           
@@ -223,27 +186,26 @@
               pageTotal = Math.ceil( totalCnt/$("#pageSize").val() );
               console.log("================");
               console.log("=totalCnt="+totalCnt);
-              console.log("=pageSize="+$("#pageSize").val());
               console.log("=pageTotal="+pageTotal);
               console.log("=page="+page);
               console.log("================");
               
             $.each(parsedJson,function(index,value){
                 htmlData +=" <tr>";
-                htmlData +="   <td class='text-center col-sm-1 col-md-1 col-lg-1'><input type='checkbox' name='chk' value='"+value.memberid+"' /></td>";
-                htmlData +="   <td class='text-center col-sm-1 col-md-1 col-lg-1'>"+value.num  +"</td>";
-                htmlData +="   <td class='text-left   col-sm-2 col-md-2 col-lg-2'>"+value.uId  +"</td>";
-                htmlData +="   <td class='text-left   col-sm-2 col-md-2 col-lg-2'>"+value.name +"</td>";
-                htmlData +="   <td class='text-center col-sm-2 col-md-2 col-lg-2'>"+value.level+"</td>";
-                htmlData +="   <td class='text-left   col-sm-3 col-md-3 col-lg-3'>"+value.email+"</td>";
-                htmlData +="   <td class='text-center col-sm-1 col-md-1 col-lg-1'>"+value.regDt+"</td>";
+                htmlData +="   <td class='td_center'><input type='checkbox' name='chk' value='"+value.memberid+"' /></td>";
+                htmlData +="   <td><a href='#' onClick='doSelectOne(" + value.memberid + ")'>" + value.memberid + "</a></td>";
+                htmlData +="   <td class='td_center'>"+value.name  +"</td>";
+                htmlData +="   <td class='text-left   col-sm-2 col-md-2 col-lg-2'>"+value.phone +"</td>";
+                htmlData +="  <td class='td_center'>"+value.regDt+"</td>";
                 htmlData +=" </tr>";                  
             });
           //데이터가 없는 경우    
-          }else{
-            htmlData +=" <tr>"; 
-            htmlData +="   <td colspan='99' class='text-center  col-sm-12 col-md-12 col-lg-12'>no data found</td>";
-            htmlData +=" </tr>";
+          }else {
+              htmlData += "<tr>";
+              htmlData += "  <td class='td_center' colspan='99'>";
+              htmlData += "   No data found ";
+              htmlData += "  </td>";
+              htmlData += "</tr>";
           }
             
           //table 데이터 출력
@@ -254,12 +216,7 @@
           renderingPage(pageTotal,page);
   
            
-        // 데이터 출력
-        $("#productTable>tbody").append(htmlData);
-        
-        //paging
-        $("#page-selection").empty();//페이저 삭제
-        renderingPage(pageTotal, page);
+ 
         
       });  // PClass.callAjax END
     } // 목록 조회 (doReterieve 함수) END ------------------------------------------
@@ -336,7 +293,7 @@
           <option value="30">이메일</option>
         </select></td>
                 <td class="table_left"><label>검색어</label></td>
-                <td><input type="text" name="searchWord" id="searchWord" placeholder="상품명을 입력하세요."></td>
+                <td><input type="text" name="searchWord" id="searchWord" placeholder="검색어를 입력하세요."></td>
               </tr>
             </table>
             <div class="reset">

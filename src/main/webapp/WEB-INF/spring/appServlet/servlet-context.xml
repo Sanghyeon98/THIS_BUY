@@ -33,6 +33,7 @@
       <mvc:exclude-mapping path="/product/**"/>
       <mvc:exclude-mapping path="/category/**"/>
       <mvc:exclude-mapping path="/board/**"/>
+      <mvc:exclude-mapping path="/admin/**"/>
       <beans:ref bean="loginInterceptor"/>
      </mvc:interceptor>  
   </mvc:interceptors>

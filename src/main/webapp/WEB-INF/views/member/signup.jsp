@@ -78,7 +78,7 @@ $(document).ready(function(){
           let url    = "/signup/idCheck.do";
           let async  = true;
           let params = {
-        		  "memberid": $("#memberid").val()
+        		  memberid: $("#memberid").val()
         		  };
           
           
