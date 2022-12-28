@@ -27,7 +27,12 @@
       <mvc:exclude-mapping path="/member/**"/>
       <mvc:exclude-mapping path="/resources/**"/>
       <mvc:exclude-mapping path="/main/**"/>
-      <mvc:exclude-mapping path="/signup/**"/>
+      <mvc:exclude-mapping path="/cart/**"/>
+      <mvc:exclude-mapping path="/orderSheet/**"/>
+      <mvc:exclude-mapping path="/detail/**"/>
+      <mvc:exclude-mapping path="/product/**"/>
+      <mvc:exclude-mapping path="/category/**"/>
+      <mvc:exclude-mapping path="/board/**"/>
       <beans:ref bean="loginInterceptor"/>
      </mvc:interceptor>  
   </mvc:interceptors>
