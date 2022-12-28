@@ -25,7 +25,7 @@
 
 <body>
   <!-- 메인페이지 전체 -->
-  <div style="position:relative; z-index:-1;">
+  <div>
     <!-- 미들 -->
     <div class="middle">
       <div class= "goods_list">

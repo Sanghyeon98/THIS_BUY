@@ -24,7 +24,7 @@
 </head>
 <body>
 	<!-- 미들 -->
-	<div style="position:relative; z-index:-1;" id="wrap">
+	<div id="wrap">
 	  <div class= "goods_list">
 	    <div class="goods">
 	      <c:forEach var="vo" items="${list}">

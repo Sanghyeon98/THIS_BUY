@@ -39,9 +39,9 @@
 				$.each(parsedJson, function(index, value) {
 				    // 2차 분류의 topNo와 현재 선택된 1차 분류의 categoryNo가 같으면 (하위 카테고리이면~!)
 				  if(value.topNo == 0) {
-				    htmlData += "<li class='cate01list hide' value='" + value.categoryNo + "'>" + value.categoryNm + "</li>";
+				    htmlData += "<li style='position:relative; z-index:3;' class='cate01list hide' value='" + value.categoryNo + "'>" + value.categoryNm + "</li>";
 				  } else {
-				    htmlData += "<li class='cate02list hide cateTop" + value.topNo + "' value='" + value.categoryNo + "'>" + value.categoryNm + "</li>";
+				    htmlData += "<li style='position:relative; z-index:2;' class='cate02list hide cateTop" + value.topNo + "' value='" + value.categoryNo + "'>" + value.categoryNm + "</li>";
 				  }
 				});
 				

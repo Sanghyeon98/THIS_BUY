@@ -21,7 +21,9 @@
          SELECT
                 TT1.rnum AS num,
                 TT1.item_no AS itemNo,
-                TT1.name,
+                CASE WHEN LENGTH(TT1.name) >= 12 THEN SUBSTR(TT1.name, 0, 10) || '..'
+                ELSE TT1.name END AS name,
+                --TT1.name,
                 TT1.price,
                 TT1.image_no AS imageNo,
                 TT1.save_name AS saveName,
