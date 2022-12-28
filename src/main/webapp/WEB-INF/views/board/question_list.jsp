@@ -314,7 +314,32 @@ ol, ul {
 <script>
 	$(document).ready(function() {
 		console.log("document.ready");
+		renderingPage('${pageTotal}',1)
 		//doRetrieve(1);
+		
+		//-------------------------------- 한건조회 (상세조회) 테이블 클릭 
+	      
+		  //테이블 클릭
+		            $("#boardTable>div").on("click","ul",function(e) {
+		                      console.log('boardTable');
+		                      let divArray = $(this).find("li>div");
+		                      let boardSeq = divArray.eq(0).text();
+
+		                      console.log('boardSeq:' + boardSeq);
+		                      console.log('boardTable');
+
+		                          if (confirm("상세 조회를 하시겠습니까?") == false)
+		                            return;
+		                          //div,seq
+		                          window.location.href = "${CP}/board/doSelectOne.do?gubun=10&seq="
+		                              + boardSeq;
+		  
+		                          console.log("boardSeq: "+ boardSeq);
+
+		                      
+		                });
+
+		//-------------------------------- 한건조회 (상세조회) 테이블 클릭  끝
 	}); //document
 
  	function doRetrieve(page) {
@@ -430,11 +455,13 @@ ol, ul {
 									href="${CP}/board/boardView.do?gubun=10">공지사항</a></li>
 								<li class="css-0 "><a class=" css-20 "
 									href="${CP}/board/boardView.do?gubun=20">1:1 문의</a></li>
+								<li class="css-0 "><a class=" css-20 "
+                  href="${CP}/board/boardView.do?gubun=30">자주하는 질문</a></li>
 							</ul>
 						</div>
 
- 				
- 						${list01 }
+ 			
+ 						여기는 : ${list01 }
 						<div class="css-5 ">
 							<div class="css-6 ">
 								<div class="css-7 ">
@@ -450,7 +477,7 @@ ol, ul {
 							<div id="boardTable">
 							  <c:choose>
 						          <c:when test="${list.size()>0 }">
-						             <c:forEach var="vo" items="${list }"  varStatus="status">
+						             <c:forEach var="vo" items="${list }"  >
 									       <ul class="css-14 ">
 												<li><a href="#">
 														<div class="css-15">
@@ -462,23 +489,7 @@ ol, ul {
 														</div>
 												</a></li>
 											</ul>
-											 <c:when test="${vo. seq } == ${list01[status.index].seq}">
-											   <ul class="css-14 ">
-                        <li><a href="#">
-                            <div class="css-15">
-                              <!-- 1:1문의  -->
-                              <div class="css-16 "><c:out value="${list01[status.index].seq }"></c:out></div>
-                              <div class="css-17 "><c:out value="${list01[status.index].title}"></c:out></div>
-                              <div class="css-18 "><c:out value="${list01[status.index].regId }"></c:out></div>
-                              <div class="css-19 "><c:out value="${list01[status.index].regDt }"></c:out></div>
-                            </div>
-                        </a></li>
-                      </ul>
-											 </c:when>
-						            <c:otherwise>
-						               <div>답변글이 존재 하지 않습니다. </div>
-						            </c:otherwise>   
-						             </c:forEach>
+											 </c:forEach>
 						          </c:when>
 						          <c:otherwise>
 						            <div>
@@ -493,10 +504,6 @@ ol, ul {
 
 
 
-							<div id="insertButtonArea">
-								<button class="css-Button" type="button" width="120" height="44"
-									radius="3" id="boardReg">등록</button>
-							</div>
 
 							<div id="questionButtonArea">
 								<button class="css-Button" type="button" width="120" height="44"

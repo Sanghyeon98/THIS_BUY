@@ -16,7 +16,20 @@
  --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%
+     //공지사항(10)/자유게시판 구분(30)
+     String divValue = request.getParameter("gubun");
+     String title = "";
+     if("30".equals(divValue)){
+       title = "자주묻는 질문 등록";
+     }else{
+       title = "공지사항 등록";
+     }
+     
+     request.setAttribute("title", title);
+     request.setAttribute("divValue", divValue);
+%>      
 
 <c:set var="CP" value="${pageContext.request.contextPath }"></c:set>
 <c:set var="RES" value="/resources" ></c:set>
@@ -373,69 +386,19 @@ ol, ul {
             return;
         }       
           
-        let image = $("#imageName").val();
-        
-        console.log("이미지 : " + image);
-        console.log("lastIndexOf : " + image.lastIndexOf('\\'));
-        console.log("substr : " + image.substr(image.lastIndexOf('\\')+1));
-        
-        let imgPathName = image.substr(image.lastIndexOf('\\')+1);
-        
-        console.log("imageName : " + imgPathName.split('.'));
-        
-        
-        let fileInput = $("#imageName")[0];
-        console.log("fileInput.files.length : " + fileInput.files.length);
-
-        let formData = new FormData();
-
-        for(let i=0; i < fileInput.files.length; i++) {
-          formData.append("image"+i, fileInput.files[i]);
-        }
-        
-        console.log("formData : " + formData);
-        
-        $.ajax({ 
-            type: "GET",
-            url: "${CP}/image/doSave.do",
-            processData: false,
-            contentType : false,
-            async: "true",
-            dataType: "html",
-            data: formData,
-            
-            success:function(data) {  // 이미지 등록 성공
-              console.log("success data : " + data);  // data : ImageVO
-              
-              let getImageNo = 0;  // 이미지 번호가 0이면 이미지 없음
-              
-              //if(null != data) {
-              if(data.length != 0) { // 등록된 이미지가 있으면 
-                console.log("null!!");
-                let getImage = JSON.parse(data);
-                
-                console.log("getImage.imageNo : " + getImage.imageNo);
-                console.log("parseInt(getImage.imageNo) : " + parseInt(getImage.imageNo));
-                
-                console.log("image value : " +  $("#imageName").val());
-                
-                getImageNo = getImage.imageNo;
-              } else { // 등록된 이미지가 없으면
-                console.log("not null!!");
-              }
+        if(confirm("등록 하시겠습니까?")==false)return;
               
         //문의동록 
         let b_method = "GET";
         let b_url    = "/board/doSave.do";
         let b_async  = true;
         let b_params = {
-            gubun : 10,
+            gubun : $("#gubun").val(),
             title : $("#title").val(),
             contents : $("#contents").val(),
             regDt : "ddd",
-            regId : "ddd",
-            answerCheck : 0,
-            imageNo : getImageNo
+            regId : "관리자",
+            answerCheck : 0
         };
         
         PClass.callAjax(b_method,b_url,b_async,b_params,function(b_data){
@@ -452,11 +415,7 @@ ol, ul {
           }
         
         });
-        
-        }
-         
-        });//ajax END
-        
+     
       });//문의등록 end
       
       
@@ -471,7 +430,7 @@ ol, ul {
     });
     
     function moveToList(){
-      window.location.href= "${CP}/board/boardView.do?gubun=10";
+      window.location.href= "${CP}/board/boardView.do?gubun="+$("gubun").val;
     }
     
    
@@ -490,27 +449,29 @@ ol, ul {
      <div class="css-3 ">고객센터</div>
      <ul class="css-4 ">
      <li class="css-0 "><a class=" css-20 " href="${CP}/board/boardView.do?gubun=10" >공지사항</a></li>
-     <li class="css-0 "><a class=" css-20 " href="${CP}/board/boardView.do?gubun=30">자주묻는질문</a></li>
+     <li class="css-0 "><a class=" css-20 " href="${CP}/board/boardView.do?gubun=30" >자주묻는질문</a></li>
+     <li class="css-0 "><a class=" css-20 " href="${CP}/board/questionView.do?gubun=20">1:1문의사항</a></li>
      </ul>
    </div>
-    
-    
+   
      <div class="css-5 ">
       <div class="css-6 ">
        <div class="css-7 ">
-         <h2 class="css-8 ">공지사항</h2>
+         <h2 class="css-8 ">${title}</h2>
+         <input type="hidden" id="gubun" name="gubun" value="${vo.gubun}">
        </div>
       </div>
       <form>
        <div class="css-21">
         <div class="css-22">
+
          <label>제목</label>
         </div>
         <div class="css-23">
          <div class="css-24">
            <div height="44" class="css-25">
             <input data-testid="input-box" id="title" name="title" placeholder="제목을 입력해주세요" 
-            type="text" height="44" class="css-26" value>
+            type="text" height="44" class="css-26" >
            </div>
          </div>
         </div>

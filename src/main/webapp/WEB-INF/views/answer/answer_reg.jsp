@@ -1,6 +1,6 @@
 <%--
 /**
-  Class Name: bootList.jsp
+  Class Name: board_reg.jsp
   Description: 목록조회
   
   Modification information
@@ -353,12 +353,14 @@ ol, ul {
           $("#count").text(currnetLength);
         }
       
-      //  
+      //contents end   
       });   
-    
-      //등록
+      
+             
+      //=====================================등록 doSave
       $("#doSave").on("click",function(){
         console.log("doSave");
+        
         
         if(eUtil.ISEmpty($("#title").val()) == true){
           alert("제목을 입력 하세요.");
@@ -366,29 +368,25 @@ ol, ul {
           return;
         }
           
-        if(eUtil.ISEmpty($("#contents").val()) == true){
+        if(eUtil.ISEmpty($("#contents").  val()) == true){
             alert("내용을 입력 하세요.");
             $("#contents").focus();
             return;
-        } 
-                      
-              
-        if(confirm("등록 하시겠습니까?")==false)return;
-        
-        let method = "GET";
-        let url    = "/board/doSave.do";
-        let async  = true;
-        let params = {
-        		gubun : 20,
+        }       
+          
+        //문의동록 
+        let b_method = "GET";
+        let b_url    = "/answer/doInsert.do";
+        let b_async  = true;
+        let b_params = {
+        		seq :  $("#seq").val(),
             title : $("#title").val(),
             contents : $("#contents").val(),
-            regDt : "",
-            regId : "작성자",
-            answerCheck : 0
+            regId : "관리자"
         };
         
-        PClass.callAjax(method,url,async,params,function(data){
-          console.log(data);
+        PClass.callAjax(b_method,b_url,b_async,b_params,function(b_data){
+          console.log(b_data);
         //JSON.parse() 메서드는 JSON 문자열의 구문을 분석하고, 
         //그 결과에서 JavaScript 값이나 객체를 생성합니다.
           let parsedJson = JSON.parse(data);
@@ -401,22 +399,23 @@ ol, ul {
           }
         
         });
+            
         
-        
-      });//문의등록 end 
+      });//=====================================등록 doSave 끝
+      
+      
       
       //목록으로 이동
       $("#boardView").on("click",function(){
         console.log("boardView");
         moveToList();
-      //boardView  
-      });
+      });//boardView  
       
     //document  
     });
     
     function moveToList(){
-      window.location.href= "${CP}/board/boardView.do?div=20";
+      window.location.href= "${CP}/board/boardView.do?gubun=20";//=====================================등록 doSave 끝;
     }
     
    
@@ -434,36 +433,21 @@ ol, ul {
      <div class="css-2 ">
      <div class="css-3 ">고객센터</div>
      <ul class="css-4 ">
-     <li class="css-0 "><a class=" css-20 " href="${CP}/board/boardView.do" >공지사항</a></li>
-     <li class="css-0 "><a class=" css-20 " href="${CP}/board/questionView.do">1:1 문의</a></li>
+     <li class="css-0 "><a class=" css-20 " href="${CP}/board/boardView.do?gubun=10" >공지사항</a></li>
+     <li class="css-0 "><a class=" css-20 " href="${CP}/board/boardView.do?gubun=20">1:1 문의</a></li>
      </ul>
    </div>
     
     
+     <input type="hidden" value="${seq }" id="seq">
+
      <div class="css-5 ">
       <div class="css-6 ">
        <div class="css-7 ">
-         <h2 class="css-8 ">1:1문의</h2>
+         <h2 class="css-8 ">Q&A 답글 작성</h2>
        </div>
       </div>
       <form>
-      
-      <div class="css-21">
-        <div class="css-22">
-         <label>유형</label>
-        </div>
-        <div class="css-23">
-         <div class="css-24">
-           <select height="44" class="css-25">
-            <option class="css-26" value="10">주문/결제/반품/교환문의</option>
-            <option class="css-26" value="20">배송문의</option>
-            <option class="css-26" value="30">상품문의</option>
-           </select>
-         </div>
-        </div>
-        </div>
-        
-       
        <div class="css-21">
         <div class="css-22">
          <label>제목</label>
@@ -472,7 +456,7 @@ ol, ul {
          <div class="css-24">
            <div height="44" class="css-25">
             <input data-testid="input-box" id="title" name="title" placeholder="제목을 입력해주세요" 
-            type="text" height="44" class="css-26" >
+            type="text" height="44" class="css-26" value>
            </div>
          </div>
         </div>
@@ -492,36 +476,14 @@ ol, ul {
         </div>
         </div>
         </div>
-        
-        <div class="">
-         <div class="css-21">
-          <div class="css-22">
-           </div>
-        <div class="css-23">
-          <div class="css-42">
-           <div class="css-43">
-            <div>
-             <label for="imageName">첨부파일</label>
-             <input type="file" id="imageName" name="imageName">
-            </div>
-           </div>
-          </div>
-          <div class="css-44">
-           <div class="css-45">
-            "30MB이하의 이미지만 업로드 가능합니다."
-           </div>
-           <div class="css-45">
-            "상품의 최대 8장까지 등록가능합니다.  "
-           </div>
-          
-          
+         
           </div>
         </div>
         </div>
         </div>
 
         <div class="css-40">
-         <button type="button" class="css-41" id="doSave">등록</button>
+         <button type="button" class="css-41" id="doSave" value="${vo.seq }">등록</button>
         </div>
       
       </form>

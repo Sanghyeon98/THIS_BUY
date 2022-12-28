@@ -24,8 +24,8 @@ String divValue = request.getParameter("gubun");
 String title = "";
 String gubun1 = "";
 String gubun2 = "";
-if ("30".equals(divValue)) {
-	title = "자주하는질문";
+if ("20".equals(divValue)) {
+	title = "1:1문의";
 	gubun1 = "작성일";
 	gubun2 = "답변상태";
 
@@ -409,33 +409,33 @@ ol, ul {
 													window.location.href = "${CP}/board/doSelectOne.do?gubun=10&seq="
 															+ boardSeq;
 	
-													console.log("boardSeq: "+ boardSeq);
+													console.log("boardSeq: "
+															+ boardSeq);
 
-											} else if ("30" == $("#gubun").val()) {
-					
+											} else if ("20" == $("#gubun").val()) {
+												
 												//$(this).next("ul.css-14");
-						                          console.log("999:"+$(this).next("ul.css-14").html());
-						                          
-						                          let subMenu = $(this).next("ul.css-14");
-						                              console.log(subMenu.is(":visible"));
-						                              if(subMenu.is(":visible")){
-						                                 subMenu.toggle("hide");
-						                              }else{
-						                                 subMenu.toggle();
-						                              }
-							             
-							        }
-								});
+												  console.log("999:"+$(this).next("ul.css-14").html());
+												  
+												  let subMenu = $(this).next("ul.css-14");
+											        console.log(subMenu.is(":visible"));
+											        if(subMenu.is(":visible")){
+											           subMenu.toggle("hide");
+											        }else{
+											           subMenu.toggle();
+											        }
+							         }
+										});
 
 //-------------------------------- 한건조회 (상세조회) 테이블 클릭  끝
+
 
 						//등록화면으로 이동
 						$("#boardReg").on("click", function() {
 
-							console.log('boardReg');
-							console.log('gubun:'+$("#gubun").val())
+							console.log('moveToReg');
 
-							window.location.href = "${CP}/board/boardReg.do?gubun="+$("#gubun").val();
+							window.location.href = "${CP}/board/moveToReg.do?gubun=10"
 
 							//moveToReg
 						});
@@ -480,8 +480,8 @@ ol, ul {
 	 }
 	 }  */
 
-	function doRetrieve(page) {
-		console.log('doRetrieve() page:' + page);
+	function doRetreive(page) {
+		console.log('doRetreive() page:' + page);
 		let method = "GET";
 		let url = "/board/doRetrieve.do";
 		let async = true;
@@ -575,6 +575,55 @@ ol, ul {
 
 	}
 
+/* 	//문의에 대한 답변 데이터 
+	const ReplyList = function(answerNo){
+		 $.ajax({
+		        url : 'answer/selectOne.do',
+		        type : 'get',
+		        data : {
+		        	answerNo : answerNo
+		        },
+		        
+		        success : function(data) {
+		        	console.log("댓글 리스트 가져오기 성공");
+		 
+		  // 댓글 목록을 html로 담기
+         let listHtml = "";
+         for(const i in data){
+             let answerNo = data[i].answerNo;
+             let seq = data[i].seq;
+             let title = data[i].title;
+             let contents = data[i].contents;
+             let regDt = data[i].regDt;
+             let regId = data[i].regId;
+           
+             listHtml += "<div class='row answer reply" + no + "'>";
+
+             if(content == ""){    // 삭제된 댓글일때
+                 listHtml += " <div>";
+                 listHtml += "   (삭제된 댓글입니다)";
+                 listHtml += " </div>";
+             }else{
+            	 listHtml += " <div class='col-1'>"
+                     listHtml += " </div>"
+                     listHtml += " <div class='col-1'>";
+                     listHtml += "   <img class='reply_list_profileImage' src='./upload/profile/"+ profile +"'/>";
+                     listHtml += " </div>";
+                     listHtml += " <div class='rereply-content"+ answerNo +" col-7'>";
+                     listHtml += "   <div>";
+                     listHtml += "     <span>";
+                     listHtml += "       <b>"+ regId +"</b>";
+                     listHtml += "     </span>";
+                     listHtml += "     <span>";
+                     listHtml +=         content;
+                     listHtml += "     </span>";
+                     listHtml += "   </div>";
+
+                     listHtml += " </div>";
+             }
+
+	} */
+
 	//paging
 	function renderingPage(pageTotal, page) {
 		console.log("pageTotal:" + pageTotal);
@@ -604,13 +653,15 @@ ol, ul {
 			console.log("num:" + num);
 			doRetrieve(num);
 		});
+	
 	}
 </script>
 
 </head>
 
 <body>
-	<input type="hidden" id="gubun" value="${divValue}">
+	<input type="text" id="gubun" value="${divValue}">
+	 <input type="text" value="${seq }" id="seq">
 
 	<div id="__next" data-reactroot="">
 		<div>
@@ -621,7 +672,7 @@ ol, ul {
 							<div class="css-3 ">고객센터</div>
 							<ul class="css-4 ">
 								<li class="css-0 "><a class=" css-20 "href="${CP}/board/boardView.do?gubun=10">공지사항</a></li>
-								<li class="css-0 "><a class=" css-20 " href="${CP}/board/boardView.do?gubun=30">자주하는 질문</a></li>
+								<li class="css-0 "><a class=" css-20 "href="${CP}/board/boardView.do?gubun=30">자주하는 질문</a></li>
 								<li class="css-0 "><a class=" css-20 "href="${CP}/board/boardView.do?gubun=20">1:1 문의</a></li>
 							</ul>
 						</div>
@@ -636,8 +687,8 @@ ol, ul {
 							<div class="css-10">
 								<div width="50" class="css-11">번호</div>
 								<div class="css-12 ">제목</div>
-								<div width="100" class="css-13">작성자</div>
-								<div width="100" class="css-13 ">작성일</div>
+								<div width="100" class="css-13">${gubun1}</div>
+								<div width="100" class="css-13 ">${gubun2}</div>
 								<div style="display: none;">SEQ</div>
 							</div>
 
@@ -655,7 +706,7 @@ ol, ul {
 																	<div style="display: none;"><c:out value="${vo.seq }"></c:out></div>
 																	<div class="css-16"><c:out value="${vo.num }"></c:out></div>
 																	<div class="css-17 "><c:out value="${vo.title }"></c:out></div>
-																	<div class="css-18 ">관리자</div>
+																	<div class="css-18 "><c:out value="${vo.regId }"></c:out></div>
 																	<div class="css-19 "><c:out value="${vo.regDt }"></c:out></div>
 														<!-- </a> -->
 														</li>
@@ -663,29 +714,39 @@ ol, ul {
 													</div>
 												</c:when>
 												<c:otherwise>
+												 <div >
 												<%-- 	<a  href="#"   value="${vo.seq }"> --%>
-												<div>
 														<ul class="css-14 ">
 															<li class="css-15">
 																		<!-- 1:1문의  -->
 																		<div style="display: none;"><c:out value="${vo.seq }"></c:out></div>
 																		<div class="css-16 " ><c:out value="${vo.num }"></c:out></div>
 																		<div class="css-17 " ><c:out value="${vo.title }"></c:out></div>
-																		<div class="css-18 ">관리자</div>
-																		<div class="css-19 "><c:out value="${vo.regDt }"></c:out></div>
+																		<div class="css-18 "><c:out value="${vo.regDt }"></c:out></div>
+																		<div class="css-19 "><c:out value="${vo.answerCheck }"></c:out></div>
 															</li>
-													</ul>	
-													<ul class="css-14 css-answer1">
-                           <li  id="${vo.seq }" value="${vo.seq }" >
-                             <div class="css-answer3"><c:out value="${vo.title }"></c:out></div>
-                
-                             <div class="css-answer7 "><c:out value="${vo.contents }"></c:out></div>
-                           </li> </ul>
-												</div>									
-						        </c:otherwise>
+													</ul>
+										<!-- 		</a> -->
+												<ul class="css-14 css-answer1">
+													 <li  id="${vo.seq }" value="${vo.seq }" >
+													   <div class="css-answer3">[Q&A]</div>
+													   <div class="css-answer5"><c:out value="${vo.title }"></c:out>
+													   </div>
+													   <div class="css-answer7 "><c:out value="${vo.contents }"></c:out></div>
+													 </li> 
+													 <li>
+                             <div class="form-group">
+                              <textarea class="form-control" id="answer99" rows="7"
+                                    placeholder="문의에 대한 답변을 달아주세요"></textarea>
+                              </div>
+                               <div class="text-right">
+                                <button type="button" class="btn btn-primary" id="doInsertButton">답변등록</button>
+                              </div>
+                           </li> 
+                        </ul> 																		
+						</c:otherwise>
 											</c:choose>
 										</c:forEach>
-		
 									</c:when>
 									<c:otherwise>
 										<div>
@@ -703,10 +764,10 @@ ol, ul {
 									radius="3" id="boardReg">등록</button>
 							</div>
 
-						<!-- 	<div id="questionButtonArea">
+							<div id="questionButtonArea">
 								<button class="css-Button" type="button" width="120" height="44"
-									radius="3" id="questionReg">등록</button>
-							</div> -->
+									radius="3" id="questionReg">문의하기</button>
+							</div>
 
 <div id="answerTable">
  <div></div>
