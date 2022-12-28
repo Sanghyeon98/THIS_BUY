@@ -24,7 +24,7 @@
   <select id="doSelectAnswer" parameterType="AnswerVO" resultType="AnswerVO" >
     SELECT
       answer_no as answerNo,
-        question_no as questionNo,
+        seq as seq,
          title,
         contents,
         CASE WHEN TO_CHAR(SYSDATE,'YYYY/MM/DD') = TO_CHAR(reg_dt, 'YYYY/MM/DD')           
@@ -61,7 +61,7 @@
   <!-- delete -->
   <delete id="doDelete" parameterType="AnswerVO">
     DELETE FROM answer 
-    WHERE  answer_no = #{answerNo}  
+    WHERE  Rb = #{answerNo}  
   </delete>
   
   <!-- insert -->

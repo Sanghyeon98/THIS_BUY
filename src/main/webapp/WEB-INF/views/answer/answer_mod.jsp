@@ -18,22 +18,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%
-     //공지사항(10)/자유게시판 구분(20)
-     String divValue = request.getParameter("gubun");
-     String title = "";
-     String gubun1 = "";
-     String gubun2 = "";
-     if("20".equals(divValue)){
-       title = "1:1문의";
-       
-     }else{
-       title = "공지사항";
-     }
-     
-     request.setAttribute("title", title);
-     request.setAttribute("divValue", divValue);
-%>
 <c:set var="CP" value="${pageContext.request.contextPath}" /> <!-- ContextPath -->
 <c:set var="RES" value="/resources"/>
 <c:set var="CP_RES" value="${CP}${RES}"/>
@@ -71,11 +55,6 @@
 	  initTableView();
 	  
 	//목록으로 이동
-	    $("#moveToList").on("click", function() {
-	      console.log("moveToList");
-	      moveToList();
-	    });
-	
 	    $("#moveToListquestion").on("click", function() {
 	        console.log("moveToList");
 	        window.location.href = "${CP}/board/questionView.do?gubun=20"
@@ -91,15 +70,6 @@
 	  //수정
 	    $("#doUpdate").on("click", function() {
 
-	     
-
-	      //제목
-	      if (eUtil.ISEmpty($("#title").val()) == true) {
-	        alert("제목을 입력 하세요.");
-	        $("#title").focus();
-	        return;
-	      }
-
 	      //내용
 	      if (eUtil.ISEmpty($("#contents").val()) == true) {
 	        alert("내용을 입력 하세요.");
@@ -111,11 +81,9 @@
 	        return;
 
 	      let method = "GET";
-	      let url = "/board/doUpdate.do";
+	      let url = "/answer/Update.do";
 	      let async = true;
 	      let params = {
-	        gubun : $("#gubun").val(),
-	        title : $("#title").val(),
 	        contents : $("#contents").val()
 	      };
 
@@ -141,10 +109,10 @@
 	        return;
 
 	      let method = "GET";
-	      let url = "/board/doDelete.do";
+	      let url = "/answer/Delete.do";
 	      let async = true;
 	      let params = {
-	        seq : $("#seq").val()
+	    		  answerNo : $("#answerNo").val()
 	      };
 
 	      PClass.callAjax(method, url, async, params, function(data) {
@@ -185,8 +153,8 @@
 
 </head>
 <body>
-      <input type="hidden" name="gubun" id="gubun" value="${vo.gubun}">
-      <input type="hidden" name="seq" id="seq" value="${vo.seq}">
+      <input type="text" name="seq" id="seq" value="${vo.seq}">
+      <input type="text" name="answerNo" id="answerNo" value="${vo.answerNo}">
      <div class="css-mod1">
       <div class="css-mod2">
        <div class="css-mod3">${title} </div>
@@ -203,7 +171,9 @@
         </div> 
         <div class="css-mod6">
          <div class="css-mod7">작성자</div>
-         <input type="text"class="css-mod7" id="regId" name="regId"value="<c:out value='${vo.regId }' />" readonly="readonly"
+         <input type="text"
+          class="css-mod7" id="regId" name="regId"
+          value="<c:out value='${vo.regId }' />" readonly="readonly"
           placeholder="작성자" maxlength="100">
         </div> 
          <div class="css-mod6">
@@ -222,21 +192,13 @@
         
         
         <div class="css-mod10">
-         <button class ="css-mod11" type="button" width="150" height="42" radius="0" id="moveToList">
-          <span class="css-mod11"> 목록</span>
-         </button>
          <button class ="css-mod11" type="button" width="150" height="42" radius="0" id="moveToListquestion">
           <span class="css-mod11"> 목록</span>
          </button>
+         
          <div id ="updatebutton">
          <button class ="css-mod11" type="button" width="150" height="42" radius="0" id="doUpdate">
           <span class="css-mod11"> 수정</span>
-         </button>
-         </div>
-         
-         <div id ="answerbutton">
-         <button class ="css-mod11" type="button" width="150" height="42" radius="0" id="answer" value="${vo.seq}">
-          <span class="css-mod11"> 답글</span>
          </button>
          </div>
          

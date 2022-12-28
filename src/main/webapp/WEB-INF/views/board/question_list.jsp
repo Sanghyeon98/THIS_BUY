@@ -74,13 +74,31 @@
 		                          if (confirm("상세 조회를 하시겠습니까?") == false)
 		                            return;
 		                          //div,seq
-		                          window.location.href = "${CP}/board/doSelectOne.do?gubun=20&seq="
-		                              + boardSeq;
+		                          window.location.href = "${CP}/board/doSelectOne.do?gubun=20&seq=" + boardSeq;
 		  
 		                          console.log("boardSeq: "+ boardSeq);
 
 		                      
 		                });
+		
+		            $("#boardTable").on("click",".clo",function(e) {
+                        console.log('boardTable');
+                        let divArray = $(this).children();
+                        let answerNo = divArray.eq(0).text();
+
+
+                        console.log('answerNo:' + answerNo);
+                        console.log('boardTable');
+
+                            if (confirm("상세 조회를 하시겠습니까?") == false)
+
+                           window.location.href = "${CP}/answer/doSelectAnswer.do?answerNo=" + answerNo;
+    
+                            console.log("answerNo: "+ answerNo);
+
+                        
+                  });
+  
 		
 		    
 
@@ -132,7 +150,7 @@
 </head>
 
 <body>
-	<input type="hidden" id="gubun" value="${divValue}">
+
 
 	<div id="__next" data-reactroot="">
 		<div>
@@ -180,7 +198,6 @@
 																	</div>
 															</li>
 														</ul>
-														
 														<c:choose>
                               <c:when test="${list01.size()>0 }">
                                 <c:forEach var="vo01" items="${list01 }">
@@ -188,9 +205,9 @@
                                   <c:when test="${vo.seq == vo01.seq}">
 		                                <ul class="css-14 ">
 				                              <li>
-				                                  <div class="css-15 cli">
+				                                  <div class="css-15 clo">
 				                                    <!-- 1:1문의  -->
-				                                    <div style="display: none;"><c:out value="${vo01.seq }"></c:out></div>
+				                                    <div style="display: none;"><c:out value="${vo01.answerNo }"></c:out></div>
 				                                    <div class="css-16 ">└</div>
 				                                    <div class="css-17 " ><c:out value="${vo01.title }"></c:out></div>
 				                                    <div class="css-18 ">관리자</div>
