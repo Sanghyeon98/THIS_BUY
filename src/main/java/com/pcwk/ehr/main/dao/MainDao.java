@@ -7,7 +7,7 @@ import com.pcwk.ehr.admin.domain.ProductVO;
 import com.pcwk.ehr.cmn.WorkDiv;
 import com.pcwk.ehr.main.domain.ProductImgVO;
 
-public interface MainDao extends WorkDiv<ProductVO>{
+public interface MainDao extends WorkDiv<ProductImgVO>{
 	
 	//전체 데이터
 	List<ProductImgVO> getAll() throws SQLException;

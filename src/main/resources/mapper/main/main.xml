@@ -6,7 +6,7 @@
   
   <sql id="searchCriteria">
     <choose>
-      <when test='searchDiv != null and searchDiv == "20"'> <!-- 2차분류 검색 -->
+      <when test='searchDiv != "" and searchDiv == "20"'> <!-- 2차분류 검색 -->
         and p.category_no = #{cateId}
       </when>
       <otherwise>
@@ -15,7 +15,7 @@
   </sql>
   
   <!-- 상품 검색 -->
-  <select id="getGoodsList" parameterType="SearchVO" resultType="ProductImgVO">
+  <select id="doRetrieve" parameterType="SearchVO" resultType="ProductImgVO">
     SELECT A.*,B.*
     FROM(
          SELECT
@@ -36,10 +36,10 @@
                      ORDER BY p.reg_dt DESC
                     )T1
                --종료 번호
-               <![CDATA[  WHERE ROWNUM <= #{pageSize} * (#{pageNum} - 1) + #{pageSize} ]]>
+               <![CDATA[  WHERE ROWNUM <= #{pageSize} * (#{pageNo} - 1) + #{pageSize} ]]>
               )TT1
           --시작번호
-          <![CDATA[  WHERE RNUM >= #{pageSize} * (#{pageNum} - 1)+1 ]]>
+          <![CDATA[  WHERE RNUM >= #{pageSize} * (#{pageNo} - 1)+1 ]]>
         )A
     CROSS JOIN
     (

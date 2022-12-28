@@ -13,7 +13,7 @@ public interface MainService {
 	List<ProductImgVO> getAll() throws SQLException;
 	
 	/*상품 검색*/
-	List<ProductVO> getGoodsList(ProductImgVO inVO) throws SQLException;
+	List<ProductImgVO> getGoodsList(ProductImgVO inVO) throws SQLException;
 
 	/**
 	 * categoryNo 건수 조회
@@ -23,5 +23,7 @@ public interface MainService {
 	 */
 	public int getCount() throws SQLException;
 	
+	
+	List<ProductImgVO> doRetrieve(DTO inVO) throws SQLException;
 	
 }

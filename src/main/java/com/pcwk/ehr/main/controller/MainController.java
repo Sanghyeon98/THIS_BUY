@@ -48,8 +48,7 @@ public class MainController {
 	@Autowired
 	MainService mainService;
 
-	public MainController() {
-	}
+	public MainController() {}
 
 	@RequestMapping(value = "/main_page.do", method = RequestMethod.GET)
 	public String singup(Model model) throws SQLException {
@@ -116,6 +115,32 @@ public class MainController {
 		LOG.debug("└-------------------------------------┘");
 
 		return jsonString;
+	}
+	
+	@RequestMapping(value = "/mainSearchProduct.do", method = RequestMethod.GET)
+	public String mainSearchProduct(SearchVO inVO, Model model) throws SQLException {
+		
+		// 페이지 번호
+		if (null != inVO && inVO.getPageNo() == 0) {
+			inVO.setPageNo(1);
+		}
+
+		// 페이지사이즈
+		if (null != inVO && inVO.getPageSize() == 0) {
+			inVO.setPageSize(10);
+		}		
+		
+		LOG.debug("┌-------------------------------------┐");
+		LOG.debug("|  ProductImgVO inVO = " + inVO);
+		
+		List<ProductImgVO> list = mainService.doRetrieve(inVO);
+		
+		model.addAttribute("list", list);
+		LOG.debug("|  ProductImgVO list = " + list);
+		
+		LOG.debug("└-------------------------------------┘");
+		
+		return "main/mainSearchProduct";
 	}
 
 	

@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+#wrap {
+  width: 1050px;
+  margin: 0 auto; /* 좌우 가운데 정렬 */
+}
+
 div {
   margin:0;
   padding:0;
@@ -167,6 +172,7 @@ a {
 }
 
 .goods{
+	flex-wrap: wrap;   /* goods div 태그 하위요소의 너비가 더 커지면 줄바꿈 발생 */
   position: relative;
   width: 100%;
   height: 100%;
@@ -174,6 +180,11 @@ a {
   display: flex;
   transition-property: transform;
   box-sizing: content-box;
+}
+
+.itemList {
+	margin-left: 36px;  
+	/* margin: 0 auto; */
 }
 
 .list{
@@ -231,6 +242,7 @@ a {
   background-color: #D9E5FF;
   padding: 5px;
   width: 200px;
+  z-index: 99;
 }
 
 .cate01list:hover {

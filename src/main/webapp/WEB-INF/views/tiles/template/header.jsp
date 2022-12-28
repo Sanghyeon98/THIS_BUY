@@ -30,7 +30,7 @@
 				
 				let parsedJson = JSON.parse(data);
 				
-				console.log("parsedJson : " + parsedJson);
+				//console.log("parsedJson : " + parsedJson);
 				
 				$("#catelist").empty();
 				
@@ -45,14 +45,14 @@
 				  }
 				});
 				
-				console.log("htmlData : " + htmlData);
+				//console.log("htmlData : " + htmlData);
 				
 				$("#catelist").append(htmlData);
 				
 			},
 			error : function(request,status,error){
 			  console.log("error");
-				alert("@@code:"+request.status+"\n"+"@@message:"+request.responseText+"\n"+"@@error:"+error);
+				//alert("@@code:"+request.status+"\n"+"@@message:"+request.responseText+"\n"+"@@error:"+error);
 			},
 			complete:function(data){//성공, 실패 관계 없이 출력
 			  console.log("complete");
@@ -68,20 +68,8 @@
 			
 			let cate02Id = $(this).val();
 			
-			let method = "GET";
-      let url = "/main/doRetrieve.do";
-      let async = true;
-      let params = { 
-    		  searchDiv : 20,       // searchDiv = 20이면 2차 분류로 검색 
-    		  cateId : cate02Id
-      };
-	    
-      
-	        
-	    /* PClass.callAjax(method, url, async, params, function(data) {
-	    
-	    }); */
-	    
+			// searchDiv = 20이면 2차분류
+			window.location.href= "${CP}/main/mainSearchProduct.do?searchDiv=20&cateId=" + cate02Id;
 		});
 		
 		
@@ -134,7 +122,7 @@
       </div>
       <div class="top2">
         <div>
-          <img src="${CP_RES}/image/logo.png" alt="로고" class="logo">
+          <a href="${CP}/main/main_page.do"><img src="${CP_RES}/image/logo.png" alt="로고" class="logo"></a>
         </div>
         <div class="search">
           <input id="gnb_search" class="search_input" placeholder="검색어를 입력해주세요" required="required">

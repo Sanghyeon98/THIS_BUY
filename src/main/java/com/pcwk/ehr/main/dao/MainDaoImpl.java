@@ -27,10 +27,10 @@ public class MainDaoImpl implements MainDao {
 	SqlSessionTemplate sqlSessionTemplate;
 
 	@Override
-	public List<ProductVO> doRetrieve(DTO inVO) throws SQLException {
+	public List<ProductImgVO> doRetrieve(DTO inVO) throws SQLException {
 		
 		SearchVO search = (SearchVO) inVO;
-		List<ProductVO> list = new ArrayList<ProductVO>();
+		List<ProductImgVO> list = new ArrayList<ProductImgVO>();
 		
         String statement = NAMESPACE + DOT + "doRetrieve";
         LOG.debug("================================");
@@ -39,7 +39,9 @@ public class MainDaoImpl implements MainDao {
 		
 		list = sqlSessionTemplate.selectList(statement, search);
 		
-		for(ProductVO vo : list) {
+		LOG.debug("|  list:" + list );  
+		
+		for(ProductImgVO vo : list) {
 			LOG.debug("|  vo : " + vo );
 		}
 		LOG.debug("================================");
@@ -50,7 +52,7 @@ public class MainDaoImpl implements MainDao {
 
 
 	@Override
-	public int doSave(ProductVO inVO) throws SQLException {
+	public int doSave(ProductImgVO inVO) throws SQLException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -58,7 +60,7 @@ public class MainDaoImpl implements MainDao {
 
 
 	@Override
-	public int doDelete(ProductVO inVO) throws SQLException {
+	public int doDelete(ProductImgVO inVO) throws SQLException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -66,7 +68,7 @@ public class MainDaoImpl implements MainDao {
 
 
 	@Override
-	public int doUpdate(ProductVO inVO) throws SQLException {
+	public int doUpdate(ProductImgVO inVO) throws SQLException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -74,7 +76,7 @@ public class MainDaoImpl implements MainDao {
 
 
 	@Override
-	public ProductVO doSelectOne(ProductVO inVO) throws SQLException {
+	public ProductImgVO doSelectOne(ProductImgVO inVO) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

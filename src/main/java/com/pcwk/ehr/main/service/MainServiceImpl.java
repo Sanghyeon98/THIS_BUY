@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pcwk.ehr.admin.domain.ProductVO;
+import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.main.dao.MainDao;
 import com.pcwk.ehr.main.domain.ProductImgVO;
 
@@ -28,7 +29,7 @@ public class MainServiceImpl implements MainService {
 	}
 	
 	@Override
-	public List<ProductVO> getGoodsList(ProductImgVO inVO) throws SQLException {
+	public List<ProductImgVO> getGoodsList(ProductImgVO inVO) throws SQLException {
 		
 		return maindao.doRetrieve(inVO);
 	}
@@ -38,6 +39,9 @@ public class MainServiceImpl implements MainService {
 		return maindao.getCount();
 	}
 
-	
+	@Override
+	public List<ProductImgVO> doRetrieve(DTO inVO) throws SQLException {
+		return maindao.doRetrieve(inVO);
+	}
 
 }
