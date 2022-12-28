@@ -186,13 +186,6 @@ int faq_no = (seq == null)? -1 : Integer.parseInt(seq);
 		let url = "/board/doRetrieve.do";
 		let async = true;
 
-		//전체
-		let searchDivValue = $('#searchDiv').val();
-
-		if ('ALL' == searchDivValue) {
-			searchDivValue = "";
-		}
-
 		let params = {
 			gubun : $("#gubun").val(),
 			pageSize : $('#pageSize').val(),
@@ -236,7 +229,7 @@ int faq_no = (seq == null)? -1 : Integer.parseInt(seq);
 														htmlData += "</ul>";
 													});
 
-								} else if ("20" == $("#gubun").val()) {
+								} else if ("30" == $("#gubun").val()) {
 									$
 											.each(
 													parsedJson,

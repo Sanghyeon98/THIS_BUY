@@ -228,10 +228,10 @@
         </div>
         <div class="css-23">
          <div class="css-24">
-           <select height="44" class="css-25">
-            <option class="css-26" value="10">주문/결제/반품/교환문의</option>
-            <option class="css-26" value="20">배송문의</option>
-            <option class="css-26" value="30">상품문의</option>
+           <select height="44" class="css-25" id="pageSize" name="pageSize">
+            <option class="css-26" value="10">배송문의</option>
+            <option class="css-26" value="20">상품문의</option>
+            <option class="css-26" value="30">기타문의</option>
            </select>
          </div>
         </div>

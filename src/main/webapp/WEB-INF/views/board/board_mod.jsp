@@ -214,6 +214,12 @@
           placeholder="등록일" maxlength="100">   
         </div> 
         <div class="css-mod9">
+  
+      <%--     <div class="imageYN">
+           ${imgVO.orgName }<img alt="이미지" src="${CP}${imgVO.viewPath}/${imgVO.saveName}">
+         </div>  --%>
+
+
          <div> <textarea class="css-mod8" rows="10" id="contents"
           name="contents"><c:out value="${vo.contents}" /></textarea>
          </div>

@@ -177,9 +177,9 @@
 								</div>
 							</div>
 							<div class="css-10">
-								<div width="50" class="css-11">번호</div>
+								<div width="100" class="css-13">문의유형</div>
 								<div class="css-12 ">제목</div>
-								<div width="100" class="css-13">작성일</div>
+								<div width=100" class="css-13">작성일</div>
 								<div width="100" class="css-13 ">답변상태</div>
 							</div>
 							<div id="boardTable">
@@ -191,8 +191,18 @@
 																	<div class="css-15 cli">
 																		<!-- 1:1문의  -->
 																		<div style="display: none;"><c:out value="${vo.seq }"></c:out></div>
-			                              <div class="css-16 " ><c:out value="${vo.num }"></c:out></div>
-			                              <div class="css-17 " ><c:out value="${vo.title }"></c:out></div>
+																		<c:choose>
+																		 <c:when test="${vo.gubunQuestion == 10 }">
+																		  <div class="css-19 ">배송문의</div>
+																		 </c:when>
+																		 <c:when test="${vo.gubunQuestion == 20 }">
+                                      <div class="css-19 ">상품문의</div>
+                                     </c:when>
+                                     <c:when test="${vo.gubunQuestion == 30 }">
+                                      <div class="css-19 ">기타문의</div>
+                                     </c:when>	
+																		</c:choose>
+			                              <div class="css-17 " >-------------<c:out value="${vo.title }"></c:out></div>
 			                              <div class="css-18 ">관리자</div>
 			                              <div class="css-19 "><c:out value="${vo.regDt }"></c:out></div>
 																	</div>
