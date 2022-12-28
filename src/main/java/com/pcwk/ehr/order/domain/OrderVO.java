@@ -17,6 +17,7 @@ public class OrderVO extends DTO{
 	private String    orderState;
 	private String    date;
 	
+	public OrderVO() {}
 	
 public OrderVO(int orderNO, int sameOrder, String memberId, int itemNO, int price, int paymentId, String name,
 		String phone, String address, String request, String orderState, String date) {
