@@ -111,8 +111,9 @@ a {
   height: 30px;
   margin: 10px;
   bottom: 3px;
-  line-height:30px;
+  /* line-height:30px; */
   background:url(/ehr/resources/img/common/searchicon.png) 60px 60px; 
+  border: none;
 }
 
 .like_bnt {

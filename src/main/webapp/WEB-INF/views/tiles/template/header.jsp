@@ -136,9 +136,20 @@
     <!-- 로고, 메뉴 -->
     <div>
       <div class="top1">
-        <a href="${CP}/signup/signup.do" id="singup">회원가입</a>
-        <div class="css-1qgm48u eo7pjfk0""></div>
-        <a href="${CP}/login/login.do" id="login">로그인</a>
+        <a href="#">${sessionScope.memberInfo.name}</a> 
+        
+        <c:choose>
+					<c:when test="${null != sessionScope.memberInfo || not empty sessionScope.memberInfo }">   <!-- session 값이 있으면 -->
+						<a href="${CP}/login/loginout.do" id="login">로그아웃</a>
+					</c:when>
+					<c:otherwise>
+		        <a href="${CP}/signup/signup.do" id="singup">회원가입</a>
+		        <div class="css-1qgm48u eo7pjfk0""></div>
+						<a href="${CP}/login/login.do" id="login">로그인</a>
+					</c:otherwise>
+        </c:choose>
+        
+        <%-- <a href="${CP}/login/login.do" id="login">로그인</a> --%>
         <div class="css-1qgm48u eo7pjfk0""></div>
         <a class="c_center">고객센터</a>
       </div>
