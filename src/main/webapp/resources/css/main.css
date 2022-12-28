@@ -183,6 +183,7 @@ a {
 }
 
 .itemList {
+	width : 186px;
 	margin-left: 36px;  
 	/* margin: 0 auto; */
 }
