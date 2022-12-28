@@ -292,7 +292,7 @@ width: 30px;
               htmlData += "    <td><input type='checkbox' name='chk' value='"+value.cartNO+"'></td>";
               htmlData += "    <td><input type='hidden' class='memberId' name='memberId' value='"+value.memberId+"'></td>";
               htmlData += "    <td><input type='hidden' class='cartNO' name='cartNO' value='"+value.cartNO+"'></td>";
-//              htmlData += "    <td><img src='"+${CP_RES }/value.viewpath+"' alt='"value.saveName"'></td>";
+              htmlData += "    <td><img src='"+${CP_RES }/value.viewpath+"' alt='"value.saveName"'></td>";
               htmlData += "    <td><a href='#' onClick='doSelectOne("+<c:out value='value.itemNO '/>+")'>"+value.name+"</a></td>";
               htmlData += "    <td><input type='button' name='minus' class='minus' value='-'>";
               htmlData += "    <input type='text' class='quantity' name='quantity' value='"+value.quantity+"' size='2'>";
