@@ -104,7 +104,8 @@
         contents,
         reg_dt,
         reg_id,
-        answer_check
+        answer_check,
+        image_No
     ) VALUES (
         seq.NEXTVAL,
         #{gubun},
@@ -113,7 +114,8 @@
         #{contents},
         SYSDATE,
         #{regId},
-        #{answerCheck}
+        #{answerCheck},
+        #{imageNO}
     )
   
   </insert>

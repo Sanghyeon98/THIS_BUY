@@ -91,10 +91,59 @@
             $("#contents").focus();
             return;
         } 
-                      
-              
-        if(confirm("등록 하시겠습니까?")==false)return;
         
+        let image = $("#imageName").val();
+        
+        console.log("이미지 : " + image);
+        console.log("lastIndexOf : " + image.lastIndexOf('\\'));
+        console.log("substr : " + image.substr(image.lastIndexOf('\\')+1));
+        
+        let imgPathName = image.substr(image.lastIndexOf('\\')+1);
+        
+        console.log("imageName : " + imgPathName.split('.'));
+        
+        
+        let fileInput = $("#imageName")[0];
+        console.log("fileInput.files.length : " + fileInput.files.length);
+        
+        let formData = new FormData();
+
+        for(let i=0; i < fileInput.files.length; i++) {
+          formData.append("image"+i, fileInput.files[i]);
+        }
+        
+        console.log("formData : " + formData);
+        
+        $.ajax({ 
+            type: "POST",
+            url: "${CP}/image/doSave.do",
+            processData: false,
+            contentType : false,
+            async: "true",
+            dataType: "html",
+            data: formData,
+            
+            success:function(data) {  // 이미지 등록 성공
+              console.log("success data : " + data);  // data : ImageVO
+              
+              let getImageNo = 0;  // 이미지 번호가 0이면 이미지 없음
+              
+              //if(null != data) {
+              if(data.length != 0) { // 등록된 이미지가 있으면 
+                console.log("null!!");
+                let getImage = JSON.parse(data);
+                
+                console.log("getImage.imageNo : " + getImage.imageNo);
+                console.log("parseInt(getImage.imageNo) : " + parseInt(getImage.imageNo));
+                
+                console.log("image value : " +  $("#imageName").val());
+                
+                getImageNo = getImage.imageNo;
+              } else { // 등록된 이미지가 없으면
+                console.log("not null!!");
+              }
+                      
+        //문의 등록 
         let method = "GET";
         let url    = "/board/doSave.do";
         let async  = true;
@@ -122,8 +171,12 @@
         
         });
         
+      }
+      
+  }); // ajax END --------------------------------------------------------
         
-      });//문의등록 end 
+        
+});//문의등록 end 
       
       //목록으로 이동
       $("#boardView").on("click",function(){
@@ -167,7 +220,7 @@
          <h2 class="css-8 ">1:1문의</h2>
        </div>
       </div>
-      <form>
+      <form method="post" enctype="multipart/form-data">
       
       <div class="css-21">
         <div class="css-22">
@@ -240,12 +293,14 @@
         </div>
         </div>
         </div>
-
+      
+       </form>
+       
         <div class="css-40">
          <button type="button" class="css-41" id="doSave">등록</button>
         </div>
       
-      </form>
+     
       
 
     

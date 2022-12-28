@@ -106,38 +106,92 @@
             $("#contents").focus();
             return;
         }       
-          
-        if(confirm("등록 하시겠습니까?")==false)return;
-              
-        //문의동록 
-        let b_method = "GET";
-        let b_url    = "/board/doSave.do";
-        let b_async  = true;
-        let b_params = {
-            gubun : $("#gubun").val(),
-            title : $("#title").val(),
-            contents : $("#contents").val(),
-            regDt : "",
-            regId : "관리자",
-            answerCheck : 0
-        };
+        
+        let image = $("#imageName").val();
+        
+        console.log("이미지 : " + image);
+        console.log("lastIndexOf : " + image.lastIndexOf('\\'));
+        console.log("substr : " + image.substr(image.lastIndexOf('\\')+1));
+        
+        let imgPathName = image.substr(image.lastIndexOf('\\')+1);
+        
+        console.log("imageName : " + imgPathName.split('.'));
+        
+        
+        let fileInput = $("#imageName")[0];
+        console.log("fileInput.files.length : " + fileInput.files.length);
+        
+        let formData = new FormData();
 
-        PClass.callAjax(b_method,b_url,b_async,b_params,function(b_data){
-          console.log(b_data);
-        //JSON.parse() 메서드는 JSON 문자열의 구문을 분석하고, 
-        //그 결과에서 JavaScript 값이나 객체를 생성합니다.
-          let parsedJson = JSON.parse(b_data);
+        for(let i=0; i < fileInput.files.length; i++) {
+          formData.append("image"+i, fileInput.files[i]);
+        }
         
-          if("1" == parsedJson.msgId){
-            alert(parsedJson.msgContents);
-            moveToList();
-          }else{
-            alert(parsedJson.msgContents);
-          }
+        console.log("formData : " + formData);
         
-        });
+        $.ajax({ 
+            type: "POST",
+            url: "${CP}/image/doSave.do",
+            processData: false,
+            contentType : false,
+            async: "true",
+            dataType: "html",
+            data: formData,
+            
+            success:function(data) {  // 이미지 등록 성공
+              console.log("success data : " + data);  // data : ImageVO
+              
+              let getImageNo = 0;  // 이미지 번호가 0이면 이미지 없음
+              
+              //if(null != data) {
+              if(data.length != 0) { // 등록된 이미지가 있으면 
+                console.log("null!!");
+                let getImage = JSON.parse(data);
+                
+                console.log("getImage.imageNo : " + getImage.imageNo);
+                console.log("parseInt(getImage.imageNo) : " + parseInt(getImage.imageNo));
+                
+                console.log("image value : " +  $("#imageName").val());
+                
+                getImageNo = getImage.imageNo;
+              } else { // 등록된 이미지가 없으면
+                console.log("not null!!");
+              }
+              
+			         //문의동록 
+			        let b_method = "GET";
+			        let b_url    = "/board/doSave.do";
+			        let b_async  = true;
+			        let b_params = {
+			            gubun : $("#gubun").val(),
+			            title : $("#title").val(),
+			            contents : $("#contents").val(),
+			            regDt : "",
+			            regId : "관리자",
+			            imageNo : getImageNo
+			        };
+			
+			        PClass.callAjax(b_method,b_url,b_async,b_params,function(b_data){
+			          console.log(b_data);
+			        //JSON.parse() 메서드는 JSON 문자열의 구문을 분석하고, 
+			        //그 결과에서 JavaScript 값이나 객체를 생성합니다.
+			          let parsedJson = JSON.parse(b_data);
+			        
+			          if("1" == parsedJson.msgId){
+			            alert(parsedJson.msgContents);
+			            moveToList();
+			          }else{
+			            alert(parsedJson.msgContents);
+			          }
+			        
+			       }); 
+              
+           }
+        
+       }); // ajax END --------------------------------------------------------
+
      
-      });//문의등록 end
+    });//문의등록 end
       
       
       
@@ -182,7 +236,7 @@
          <input type="hidden" id="gubun" name="gubun" value="${vo.gubun}">
        </div>
       </div>
-      <form>
+      <form  method="post" enctype="multipart/form-data">
        <div class="css-21">
         <div class="css-22">
 
@@ -240,13 +294,13 @@
         </div>
         </div>
 
-        <div class="css-40">
-         <button type="button" class="css-41" id="doSave">등록</button>
-        </div>
+        
       
       </form>
       
-
+        <div class="css-40">
+         <button type="button" class="css-41" id="doSave">등록</button>
+        </div>
     
     
     </div></div></div></div></div></div>
