@@ -105,7 +105,7 @@
         		seq :  $("#seq").val(),
             title : $("#title").val(),
             contents : $("#contents").val(),
-            regId : "관리자"
+            regId : $("#regIdd").val()
         };
         
         PClass.callAjax(b_method,b_url,b_async,b_params,function(b_data){
@@ -211,6 +211,11 @@
         </div>
       
       </form>
+      
+        <!-- hidden  -->
+           <input type="hidden" data-testid="input-box" id="regIdd" name="regIdd" value="${sessionScope.memberInfo.name  }" >
+        <!-- hidden end  -->
+      
       
 
     

@@ -210,8 +210,7 @@
          <div class="css-mod7">작성일</div>
          <input type="text"
           class="css-mod8" id="regDt" name="regDt"
-          value="<c:out value='${vo.regDt }' />" readonly="readonly"
-          placeholder="등록일" maxlength="100">   
+          value="<c:out value='${vo.regDt }' />" readonly="readonly" placeholder="등록일" maxlength="100">   
         </div> 
         <div class="css-mod9">
   

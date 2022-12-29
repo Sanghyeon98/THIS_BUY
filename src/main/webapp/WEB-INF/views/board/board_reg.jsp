@@ -165,7 +165,7 @@
 			        let b_params = {
 			            gubun : $("#gubun").val(),
 			            title : $("#title").val(),
-			            contents : $("#contents").val(),
+			            contents : $("#contents").val(), 
 			            regId : $("#regIdd").val(),
 			            imageNo : getImageNo
 			        };
@@ -294,7 +294,7 @@
         </div>
         
         <!-- hidden  -->
-           <input type="hidden" data-testid="input-box" id="regIdd" name="regIdd" value="${sessionScope.memberInfo.name  }" >
+           <input type="text" data-testid="input-box" id="regIdd" name="regIdd" value="${sessionScope.memberInfo.name  }" >
            <input type="hidden" id="gubun" name="gubun" value="${vo.gubun}">
         <!-- hidden end  -->
       

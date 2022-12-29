@@ -158,6 +158,36 @@ int faq_no = (seq == null)? -1 : Integer.parseInt(seq);
 						   }
 						 */
 
+						 
+						 //삭제
+						 
+						 $("#doDelete").on("click", function() {
+						        console.log("doDelete");
+
+						        if (confirm("삭제 하시겠습니까?") == false)
+						          return;
+
+						        let method = "GET";
+						        let url = "/board/doDelete.do";
+						        let async = true;
+						        let params = {
+						          seq : $("#${vo.seq }").val()
+						        };
+
+						        PClass.callAjax(method, url, async, params, function(data) {
+						          console.log(data);
+						          let parsedJson = JSON.parse(data);
+						          if ("1" == parsedJson.msgId) {
+						            alert(parsedJson.msgContents);
+						            moveToList();
+						          } else {
+						            alert(parsedJson.msgContents);
+						          }
+
+						        });
+
+						        //doDelete  
+						      });
 						
 
 					}); //document
@@ -349,10 +379,10 @@ int faq_no = (seq == null)? -1 : Integer.parseInt(seq);
 													<ul class="css-14 ">
 														<li class="css-15"><!-- <a href="#"> -->
 																	<!-- 공지사항  -->
-																	<div style="display: none;"><c:out value="${vo.seq }"></c:out></div>
+																	<div style="display: none;" Id="seq"><c:out value="${vo.seq }"></c:out></div>
 																	<div class="css-16"><c:out value="${vo.num }"></c:out></div>
 																	<div class="css-17 "><c:out value="${vo.title }"></c:out></div>
-																	<div class="css-18 ">관리자</div>
+																	<div class="css-18 "><c:out value="${vo.regId }"></c:out></div>
 																	<div class="css-19 "><c:out value="${vo.regDt }"></c:out></div>
 														<!-- </a> -->
 														</li>
@@ -377,7 +407,9 @@ int faq_no = (seq == null)? -1 : Integer.parseInt(seq);
                              <div class="css-answer3">&nbsp;&nbsp;&nbsp;<c:out value="${vo.title }"></c:out></div>
                 
                              <div class="css-answer7 ">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${vo.contents }"></c:out></div>
-                           </li> </ul>
+                           </li> 
+                           </ul>
+                            
 												</div>									
 						        </c:otherwise>
 											</c:choose>
@@ -403,11 +435,6 @@ int faq_no = (seq == null)? -1 : Integer.parseInt(seq);
                   </c:choose>
 							</div>
 
-
-						<!-- 	<div id="questionButtonArea">
-								<button class="css-Button" type="button" width="120" height="44"
-									radius="3" id="questionReg">등록</button>
-							</div> -->
 
 <div id="answerTable">
  <div></div>

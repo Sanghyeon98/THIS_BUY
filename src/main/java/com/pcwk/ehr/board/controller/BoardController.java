@@ -334,12 +334,12 @@ public class BoardController {
 		LOG.debug("│inVO = "+inVO);
 		LOG.debug("└──────────────────────────────┘");
 
-
 		BoardVO outVO = boardService.doSelectOne(inVO);
 		
 		// 이미지 조회
 		ImageVO imgVO = new ImageVO();
 		imgVO.setImageNo(outVO.getImageNo());
+		
 				
 		ImageVO outImgVO = imgService.doSelectOne(imgVO);
 		LOG.debug("|  outImgVO = " + outImgVO);
@@ -371,6 +371,12 @@ public class BoardController {
 		LOG.debug("┌=============================┐");
 
 		LOG.debug("|inVO=" + inVO);
+		
+
+		// 이미지 없음.
+		if (null != inVO && inVO.getImageNo() == 0) {
+			inVO.setImageNo(1);
+		}
 
 		int flag = this.boardService.doSave(inVO);
 

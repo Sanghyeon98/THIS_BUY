@@ -91,8 +91,8 @@
                         console.log('boardTable');
 
                             if (confirm("상세 조회를 하시겠습니까?") == false)
-
-                           window.location.href = "${CP}/answer/doSelectAnswer.do?answerNo=" + answerNo;
+                            	 return;
+                           window.location.href = "${CP}/answer/doSelectAnswer.do?gubun=20&answerNo=" + answerNo;
     
                             console.log("answerNo: "+ answerNo);
 
@@ -188,8 +188,8 @@
 							<div class="css-10">
 								<div width="100" class="css-13">문의유형</div>
 								<div class="css-12 ">제목</div>
-								<div width=100" class="css-13">작성일</div>
-								<div width="100" class="css-13 ">답변상태</div>
+								<div width=100" class="css-13">작성자</div>
+								<div width="100" class="css-13 ">작성일</div>
 							</div>
 							<div id="boardTable">
 							  <c:choose>
@@ -211,9 +211,9 @@
                                       <div class="css-19 ">기타문의</div>
                                      </c:when>	
 																		</c:choose>
-			                              <div class="css-17 " ><c:out value="${vo.title }"></c:out></div>
-			                              <div class="css-18 ">관리자</div>
-			                              <div class="css-19 "><c:out value="${vo.regDt }"></c:out></div>
+			                              <div class="css-17 " ><c:out value="${vo.title}"></c:out></div>
+			                              <div class="css-18 "><c:out value="${vo.regId}"></c:out></div>
+			                              <div class="css-19 "><c:out value="${vo.regDt} "></c:out></div>
 																	</div>
 															</li>
 														</ul>
@@ -229,7 +229,7 @@
 				                                    <div style="display: none;"><c:out value="${vo01.answerNo }"></c:out></div>
 				                                    <div class="css-16 ">└──</div>
 				                                    <div class="css-17 " ><c:out value="${vo01.title }"></c:out></div>
-				                                    <div class="css-18 ">관리자</div>
+				                                    <div class="css-18 "><c:out value="${vo01.regId }"></c:out></div>
 				                                    <div class="css-19 "><c:out value="${vo01.regDt }"></c:out></div>
 				                                  </div>
 				                              </li>

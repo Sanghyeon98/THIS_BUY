@@ -152,9 +152,7 @@
         		gubunQuestion : $("#gubunQuestion").val(),
             title : $("#title").val(),
             contents : $("#contents").val(),
-            regDt : "",
-            regId : "작성자",
-            answerCheck : 0,
+            regId : $("#regIdd").val(),
             imageNo : getImageNo
             
         };
@@ -303,7 +301,9 @@
          <button type="button" class="css-41" id="doSave">등록</button>
         </div>
       
-     
+      <!-- hidden  -->
+           <input type="hidden" data-testid="input-box" id="regIdd" name="regIdd" value="${sessionScope.memberInfo.name  }" >
+        <!-- hidden end  -->
       
 
     

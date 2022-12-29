@@ -84,7 +84,9 @@
 	      let url = "/answer/Update.do";
 	      let async = true;
 	      let params = {
-	        contents : $("#contents").val()
+	    		  
+	        contents : $("#contents").val(),
+	        answerNo : $("#answerNo").val()
 	      };
 
 	      PClass.callAjax(method, url, async, params, function(data) {
@@ -133,7 +135,7 @@
   });
   
   function moveToList() {
-	    window.location.href = "${CP}/board/boardView.do?gubun="+$("#gubun").val();
+	    window.location.href = "${CP}/board/questionView.do?gubun=20";
 	  }
   
   function initTableView() {
@@ -153,8 +155,8 @@
 
 </head>
 <body>
-      <input type="text" name="seq" id="seq" value="${vo.seq}">
-      <input type="text" name="answerNo" id="answerNo" value="${vo.answerNo}">
+      <input type="hidden" name="seq" id="seq" value="${vo.seq}">
+      <input type="hidden" name="answerNo" id="answerNo" value="${vo.answerNo}">
      <div class="css-mod1">
       <div class="css-mod2">
        <div class="css-mod3">${title} </div>

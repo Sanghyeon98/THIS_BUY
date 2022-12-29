@@ -34,6 +34,12 @@
     <put-attribute name="body" value="/WEB-INF/views/board/{1}.jsp"/> <!-- {1} : 어떤 jsp파일이 와도 상관 X -->
   </definition>
   
+    <!-- /answer/answer.do -->
+  <definition name="answer/*" extends="base-definition"> <!-- base-definition 상속 받음 -->
+    <put-attribute name="title" value="공지사항"/>
+    <put-attribute name="body" value="/WEB-INF/views/answer/{1}.jsp"/> <!-- {1} : 어떤 jsp파일이 와도 상관 X -->
+  </definition>
+  
   <!-- /user/view.do -->
   <definition name="user/*" extends="base-definition"> <!-- base-definition 상속 받음 -->
     <put-attribute name="title" value="회원관리"/>

@@ -48,7 +48,7 @@
                  DECODE( TO_CHAR(SYSDATE,'YYYY-MM-DD'),  TO_CHAR(TT1.reg_dt,'YYYY-MM-DD')
                         ,TO_CHAR(TT1.reg_dt,'HH24:MI')
                         ,TO_CHAR(TT1.reg_dt,'YYYY-MM-DD')) as regDt,
-                TT1.reg_id,
+                TT1.reg_id as "regId",
                 TT1.IMAGE_NO AS imageNo
           FROM (
               SELECT ROWNUM AS rnum, T1.*

@@ -61,7 +61,7 @@
   <!-- delete -->
   <delete id="doDelete" parameterType="AnswerVO">
     DELETE FROM answer 
-    WHERE  Rb = #{answerNo}  
+    WHERE  answer_no = #{answerNo}  
   </delete>
   
   <!-- insert -->
