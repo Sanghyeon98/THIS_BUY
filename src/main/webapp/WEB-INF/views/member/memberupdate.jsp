@@ -60,16 +60,62 @@ $(document).ready(function(){
     
     
     
-    
-    $("#passwd").on("keypress",function(e){
         
-        if(13==e.which){
-          e.preventDefault();
-          //event trigger발생
-          $('#Login').trigger('click');
-        }
+        $("#update").on("click",function(){
+            console.log("#update");
+            
+            
+      
+            
+          if(eUtil.ISEmpty( $("#name").val() ) == true){
+              alert("이름을 입력 하세요.");
+              $("#name").focus();
+              return;
+          }         
+
+          
+      
+          
+          
+          if(eUtil.ISEmpty( $("#email").val() ) == true){
+              alert("이메일을 입력 하세요.");
+              $("#email").focus();
+              return;
+          }       
+          
+          if(confirm("수정 하시겠습니까?")==false)return;
+          
+          let method = "GET";
+          let url    = "/memberupdate/doUpdate.do";
+          let async  = true;
+          let params = {
+                  "memberid"   : $("#memberid").val(),
+                  "name"     : $("#name").val(),
+                  "email"    : $("#email").val(),
+                  "phone"    : $("#phone").val()
+          };
+          
+          PClass.callAjax(method,url,async,params,function(data){
+              console.log("data:"+data);
+              //JSON.parse() 메서드는 JSON 문자열의 구문을 분석하고, 그 결과에서 JavaScript 값이나 객체를 생성합니다.
+              let parsedJson = JSON.parse(data);
+              
+              if("1" == parsedJson.msgId){
+                  alert(parsedJson.msgContents);
+                  $("#searchWord").focus();
+              }else{
+                  
+                  alert(parsedJson.msgId+","+parsedJson.msgContents);
+              }
+              window.location.href = "${CP}/main/main_page.do"; 
+          });
+          
+          
+          
+        //수정    
+        });
         
-      });
+      
     
     
     
@@ -104,33 +150,7 @@ $(document).ready(function(){
     </div>
     </div>
     
-    <div class="row">
-    <div class="col-md-2 text-centers">
-     현재 비밀번호<span class="r"></span>
-    </div>
-    <div class="col-md-7 text-centers">
-      <input type="password"  class="form-control" id="passwd" name="passwd" placeholder="현재 비밀번호를 입력해주세요">
-    </div>
-    </div>
-    
-     <div class="row">
-    <div class="col-md-2 text-centers">
-    새 비밀번호<span class="r"></span>
-    </div>
-    <div class="col-md-7 text-centers">
-      <input type="password"  class="form-control" id="newpasswd" name="newpasswd" placeholder="새 비밀번호를 입력해주세요">
-    </div>
-    </div>
-    
-    <!-- 비밀번호 일치확인 -->
-     <div class="row">
-    <div class="col-md-2 text-centers">
-    새 비밀번호 확인<span class="r"></span>
-    </div>
-    <div class="col-md-7 text-centers">
-      <input type="password" class="form-control" id="newpasswdc" name="newpasswdc" placeholder="새 비밀번호를 한번 더 입력해주세요">
-    </div>
-    </div>
+  
     
   <div class="row">
     <div class="col-md-2 text-centers">
@@ -153,8 +173,7 @@ $(document).ready(function(){
          <button type="submit" class="btn btn-default btn-block" value="이메일 인증" id="emailCheck">이메일 인증</button>
         </div>
    </div>
-   <input class="form-control mailcheckinput" placeholder="인증번호 6자리를 입력해주세요!" disabled="disabled" maxlength="6">
-   <span id="mail-check-warn"></span>
+  
    <!-- 본인 인증 넣기 -->
    <div class="row">
     <div class="col-md-2 text-centers">
@@ -203,7 +222,7 @@ $(document).ready(function(){
   <div class="btn-signup">
     
   
-  <button type="button" style="width: 240px;" class="btn btn-default btn-block " value="등록" id="add">수정하기</button>
+  <button type="button" style="width: 240px;" class="btn btn-default btn-block " value="등록" id="update">수정하기</button>
   
  
   </div>

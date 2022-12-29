@@ -94,16 +94,10 @@
 	<update id="doUpdate" parameterType="MemberVO">
 		UPDATE hr_member
 		SET
-		passwd = #{passwd},
 		name = #{name},
 		email = #{email},
 		phone = #{phone},
-		address = #{address},
-		gender = #{gender},
-		birthdate = SYSDATE,
-		reg_dt = SYSDATE,
-		mod_dt = SYSDATE,
-		auth = #{auth}
+		mod_dt = SYSDATE
 		WHERE member_id = #{memberid}
 	</update>
 
