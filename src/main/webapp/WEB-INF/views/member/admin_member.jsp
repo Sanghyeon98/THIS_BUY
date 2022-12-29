@@ -140,12 +140,13 @@
     
     
     //=============================doSelectOne함수
-    function doSelectOne(productNo) {
-      let url = "${CP}/product/moveToMod.do";
+    function doSelectOne(memberid) {
+      console.log("memberid : " + memberid);
+    	
+      let url = "${CP}/admin/moveToMod.do";
 
-      url = url + "?itemNo="+productNo;
-      console.log("url : "+url);
-      location.href = url;
+      url = url + "?memberid="+memberid; 
+      
     }
     //=============================doSelectOne함수 끝  
     
@@ -193,7 +194,7 @@
             $.each(parsedJson,function(index,value){
                 htmlData +=" <tr>";
                 htmlData +="   <td class='td_center'><input type='checkbox' name='chk' value='"+value.memberid+"' /></td>";
-                htmlData +="   <td><a href='#' onClick='doSelectOne(" + value.memberid + ")'>" + value.memberid + "</a></td>";
+                htmlData +="   <td><a href='${CP}/admin/moveToMod.do?memberid=" + value.memberid + "'>" + value.memberid + "</a></td>";
                 htmlData +="   <td class='td_center'>"+value.name  +"</td>";
                 htmlData +="   <td class='text-left   col-sm-2 col-md-2 col-lg-2'>"+value.phone +"</td>";
                 htmlData +="  <td class='td_center'>"+value.regDt+"</td>";
@@ -274,6 +275,7 @@
       <div class="lnb">
         <jsp:include page="/WEB-INF/views/cmn/admin_left_menu.jsp"></jsp:include>
       </div>
+      <input type="text" id="test1">
       <!-- lnb END ------------------------------------------------------------>
       
       <!-- content -->
