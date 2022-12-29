@@ -35,38 +35,67 @@
 <script src="${CP_RES}/js/bootstrap.min.js"></script>
 
 <style>
+
+body, header, footer, div, h1, h2, ul, li, p {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;  /* padding, border를 width에 포함 */
+}
+
+.clear:after {
+  content: "";
+  display: block;
+  clear: both;   /* float 속성 초기화 */
+}
+
+a {
+  background-color: transparent;
+  text-decoration: none;
+  color: inherit;
+}
+
+li {
+  list-style-type: none;   /* 불릿 제거 */ 
+}
+
+div {
+  display : block;
+} 
+
+#wrap {
+  width: 1050px;
+  margin: 0 auto; /* 좌우 가운데 정렬 */
+}
+
 .side {
 	display: flex;
+	width: 1050px;
+	margin: 0px auto;
+	padding : 20px;
+	padding-bottom : 60px;
+	float: center;  
+	justify-content: space-between;
 }
 
 .content2 {
+  padding-left: 20px;
 	position: relative;
-	width: 284px;
+	width: 600px;
 }
 
-.side1 {
+#tableArea {
+  width: 100%;
+}
+
+#productOnetable {
+  width: 100%;
+}
+
+.side1 { 
 	float: center;
 	height: 1000px;
 	margin: 0px 150px 50px 150px;
 	background-color: pink;
-}
-
-.side2 {
-	display: flex;
-	width: 550px;
-	margin: 0px auto;
-	padding-bottom: 10px;
-	float: center;
-	justify-content: space-between;
-}
-
-.side {
-	display: flex;
-	width: 550px;
-	margin: 0px auto;
-	padding-bottom: 80px;
-	float: center;
-	justify-content: space-between;
 }
 
 .address {
@@ -78,9 +107,9 @@
 	width: 80%;
 	height: 30px;
 	border-radius: 3px;
-	color: rgb(95, 0, 128);
+	color: #B8C9DF;
 	background-color: rgb(255, 255, 255);
-	border: 1px solid rgb(95, 0, 128);
+	border: 1px solid #B8C9DF;
 }
 
 .tag {
@@ -167,38 +196,44 @@
 </script>
 </head>
 <body>
-	<div>
+	<div id="wrap"> 
 		<div class="side">
-			<div>
-				<img alt="이미지" src="${CP_RES }/imgs/spring.png">
+			<div class="imgArea">
+				<img alt="이미지" width="400" src="${CP}${vo.viewPath}/${vo.saveName}">
 			</div>
 			<div class="content2">
-				<div>
-					<table>
-						<tr class="1">
+				<div id="tableArea">
+					<table id="productOnetable">
+						<tr style="display: none;">
 							<td>상품 번호</td>
-							<td><input type="text" value="${vo.itemNo}"
-								readonly="readonly" id="itemNO" name="itemNO"></td>
+							<td id="itemNO" name="itemNO" value="${vo.itemNo}">
+							  ${vo.itemNo} 
+							</td> 
 						</tr>
 						<tr>
 							<td>상품명</td>
-							<td><input type="text" value="${vo.name}"
-								readonly="readonly"></td>
+							<td id="name" name="name" value="${vo.name}">
+                ${vo.name} 
+              </td>
 						</tr>
 						<tr>
 							<td>상품 가격</td>
-							<td><input type="text" name="price" id="price"
-								value="${vo.price}" readonly="readonly"></td>
+							<td>
+							  <input type="hidden" id="price" name="price" value="${vo.price}">
+                ${vo.price} 
+              </td>
 						</tr>
 						<tr>
 							<td>생산지</td>
-							<td><input type="text" value="${vo.production}"
-								readonly="readonly"></td>
+							<td id="production" name="production" value="${vo.production}">
+                ${vo.production} 
+              </td>
 						</tr>
 						<tr>
 							<td>중량/용량</td>
-							<td><input type="text" value="${vo.weight}"
-								readonly="readonly"></td>
+              <td id="weight" name="weight" value="${vo.weight}">
+                ${vo.weight} 
+              </td>
 						</tr>
 						<tr>
 							<td>수량</td>
@@ -222,7 +257,7 @@
 			</div>
 		</div>
 		<div class="side1">
-			<p>상세 정보를 입력</p>
+			<p>${vo.detail}</p>
 		</div>
 	</div>
 </body>

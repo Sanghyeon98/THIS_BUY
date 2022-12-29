@@ -74,14 +74,14 @@ a {
 .mainMenu .loginInfoList {display:none; position:absolute; left:0; right:0; text-align:center;}
 .mainMenu .loginInfoList a {display:block; padding:5px; background:#fff; width: 80px; /*color:#fff;*/}
  
- 
+/*  
 .catelist:after {display:block; content:''; clear:both;}
 .catelist > li {position:relative; float:left; margin-right:5px;}
-.catelist > li > .cate01list {display:block; padding:0 15px; height:40px; line-height:40px; /*color:#fff; background:#333;*/ }
+.catelist > li > .cate01list {display:block; padding:0 15px; height:40px; line-height:40px; color:#fff; background:#333; }
 .catelist > li:hover .cate02list {display:block;}
 .catelist .cate02list {display:none; position:absolute; left:0; right:0; text-align:center;}
-.catelist .cate02list a {display:block; padding:5px; background:#fff; width: 100px; /*color:#fff;*/}
- 
+.catelist .cate02list a {display:block; padding:5px; background:#fff; width: 100px; color:#fff;}
+  */
 
 #loginName {
   margin-right: 10px;

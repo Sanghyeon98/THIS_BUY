@@ -5,22 +5,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.pcwk.ehr.detail">
 
-	<select id="doSelectOne" parameterType="DetailVO"
-		resultType="DetailVO">
-      <![CDATA[
-      SELECT
-        item_no AS itemNo,
-        name,
-        price,
-        image_no AS imageNo,
-        production,
-        weight,
-        detail,
-        final_price AS finalPrice,
-        sales
-      FROM product
-      WHERE item_no = #{itemNo}
-      ]]>
+	<select id="doSelectOne" parameterType="DetailVO"	resultType="DetailVO">
+		<![CDATA[
+			 SELECT
+			    item_no AS itemNo,
+			    name,
+			    price,
+			    p.image_no AS imageNo,
+			    production,
+			    weight,
+			    detail,
+			    final_price AS finalPrice,
+			    sales,
+			    i.view_path AS viewPath,
+			    i.save_name AS saveName
+			FROM product p, image i
+			WHERE 1=1
+			    AND p.image_no = i.image_no
+			    AND item_no = #{itemNo}
+		]]>
 	</select>
 
 	<insert id="doSave" parameterType="DetailVO">

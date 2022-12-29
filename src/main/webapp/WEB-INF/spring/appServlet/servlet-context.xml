@@ -20,17 +20,18 @@
   <!-- 모든 요청을 interceptor할것 
   단 /login/으로 시작되는 것은 제외 한다.
   -->
-  <mvc:interceptors>
+<!--   <mvc:interceptors>
      <mvc:interceptor>
       <mvc:mapping path="/**"/>
       <mvc:exclude-mapping path="/login/**"/>
+      <mvc:exclude-mapping path="/category/**"/>
       <mvc:exclude-mapping path="/member/**"/>
       <mvc:exclude-mapping path="/resources/**"/>
       <mvc:exclude-mapping path="/main/**"/>
       <mvc:exclude-mapping path="/signup/**"/>
       <beans:ref bean="loginInterceptor"/>
      </mvc:interceptor>  
-  </mvc:interceptors>
+  </mvc:interceptors> -->
    
    
   

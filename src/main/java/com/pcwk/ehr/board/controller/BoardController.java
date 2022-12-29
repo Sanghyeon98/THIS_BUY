@@ -349,7 +349,7 @@ public class BoardController {
 		String message = "";
 		
 		model.addAttribute("vo", outVO);
-		model.addAttribute("imgVO", imgVO);
+		model.addAttribute("imgVO", outImgVO);
 		
 		LOG.debug("└──────────────────────────────┘");
 		

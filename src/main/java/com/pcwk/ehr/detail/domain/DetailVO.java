@@ -18,6 +18,11 @@ public class DetailVO extends DTO {
 	private String regDt;		// 상품등록일_defuault SYSDATE
 	private String modDt;		// 상품수정일_defuault SYSDATE
 	
+	// image 테이블 조인 변수
+	private String viewPath;	// 이미지 view Path
+	private String saveName;	// 이미지 저장명
+	
+	
 	public DetailVO() {}
 	
 	public DetailVO(int itemNo, String name, int price, int categoryNo, int imageNo, String production, int weight,
@@ -37,6 +42,44 @@ public class DetailVO extends DTO {
 		this.sales = sales;
 		this.regDt = regDt;
 		this.modDt = modDt;
+	}
+	
+	public DetailVO(int itemNo, String name, int price, int categoryNo, int imageNo, String production, int weight,
+			String expired, String detail, int discount, int finalPrice, int sales, String regDt, String modDt,
+			String viewPath, String saveName) {
+		super();
+		this.itemNo = itemNo;
+		this.name = name;
+		this.price = price;
+		this.categoryNo = categoryNo;
+		this.imageNo = imageNo;
+		this.production = production;
+		this.weight = weight;
+		this.expired = expired;
+		this.detail = detail;
+		this.discount = discount;
+		this.finalPrice = finalPrice;
+		this.sales = sales;
+		this.regDt = regDt;
+		this.modDt = modDt;
+		this.viewPath = viewPath;
+		this.saveName = saveName;
+	}
+
+	public String getViewPath() {
+		return viewPath;
+	}
+
+	public void setViewPath(String viewPath) {
+		this.viewPath = viewPath;
+	}
+
+	public String getSaveName() {
+		return saveName;
+	}
+
+	public void setSaveName(String saveName) {
+		this.saveName = saveName;
 	}
 
 	public int getItemNo() {
@@ -153,10 +196,11 @@ public class DetailVO extends DTO {
 
 	@Override
 	public String toString() {
-		return "ProductVO [itemNo=" + itemNo + ", name=" + name + ", price=" + price + ", categoryNo=" + categoryNo
+		return "DetailVO [itemNo=" + itemNo + ", name=" + name + ", price=" + price + ", categoryNo=" + categoryNo
 				+ ", imageNo=" + imageNo + ", production=" + production + ", weight=" + weight + ", expired=" + expired
 				+ ", detail=" + detail + ", discount=" + discount + ", finalPrice=" + finalPrice + ", sales=" + sales
-				+ ", regDt=" + regDt + ", modDt=" + modDt + ", toString()=" + super.toString() + "]";
+				+ ", regDt=" + regDt + ", modDt=" + modDt + ", viewPath=" + viewPath + ", saveName=" + saveName
+				+ ", toString()=" + super.toString() + "]";
 	}
 	
 }
