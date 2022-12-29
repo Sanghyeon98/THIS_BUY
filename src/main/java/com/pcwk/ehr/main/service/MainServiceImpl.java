@@ -8,7 +8,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pcwk.ehr.admin.domain.ProductVO;
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.main.dao.MainDao;
 import com.pcwk.ehr.main.domain.ProductImgVO;
@@ -67,11 +66,6 @@ public class MainServiceImpl implements MainService {
 	@Override
 	public List<ProductImgVO> cateList5() throws SQLException {
 		return maindao.cateList5();
-	}
-
-	@Override
-	public List<ProductImgVO> cateList6() throws SQLException {
-		return maindao.cateList6();
 	}
 
 }

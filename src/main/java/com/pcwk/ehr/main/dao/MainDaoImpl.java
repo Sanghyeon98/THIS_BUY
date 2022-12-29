@@ -10,7 +10,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.pcwk.ehr.admin.domain.ProductVO;
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.cmn.SearchVO;
 import com.pcwk.ehr.main.domain.ProductImgVO;
@@ -222,27 +221,6 @@ public class MainDaoImpl implements MainDao {
 		LOG.debug("================================");
 		
 		return list5;
-	}
-
-
-
-	@Override
-	public List<ProductImgVO> cateList6() throws SQLException {
-		List<ProductImgVO> list6 = null;
-		
-		String statement = NAMESPACE + DOT + "cateList6";
-
-		LOG.debug("================================");
-		LOG.debug("|  statement: " + statement);
-		
-		list6 = sqlSessionTemplate.selectList(statement);
-		
-		for(ProductImgVO vo : list6) {
-			LOG.debug("|  vo : " + vo);
-		}
-		LOG.debug("================================");
-		
-		return list6;
 	}
 
 	

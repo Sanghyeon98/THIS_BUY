@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.pcwk.ehr.admin.domain.CategoryVO;
-import com.pcwk.ehr.admin.domain.ProductVO;
 import com.pcwk.ehr.admin.service.CategoryService;
 import com.pcwk.ehr.admin.service.ProductService;
 import com.pcwk.ehr.cmn.SearchVO;
@@ -59,14 +58,12 @@ public class MainController {
 		List<ProductImgVO> list3 = mainService.cateList3();
 		List<ProductImgVO> list4 = mainService.cateList4();
 		List<ProductImgVO> list5 = mainService.cateList5();
-		List<ProductImgVO> list6 = mainService.cateList6();
 
 		model.addAttribute("list1", list1);
 		model.addAttribute("list2", list2);
 		model.addAttribute("list3", list3);
 		model.addAttribute("list4", list4);
 		model.addAttribute("list5", list5);
-		model.addAttribute("list6", list6);
 
 		return "main/main_page";
 	}

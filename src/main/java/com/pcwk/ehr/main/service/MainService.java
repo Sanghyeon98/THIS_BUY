@@ -3,7 +3,6 @@ package com.pcwk.ehr.main.service;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.pcwk.ehr.admin.domain.ProductVO;
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.main.domain.ProductImgVO;
 
@@ -21,8 +20,6 @@ public interface MainService {
 	List<ProductImgVO> cateList4() throws SQLException;
 	
 	List<ProductImgVO> cateList5() throws SQLException;
-	
-	List<ProductImgVO> cateList6() throws SQLException;
 	
 	/*상품 검색*/
 	List<ProductImgVO> getGoodsList(ProductImgVO inVO) throws SQLException;

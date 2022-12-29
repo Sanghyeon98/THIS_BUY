@@ -118,7 +118,7 @@
       FROM product p, image i, category c
       WHERE p.image_no = i.image_no
       AND p.category_no = c.category_no
-      AND c.top_no = 0
+      AND c.top_no = 1
       
       ORDER BY p.reg_dt desc
     ) a
@@ -149,7 +149,7 @@
       FROM product p, image i, category c
       WHERE p.image_no = i.image_no
       AND p.category_no = c.category_no
-      AND c.top_no = 1
+      AND c.top_no = 2
       
       ORDER BY p.reg_dt desc
     ) a
@@ -180,7 +180,7 @@
       FROM product p, image i, category c
       WHERE p.image_no = i.image_no
       AND p.category_no = c.category_no
-      AND c.top_no = 2
+      AND c.top_no = 3
       
       ORDER BY p.reg_dt desc
     ) a
@@ -211,37 +211,6 @@
       FROM product p, image i, category c
       WHERE p.image_no = i.image_no
       AND p.category_no = c.category_no
-      AND c.top_no = 3
-      
-      ORDER BY p.reg_dt desc
-    ) a
-    <![CDATA[WHERE rownum <= 4]]>
-  </select>
-  
-  <select id="cateList5" parameterType="ProductVO" resultType="ProductImgVO">
-  SELECT rownum, a.*
-    FROM (
-      SELECT
-        p.item_no AS itemNo,
-        name,
-        price,
-        quantity,
-        p.category_no AS categoryNo,
-        p.image_no AS imageNo,
-        production,
-        weight,
-        TO_CHAR(expired, 'YYYY-MM-DD HH24:MI:SS') AS expired,
-        detail,
-        discount,
-        final_price AS finalPrice,
-        sales,
-        TO_CHAR(p.reg_dt, 'YYYY-MM-DD HH24:MI:SS') AS regDt,
-        TO_CHAR(p.mod_dt, 'YYYY-MM-DD HH24:MI:SS') AS modDt,
-        i.save_name AS saveName,
-        i.view_path AS viewPath
-      FROM product p, image i, category c
-      WHERE p.image_no = i.image_no
-      AND p.category_no = c.category_no
       AND c.top_no = 4
       
       ORDER BY p.reg_dt desc
@@ -249,7 +218,7 @@
     <![CDATA[WHERE rownum <= 4]]>
   </select>
   
-  <select id="cateList6" parameterType="ProductVO" resultType="ProductImgVO">
+  <select id="cateList5" parameterType="ProductVO" resultType="ProductImgVO">
   SELECT rownum, a.*
     FROM (
       SELECT
