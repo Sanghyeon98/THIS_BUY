@@ -196,15 +196,19 @@
           <span class="css-mod11"> 목록</span>
          </button>
          
-         <div id ="updatebutton">
-         <button class ="css-mod11" type="button" width="150" height="42" radius="0" id="doUpdate">
-          <span class="css-mod11"> 수정</span>
-         </button>
-         </div>
-         
-         <button class ="css-mod11" type="button" width="150" height="42" radius="0" id="doDelete">
-          <span class="css-mod11"> 삭제</span>
-         </button>
+         <c:choose>
+           <c:when test="${1 == sessionScope.memberInfo.auth}">
+		         <div id ="updatebutton">
+		         <button class ="css-mod11" type="button" width="150" height="42" radius="0" id="doUpdate">
+		          <span class="css-mod11"> 수정</span>
+		         </button>
+		         </div>
+		         
+		         <button class ="css-mod11" type="button" width="150" height="42" radius="0" id="doDelete">
+		          <span class="css-mod11"> 삭제</span>
+		         </button>
+           </c:when>
+          </c:choose>
         </div>
         
    

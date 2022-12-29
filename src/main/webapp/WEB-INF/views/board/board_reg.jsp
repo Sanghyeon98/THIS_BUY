@@ -166,8 +166,7 @@
 			            gubun : $("#gubun").val(),
 			            title : $("#title").val(),
 			            contents : $("#contents").val(),
-			            regDt : "",
-			            regId : "관리자",
+			            regId : $("#regIdd").val(),
 			            imageNo : getImageNo
 			        };
 			
@@ -233,13 +232,13 @@
       <div class="css-6 ">
        <div class="css-7 ">
          <h2 class="css-8 ">${title}</h2>
-         <input type="hidden" id="gubun" name="gubun" value="${vo.gubun}">
+
        </div>
       </div>
       <form  method="post" enctype="multipart/form-data">
        <div class="css-21">
         <div class="css-22">
-
+    
          <label>제목</label>
         </div>
         <div class="css-23">
@@ -293,8 +292,11 @@
         </div>
         </div>
         </div>
-
         
+        <!-- hidden  -->
+           <input type="hidden" data-testid="input-box" id="regIdd" name="regIdd" value="${sessionScope.memberInfo.name  }" >
+           <input type="hidden" id="gubun" name="gubun" value="${vo.gubun}">
+        <!-- hidden end  -->
       
       </form>
       

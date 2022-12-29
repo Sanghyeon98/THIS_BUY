@@ -131,7 +131,7 @@ int faq_no = (seq == null)? -1 : Integer.parseInt(seq);
 
 						//등록화면으로 이동
 						$("#boardReg").on("click", function() {
-z
+
 							console.log('boardReg');
 							console.log('gubun:'+$("#gubun").val())
 
@@ -368,7 +368,7 @@ z
 																		<div style="display: none;"><c:out value="${vo.seq }"></c:out></div>
 																		<div class="css-16 " ><c:out value="${vo.num }"></c:out></div>
 																		<div class="css-17 " ><c:out value="${vo.title }"></c:out></div>
-																		<div class="css-18 ">관리자</div>
+																		<div class="css-18 "><c:out value="${vo.regId}"></c:out></div>
 																		<div class="css-19 "><c:out value="${vo.regDt }"></c:out></div>
 															</li>
 													</ul>	
@@ -393,15 +393,16 @@ z
 
 							</div>
 
-          <c:choose>
-           <c:when test="${2 < sessionScope.userInfo.name && not empty sessionScope.userInfo}">
 
 							<div id="insertButtonArea">
-								<button class="css-Button" type="button" width="120" height="44"
-									radius="3" id="boardReg">등록</button>
+							    <c:choose>
+                    <c:when test="${1 == sessionScope.memberInfo.auth}">
+								      <button class="css-Button" type="button" width="120" height="44"
+									       radius="3" id="boardReg">등록</button>
+									 </c:when>
+                  </c:choose>
 							</div>
-						</c:when>
-					</c:choose>
+
 
 						<!-- 	<div id="questionButtonArea">
 								<button class="css-Button" type="button" width="120" height="44"

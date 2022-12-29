@@ -203,7 +203,7 @@
         </div> 
         <div class="css-mod6">
          <div class="css-mod7">작성자</div>
-         <input type="text"class="css-mod7" id="regId" name="regId"value="<c:out value='${vo.regId }' />" readonly="readonly"
+         <input type="text"class="css-mod7" id="regId" name="regId"value="<c:out value='${vo.regId}' />" readonly="readonly"
           placeholder="작성자" maxlength="100">
         </div> 
          <div class="css-mod6">
@@ -236,7 +236,7 @@
          </button>
          
          <c:choose>
-           <c:when test="${2 < sessionScope.userInfo.name && not empty sessionScope.userInfo}">
+           <c:when test="${1 == sessionScope.memberInfo.auth}">
          
          <div id ="updatebutton">
          <button class ="css-mod11" type="button" width="150" height="42" radius="0" id="doUpdate">
