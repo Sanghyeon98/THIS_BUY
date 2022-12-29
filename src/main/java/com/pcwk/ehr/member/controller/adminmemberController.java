@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import com.google.gson.Gson;
-import com.pcwk.ehr.admin.domain.CategoryVO;
-import com.pcwk.ehr.admin.domain.ProductVO;
 import com.pcwk.ehr.cmn.MessageVO;
 import com.pcwk.ehr.cmn.SearchVO;
 import com.pcwk.ehr.cmn.StringUtil;
@@ -146,4 +144,29 @@ public class adminmemberController {
 			
 			return jsonString;
 		}
+		// 제품 수정 화면 이동
+		@RequestMapping(value = "/moveToMod.do")
+		public String moveToMod(MemberVO inVO, Model model, HttpSession session) throws SQLException {
+			
+			// 세션으로 권한(auth)가 관리자(1)가 아니면 관리화면 접근 불가 처리 ------------------------
+			MemberVO memberSession = (MemberVO) session.getAttribute("memberInfo");
+			LOG.debug("|  memberSession = " + memberSession);
+			LOG.debug("|  memberSession.getAuth() = " + memberSession.getAuth());
+			
+			if(!"1".equals(memberSession.getAuth())) {	// 관리자가 아니면
+				LOG.debug("|  not Admin ");
+				return "product/moveToMain";
+			}		
+			// 세션으로 권한(auth)가 관리자(1)가 아니면 관리화면 접근 불가 처리 ------------------------
+			
+			// 제품 단건 조회
+			
+			MemberVO outVO = memberservice.doSelectOne(inVO);
+			model.addAttribute("vo",outVO);
+			
+			LOG.debug("|  outVO = " + outVO);
+			return "member/admin_memberdetail";
+		}
+
+		
 }
