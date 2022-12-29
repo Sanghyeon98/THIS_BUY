@@ -200,7 +200,7 @@
           </ul>
         </div>
         <div class="top3_1">
-          <span class="menu"><a href="#">신상품</a></span>
+          <span class="menu"><a href="${CP}/main/latestProductPage.do">신상품</a></span>
           <span class="menu"><a href="#">베스트</a></span>
           <span class="menu"><a href="#">특가상품</a></span>
         </div>
