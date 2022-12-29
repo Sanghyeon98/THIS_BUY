@@ -118,11 +118,11 @@
       FROM product p, image i, category c
       WHERE p.image_no = i.image_no
       AND p.category_no = c.category_no
-      AND c.top_no = 1
+      AND c.top_no = 2
       
       ORDER BY p.reg_dt desc
     ) a
-    <![CDATA[WHERE rownum <= 4]]>
+    <![CDATA[WHERE rownum <= 20]]>
   </select>
   
   <select id="cateList2" parameterType="ProductVO" resultType="ProductImgVO">
@@ -153,7 +153,7 @@
       
       ORDER BY p.reg_dt desc
     ) a
-    <![CDATA[WHERE rownum <= 4]]>
+    <![CDATA[WHERE rownum <= 20]]>
   </select>
   
   <select id="cateList3" parameterType="ProductVO" resultType="ProductImgVO">
@@ -184,7 +184,7 @@
       
       ORDER BY p.reg_dt desc
     ) a
-    <![CDATA[WHERE rownum <= 4]]>
+    <![CDATA[WHERE rownum <= 20]]>
   </select>
   
   <select id="cateList4" parameterType="ProductVO" resultType="ProductImgVO">
@@ -215,7 +215,7 @@
       
       ORDER BY p.reg_dt desc
     ) a
-    <![CDATA[WHERE rownum <= 4]]>
+    <![CDATA[WHERE rownum <= 20]]>
   </select>
   
   <select id="cateList5" parameterType="ProductVO" resultType="ProductImgVO">
@@ -246,7 +246,7 @@
       
       ORDER BY p.reg_dt desc
     ) a
-    <![CDATA[WHERE rownum <= 4]]>
+    <![CDATA[WHERE rownum <= 20]]>
   </select>
 
   </mapper>
