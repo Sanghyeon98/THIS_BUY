@@ -161,7 +161,7 @@
 		            <ul id="loginInfoList">
 			            <li class="loginInfo hide"><a href="#">주문 내역</a></li>
 			            <li class="loginInfo hide"><a href="#">상품 문의</a></li>
-			            <li class="loginInfo hide"><a href="#">개인 정보 수정</a></li>
+			            <li class="loginInfo hide"><a href="${CP}/memberupdate/memberCheck.do">개인 정보 수정</a></li>
 		            </ul>
 		          </ul>
 		        </div> 
