@@ -9,8 +9,20 @@ import com.pcwk.ehr.main.domain.ProductImgVO;
 
 public interface MainService {
 	
-	/* 전체 상품 조회 */
+	/* 전체 최신 상품 조회 */
 	List<ProductImgVO> getAll() throws SQLException;
+	
+	List<ProductImgVO> cateList1() throws SQLException;
+	
+	List<ProductImgVO> cateList2() throws SQLException;
+	
+	List<ProductImgVO> cateList3() throws SQLException;
+	
+	List<ProductImgVO> cateList4() throws SQLException;
+	
+	List<ProductImgVO> cateList5() throws SQLException;
+	
+	List<ProductImgVO> cateList6() throws SQLException;
 	
 	/*상품 검색*/
 	List<ProductImgVO> getGoodsList(ProductImgVO inVO) throws SQLException;

@@ -14,13 +14,13 @@
         </choose>
       </when>
       <otherwise>  <!-- 검색이 아닌 메인, 카테고리 선택 시 보여줌 -->
-		    <choose>
-		      <when test='searchDiv != "" and searchDiv == "20"'> <!-- 2차분류 검색 -->
-		        and p.category_no = #{cateId}
-		      </when>
-		      <otherwise>
-		      </otherwise>
-		    </choose>
+        <choose>
+          <when test='searchDiv != "" and searchDiv == "20"'> <!-- 2차분류 검색 -->
+            and p.category_no = #{cateId}
+          </when>
+          <otherwise>
+          </otherwise>
+        </choose>
       </otherwise>
     </choose>
   </sql>
@@ -63,7 +63,7 @@
     )B
   </select>
   
-  <!-- 메인 : 상품 표시-->
+  <!-- 최신 상품 20개 -->
   <select id="getALL" parameterType="ProductVO" resultType="ProductImgVO">
     SELECT rownum, a.*
     FROM (
@@ -91,6 +91,193 @@
       ORDER BY p.reg_dt desc
     ) a
     <![CDATA[WHERE rownum <= 20]]>
+  </select>
+  
+  <!-- 메인 : 상품 표시-->
+  <select id="cateList1" parameterType="ProductVO" resultType="ProductImgVO">
+  SELECT rownum, a.*
+    FROM (
+      SELECT
+        p.item_no AS itemNo,
+        name,
+        price,
+        quantity,
+        p.category_no AS categoryNo,
+        p.image_no AS imageNo,
+        production,
+        weight,
+        TO_CHAR(expired, 'YYYY-MM-DD HH24:MI:SS') AS expired,
+        detail,
+        discount,
+        final_price AS finalPrice,
+        sales,
+        TO_CHAR(p.reg_dt, 'YYYY-MM-DD HH24:MI:SS') AS regDt,
+        TO_CHAR(p.mod_dt, 'YYYY-MM-DD HH24:MI:SS') AS modDt,
+        i.save_name AS saveName,
+        i.view_path AS viewPath
+      FROM product p, image i, category c
+      WHERE p.image_no = i.image_no
+      AND p.category_no = c.category_no
+      AND c.top_no = 0
+      
+      ORDER BY p.reg_dt desc
+    ) a
+    <![CDATA[WHERE rownum <= 4]]>
+  </select>
+  
+  <select id="cateList2" parameterType="ProductVO" resultType="ProductImgVO">
+  SELECT rownum, a.*
+    FROM (
+      SELECT
+        p.item_no AS itemNo,
+        name,
+        price,
+        quantity,
+        p.category_no AS categoryNo,
+        p.image_no AS imageNo,
+        production,
+        weight,
+        TO_CHAR(expired, 'YYYY-MM-DD HH24:MI:SS') AS expired,
+        detail,
+        discount,
+        final_price AS finalPrice,
+        sales,
+        TO_CHAR(p.reg_dt, 'YYYY-MM-DD HH24:MI:SS') AS regDt,
+        TO_CHAR(p.mod_dt, 'YYYY-MM-DD HH24:MI:SS') AS modDt,
+        i.save_name AS saveName,
+        i.view_path AS viewPath
+      FROM product p, image i, category c
+      WHERE p.image_no = i.image_no
+      AND p.category_no = c.category_no
+      AND c.top_no = 1
+      
+      ORDER BY p.reg_dt desc
+    ) a
+    <![CDATA[WHERE rownum <= 4]]>
+  </select>
+  
+  <select id="cateList3" parameterType="ProductVO" resultType="ProductImgVO">
+  SELECT rownum, a.*
+    FROM (
+      SELECT
+        p.item_no AS itemNo,
+        name,
+        price,
+        quantity,
+        p.category_no AS categoryNo,
+        p.image_no AS imageNo,
+        production,
+        weight,
+        TO_CHAR(expired, 'YYYY-MM-DD HH24:MI:SS') AS expired,
+        detail,
+        discount,
+        final_price AS finalPrice,
+        sales,
+        TO_CHAR(p.reg_dt, 'YYYY-MM-DD HH24:MI:SS') AS regDt,
+        TO_CHAR(p.mod_dt, 'YYYY-MM-DD HH24:MI:SS') AS modDt,
+        i.save_name AS saveName,
+        i.view_path AS viewPath
+      FROM product p, image i, category c
+      WHERE p.image_no = i.image_no
+      AND p.category_no = c.category_no
+      AND c.top_no = 2
+      
+      ORDER BY p.reg_dt desc
+    ) a
+    <![CDATA[WHERE rownum <= 4]]>
+  </select>
+  
+  <select id="cateList4" parameterType="ProductVO" resultType="ProductImgVO">
+  SELECT rownum, a.*
+    FROM (
+      SELECT
+        p.item_no AS itemNo,
+        name,
+        price,
+        quantity,
+        p.category_no AS categoryNo,
+        p.image_no AS imageNo,
+        production,
+        weight,
+        TO_CHAR(expired, 'YYYY-MM-DD HH24:MI:SS') AS expired,
+        detail,
+        discount,
+        final_price AS finalPrice,
+        sales,
+        TO_CHAR(p.reg_dt, 'YYYY-MM-DD HH24:MI:SS') AS regDt,
+        TO_CHAR(p.mod_dt, 'YYYY-MM-DD HH24:MI:SS') AS modDt,
+        i.save_name AS saveName,
+        i.view_path AS viewPath
+      FROM product p, image i, category c
+      WHERE p.image_no = i.image_no
+      AND p.category_no = c.category_no
+      AND c.top_no = 3
+      
+      ORDER BY p.reg_dt desc
+    ) a
+    <![CDATA[WHERE rownum <= 4]]>
+  </select>
+  
+  <select id="cateList5" parameterType="ProductVO" resultType="ProductImgVO">
+  SELECT rownum, a.*
+    FROM (
+      SELECT
+        p.item_no AS itemNo,
+        name,
+        price,
+        quantity,
+        p.category_no AS categoryNo,
+        p.image_no AS imageNo,
+        production,
+        weight,
+        TO_CHAR(expired, 'YYYY-MM-DD HH24:MI:SS') AS expired,
+        detail,
+        discount,
+        final_price AS finalPrice,
+        sales,
+        TO_CHAR(p.reg_dt, 'YYYY-MM-DD HH24:MI:SS') AS regDt,
+        TO_CHAR(p.mod_dt, 'YYYY-MM-DD HH24:MI:SS') AS modDt,
+        i.save_name AS saveName,
+        i.view_path AS viewPath
+      FROM product p, image i, category c
+      WHERE p.image_no = i.image_no
+      AND p.category_no = c.category_no
+      AND c.top_no = 4
+      
+      ORDER BY p.reg_dt desc
+    ) a
+    <![CDATA[WHERE rownum <= 4]]>
+  </select>
+  
+  <select id="cateList6" parameterType="ProductVO" resultType="ProductImgVO">
+  SELECT rownum, a.*
+    FROM (
+      SELECT
+        p.item_no AS itemNo,
+        name,
+        price,
+        quantity,
+        p.category_no AS categoryNo,
+        p.image_no AS imageNo,
+        production,
+        weight,
+        TO_CHAR(expired, 'YYYY-MM-DD HH24:MI:SS') AS expired,
+        detail,
+        discount,
+        final_price AS finalPrice,
+        sales,
+        TO_CHAR(p.reg_dt, 'YYYY-MM-DD HH24:MI:SS') AS regDt,
+        TO_CHAR(p.mod_dt, 'YYYY-MM-DD HH24:MI:SS') AS modDt,
+        i.save_name AS saveName,
+        i.view_path AS viewPath
+      FROM product p, image i, category c
+      WHERE p.image_no = i.image_no
+      AND p.category_no = c.category_no
+      AND c.top_no = 5
+      
+      ORDER BY p.reg_dt desc
+    ) a
+    <![CDATA[WHERE rownum <= 4]]>
   </select>
 
   </mapper>

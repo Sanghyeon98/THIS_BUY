@@ -119,5 +119,131 @@ public class MainDaoImpl implements MainDao {
 		return count;
 	}
 
+
+
+	@Override
+	public List<ProductImgVO> cateList1() throws SQLException {
+		List<ProductImgVO> list1 = null;
+		
+		String statement = NAMESPACE + DOT + "cateList1";
+
+		LOG.debug("================================");
+		LOG.debug("|  statement: " + statement);
+		
+		list1 = sqlSessionTemplate.selectList(statement);
+		
+		for(ProductImgVO vo : list1) {
+			LOG.debug("|  vo : " + vo);
+		}
+		LOG.debug("================================");
+		
+		return list1;
+	}
+
+
+
+	@Override
+	public List<ProductImgVO> cateList2() throws SQLException {
+		List<ProductImgVO> list2 = null;
+		
+		String statement = NAMESPACE + DOT + "cateList2";
+
+		LOG.debug("================================");
+		LOG.debug("|  statement: " + statement);
+		
+		list2 = sqlSessionTemplate.selectList(statement);
+		
+		for(ProductImgVO vo : list2) {
+			LOG.debug("|  vo : " + vo);
+		}
+		LOG.debug("================================");
+		
+		return list2;
+	}
+
+
+
+	@Override
+	public List<ProductImgVO> cateList3() throws SQLException {
+		List<ProductImgVO> list3 = null;
+		
+		String statement = NAMESPACE + DOT + "cateList3";
+
+		LOG.debug("================================");
+		LOG.debug("|  statement: " + statement);
+		
+		list3 = sqlSessionTemplate.selectList(statement);
+		
+		for(ProductImgVO vo : list3) {
+			LOG.debug("|  vo : " + vo);
+		}
+		LOG.debug("================================");
+		
+		return list3;
+	}
+
+
+
+	@Override
+	public List<ProductImgVO> cateList4() throws SQLException {
+		List<ProductImgVO> list4 = null;
+		
+		String statement = NAMESPACE + DOT + "cateList4";
+
+		LOG.debug("================================");
+		LOG.debug("|  statement: " + statement);
+		
+		list4 = sqlSessionTemplate.selectList(statement);
+		
+		for(ProductImgVO vo : list4) {
+			LOG.debug("|  vo : " + vo);
+		}
+		LOG.debug("================================");
+		
+		return list4;
+	}
+
+
+
+	@Override
+	public List<ProductImgVO> cateList5() throws SQLException {
+		List<ProductImgVO> list5 = null;
+		
+		String statement = NAMESPACE + DOT + "cateList5";
+
+		LOG.debug("================================");
+		LOG.debug("|  statement: " + statement);
+		
+		list5 = sqlSessionTemplate.selectList(statement);
+		
+		for(ProductImgVO vo : list5) {
+			LOG.debug("|  vo : " + vo);
+		}
+		LOG.debug("================================");
+		
+		return list5;
+	}
+
+
+
+	@Override
+	public List<ProductImgVO> cateList6() throws SQLException {
+		List<ProductImgVO> list6 = null;
+		
+		String statement = NAMESPACE + DOT + "cateList6";
+
+		LOG.debug("================================");
+		LOG.debug("|  statement: " + statement);
+		
+		list6 = sqlSessionTemplate.selectList(statement);
+		
+		for(ProductImgVO vo : list6) {
+			LOG.debug("|  vo : " + vo);
+		}
+		LOG.debug("================================");
+		
+		return list6;
+	}
+
 	
 }

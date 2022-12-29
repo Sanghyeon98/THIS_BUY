@@ -44,4 +44,34 @@ public class MainServiceImpl implements MainService {
 		return maindao.doRetrieve(inVO);
 	}
 
+	@Override
+	public List<ProductImgVO> cateList1() throws SQLException {
+		return maindao.cateList1();
+	}
+
+	@Override
+	public List<ProductImgVO> cateList2() throws SQLException {
+		return maindao.cateList2();
+	}
+
+	@Override
+	public List<ProductImgVO> cateList3() throws SQLException {
+		return maindao.cateList3();
+	}
+
+	@Override
+	public List<ProductImgVO> cateList4() throws SQLException {
+		return maindao.cateList4();
+	}
+
+	@Override
+	public List<ProductImgVO> cateList5() throws SQLException {
+		return maindao.cateList5();
+	}
+
+	@Override
+	public List<ProductImgVO> cateList6() throws SQLException {
+		return maindao.cateList6();
+	}
+
 }

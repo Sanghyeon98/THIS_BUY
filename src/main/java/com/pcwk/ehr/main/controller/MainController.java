@@ -31,8 +31,6 @@ public class MainController {
 
 	final Logger LOG = LogManager.getLogger(getClass());
 
-	final String VIEW_NAME = "main/main_page";
-
 	@Autowired
 	ProductService prodService;
 
@@ -51,16 +49,39 @@ public class MainController {
 	public MainController() {}
 
 	@RequestMapping(value = "/main_page.do", method = RequestMethod.GET)
-	public String singup(Model model) throws SQLException {
+	public String mainPage(Model model) throws SQLException {
 		LOG.debug("┌=============================┐");
 		LOG.debug("|main_page                    |");
+		LOG.debug("└=============================┘");
+
+		List<ProductImgVO> list1 = mainService.cateList1();
+		List<ProductImgVO> list2 = mainService.cateList2();
+		List<ProductImgVO> list3 = mainService.cateList3();
+		List<ProductImgVO> list4 = mainService.cateList4();
+		List<ProductImgVO> list5 = mainService.cateList5();
+		List<ProductImgVO> list6 = mainService.cateList6();
+
+		model.addAttribute("list1", list1);
+		model.addAttribute("list2", list2);
+		model.addAttribute("list3", list3);
+		model.addAttribute("list4", list4);
+		model.addAttribute("list5", list5);
+		model.addAttribute("list6", list6);
+
+		return "main/main_page";
+	}
+	
+	@RequestMapping(value = "/latestProductPage.do", method = RequestMethod.GET)
+	public String latestProduct(Model model) throws SQLException {
+		LOG.debug("┌=============================┐");
+		LOG.debug("|latestProductPage            |");
 		LOG.debug("└=============================┘");
 
 		List<ProductImgVO> list = mainService.getAll();
 
 		model.addAttribute("list", list);
 
-		return VIEW_NAME;
+		return "main/latestProductPage";
 	}
 
 	// 상품 검색
