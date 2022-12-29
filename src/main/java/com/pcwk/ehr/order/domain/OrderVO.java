@@ -4,23 +4,23 @@ import com.pcwk.ehr.cmn.DTO;
 
 public class OrderVO extends DTO{
 	
-	private int   	  orderNO;
-	private int       sameOrder;
-	private String 	  memberId;
-	private int       itemNO;
-	private int   	  price;
-	private int       paymentId;
-	private String    name;
-	private String    phone;
-	private String    address;
-	private String    request;
-	private String    orderState;
-	private String    date;
+	private int   	  orderNO;     	//주문번호
+	private int       sameOrder;   	//동일주문
+	private String 	  memberId;    	//주문자
+	private int       itemNO;		//상품번호
+	private int   	  price;		//가격
+	private int       paymentId;	//결제방법
+	private String    name;			//수령자명
+	private String    phone;		//핸드폰번호
+	private String    address;		//배송지
+	private String    request;		//요청사항
+	private String    orderState;	//주문상태
+	private String    orderDate;			//
 	
 	public OrderVO() {}
 	
 public OrderVO(int orderNO, int sameOrder, String memberId, int itemNO, int price, int paymentId, String name,
-		String phone, String address, String request, String orderState, String date) {
+		String phone, String address, String request, String orderState, String orderDate) {
 	super();
 	this.orderNO = orderNO;
 	this.sameOrder = sameOrder;
@@ -33,7 +33,7 @@ public OrderVO(int orderNO, int sameOrder, String memberId, int itemNO, int pric
 	this.address = address;
 	this.request = request;
 	this.orderState = orderState;
-	this.date = date;
+	this.orderDate = orderDate;
 }
 	
 	public int getOrderNO() {
@@ -103,17 +103,17 @@ public OrderVO(int orderNO, int sameOrder, String memberId, int itemNO, int pric
 		this.orderState = orderState;
 	}
 	public String getDate() {
-		return date;
+		return orderDate;
 	}
-	public void setDate(String date) {
-		this.date = date;
+	public void setDate(String orderDate) {
+		this.orderDate = orderDate;
 	}
 	
 	@Override
 	public String toString() {
 		return "OrderVO [orderNO=" + orderNO + ", sameOrder=" + sameOrder + ", memberId=" + memberId + ", itemNO="
 				+ itemNO + ", price=" + price + ", paymentId=" + paymentId + ", name=" + name + ", phone=" + phone
-				+ ", address=" + address + ", request=" + request + ", orderState=" + orderState + ", date=" + date
+				+ ", address=" + address + ", request=" + request + ", orderState=" + orderState + ", orderDate=" + orderDate
 				+ ", toString()=" + super.toString() + "]";
 	}
 	
