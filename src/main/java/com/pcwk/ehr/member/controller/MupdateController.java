@@ -50,6 +50,15 @@ public class MupdateController {
 		return "member/memberCheck";
 	}
 	
+	@RequestMapping(value = "/pwUpdate.do")
+	public String pwUpdate() {
+		LOG.debug("┌=============================┐");
+		LOG.debug("|pwUpdate=                 |");
+		LOG.debug("└=============================┘");
+
+		return "member/pwUpdate";
+	}
+	
 	@RequestMapping(value = "/memberupdate.do")
 	public String memberupdate() {
 		LOG.debug("┌=============================┐");
@@ -72,6 +81,30 @@ public class MupdateController {
 			message = inVO.getMemberid() + "수정 되었습니다.";
 		} else {
 			message = inVO.getMemberid() + "수정 실패";
+		}
+
+		MessageVO messageVO = new MessageVO(String.valueOf(flag), message);
+
+		jsonString = new Gson().toJson(messageVO);
+
+		LOG.debug("|jsonString=" + jsonString);
+		LOG.debug("└=============================┘");
+		return jsonString;
+	}
+	
+	@RequestMapping(value = "/pwUpdate.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+	@ResponseBody // 비동기 처리를 하는 경우, HTTP 요청 부분의 body부분이 그대로 브라우저에 전달된다.
+	public String pwUpdate(MemberVO inVO) throws SQLException {
+		String jsonString = "";
+		LOG.debug("┌=============================┐");
+		LOG.debug("|inVO=" + inVO);
+		int flag = memberservice.pwUpdate(inVO);
+
+		String message = "";// json으로 전달할 메시지
+		if (1 == flag) {
+			message =  "비밀 번호가 수정 되었습니다.";
+		} else {
+			message ="수정 실패";
 		}
 
 		MessageVO messageVO = new MessageVO(String.valueOf(flag), message);

@@ -76,6 +76,20 @@ final Logger LOG = LogManager.getFormatterLogger(getClass());
 	}
 
 	@Override
+	public int pwUpdate(MemberVO inVO) throws SQLException {
+		int flag = 0;
+		
+		String statement = NAMESPACE+DOT+"pwUpdate";
+		LOG.debug("��--------------------------------��");
+		LOG.debug("|param:"+inVO );        
+		LOG.debug("|statement:"+statement );  		
+		
+		flag = sqlSessionTemplate.update(statement, inVO);
+		LOG.debug("��--------------------------------��");
+		return flag;
+	}
+	
+	@Override
 	public MemberVO doSelectOne(MemberVO inVO) throws SQLException {
 		MemberVO outVO = null;
 		//com.pcwk.ehr.user.doSelectOne

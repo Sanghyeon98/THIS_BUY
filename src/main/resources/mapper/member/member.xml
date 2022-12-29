@@ -100,6 +100,13 @@
 		mod_dt = SYSDATE
 		WHERE member_id = #{memberid}
 	</update>
+	
+	<update id="pwUpdate" parameterType="MemberVO">
+        UPDATE hr_member
+        SET
+        passwd = #{passwd}
+        WHERE member_id = #{memberid}
+    </update>
 
 	<!-- resultMap -->
 	<!-- column : DB컬럼 property: VO 프로퍼티명 jdbcType: DB컬럼 타입 type: VO -->

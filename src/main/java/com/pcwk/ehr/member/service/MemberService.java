@@ -64,6 +64,14 @@ public interface MemberService {
 	 * @throws SQLException
 	 */
 	int doUpdate(MemberVO inVO) throws SQLException;
+	/**
+	 * 비밀번호 수정
+	 * 
+	 * @param t
+	 * @return 1(성공)/0(실패)
+	 * @throws SQLException
+	 */
+	int pwUpdate(MemberVO inVO) throws SQLException;
 
 	/**
 	 * 단건조회

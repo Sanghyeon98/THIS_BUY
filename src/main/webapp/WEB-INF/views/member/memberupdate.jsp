@@ -34,6 +34,11 @@
 $(document).ready(function(){
     console.log("document.ready");
     
+    $("#pwUpdate").on("click",function(){
+    	window.location.href = "pwUpdate.do";
+    	});
+    
+    
     var now = new Date();
     var year = now.getFullYear();
     var mon = (now.getMonth() + 1) > 9 ? ''+(now.getMonth() + 1) : '0'+(now.getMonth() + 1); 
@@ -102,7 +107,6 @@ $(document).ready(function(){
               
               if("1" == parsedJson.msgId){
                   alert(parsedJson.msgContents);
-                  $("#searchWord").focus();
               }else{
                   
                   alert(parsedJson.msgId+","+parsedJson.msgContents);
@@ -113,15 +117,16 @@ $(document).ready(function(){
           
           
         //수정    
+       
         });
         
       
     
     
-    
   //document  
 });
 
+    	
 
 </script>
 
@@ -223,6 +228,7 @@ $(document).ready(function(){
     
   
   <button type="button" style="width: 240px;" class="btn btn-default btn-block " value="등록" id="update">수정하기</button>
+  <button type="button" style="width: 240px;" class="btn btn-default btn-block " value="등록" id="pwUpdate">비밀 번호 변경하기</button>
   
  
   </div>

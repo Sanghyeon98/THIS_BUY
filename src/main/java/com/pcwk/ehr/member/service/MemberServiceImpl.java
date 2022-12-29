@@ -126,6 +126,12 @@ public class MemberServiceImpl implements MemberService {
 		return null;
 	}
 
+	@Override
+	public int pwUpdate(MemberVO inVO) throws SQLException {
+		// TODO Auto-generated method stub
+		return memberDao.pwUpdate(inVO);
+	}
+
 
 	
 
