@@ -215,9 +215,9 @@
         </div> 
         <div class="css-mod9">
   
-      <%--     <div class="imageYN">
+        <div class="imageYN">
            ${imgVO.orgName }<img alt="이미지" src="${CP}${imgVO.viewPath}/${imgVO.saveName}">
-         </div>  --%>
+         </div> 
 
 
          <div> <textarea class="css-mod8" rows="10" id="contents"
@@ -234,6 +234,10 @@
          <button class ="css-mod11" type="button" width="150" height="42" radius="0" id="moveToListquestion">
           <span class="css-mod11"> 목록</span>
          </button>
+         
+         <c:choose>
+           <c:when test="${2 < sessionScope.userInfo.name && not empty sessionScope.userInfo}">
+         
          <div id ="updatebutton">
          <button class ="css-mod11" type="button" width="150" height="42" radius="0" id="doUpdate">
           <span class="css-mod11"> 수정</span>
@@ -249,6 +253,11 @@
          <button class ="css-mod11" type="button" width="150" height="42" radius="0" id="doDelete">
           <span class="css-mod11"> 삭제</span>
          </button>
+          </c:when>
+         </c:choose>
+         
+         
+         
         </div>
         
    

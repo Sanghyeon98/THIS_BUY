@@ -176,6 +176,15 @@
 									<h2 class="css-8 ">1:1문의</h2>
 								</div>
 							</div>
+							<div style="display: none;">
+               <select class="form-control input-sm" name="pageSize" id="pageSize">
+                  <c:forEach var="code" items="${PAGE_SIZE}">
+                    <option value='<c:out value="${code.detCode }"/>'>
+                      <c:out value="${code.detName }" />
+                    </option>
+                  </c:forEach>
+                </select>
+               </div>
 							<div class="css-10">
 								<div width="100" class="css-13">문의유형</div>
 								<div class="css-12 ">제목</div>
@@ -202,7 +211,7 @@
                                       <div class="css-19 ">기타문의</div>
                                      </c:when>	
 																		</c:choose>
-			                              <div class="css-17 " >-------------<c:out value="${vo.title }"></c:out></div>
+			                              <div class="css-17 " ><c:out value="${vo.title }"></c:out></div>
 			                              <div class="css-18 ">관리자</div>
 			                              <div class="css-19 "><c:out value="${vo.regDt }"></c:out></div>
 																	</div>
@@ -218,7 +227,7 @@
 				                                  <div class="css-15 clo">
 				                                    <!-- 1:1문의  -->
 				                                    <div style="display: none;"><c:out value="${vo01.answerNo }"></c:out></div>
-				                                    <div class="css-16 ">└</div>
+				                                    <div class="css-16 ">└──</div>
 				                                    <div class="css-17 " ><c:out value="${vo01.title }"></c:out></div>
 				                                    <div class="css-18 ">관리자</div>
 				                                    <div class="css-19 "><c:out value="${vo01.regDt }"></c:out></div>

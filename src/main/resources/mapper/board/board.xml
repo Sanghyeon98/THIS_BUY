@@ -49,7 +49,7 @@
                         ,TO_CHAR(TT1.reg_dt,'HH24:MI')
                         ,TO_CHAR(TT1.reg_dt,'YYYY-MM-DD')) as regDt,
                 TT1.reg_id,
-                TT1.IMAGE_NO AS imageNO
+                TT1.IMAGE_NO AS imageNo
           FROM (
               SELECT ROWNUM AS rnum, T1.*
               FROM (
@@ -72,6 +72,58 @@
          WHERE gubun = #{gubun}
       ) B
    </select>
+   
+   
+   <select id="doRetrieveimage" resultType="BoardVO" parameterType="BoardSearchVO">
+    SELECT A.*,B.*
+      FROM(
+          SELECT TT1.rnum as num,
+                 TT1.seq as seq,
+                 TT1.gubun as "gubun",
+                 TT1.gubun_question as "gubunQuestion",
+                 TT1.title as "title",
+                 TT1.contents as "contents",
+                 -- 당일이면 시:분, 그렇지 않으면 년-월-일
+                 DECODE( TO_CHAR(SYSDATE,'YYYY-MM-DD'),  TO_CHAR(TT1.reg_dt,'YYYY-MM-DD')
+                        ,TO_CHAR(TT1.reg_dt,'HH24:MI')
+                        ,TO_CHAR(TT1.reg_dt,'YYYY-MM-DD')) as regDt,
+                TT1.reg_id as regId,
+                TT1.image_no as imageNo,
+                TT1.save_name as saveName,
+                TT1.view_path as viewPath
+          FROM (
+              SELECT ROWNUM AS rnum, T1.*
+              FROM (
+                    select b.seq,
+                           b.gubun,
+                           b.title,
+                           b.contents,
+                           b.reg_dt,
+                           b.reg_id,
+                           b.image_no,
+                           b.answer_check,
+                           b.gubun_question,
+                           i.save_name,
+                           i.view_path
+                    from board b, image i
+                    where b.image_no = i.image_no
+                    and b.gubun = #{gubun}
+                  ORDER BY reg_dt DESC
+              ) T1
+              -- 종료 번호
+              <![CDATA[ WHERE ROWNUM <= #{pageSize} * (#{pageNo} - 1) + #{pageSize} ]]>
+          ) TT1
+          -- 시작번호
+          <![CDATA[ WHERE ROWNUM >= #{pageSize} * (#{pageNo} - 1) + 1 ]]>
+      ) A
+      CROSS JOIN
+      (
+          SELECT COUNT(*) totalCnt
+          FROM board
+          --WHERE 조건
+         WHERE gubun = #{gubun}
+      ) B
+       </select>
   
   <!-- doDelete -->
   <delete id = "doDelete" parameterType="BoardVO">
@@ -94,7 +146,7 @@
 	</select> 	
 
   
-  <!-- doInsert --> 
+  <!-- doSave --> 
   <insert id = "doSave" parameterType="BoardVO">
     
     INSERT INTO board (
@@ -113,10 +165,10 @@
         #{gubunQuestion},
         #{title},
         #{contents},
-        SYSDATE,
+        LOCALTIMESTAMP,
         #{regId},
         #{answerCheck},
-        #{imageNO}
+        #{imageNo}
     )
   
   </insert>
@@ -126,7 +178,7 @@
     UPDATE board
     SET   title = #{title}
         , contents = #{contents}
-        , reg_dt = SYSDATE
+        , reg_dt = LOCALTIMESTAMP
     WHERE seq = #{seq}
     
   </update>
@@ -141,23 +193,31 @@
    <result  column="reg_dt"     property="regDt"     />
    <result  column="reg_id" property="regId" />
    <result  column="answer_check"     property="answerCheck"     />
+   <result column="save_name" property="saveName" />
+   <result column="view_path" property="viewPath" />
+   <result column="image_no" property="imageNo" />
   </resultMap> 
    
 
   
   <select id="doSelectOne" parameterType="BoardVO" resultMap="boardMap">
-    
-    SELECT seq,                           
-          gubun,
-          gubun_question,
-          title,
-          contents,
-          reg_id,                                                                               
-          TO_CHAR(reg_dt, 'YYYY/MM/DD HH24MISS') reg_dt ,
-          answer_check  as answerCheck
-    FROM   board                             
-    WHERE seq = #{seq}
-    ORDER BY seq
+  
+  select b.seq as seq,
+         b.gubun as gubun,
+         b.title as title,
+         b.contents as contents,
+         b.reg_dt as regDt,
+         b.reg_id as regId,
+         b.image_no as imageNo,
+         b.answer_check as answerCheck,
+         b.gubun_question as gubunQuestion,
+         i.save_name as saveName,
+         i.view_path as viewPath
+  from board b, image i
+  where b.image_no = i.image_no
+  and b.seq = #{seq}
+ ORDER BY seq
+
     
   </select>
 </mapper>

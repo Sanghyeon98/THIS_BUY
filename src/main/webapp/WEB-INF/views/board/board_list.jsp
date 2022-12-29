@@ -131,7 +131,7 @@ int faq_no = (seq == null)? -1 : Integer.parseInt(seq);
 
 						//등록화면으로 이동
 						$("#boardReg").on("click", function() {
-
+z
 							console.log('boardReg');
 							console.log('gubun:'+$("#gubun").val())
 
@@ -320,6 +320,15 @@ int faq_no = (seq == null)? -1 : Integer.parseInt(seq);
 									<h2 class="css-8 ">${title}</h2>
 								</div>
 							</div>
+							<div style="display: none;">
+							 <select class="form-control input-sm" name="pageSize" id="pageSize">
+				          <c:forEach var="code" items="${PAGE_SIZE}">
+				            <option value='<c:out value="${code.detCode }"/>'>
+				              <c:out value="${code.detName }" />
+				            </option>
+				          </c:forEach>
+				        </select>
+				       </div>
 							<div class="css-10">
 								<div width="50" class="css-11">번호</div>
 								<div class="css-12 ">제목</div>
@@ -327,6 +336,7 @@ int faq_no = (seq == null)? -1 : Integer.parseInt(seq);
 								<div width="100" class="css-13 ">작성일</div>
 								<div style="display: none;">SEQ</div>
 							</div>
+							
 
 							<div id="boardTable">
 
@@ -354,7 +364,7 @@ int faq_no = (seq == null)? -1 : Integer.parseInt(seq);
 												<div>
 														<ul class="css-14 ">
 															<li class="css-15">
-																		<!-- 1:1문의  -->
+																		<!-- 자주묻는질문  -->
 																		<div style="display: none;"><c:out value="${vo.seq }"></c:out></div>
 																		<div class="css-16 " ><c:out value="${vo.num }"></c:out></div>
 																		<div class="css-17 " ><c:out value="${vo.title }"></c:out></div>
@@ -383,12 +393,15 @@ int faq_no = (seq == null)? -1 : Integer.parseInt(seq);
 
 							</div>
 
-
+          <c:choose>
+           <c:when test="${2 < sessionScope.userInfo.name && not empty sessionScope.userInfo}">
 
 							<div id="insertButtonArea">
 								<button class="css-Button" type="button" width="120" height="44"
 									radius="3" id="boardReg">등록</button>
 							</div>
+						</c:when>
+					</c:choose>
 
 						<!-- 	<div id="questionButtonArea">
 								<button class="css-Button" type="button" width="120" height="44"
@@ -402,7 +415,7 @@ int faq_no = (seq == null)? -1 : Integer.parseInt(seq);
 
 
 							<!-- ----------------------------------페이징  -->
-							<div class="text-center col-sm-12 col-dm-12 col-lg-12">
+							<div style="display: none;">
 								<div id="page-selection" class="text-center page"></div>
 							</div>
 							<!-- ----------------------------------페이징  끝-->

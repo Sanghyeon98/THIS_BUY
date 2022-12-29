@@ -12,12 +12,14 @@ public class BoardVO extends DTO {
 	private String regDt;		// 등록일
 	private String regId;		// 등록자
 	private int answerCheck;	// 답변 체크
-	private int imageNO; //이미지 번호 
+	private int imageNo; //이미지 번호 
+	private  String		saveName;     //저장파일명
+	private  String		viewPath;     //이미지태그경로
 	
 	public BoardVO() {}
 
 	public BoardVO(int seq, int gubun, int gubunQuestion, String title, String contents, String regDt, String regId,
-			int answerCheck, int imageNO) {
+			int answerCheck, int imageNo, String saveName, String viewPath) {
 		super();
 		this.seq = seq;
 		this.gubun = gubun;
@@ -27,7 +29,9 @@ public class BoardVO extends DTO {
 		this.regDt = regDt;
 		this.regId = regId;
 		this.answerCheck = answerCheck;
-		this.imageNO = imageNO;
+		this.imageNo = imageNo;
+		this.saveName = saveName;
+		this.viewPath = viewPath;
 	}
 
 	public int getSeq() {
@@ -94,20 +98,38 @@ public class BoardVO extends DTO {
 		this.answerCheck = answerCheck;
 	}
 
-	public int getImageNO() {
-		return imageNO;
+	public int getImageNo() {
+		return imageNo;
 	}
 
-	public void setImageNO(int imageNO) {
-		this.imageNO = imageNO;
+	public void setImageNo(int imageNo) {
+		this.imageNo = imageNo;
+	}
+
+	public String getSaveName() {
+		return saveName;
+	}
+
+	public void setSaveName(String saveName) {
+		this.saveName = saveName;
+	}
+
+	public String getViewPath() {
+		return viewPath;
+	}
+
+	public void setViewPath(String viewPath) {
+		this.viewPath = viewPath;
 	}
 
 	@Override
 	public String toString() {
 		return "BoardVO [seq=" + seq + ", gubun=" + gubun + ", gubunQuestion=" + gubunQuestion + ", title=" + title
 				+ ", contents=" + contents + ", regDt=" + regDt + ", regId=" + regId + ", answerCheck=" + answerCheck
-				+ ", imageNO=" + imageNO + "]";
+				+ ", imageNo=" + imageNo + ", saveName=" + saveName + ", viewPath=" + viewPath + ", toString()="
+				+ super.toString() + "]";
 	}
+
 
 	
 

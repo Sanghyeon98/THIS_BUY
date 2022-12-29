@@ -149,11 +149,14 @@
         let async  = true;
         let params = {
         		gubun : 20,
+        		gubunQuestion : $("#gubunQuestion").val(),
             title : $("#title").val(),
             contents : $("#contents").val(),
             regDt : "",
             regId : "작성자",
-            answerCheck : 0
+            answerCheck : 0,
+            imageNo : getImageNo
+            
         };
         
         PClass.callAjax(method,url,async,params,function(data){
@@ -228,7 +231,7 @@
         </div>
         <div class="css-23">
          <div class="css-24">
-           <select height="44" class="css-25" id="pageSize" name="pageSize">
+           <select height="44" class="css-25" id="gubunQuestion">
             <option class="css-26" value="10">배송문의</option>
             <option class="css-26" value="20">상품문의</option>
             <option class="css-26" value="30">기타문의</option>

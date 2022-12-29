@@ -24,6 +24,8 @@ import com.pcwk.ehr.cmn.SearchVO;
 import com.pcwk.ehr.cmn.StringUtil;
 import com.pcwk.ehr.code.domain.CodeVO;
 import com.pcwk.ehr.code.service.CodeService;
+import com.pcwk.ehr.image.domain.ImageVO;
+import com.pcwk.ehr.image.service.ImageService;
 
 @Controller("boardController")
 @RequestMapping("board")
@@ -38,6 +40,9 @@ public class BoardController {
 	
 	@Autowired
 	AnswerService answerService;
+	
+	@Autowired
+	ImageService imgService;
 
 	public BoardController() {
 
@@ -331,11 +336,20 @@ public class BoardController {
 
 
 		BoardVO outVO = boardService.doSelectOne(inVO);
+		
+		// 이미지 조회
+		ImageVO imgVO = new ImageVO();
+		imgVO.setImageNo(outVO.getImageNo());
+				
+		ImageVO outImgVO = imgService.doSelectOne(imgVO);
+		LOG.debug("|  outImgVO = " + outImgVO);
+				
 		LOG.debug("┌──────────────────────────────┐");
 		LOG.debug("│outVO = "+outVO);
 		String message = "";
 		
 		model.addAttribute("vo", outVO);
+		model.addAttribute("imgVO", imgVO);
 		
 		LOG.debug("└──────────────────────────────┘");
 		

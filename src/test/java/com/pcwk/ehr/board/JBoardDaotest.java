@@ -67,9 +67,9 @@ public class JBoardDaotest {
 		
 		//BoardVO(int seq, int gubun, int gubunQuestion, String title, String contents, String regDt, String regId,
 		//int answerCheck)
-		board01 = new BoardVO (1, 10, 10, "제목10", "내용10" , "d", "d", 1,0);
-		board02 = new BoardVO (2, 20, 20, "제목10", "내용10" , "d", "d", 1,1);
-		board03 = new BoardVO (3, 20, 30, "제목10", "내용10" , "d", "d", 1,2);
+		board01 = new BoardVO (1, 10, 10, "제목10", "내용10" , "d", "d", 1,0,"10","10");
+		board02 = new BoardVO (2, 20, 20, "제목10", "내용10" , "d", "d", 1,1,"10","10");
+		board03 = new BoardVO (3, 20, 30, "제목10", "내용10" , "d", "d", 1,2,"10","10");
 	
 		//int pageSize, int pageNo, String searchDiv, String searchWord, String gubun, String gubunQuestion
 		search = new BoardSearchVO(1, 1, "10", "10", "10", "20");
