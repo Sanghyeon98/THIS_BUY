@@ -16,6 +16,7 @@
     <typeAlias type="com.pcwk.ehr.cart.domain.CartVO" alias="CartVO"/>
     <typeAlias type="com.pcwk.ehr.image.domain.ImageVO" alias="ImageVO"/>
     <typeAlias type="com.pcwk.ehr.order.domain.OrderVO" alias="OrderVO"/>
+    <typeAlias type="com.pcwk.ehr.order.domain.OrderSearchVO" alias="OrderSearchVO"/>
     <typeAlias type="com.pcwk.ehr.main.domain.ProductImgVO" alias="ProductImgVO"/>
     <typeAlias type="com.pcwk.ehr.member.domain.MemberVO" alias="MemberVO"/>
     <typeAlias type="com.pcwk.ehr.cart.domain.CartJoinVO" alias="CartJoinVO"/>

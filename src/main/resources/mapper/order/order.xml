@@ -5,61 +5,125 @@
 
 <mapper namespace="com.pcwk.ehr.order">
 
+
 <sql id="searchCondition">
-	<where>
-	   <choose>
-	       <when test="searchDiv == '10' and '' != searchDiv">
-	         order_no LIKE = #{searchDiv}
-	       </when>
-	       <when test="searchDiv == '20' and '' != searchDiv">
-	         name LIKE #{searchWord} || '%'
-	       </when>
-	   </choose>
-	</where>
+   <choose>
+              <when test="  '3' == searchDiv  ">
+         and order_date between trunc(add_months(LOCALTIMESTAMP,-2)+1)-to_char(LOCALTIMESTAMP,'dd')
+and trunc(last_day(LOCALTIMESTAMP)) +0.9999421
+        </when>
+        <when test="  '6' == searchDiv ">
+         and order_date between trunc(add_months(LOCALTIMESTAMP,-5)+1)-to_char(LOCALTIMESTAMP,'dd')
+and trunc(last_day(LOCALTIMESTAMP)) +0.9999421
+        </when>
+        <when test="  '9' == searchDiv  ">
+         and order_date between trunc(add_months(LOCALTIMESTAMP,-8)+1)-to_char(LOCALTIMESTAMP,'dd')
+and trunc(last_day(LOCALTIMESTAMP)) +0.9999421
+        </when> 
+        <when test="  '12' == searchDiv  ">
+         and order_date between trunc(add_months(LOCALTIMESTAMP,-11)+1)-to_char(LOCALTIMESTAMP,'dd')
+and trunc(last_day(LOCALTIMESTAMP)) +0.9999421
+        </when> 
+        <when test="  '36' == searchDiv  ">
+         and order_date between trunc(add_months(LOCALTIMESTAMP,-11)+1)-to_char(LOCALTIMESTAMP,'dd')
+and trunc(last_day(LOCALTIMESTAMP)) +0.9999421
+        </when> 
+   </choose>
 </sql>
 
+<select id="doRetrieve" resultType="OrderVO" parameterType="OrderSearchVO">
+select A.*, B.*
+from (
+    select 
+        TT1.num,
+        TT1.productName,
+        TT1.same_order as sameOrder,
+        TT1.payment_id as paymentId,
+        TT1.sumprice as price,
+        TT1.order_date as orderDate
+    from (
+        select
+            rownum num,
+            t1.*
+        from (
+            select
+                case when count(*) = 1 then max(p.name)
+                     else max(p.name) || ' 외 ' || count(*) || '건'
+                end as productName,
+                same_order, payment_id, sum(o.price) as sumPrice, order_date
+            from ordering o, product p
+            where 1=1
+                and o.item_no = p.item_no
+                and member_id = #{memberId}
+                <include refid="searchCondition"/>            
+            group by same_order, payment_id, order_date --, p.name
+        ) T1
+        <![CDATA[ WHERE ROWNUM <= #{pageSize} * (#{pageNo} - 1) + #{pageSize} ]]>
+    ) TT1
+    <![CDATA[ WHERE NUM >= #{pageSize} * (#{pageNo} - 1) + 1 ]]>
+) A
+CROSS JOIN
+(
+    SELECT COUNT(*) totalCnt
+    FROM ordering o, product p
+    WHERE 1=1
+        and o.item_no = p.item_no
+        and o.member_id = #{memberId}
+    <include refid="searchCondition"/>
+) B
+
+</select>
 
 
-<select id="doRetrieve" resultType="OrderVO" parameterType="SearchVO">
+<select id="doRetrieveDetail" resultType="OrderVO" parameterType="SearchVO">
 SELECT A.*,B.*
 FROM(
-  SELECT 
-    TT1.order_no AS orderNO,
-    TT1.same_order AS sameOrder,
-    TT1.member_id AS memberId,
-    TT1.item_no AS itemNO,
-    TT1.price,
-    TT1.payment_id AS paymentId,
-    TT1.name,
-    TT1.phone,
-    TT1.address,
-    TT1.request,
-    TT1.order_state AS orderState,
-    DECODE( TO_CHAR(LOCALTIMESTAMP,'YYYY-MM-DD'),  TO_CHAR(TT1.order_date,'YYYY-MM-DD')
-                    ,TO_CHAR(TT1.order_date,'HH24:MI')
-                    ,TO_CHAR(TT1.order_date,'YYYY-MM-DD')) as orderDate   
-FROM (
-    SELECT ROWNUM AS RNUM, T1.*
-    FROM (
-        SELECT *
-        FROM ordering
-        -- WHERE 조건 (검색구분:''(전체), 10(order_nm), 20(status), 검색어)
-       <include refid="searchCondition"/>
-        ORDER BY order_no
-    ) T1
-    -- 종료 번호
-    <![CDATA[ WHERE ROWNUM <= #{pageSize} * (#{pageNo} - 1) + #{pageSize} ]]>
-) TT1
--- 시작번호
-<![CDATA[ WHERE ROWNUM >= #{pageSize} * (#{pageNo} - 1) + 1 ]]>
-    ) A
-    CROSS JOIN
-    (
-        SELECT COUNT(*) totalCnt
-        FROM product
-        --WHERE 조건
-        <include refid="searchCondition"/>
-    ) B
+	SELECT 
+	    TT1.order_no AS orderNO,
+	    TT1.same_order AS sameOrder,
+	    TT1.member_id AS memberId,
+	    TT1.item_no AS itemNO,
+	    TT1.price,
+	    TT1.payment_id AS paymentId,
+	    TT1.name,
+	    TT1.phone,
+	    TT1.address,
+	    TT1.request,
+	    TT1.order_state AS orderState,
+	    DECODE( TO_CHAR(LOCALTIMESTAMP,'YYYY-MM-DD'),  TO_CHAR(TT1.order_date,'YYYY-MM-DD')
+	                    ,TO_CHAR(TT1.order_date,'HH24:MI')
+	                    ,TO_CHAR(TT1.order_date,'YYYY-MM-DD')) as orderDate,
+	    TT1.ProductName
+	FROM (
+	    SELECT ROWNUM AS RNUM, T1.*
+	    FROM (
+	        SELECT 
+	            o.order_no, o.same_order, o.member_id, o.item_no, 
+	            o.price, o.payment_id, o.name, o.phone, o.address,
+	            o.request, o.order_state, o.order_date,
+	            p.name as ProductName
+	        FROM ordering o, product p
+	        WHERE 1=1
+	            and o.item_no = p.item_no
+	            and o.member_id = #{memberId}
+	        
+	        ORDER BY order_no
+	    ) T1
+	    -- 종료 번호
+	    <![CDATA[ WHERE ROWNUM <= #{pageSize} * (#{pageNo} - 1) + #{pageSize} ]]>
+	) TT1
+	-- 시작번호
+	<![CDATA[ WHERE ROWNUM >= #{pageSize} * (#{pageNo} - 1) + 1 ]]>
+) A
+CROSS JOIN
+(
+ SELECT COUNT(*) totalCnt
+ FROM ordering o, product p
+ WHERE 1=1
+     and o.item_no = p.item_no
+     and o.member_id = #{memberId}
+    <include refid="searchCondition"/>
+) B
 </select>
 
 
@@ -79,10 +143,9 @@ FROM (
 		  order_state AS orderState,
 		  TO_CHAR(order_date, 'YYYY-MM-DD HH24:MI:SS') AS orderDate
 		FROM ordering
-		WHERE name = #{name}
+		WHERE member_id = #{memberId}
 	]]>
-</select> 
-
+</select>
 
 <select id="getCount" parameterType="OrderVO" resultType="int">
   SELECT COUNT(*) cnt
@@ -152,7 +215,7 @@ WHERE
 	order_state,
 	order_date
 ) VALUES (
-	#{orderNO},
+	ORDERNO_SEQUENCE.NEXTVAL,
 	#{sameOrder},
 	#{memberId},
 	#{itemNO},
@@ -162,7 +225,7 @@ WHERE
 	#{phone},
 	#{address},
 	#{request},
-	#{orderState},
+	'X',
 	LOCALTIMESTAMP
 	)
 </select>

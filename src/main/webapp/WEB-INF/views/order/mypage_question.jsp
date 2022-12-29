@@ -72,8 +72,7 @@ ul {
 </style>
 
 
-<title>mypage</title>
-
+<title>주문내역</title>
 <!-- 뷰포트(반응형 웹)  -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -94,21 +93,16 @@ ul {
 <script src="${CP_RES}/js/jquery.bootpag.js"></script>
 <!-- bootstrap js -->
 <script src="${CP_RES}/js/bootstrap.min.js"></script>
+<!-- javascript -->
 <script>
    $(document).ready(function(){
       console.log('Hello, world!');
-      
-      
-      $("#doRetrieve").on("click",function(){
-          console.log('doRetrieve');
    
-          
-        
-         
-
-          
-        //doRetrive
-        });        
+      /*  doSelecte(); */
+      
+      //paging
+     
+      
       
     });
   </script>
@@ -128,58 +122,53 @@ ul {
 		</ul>
 	</div>
 
-	<div class="body">
+		<div class="list_body">
 
+  <div>
+      <ul>
+        <li><a href="#doRetrieve" id="doRetrieve" class="tag">주문내역</a></li>
+        <li><a href="#question" id="question" class = tag>상품문의</a></li>
+        <li><a href="#login" id="login" class = tag>개인정보수정></a></li>
+      </ul>
+    </div>
 		<div>
-			<ul>
-				<li id="doRetrieve" class="tag">주문내역</li>
-				<li class="tag">상품문의</li>
-				<li class="tag">개인정보수정</li>
-			</ul>
-		</div>
-		<div>
-		
-		${list }
 			<div class="title">
 				<div>
-					<span class="sp_head">주문내역 </span> <span class="sp_font"></span>
-					 <!-- 제목 ------------------------------------------------------------------->
-    <!-- 검색 : 검색구분(select) 검색어(input) 페이지 사이즈(select)--> 
-    <form action="#" class="form-inline text-right" >
-      <input type="hidden" name="div" id="div" value="${divValue}" >  
-      <div class="form-group">
-        <select class="form-control input-sm" name="searchDiv" id="searchDiv">
-          <c:forEach var="code" items="${ORDER_SEARCH}">
-            <option value='<c:out value="${code.detCode }"/>' >
-              <c:out value="${code.detName }" />
-            </option>
-          </c:forEach>
-        </select>
-          <c:forEach var="code" items="${PAGE_SIZE}">
-            <option value='<c:out value="${code.detCode }"/>'>
-              <c:out value="${code.detName }" />
-            </option>
-          </c:forEach>            
-      </div>
-    </form> 
-    <!-- 검색 ------------------------------------------------------------------->
+					<span class="sp_head">상품문의</span> <span class="sp_font">-상품에
+						대한 문의를 남기는 공간입니다. 해당 게시판의 성격과 다른 글은 사전동의 없이 담당 게시판으로 이동될 수 있습니다.</span>
 					<hr>
-				<div>
-			<div class="table-responsive">
-    <table id="boardTable" class="table table-striped table-bordered table-hover">
-      <thead class="bg-primary">
-        <tr>
-          <th class="text-center col-sm-1 col-md-1 col-lg-1">3개월</th>
-          <th class="text-center col-sm-6 col-md-6 col-lg-8">6개월</th>
-          <th class="text-center col-sm-2 col-md-2 col-lg-1">1년</th>
-          <th class="text-center col-sm-2 col-md-2 col-lg-1">2년</th>
-          <th class="text-center col-sm-1 col-md-1 col-lg-1">5년</th>
-          <th style='display:none;'>SEQ</th>
-        </tr>
-      </thead>
+					<div>
+						<table>
+							<thead>
+								<tr>
+									<th>제목</th>
+									<th>작성일</th>
+									<th>답변상태</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>ㄴㅇㄹㄴㅁㅇㄹㄴㅁㅇㅁㄴㅇㄻㄴㅇㄻㄴㅇㄹ</td>
+									<td>2022/11/14</td>
+									<td>답변완료</td>
+								</tr>
+								<tr>
+									<td>ㄴㅇㄹㄴㅁㅇㄹㄴㅁㅇㅁㄴㅇㄻㄴㅇㄻㄴㅇㄹ</td>
+									<td>2022/11/12</td>
+									<td>답변완료</td>
+								</tr>
+								<tr>
+									<td>ㄴㅇㄹㄴㅁㅇㄹㄴㅁㅇㅁㄴㅇㄻㄴㅇㄻㄴㅇㄹ</td>
+									<td>2022/11/15</td>
+									<td>답변미완료</td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
-		
+			</div>
+		</div>
+	</div>
 </body>
 </html>
 </fmt:bundle>

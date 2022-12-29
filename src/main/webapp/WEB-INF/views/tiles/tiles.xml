@@ -28,6 +28,12 @@
     <put-attribute name="body" value="/WEB-INF/views/category/{1}.jsp"/> <!-- {1} : 어떤 jsp파일이 와도 상관 X -->
   </definition>
   
+  <!-- /order -->
+  <definition name="order/*" extends="base-definition"> <!-- base-definition 상속 받음 -->
+    <put-attribute name="title" value="회원관리"/>
+    <put-attribute name="body" value="/WEB-INF/views/order/{1}.jsp"/> <!-- {1} : 어떤 jsp파일이 와도 상관 X -->
+  </definition>  
+  
   <!-- /board/board.do -->
   <definition name="board/*" extends="base-definition"> <!-- base-definition 상속 받음 -->
     <put-attribute name="title" value="공지사항"/>
