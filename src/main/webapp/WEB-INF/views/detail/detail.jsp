@@ -170,9 +170,9 @@ div {
 			let url = "/cart/doSave.do";
 			let async = true;
 			let params = {
-				cartNO : 1523, //나중에 뺀다!
+				//cartNO : 1523, //나중에 뺀다!
 				itemNO : $("#itemNO").val(),
-				memberId : $("memberId").val(), //세션으로!
+				memberId : $("#UserId").val(), //세션으로! ${sessionScope.memberInfo.memberid}
 				quantity : $("#amount").val()
 			};
 
@@ -261,6 +261,7 @@ div {
 			<p>${vo.detail}</p>
 		</div>
 	</div>
+	<input type="hidden" id="UserId" value="${sessionScope.memberInfo.memberid}"/>
 </body>
 	</html>
 </fmt:bundle>
