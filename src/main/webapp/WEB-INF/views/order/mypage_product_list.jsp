@@ -219,17 +219,17 @@ ul {
 		   </div>
 		   <ul class="css-1x9bshx ecbxmj2">  
 		     <li class="css-0 ecbxmj1">
-		       <a href="#" id="doRetrieve" class="tag css-pi3u6r ecbxmj0">주문 내역
+		       <a href="${CP}/order/orderView.do?memberId=kim" id="doRetrieve" class="tag css-pi3u6r ecbxmj0">주문 내역
 		         <span class="css-e41glx e1x0rfoo0"></span>
 		       </a>
 		     </li>
 		     <li class="css-0 ecbxmj1">
-		       <a href="#" id="question" class="tag css-pi3u6r ecbxmj0">상품 문의
+		       <a href="${CP}/board/questionView.do?gubun=20" id="question" class="tag css-pi3u6r ecbxmj0">상품 문의
 		         <span class="css-e41glx e1x0rfoo0"></span>
 		       </a>
 		     </li>
 		     <li class="css-0 ecbxmj1">
-		       <a href="#" id="login" class="tag active css-pi3u6r ecbxmj0">개인 정보 수정
+		       <a href="${CP}/memberupdate/memberCheck.do" id="login" class="tag active css-pi3u6r ecbxmj0">개인 정보 수정
 		         <span class="css-e41glx e1x0rfoo0"></span>
 		       </a>
 		     </li>
