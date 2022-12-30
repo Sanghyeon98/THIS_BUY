@@ -194,7 +194,8 @@
         </div>
         <div class="search">
           <input id="gnb_search" class="search_input" placeholder="검색어를 입력해주세요">
-          <button id="search_bnt"></button>
+          <a id="search_bnt"><img width="25" alt="장바구니" src="${CP_RES}/img/common/searchicon_back.png"></a>
+          <!-- <button id="search_bnt"></button> -->
         </div>
         <div>
           <button class="like_bnt"></button>

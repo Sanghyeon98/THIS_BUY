@@ -126,9 +126,10 @@ a {
   width: 30px;
   height: 30px;
   margin: 10px;
+  padding-top: 10px;
   bottom: 3px;
   /* line-height:30px; */
-  background:url(/ehr/resources/img/common/searchicon.png) 60px 60px; 
+  /* background:url(/ehr/resources/img/common/searchicon.png) 60px 60px; */ 
   border: none;
 }
 
