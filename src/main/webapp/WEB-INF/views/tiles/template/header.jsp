@@ -156,7 +156,7 @@
                   <c:choose>
                     <c:when test="${sessionScope.memberInfo.auth != '1'}">
 		                  <li><a href="${CP}/order/orderView.do?memberId=${sessionScope.memberInfo.memberid}">주문내역</a></li>
-		                  <li><a href="#">상품문의</a></li>
+		                  <li><a href="${CP}/board/questionView.do?gubun=20">상품문의</a></li>
 		                  <li><a href="${CP}/memberupdate/memberCheck.do">개인정보수정</a></li>
                     </c:when>
                     <c:otherwise>
