@@ -354,7 +354,7 @@ function test() {
           주소<span class="r">*</span>
     </div>
        <div class="col-md-7 text-centers">
- <input type="text"  class="form-control" id="adress" name="adress" placeholder="주소를 입력해주세요">        
+ <input type="text"  class="form-control" id="address" name="address" placeholder="주소를 입력해주세요">        
   <small>배송지에 따라 상품 정보가 달라질 수 있습니다.</small>
        </div>
        </div>
