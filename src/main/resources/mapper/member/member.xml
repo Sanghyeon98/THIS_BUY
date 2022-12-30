@@ -183,6 +183,7 @@
 		#{name},
 		#{email},
 		#{phone},
+		#{address},
 		SYSDATE
 		)
 	</insert>
