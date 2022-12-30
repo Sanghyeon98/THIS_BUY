@@ -35,6 +35,12 @@
 <meta charset="UTF-8">
 <style>       
 
+body, header, footer, div, h1, h2, ul, li, p {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;  /* padding, border를 width에 포함 */
+}
+
 .cart__list__optionbtn{
     background-color: #B8C9DF
 }
@@ -61,7 +67,7 @@ margin: 0 auto;
     display: flex;
     width: 1050px; 
     margin: 0px auto; 
-    padding-bottom: 80px;
+    padding-bottom: 50px;
     float: center;
     justify-content: space-between;
     }
@@ -108,10 +114,19 @@ width: 30px;
 }
 .price{
     margin-left: 50px;
+    width : 50px
 }
 .amount_minus{
-    margin-left: 50px;
+    margin-left: 30px;
     }
+.delivery{
+margin-left: 30px;
+  width : 50px
+}
+.finalsumprice{
+margin-left: 0px;
+  width: 70px;
+}
 </style>
 <title>제목</title>
 
@@ -259,7 +274,7 @@ width: 30px;
       let async = true;
       
       let params = {
-    		  memberId : "admin"
+    		  memberId : $("#UserId").val()
           
       };     //VO안에  memberId 
       
@@ -291,13 +306,13 @@ width: 30px;
         	    
         	  htmlData += "<tr class='cartRow'>";
               htmlData += "    <td><input type='checkbox' name='chk' value='"+value.cartNO+"'></td>";
-              htmlData += "    <td><img src='${CP}"+value.viewpath+"/th_"+value.saveName+"' alt='이미지' width='100'></td>";
+              htmlData += "    <td><img src='${CP}"+value.viewpath+"/th_"+value.saveName+"' alt='이미지' width=70'></td>";
               htmlData += "    <td><input type='hidden' class='memberId' name='memberId' value='"+value.memberId+"'></td>";
               htmlData += "    <td><input type='hidden' class='cartNO' name='cartNO' value='"+value.cartNO+"'></td>";
               htmlData += "    <td><a href='#' onClick='doSelectOne("+<c:out value='value.itemNO '/>+")'>"+value.name+"</a></td>";
               htmlData += "    <td><input type='button' name='minus' class='minus' value='-'>";
               htmlData += "    <input type='text' class='quantity' name='quantity' value='"+value.quantity+"' size='2'>";
-              htmlData += "    <td><input type='button' name='add' class='add' value='+'>";
+              htmlData += "    <input type='button' name='add' class='add' value='+'></td>";
               htmlData += "    <td>"+value.finalPrice+"원</td>";
               htmlData += "</tr>";
           });
@@ -350,45 +365,16 @@ width: 30px;
   			 <table class="cart__list table">
                 <thead>
                     <tr class="checkBox">
-                        <td colspan="3"><input id="checkAll" type="checkbox" >
+                        <td colspan="6"><input id="checkAll" type="checkbox" >
                             <button class="cart__list__optionbtn btn btn-Navy" id="dodelete">선택삭제</button>
                         </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
                     </tr>
                 </thead>
                 <tbody >
-                    <c:choose>
-                  <c:when test="${list.size() > 0 }">
-                    <c:forEach var="vo" items="${list }">
-                      <tr>
-                        <td class="td_center"><input type="checkbox" name="chk" value="${vo.itemNo }"></td>
-                        <td class="td_center"><c:out value="${vo.imageNo}"/></td>
-                        <td><c:out value="${vo.name}"/></td>
-                        <td class="cart__list__option">
-                        <p><span><input class="amount_minus" type="button" value="-"></span>
-                        <input class="amount" type="number" min="1" value="${vo.quantity}">
-                        <span><input type="button" value="+"></span>
-                        </p>
-                        </td>
-                        <td style="display: none;"><c:out value="${vo.price}"/></td>
-                      </tr>
-                    </c:forEach>
-                  </c:when>
-                  <c:otherwise>
-                    <tr>
-                      <td class="text-center col-sm-12 col-md-12 col-lg-12" colspan="99">
-                          No data found
-                      </td>
-                    </tr>
-                  </c:otherwise>
-                </c:choose>
+                
                 </tbody>
-               
         </table>
-           
-        
+        <input type="hidden" id="UserId" value="${sessionScope.memberInfo.memberid}" />
       <div class= "content2">
         <div>
             <div>
@@ -413,7 +399,7 @@ width: 30px;
         </div>
         <div class="col-auto">
             <span class="form-text" >결제예정금액</span>
-            <span><input class="finalsumprice form-control " id="finalsumprice" type="text"  ></span>
+            <span><input class="finalsumprice" id="finalsumprice" type="text"  ></span>
             <span>원</span>
         </div>
         </div> 
