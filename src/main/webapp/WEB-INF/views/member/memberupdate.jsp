@@ -228,7 +228,6 @@ $(document).ready(function(){
     
   
   <button type="button" style="width: 240px;" class="btn btn-default btn-block " value="등록" id="update">수정하기</button>
-  <button type="button" style="width: 240px;" class="btn btn-default btn-block " value="등록" id="pwUpdate">비밀 번호 변경하기</button>
   
  
   </div>
