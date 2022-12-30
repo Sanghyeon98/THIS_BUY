@@ -69,6 +69,7 @@
   $(document).ready(function(){
 	  console.log("document.ready");
 	  initTableView();
+	  imgView();
 	  
 	//목록으로 이동
 	    $("#moveToList").on("click", function() {
@@ -181,12 +182,23 @@
 	      $("#moveToListquestion").css("display", "");
 	    }
 	  }
+  
+  function imgView() {
+      if ("0" == $("#imageNo").val()) {
+        $("#imageView").css("display", "none");
+
+      } else if ("0" != $("#imageNo").val()) {
+        $("#imageView").css("display", "");
+ 
+      }
+    }
 </script>
 
 </head>
 <body>
       <input type="hidden" name="gubun" id="gubun" value="${vo.gubun}">
       <input type="hidden" name="seq" id="seq" value="${vo.seq}">
+      <input type="hidden" name="imageNo" id="imageNo" value="${vo.imageNo}">
      <div class="css-mod1">
       <div class="css-mod2">
        <div class="css-mod3">${title} </div>
@@ -203,7 +215,7 @@
         </div> 
         <div class="css-mod6">
          <div class="css-mod7">작성자</div>
-         <input type="text"class="css-mod7" id="regId" name="regId"value="<c:out value='${vo.regId}' />" readonly="readonly"
+         <input type="text"class="css-mod8" id="regId" name="regId"value="<c:out value='${vo.regId}' />" readonly="readonly"
           placeholder="작성자" maxlength="100">
         </div> 
          <div class="css-mod6">
@@ -214,10 +226,12 @@
         </div> 
         <div class="css-mod9">
   
-        <div class="imageYN">
+
+        <div class="imageYN" Id ="imageView">
            ${imgVO.orgName }<img alt="이미지" src="${CP}${imgVO.viewPath}/${imgVO.saveName}">
          </div> 
 
+        
 
          <div> <textarea class="css-mod8" rows="10" id="contents"
           name="contents"><c:out value="${vo.contents}" /></textarea>
