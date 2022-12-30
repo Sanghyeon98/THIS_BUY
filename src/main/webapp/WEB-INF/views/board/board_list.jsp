@@ -250,13 +250,13 @@ int faq_no = (seq == null)? -1 : Integer.parseInt(seq);
 													parsedJson,
 													function(index, value) {
 
-														htmlData += "<ul class='css-14'><li><a href='#'> <div class='css-15'>";
-														htmlData += "    <div style='display: none;'"+ <c:out value='value.seq'/>+ "</div>";
-														htmlData += "    <div class='css-15'"+ <c:out value='value.num'/>+ "</div>";
-														htmlData += "    <div class='css-15'"+ <c:out value='value.title'/>+ "</div>";
-														htmlData += "    <div class='css-15'"+ <c:out value='value.regId'/>+ "</div>";
-														htmlData += "    <div class='css-15'"+ <c:out value='value.regDt'/>+ "</div>";
-														htmlData += "</ul>";
+														htmlData += "<ul class='css-14'><li class='css-15'>";
+                            htmlData += "    <div style='display: none;' Id='seq'>"+<c:out value='value.seq'/>+"</div>";
+                            htmlData += "    <div class='css-16'>"+ <c:out value='value.num'/>+ "</div>";
+                            htmlData += "    <div class='css-17'><a href='#' onClick='doSelectOne("+<c:out value='value.seq '/>+")'>"+ <c:out value='value.title'/>+ "</a></div>";
+                            htmlData += "    <div class='css-18'>"+ <c:out value='value.regId'/>+ "</div>";
+                            htmlData += "    <div class='css-19'>"+ <c:out value='value.regDt'/>+ "</div>";
+                            htmlData += "</li></ul>";
 													});
 
 								} else if ("30" == $("#gubun").val()) {
@@ -322,6 +322,18 @@ int faq_no = (seq == null)? -1 : Integer.parseInt(seq);
 			doRetrieve(num);
 		});
 	}
+	
+	
+	function doSelectOne(boardSeq){
+
+	        if (confirm("상세 조회를 하시겠습니까?") == false)
+	                return;
+	        let url = "${CP}/board/doSelectOne.do?gubun=10&";
+
+	      url = url + "Seq="+boardSeq;
+	      console.log("url : "+url);
+	      location.href = url;
+}
 </script>
 
 </head>

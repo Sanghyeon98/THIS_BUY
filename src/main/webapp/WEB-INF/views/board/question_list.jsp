@@ -265,7 +265,7 @@
 
 
 							<!-- ----------------------------------페이징  -->
-							<div class="text-center col-sm-12 col-dm-12 col-lg-12">
+							<div  style="display: none;">
 								<div id="page-selection" class="text-center page"></div>
 							</div>
 							<!-- ----------------------------------페이징  끝-->
