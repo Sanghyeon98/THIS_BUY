@@ -172,7 +172,7 @@ div {
 			let params = {
 				cartNO : 1523, //나중에 뺀다!
 				itemNO : $("#itemNO").val(),
-				memberId : "admin", //세션으로!
+				memberId : $("memberId").val(), //세션으로!
 				quantity : $("#amount").val()
 			};
 
@@ -197,6 +197,7 @@ div {
 </head>
 <body>
 	<div id="wrap"> 
+	  <input type="hidden" id="memberId" value="${sessionScope.memberInfo.memberid }">
 		<div class="side">
 			<div class="imgArea">
 				<img alt="이미지" width="400" src="${CP}${vo.viewPath}/${vo.saveName}">

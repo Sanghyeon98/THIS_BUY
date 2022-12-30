@@ -137,13 +137,15 @@ a {
   height: 30px;
   line-height:30px;
   background: url(/ehr/resources/img/common/like_icon.png);
+  border: none;
 }
 
 .cart_bnt {
   width: 30px;
   height: 30px;
   line-height:30px;
-  background: url(/ehr/resources/img/common/cart_icon.png);
+  background: url(/ehr/resources/img/common/cartlogo.png);
+  border: none;
 }
 
 .top3 {

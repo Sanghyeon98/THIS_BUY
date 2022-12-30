@@ -1,12 +1,12 @@
 <%--
 /**
-  Class Name: footer.jsp
+  Class Name:
   Description:
   Modification information
   
    수정일     수정자      수정내용
   -----   -----  -------------------------------------------
-  2022. 12. 13        최초작성 
+  2022. 12. 9        최초작성 
     
   author eclass 개발팀 : ITSC
   since 2022.11.28
@@ -19,13 +19,18 @@
 <c:set var="CP" value="${pageContext.request.contextPath }"></c:set>
 <c:set var="RES" value="/resources"></c:set>
 <c:set var="CP_RES" value="${CP}${RES}"></c:set>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>제목</title>
+  <!-- 뷰포트 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<style>
-  .main_footer {
-    height: 100px;
-  }
-</style>
-
-<div id="footer" class="main_footer">
-  <p>Copyright &copy; by 2022 THIS_BUY All right reserved.</p>
-</div>
+  <script>
+  </script>
+</head>
+<body>
+  <c:redirect url="/main/main_page.do"></c:redirect>
+</body>
+</html>

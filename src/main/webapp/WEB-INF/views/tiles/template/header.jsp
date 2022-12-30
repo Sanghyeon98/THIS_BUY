@@ -17,7 +17,12 @@
 
 <script>
   $(document).ready(function(){
-    
+	  
+	  // 장바구니
+	  $(".cart_bnt").on("click", function() {
+		  window.location.href= "${CP}/cart/view.do";
+	  });    
+	  
     
     // 검색어 엔터
     $("#gnb_search").on("keypress", function(e) {
@@ -62,9 +67,9 @@
         $.each(parsedJson, function(index, value) {
             // 2차 분류의 topNo와 현재 선택된 1차 분류의 categoryNo가 같으면 (하위 카테고리이면~!)
           if(value.topNo == 0) {
-            htmlData += "<li style='position:relative; z-index:3;' class='cate01list hide' value='" + value.categoryNo + "'>" + value.categoryNm + "</li>";
+            htmlData += "<li style='position:relative; z-index:51;' class='cate01list hide' value='" + value.categoryNo + "'>" + value.categoryNm + "</li>";
           } else {
-            htmlData += "<li style='position:relative; z-index:2;' class='cate02list hide cateTop" + value.topNo + "' value='" + value.categoryNo + "'>" + value.categoryNm + "</li>";
+            htmlData += "<li style='position:relative; z-index:50;' class='cate02list hide cateTop" + value.topNo + "' value='" + value.categoryNo + "'>" + value.categoryNm + "</li>";
           }
         });
         
@@ -148,9 +153,16 @@
               <li>
                 <a href="#">${sessionScope.memberInfo.name} 님</a>
                 <ul class="loginInfoList">
-                  <li><a href="${CP}/order/orderView.do?memberId=${sessionScope.memberInfo.memberid}">주문내역</a></li>
-                  <li><a href="#">상품문의</a></li>
-                  <li><a href="${CP}/memberupdate/memberCheck.do">개인정보수정</a></li>
+                  <c:choose>
+                    <c:when test="${sessionScope.memberInfo.auth != '1'}">
+		                  <li><a href="${CP}/order/orderView.do?memberId=${sessionScope.memberInfo.memberid}">주문내역</a></li>
+		                  <li><a href="#">상품문의</a></li>
+		                  <li><a href="${CP}/memberupdate/memberCheck.do">개인정보수정</a></li>
+                    </c:when>
+                    <c:otherwise>
+                      <li><a href="${CP}/product/productView.do">관리메뉴</a></li>
+                    </c:otherwise>
+                  </c:choose>
                 </ul>
               </li>
               <li>
@@ -176,9 +188,9 @@
           </li>
         </ul>
       </div>
-      <div class="top2">
+      <div class="top2"> 
         <div>
-          <a href="${CP}/main/main_page.do"><img src="${CP_RES}/image/logo.png" alt="로고" class="logo"></a>
+          <a href="${CP}/main/main_page.do"><img src="${CP_RES}/img/common/thisbuy_logo.png" width="150" alt="로고" class="logo"></a>
         </div>
         <div class="search">
           <input id="gnb_search" class="search_input" placeholder="검색어를 입력해주세요">
@@ -186,7 +198,8 @@
         </div>
         <div>
           <button class="like_bnt"></button>
-          <button class="cart_bnt"></button>
+          <a href="${CP}/cart/view.do"><img width="28" alt="장바구니" src="${CP_RES}/img/common/cartlogo.png"></a>
+          <!-- <button class="cart_bnt"></button> -->
         </div>
       </div>
       <div class="top3">
