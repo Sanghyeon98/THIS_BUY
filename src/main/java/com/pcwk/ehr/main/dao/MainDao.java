@@ -23,6 +23,8 @@ public interface MainDao extends WorkDiv<ProductImgVO>{
 	
 	List<ProductImgVO> cateList5() throws SQLException;
 	
+	List<ProductImgVO> cateList6() throws SQLException;
+	
 	
 	//등록된 데이터 건수 확인
 	int getCount() throws SQLException;

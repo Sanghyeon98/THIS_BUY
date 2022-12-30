@@ -68,4 +68,9 @@ public class MainServiceImpl implements MainService {
 		return maindao.cateList5();
 	}
 
+	@Override
+	public List<ProductImgVO> cateList6() throws SQLException {
+		return maindao.cateList6();
+	}
+
 }

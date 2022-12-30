@@ -21,6 +21,8 @@ public interface MainService {
 	
 	List<ProductImgVO> cateList5() throws SQLException;
 	
+	List<ProductImgVO> cateList6() throws SQLException;
+	
 	/*상품 검색*/
 	List<ProductImgVO> getGoodsList(ProductImgVO inVO) throws SQLException;
 

@@ -223,5 +223,26 @@ public class MainDaoImpl implements MainDao {
 		return list5;
 	}
 
+
+
+	@Override
+	public List<ProductImgVO> cateList6() throws SQLException {
+		List<ProductImgVO> list6 = null;
+		
+		String statement = NAMESPACE + DOT + "cateList6";
+
+		LOG.debug("================================");
+		LOG.debug("|  statement: " + statement);
+		
+		list6 = sqlSessionTemplate.selectList(statement);
+		
+		for(ProductImgVO vo : list6) {
+			LOG.debug("|  vo : " + vo);
+		}
+		LOG.debug("================================");
+		
+		return list6;
+	}
+
 	
 }

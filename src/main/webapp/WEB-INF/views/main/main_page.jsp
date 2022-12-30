@@ -41,13 +41,13 @@
   }
   
   .slick-prev{
-    left: 45px;
-    color: black;
+    left: 25px;
+    background-color: #CA8A8B;
     z-index: 1;
   }
   .slick-next{
     right: 45px;
-    color: black;
+    background-color: #CA8A8B;
     z-index: 1;
   }
 </style>
@@ -103,7 +103,7 @@
     <div class= "goods_list">
       <div>
         <div>
-          <h3>채소<br><small>금주에 가장많이 팔린 제품!</small></h3>
+          <h3>채소 | 과일</h3>
         </div>
         <div class="goods responsive">
           <c:forEach var="vo1" items="${list1}">
@@ -117,7 +117,7 @@
       </div>
       <div>
         <div>
-          <h3 class="catefont">채소</h3>
+          <h3 class="catefont">수산 | 해산 | 건어물</h3>
         </div>
         <div class="goods responsive">
           <c:forEach var="vo2" items="${list2}">
@@ -131,7 +131,7 @@
       </div>
       <div>
         <div>
-          <h3 class="catefont">채소</h3>
+          <h3 class="catefont">정육 | 계란</h3>
         </div>
         <div class="goods responsive">
           <c:forEach var="vo3" items="${list3}">
@@ -145,7 +145,7 @@
       </div>
       <div>
         <div>
-          <h3 class="catefont">채소</h3>
+          <h3 class="catefont">생수 | 음료 | 우유 | 커피</h3>
         </div>
         <div class="goods responsive">
           <c:forEach var="vo4" items="${list4}">
@@ -159,7 +159,7 @@
       </div>
       <div>
         <div>
-          <h3 class="catefont">채소</h3>
+          <h3 class="catefont">국 | 반찬 | 메인요리</h3>
         </div>
         <div class="goods responsive">
           <c:forEach var="vo5" items="${list5}">
@@ -167,6 +167,20 @@
               <a href="${CP}/detail/view.do?itemNo=${vo5.itemNo}"><img alf="이미지" width="170" src="${CP}${vo5.viewPath}/${vo5.saveName}"></a>
               <a href="${CP}/detail/view.do?itemNo=${vo5.itemNo}"><figcaption>${vo5.name}</figcaption></a>
               <a href="${CP}/detail/view.do?itemNo=${vo5.itemNo}"><figcaption class="price_font">${vo5.price}원</figcaption></a>
+            </figure>
+          </c:forEach>
+        </div>
+      </div>
+      <div>
+        <div>
+          <h3 class="catefont">간식 | 과자 | 떡</h3>
+        </div>
+        <div class="goods responsive">
+          <c:forEach var="vo6" items="${list6}">
+            <figure class="main_itemList">
+              <a href="${CP}/detail/view.do?itemNo=${vo6.itemNo}"><img alf="이미지" width="170" src="${CP}${vo6.viewPath}/${vo5.saveName}"></a>
+              <a href="${CP}/detail/view.do?itemNo=${vo6.itemNo}"><figcaption>${vo6.name}</figcaption></a>
+              <a href="${CP}/detail/view.do?itemNo=${vo6.itemNo}"><figcaption class="price_font">${vo6.price}원</figcaption></a>
             </figure>
           </c:forEach>
         </div>
