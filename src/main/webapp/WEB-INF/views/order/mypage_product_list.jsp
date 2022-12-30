@@ -29,7 +29,14 @@
 <style>
 
 #body {
-  margin: 0 auto;
+    margin: 0;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: #fff;
+  -webkit-tap-highlight-color: transparent;
 }
 
 #contentBody {
@@ -258,13 +265,13 @@ ul {
 			       
 			    <table id="orderTable" class="table table-striped table-bordered table-hover">
 			      <thead class="bg-primary">
-			        <tr> 
+			        <td> 
 			          <th class="text-center col-sm-1 col-md-1 col-lg-1">상품명</th>
 			          <th class="text-center col-sm-6 col-md-6 col-lg-8">주문번호</th>
 			          <th class="text-center col-sm-2 col-md-2 col-lg-1">결제방법</th>
 			          <th class="text-center col-sm-2 col-md-2 col-lg-1">결제금액</th>
 			          <th style='display:none;'>SEQ</th>
-			        </tr>
+			        </td>
 			        </thead>
 			      <tbody>
 			      <c:choose>
