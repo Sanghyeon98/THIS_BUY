@@ -172,7 +172,7 @@
 		                	 $.each(parsedJson,function(index, value) {
 		                         
 		                		 htmlData += "<ul class='css-14 '><li><div class='css-15 cli'>                 ";
-		                		 htmlData += "<div style='display: none;'>"+<c:out value='value.answerNo }'/>+"</div>                                 ";
+		                		 htmlData += "<div style='display: none;'>"+<c:out value='value.answerNo'/>+"</div>                                 ";
 		                		 htmlData += "<div class='css-16 '>└──</div>                                ";
 		                		 htmlData += "<div class='css-17 ' >"+<c:out value='value.title'/>+"</div>";
 		                		 htmlData += "<div class='css-18 ' >"+<c:out value='value.regId'/>+"</div>";
@@ -370,10 +370,10 @@
                 </select>
                </div>
                
-               <input type="hidden" id="gubun" value="${divValue}">
+<%--                <input type="hidden" id="gubun" value="${divValue}">
                <input type="hidden" id="seq" value="${vo.seq}">
                <input type="hidden" id="answerseq" value="${vo01.seq}">
-               <input type="hidden" id="gubunQuestion" value="${vo.gubunQuestion}">
+               <input type="hidden" id="gubunQuestion" value="${vo.gubunQuestion}"> --%>
 
 
 

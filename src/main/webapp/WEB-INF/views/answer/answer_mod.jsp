@@ -174,7 +174,7 @@
         <div class="css-mod6">
          <div class="css-mod7">작성자</div>
          <input type="text"
-          class="css-mod7" id="regId" name="regId"
+          class="css-mod8" id="regId" name="regId"
           value="<c:out value='${vo.regId }' />" readonly="readonly"
           placeholder="작성자" maxlength="100">
         </div> 
