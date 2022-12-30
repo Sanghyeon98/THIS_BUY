@@ -175,6 +175,7 @@
 		name ,
 		email ,
 		phone ,
+		address ,
 		reg_dt
 		) VALUES (
 		#{memberid},

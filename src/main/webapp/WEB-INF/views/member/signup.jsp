@@ -32,10 +32,10 @@
 <script >
 
 
-
-
 //생년월일 select 활성화
-$(document).ready(function(){            
+$(document).ready(function(){   
+	
+	
     var now = new Date();
     var year = now.getFullYear();
     var mon = (now.getMonth() + 1) > 9 ? ''+(now.getMonth() + 1) : '0'+(now.getMonth() + 1); 
@@ -200,18 +200,31 @@ $(document).ready(function(){
                $("#phone").focus();
                return;
            }   
+           if(eUtil.ISEmpty( $("#address").val() ) == true){
+               alert("주소을 입력 하세요.");
+               $("#address").focus();
+               return;
+           } 
+           var p1 = document.getElementById('passwd1').value;
+           var p2 = document.getElementById('passwd2').value;
+           if(( p1 != p2 ) ==true) {
+             alert("비밀번호가 일치 하지 않습니다");
+             $("#passwd1").focus();
+             return ;
+           }
            
            if(confirm("등록 하시겠습니까?")==false)return;
            
-           let method = "POST";
+           let method = "GET";
            let url    = "/signup/add.do";
            let async  = true;
            let params = {
-               "memberid"      : $("#memberid").val(),
-               "passwd"   : $("#passwd").val(),
+               "memberid" : $("#memberid").val(),
+               "passwd"   : $("#passwd1").val(),
                "name"     : $("#name").val(),
                "email"    : $("#email").val(),
                "phone"    : $("#phone").val(),
+               "address"    : $("#address").val(),
                
            };
            
@@ -235,6 +248,17 @@ $(document).ready(function(){
 
 
 });
+
+function test() {
+    var p1 = document.getElementById('passwd1').value;
+    var p2 = document.getElementById('passwd2').value;
+    if(( p1 != p2 ) ==true) {
+      alert("비밀번호가 일치 하지 않습니다");
+      $("#passwd").focus();
+      return false;
+    }
+
+  }
 //doc
  //버튼, 등록 컨트롤 초기화
     
@@ -276,7 +300,7 @@ $(document).ready(function(){
      비밀번호<span class="r">*</span>
     </div>
     <div class="col-md-7 text-centers">
-      <input type="password"  class="form-control" id="passwd" name="passwd" placeholder="비밀번호를 입력해주세요">
+      <input type="password"  class="form-control" id="passwd1" name="passwd1" placeholder="비밀번호를 입력해주세요">
     </div>
     </div>
     
@@ -286,7 +310,7 @@ $(document).ready(function(){
      비밀번호 확인<span class="r">*</span>
     </div>
     <div class="col-md-7 text-centers">
-      <input type="password" class="form-control" id="passwd" name="passwd" placeholder="비밀번호를 한번 더 입력해주세요">
+      <input type="password" class="form-control" id="passwd2" name="passwd2" placeholder="비밀번호를 한번 더 입력해주세요">
     </div>
     </div>
     
@@ -311,8 +335,6 @@ $(document).ready(function(){
          <button type="submit" class="btn btn-default btn-block" value="이메일 인증" id="emailCheck">이메일 인증</button>
         </div>
    </div>
-   <input class="form-control mailcheckinput" placeholder="인증번호 6자리를 입력해주세요!" disabled="disabled" maxlength="6">
-   <span id="mail-check-warn"></span>
    <!-- 본인 인증 넣기 -->
    <div class="row">
     <div class="col-md-2 text-centers">
@@ -332,8 +354,8 @@ $(document).ready(function(){
           주소<span class="r">*</span>
     </div>
        <div class="col-md-7 text-centers">
-         <button type="submit" class="btn btn-default btn-block">주소 검색</button>
-         <small>배송지에 따라 상품 정보가 달라질 수 있습니다.</small>
+ <input type="text"  class="form-control" id="adress" name="adress" placeholder="주소를 입력해주세요">        
+  <small>배송지에 따라 상품 정보가 달라질 수 있습니다.</small>
        </div>
        </div>
        
@@ -344,13 +366,13 @@ $(document).ready(function(){
     </div>
            <div class="col-md-7 text-centers " style="display:flex;">
            <label class="radio-inline">여자</label>
-           <input type="radio" name="optionsRadios1" id="optionsRadios1" value="option1" checked>
+           <input type="radio" name="gender"  value="option1" checked>
             <div style="width:15%"></div>
            <label class="radio-inline">남자</label>
-           <input type="radio" name="optionsRadios2" id="optionsRadios2" value="option2" >
+           <input type="radio" name="gender"  value="option2" >
             <div style="width:15%"></div>
            <label class="radio-inline">선택 안함</label>
-           <input type="radio" name="optionsRadios3" id="optionsRadios3" value="option3" >
+           <input type="radio" name="gender"  value="option3" >
            
        </div>
        </div>
