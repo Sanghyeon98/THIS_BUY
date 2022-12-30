@@ -115,6 +115,93 @@
           //moveToReg
         });
 	}); //document
+	
+	 function doRetrieve(page) {
+		    console.log('doRetrieve() page:' + page);
+		    let method = "GET";
+		    let url = "/board/doRetrieve.do";
+		    let async = true;
+
+		    let params = {
+		      gubun : $("#gubun").val(),
+		      pageSize : $('#pageSize').val(),
+		      pageNo : page
+		    };
+
+		    PClass.callAjax(method,url,async,params,function(data) {
+		              console.log(data);
+		              let parsedJson = JSON.parse(data);
+
+		              let htmlData = "";
+
+		              //기존 데이터 삭제
+		              $("#boardTable").empty();
+
+		              let totalCnt = 0;//총글수  
+		              let pageTotal = 0;//총페이지수
+
+		              if (null != parsedJson && parsedJson.length > 0) {
+
+		                totalCnt = parsedJson[0].totalCnt;
+		                pageTotal = Math.ceil(totalCnt/ $("#pageSize").val());
+		                console.log("----------------------------");
+		                console.log("-totalCnt:" + totalCnt);
+		                console.log("-pageTotal:" + pageTotal);
+		                console.log("-page:" + page);
+		                console.log("----------------------------");
+		                
+		                $.each(parsedJson,function(index, value) {
+		                
+			                htmlData += "<ul class='css-14 '><li><div class='css-15 cli'>                 ";
+			                if ("10" == $("#gubunQuestion").val()){
+			                       htmlData += "<div class='css-19 '>배송문의</div>                                 ";
+			                    }else if ("20" == $("#gubunQuestion").val()){
+			                      htmlData += "<div class='css-19 '>상품문의</div>                                 ";
+			                    }else if ("30" == $("#gubunQuestion").val()){
+			                      htmlData += "<div class='css-19 '>기타문의</div>                                 ";
+			                    }
+			                htmlData += "<div class='css-17 ' >"+<c:out value='value.title'/>+"</div>  ";
+			                htmlData += "<div class='css-18 '>"+<c:out value='value.regId'/>+"</div>   ";
+			                htmlData += "<div class='css-19 '>"+<c:out value='value.regDt'/>+"</div>  ";
+			                htmlData += "</div></li></ul>                                                 ";
+                    
+		                });
+		                
+		                if ($("#seq").val() == $("#answerseq").val()){
+		                	
+		                	 $.each(parsedJson,function(index, value) {
+		                         
+		                		 htmlData += "<ul class='css-14 '><li><div class='css-15 cli'>                 ";
+		                		 htmlData += "<div style='display: none;'>"+<c:out value='value.answerNo }'/>+"</div>                                 ";
+		                		 htmlData += "<div class='css-16 '>└──</div>                                ";
+		                		 htmlData += "<div class='css-17 ' >"+<c:out value='value.title'/>+"</div>";
+		                		 htmlData += "<div class='css-18 ' >"+<c:out value='value.regId'/>+"</div>";
+		                		 htmlData += "<div class='css-19 ' >"+<c:out value='value.regDt'/>+"</div>";
+		                		 htmlData += "</div></li></ul>                                                      ";
+		                       
+		                     });
+		                	
+		                	
+		                }
+
+		                
+		              } else {
+		                htmlData += "<div>";
+		                htmlData += "   No data found ";
+		                htmlData += "</div>";
+		              }
+
+		              //데이터 출력
+		              $("#boardTable").append(htmlData);
+
+		              //paging
+		              $("#page-selection").empty();//페이저 삭제
+		              renderingPage(pageTotal, page);
+
+		              //PClass.callAjax  
+		            });
+
+		  }
 
 	//paging
 	function renderingPage(pageTotal, page) {
@@ -144,6 +231,16 @@
 		}).on("page", function(event, num) {
 			console.log("num:" + num);
 		});
+	}
+	
+	function Question(pageTotal, page) {
+	    if ("10" == ("$gubunQuestion").val()){
+	    	
+	    }else if ("20" == ("$gubunQuestion").val()){
+	    	
+	    }else if ("30" == ("$gubunQuestion").val()){
+	    	
+	    }
 	}
 </script>
 
@@ -261,6 +358,22 @@
 								<button class="css-Button" type="button" width="120" height="44"
 									radius="3" id="questionReg">문의하기</button>
 							</div>
+							
+							<!-- hidden -->
+							<div style="display: none;">
+               <select class="form-control input-sm" name="pageSize" id="pageSize">
+                  <c:forEach var="code" items="${PAGE_SIZE}">
+                    <option value='<c:out value="${code.detCode }"/>'>
+                      <c:out value="${code.detName }" />
+                    </option>
+                  </c:forEach>
+                </select>
+               </div>
+               
+               <input type="hidden" id="gubun" value="${divValue}">
+               <input type="hidden" id="seq" value="${vo.seq}">
+               <input type="hidden" id="answerseq" value="${vo01.seq}">
+               <input type="hidden" id="gubunQuestion" value="${vo.gubunQuestion}">
 
 
 
