@@ -178,7 +178,7 @@
         <div class="goods responsive">
           <c:forEach var="vo6" items="${list6}">
             <figure class="main_itemList">
-              <a href="${CP}/detail/view.do?itemNo=${vo6.itemNo}"><img alf="이미지" width="170" src="${CP}${vo6.viewPath}/${vo5.saveName}"></a>
+              <a href="${CP}/detail/view.do?itemNo=${vo6.itemNo}"><img alf="이미지" width="170" src="${CP}${vo6.viewPath}/${vo6.saveName}"></a>
               <a href="${CP}/detail/view.do?itemNo=${vo6.itemNo}"><figcaption>${vo6.name}</figcaption></a>
               <a href="${CP}/detail/view.do?itemNo=${vo6.itemNo}"><figcaption class="price_font">${vo6.price}원</figcaption></a>
             </figure>
