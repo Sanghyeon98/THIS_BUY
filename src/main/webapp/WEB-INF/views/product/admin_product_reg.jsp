@@ -243,63 +243,67 @@
         </div>
         <div class="content_body">
           <form action="#" method="post" enctype="multipart/form-data">
-            <table>
+            <table class="table table-bordered"> 
               <tr>
                 <td class="table_left"><label>분류선택</label></td>
                 <td>
-                  <select class="cate01List">
-                    <option value='none'>==선택==</option>
-                    <c:forEach var="vo" items="${cate01List}">
-                        <option value='<c:out value="${vo.categoryNo}"/>'>
-                            <c:out value="${vo.categoryNm}"/>
-                        </option>
-                    </c:forEach>
-                  </select>
-                  <select class="cate02List">
-                    <option value='none'>==선택==</option>
-                  </select>
+                  <div class="col-xs-4">
+	                  <select class="cate01List form-control">
+	                    <option value='none'>==선택==</option>
+	                    <c:forEach var="vo" items="${cate01List}">
+	                        <option value='<c:out value="${vo.categoryNo}"/>'>
+	                            <c:out value="${vo.categoryNm}"/>
+	                        </option>
+	                    </c:forEach>
+	                  </select>
+                  </div>
+                  <div class="col-xs-4">
+	                  <select class="cate02List form-control"> 
+	                    <option value='none'>==선택==</option>
+	                  </select>
+                  </div>
                 </td>
               </tr>
               <tr>
                 <td class="table_left"><label for="name">상품명</label></td>
-                <td><input type="text" id="name" name="name" placeholder="상품명"></td>
+                <td><input class="form-control" type="text" id="name" name="name" placeholder="상품명"></td>
               </tr>
               <tr>
                 <td class="table_left"><label for="price">가격</label></td>
-                <td><input type="number" id="price" name="price" placeholder="가격"></td>
+                <td><input class="form-control" type="number" id="price" name="price" placeholder="가격"></td>
               </tr>
               <tr>
                 <td class="table_left"><label for="production">생산지</label></td>
-                <td><input type="text" id="production" name="production" placeholder="생산지"></td>
+                <td><input class="form-control" type="text" id="production" name="production" placeholder="생산지"></td>
               </tr>
               <tr>
                 <td class="table_left"><label for="weight">무게</label></td>
-                <td><input type="number" id="weight" name="weight" placeholder="무게"></td>
+                <td><input class="form-control" type="number" id="weight" name="weight" placeholder="무게"></td>
               </tr>
               <tr>
                 <td class="table_left"><label for="expired">유통기한</label></td>
-                <td><input type="text" id="expired" name="expired" placeholder="YYYYMMDD"></td>
+                <td><input class="form-control" type="text" id="expired" name="expired" placeholder="YYYYMMDD"></td>
               </tr>
               <tr>
                 <td class="table_left"><label for="quantity">재고수량</label></td>
-                <td><input type="number" id="quantity" name="quantity" placeholder="재고수량"></td>
+                <td><input class="form-control" type="number" id="quantity" name="quantity" placeholder="재고수량"></td>
               </tr>
               <tr>
                 <td class="table_left"><label for="detail">상품 설명</label></td>
-                <td><textarea rows="" cols="" id="detail" name="detail"></textarea></td>
+                <td><textarea class="form-control" id="detail" name="detail"></textarea></td>
               </tr>
-              <tr>
+              <tr> 
                 <td class="table_left"><label for="imageName">이미지</label></td>
                 <td><input type="file" id="imageName" name="imageName"></div>
               </tr>
-            </table>
+            </table> 
             <div class="reset">
-              <input type="reset">
+              <input class="btn btn-default btn-sm" type="reset">
             </div>
           </form>
         </div>
         <div class="bt_area">
-          <button id="prod_save_bt">상품 등록</button>
+          <button class="btn" style="background-color: #b5c8e0; color: white;" style="background-color: #B8C9DF;" id="prod_save_bt">상품 등록</button>
         </div>
       </div>
       <!-- content END ---------------------------------------------------------->

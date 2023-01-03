@@ -24,15 +24,15 @@ a {
 
 #wrap {
   width: 1050px;
-  height: 600px;
+  /* height: 600px; */ 
   background-color: rgb(242, 242, 242);
   margin: 0 auto; /* 좌우 가운데 정렬 */
 }
 
 .lnb {
   float: left;
-  width: 20%;
-  background-color: lightgray;
+  width: 20%; 
+  /* background-color: lightgray; */
 }
 
 .lnb li {
@@ -67,10 +67,10 @@ table {
 	background-color: white;
 }
 
-tr, td, th { 
+/* tr, td, th { 
 	border: 1px solid;
-	padding: 5px 0; 
-}
+	padding: 5px 0;  
+} */
 
 .table_left {
 	width: 20%;

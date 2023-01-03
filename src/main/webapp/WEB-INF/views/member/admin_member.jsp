@@ -275,58 +275,61 @@
       <div class="lnb">
         <jsp:include page="/WEB-INF/views/cmn/admin_left_menu.jsp"></jsp:include>
       </div>
-      <input type="text" id="test1">
       <!-- lnb END ------------------------------------------------------------>
       
       <!-- content -->
       <div class="content">
         <div class="content_nav">
-          <p>관리자 > 회원 관리 </p>
+          <p>관리자 > 회원 관리  > 회원 정보</p>
         </div>
         <div class="content_body">
           <form action="#">
-            <table>
+            <table class="table table-bordered">
               <tr>
-              <td class="table_left"><label>분류선택</label></td>
-              <td><select class="form-control input-sm" name="searchDiv" id="searchDiv">  
-          <option value="">전체</option>
-          <option value="10">아이디</option>
-          <option value="20">이름</option>
-          <option value="30">이메일</option>
-        </select></td>
-                <td class="table_left"><label>검색어</label></td>
-                <td><input type="text" name="searchWord" id="searchWord" placeholder="검색어를 입력하세요."></td>
+	              <td class="table_left"><label>분류선택</label></td>
+	              <td>
+	                <select class="form-control input-sm" name="searchDiv" id="searchDiv">  
+					          <option value="">전체</option>
+					          <option value="10">아이디</option>
+					          <option value="20">이름</option>
+					          <option value="30">이메일</option>
+					        </select>
+					      </td>
+              </tr> 
+              <tr> 
+	              <td class="table_left"><label>검색어</label></td> 
+	              <td><input class="form-control" type="text" name="searchWord" id="searchWord" placeholder="검색어를 입력하세요."></td>
               </tr>
             </table>
             <div class="reset">
-              <input type="reset">
+              <input class="btn btn-default btn-sm" type="reset">
             </div>
           </form>
         </div>
         <div class="search_bt_area">
-          <button id="doRetrieve">검색</button>
+          <button class="btn" style="background-color: #b5c8e0; color: white;" id="doRetrieve">검색</button>
         </div>
-        <div class="search_option">
-          <select id="pageSize" name="pageSize">
+        <div class="search_option col-xs-2">
+          <select class="form-control" id="pageSize" name="pageSize">
             <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="30">30</option>
-          <option value="50">50</option>
-          <option value="100">100</option>
+	          <option value="20">20</option>
+	          <option value="30">30</option>
+	          <option value="50">50</option>
+	          <option value="100">100</option>
           </select>
         </div>
 
         <!-- 테이블 목록 -->
         <div class="search_list">
           <form action="#">
-            <table id="memberTable">
+            <table class="table table-bordered" id="memberTable">
               <thead>
                 <tr>
-                  <th width="5%"><input type="checkbox" id="checkAll"></th>
-                  <th width="12%">id</th>
-                  <th width="8%">이름</th>
-                  <th width="58%">전화번호</th>
-                  <th width="17%">등록일</th>
+                  <th style="text-align: center;" width="5%"><input type="checkbox" id="checkAll"></th>
+                  <th style="text-align: center;" width="20%">id</th>
+                  <th style="text-align: center;" width="20%">이름</th>
+                  <th style="text-align: center;" width="25%">전화번호</th>
+                  <th style="text-align: center;" width="30%">등록일</th>
                   <th style="display: none;">SEQ</th>
                 </tr>
               </thead>
@@ -346,7 +349,7 @@
         <!-- 페이징 ------------------------------------------------------------->
         
         <div class="bottom_bt_area">
-          <button id="upDeleteAll">회원 삭제</button>
+          <button class="btn btn-danger btn-sm" id="upDeleteAll">회원 삭제</button>
         </div>
       </div>
       <!-- content END -------------------------------------------------------->

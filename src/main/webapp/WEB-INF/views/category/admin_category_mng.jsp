@@ -18,7 +18,7 @@
   <meta charset="UTF-8">
   <!-- jquery ui -->
   <link rel="stylesheet" href="${CP_RES}/css/admin_category_mng.css">
-
+  
   <title>카테고리 관리</title>
   
   <!-- javascript --> 

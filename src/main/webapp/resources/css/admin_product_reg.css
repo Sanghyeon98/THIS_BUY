@@ -19,12 +19,12 @@ li {
 
 a {
 	text-decoration: none;
-	color: black;
+	color: black; 
 }
 
 #wrap {
   width: 1050px;
-  height: 600px;
+  /* height: 600px; */
   background-color: rgb(242, 242, 242);
   margin: 0 auto; /* 좌우 가운데 정렬 */
 }
@@ -32,7 +32,7 @@ a {
 .lnb {
   float: left;
   width: 20%;
-  background-color: lightgray;
+  /* background-color: lightgray; */ 
 }
 
 .lnb li {

@@ -52,7 +52,7 @@
       dataType: "html",
       data: {},
       success:function(data){ //통신 성공
-        console.log("success");
+        console.log("mainTop success");
         
         let parsedJson = JSON.parse(data);
         
@@ -65,10 +65,10 @@
         $.each(parsedJson, function(index, value) {
             // 2차 분류의 topNo와 현재 선택된 1차 분류의 categoryNo가 같으면 (하위 카테고리이면~!)
           if(value.topNo == 0) {
-            htmlData += "<li style='position:relative; z-index:51;' class='cate01list hide' value='" + value.categoryNo + "'>" + value.categoryNm + "</li>";
+            htmlData += "<li style='position:relative; z-index:51;' class='cate01list' value='" + value.categoryNo + "'>" + value.categoryNm + "</li>";
           } else {
             htmlData += "<li style='position:relative; z-index:50;' class='cate02list hide cateTop" + value.topNo + "' value='" + value.categoryNo + "'>" + value.categoryNm + "</li>";
-          }
+          } 
         });
         
         //console.log("htmlData : " + htmlData);
@@ -87,7 +87,7 @@
     
     
     // 2차분류 클릭 이벤트
-    $("#categoryMenu").on("click", '.cate02list', function() {
+    $("#catelist").on("click", '.cate02list', function() {
       console.log("2차 분류..");
       
       console.log("2차분류 카테고리 ID : " + $(this).val());
@@ -102,7 +102,7 @@
      
     // 1차 분류 선택 시, 해당 카테고리에 맞는 2차 분류 보여주기
 //    $("#categoryMenu").on("mouseenter",'.cate01list', function() {
-    $("#categoryMenu").on("click",'.cate01list', function() {
+    $("#catelist").on("click",'.cate01list', function() {
       
       let cate01No = $(this).val();
       console.log("cate01No : " + cate01No);
@@ -203,12 +203,14 @@
       </div>
       <div class="top3">
         <div class="category">
-          <ul>
-            <li id="categoryMenu">
-              <a href="#">〓 카테고리</a>
+          <ul class="categoryUl">
+            <li class="categoryLi">
+	            <a href="#">〓 카테고리</a>
+	            <!-- <li id="categoryMenu"> -->
               <ul id="catelist">
               </ul>
-            </li>
+	            <!-- </li> -->
+	          </li>
           </ul>
         </div>
         <div class="top3_1">

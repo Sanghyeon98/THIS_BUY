@@ -254,111 +254,115 @@
         <div class="content_body">
           <form action="#" method="post" enctype="multipart/form-data">
             <input type="hidden" name="itemNo" id="itemNo" value="${vo.itemNo}"> 
-            <table>
+            <table class="table table-bordered">
               <tr>
                 <td class="table_left"><label>분류선택</label></td>
                 <td>
                   <!-- 1차 분류 -->
-                  <select class="cate01List">
-                    <option value='none'>==선택==</option>
-                    <c:forEach var="cateVO2" items="${cate02List}">
-                      <c:choose>
-                        <c:when test="${vo.categoryNo == cateVO2.categoryNo }">
-                          <c:forEach var="cateVO1" items="${cate01List}">
-                            <c:choose>
-                              <c:when test="${cateVO2.topNo == cateVO1.categoryNo}">
-				                        <option selected="selected" value='<c:out value="${cateVO1.categoryNo}"/>'>
-				                            <c:out value="${cateVO1.categoryNm}"/>
-				                        </option>
-                              </c:when>
-                              <c:otherwise>
-				                        <option value='<c:out value="${cateVO1.categoryNo}"/>'>
-				                            <c:out value="${cateVO1.categoryNm}"/>
-				                        </option>
-                              </c:otherwise>
-                            </c:choose>
-                          </c:forEach>
-                        </c:when>
-                      </c:choose>
-                    </c:forEach>
-                  </select>
+                  <div class="col-xs-4">
+	                  <select class="cate01List form-control">
+	                    <option value='none'>==선택==</option>
+	                    <c:forEach var="cateVO2" items="${cate02List}">
+	                      <c:choose>
+	                        <c:when test="${vo.categoryNo == cateVO2.categoryNo }">
+	                          <c:forEach var="cateVO1" items="${cate01List}">
+	                            <c:choose>
+	                              <c:when test="${cateVO2.topNo == cateVO1.categoryNo}">
+					                        <option selected="selected" value='<c:out value="${cateVO1.categoryNo}"/>'>
+					                            <c:out value="${cateVO1.categoryNm}"/>
+					                        </option>
+	                              </c:when>
+	                              <c:otherwise>
+					                        <option value='<c:out value="${cateVO1.categoryNo}"/>'>
+					                            <c:out value="${cateVO1.categoryNm}"/>
+					                        </option>
+	                              </c:otherwise>
+	                            </c:choose>
+	                          </c:forEach>
+	                        </c:when>
+	                      </c:choose>
+	                    </c:forEach>
+	                  </select>
+                  </div>
                   
                   <!-- 2차 분류 --> 
-                  <select class="cate02List">
-                    <option value='none'>==선택==</option>
-                    <c:forEach var="cateVO2" items="${cate02List}">
-                      <c:choose>
-                        <c:when test="${vo.categoryNo == cateVO2.categoryNo }">
-                          <c:forEach var="cateVO2_2" items="${cate02List }">
-                            <c:choose>
-                              <c:when test="${cateVO2.topNo == cateVO2_2.topNo }">
-                                <c:choose>
-                                  <c:when test="${vo.categoryNo == cateVO2_2.categoryNo}">
-						                        <option selected="selected" value='<c:out value="${cateVO2_2.categoryNo}"/>'>
-						                            <c:out value="${cateVO2_2.categoryNm}"/>
-						                        </option> 
-                                  </c:when>
-                                  <c:otherwise>
-						                        <option value='<c:out value="${cateVO2_2.categoryNo}"/>'>
-						                            <c:out value="${cateVO2_2.categoryNm}"/>
-						                        </option> 
-                                  </c:otherwise>
-                                </c:choose>
-                              </c:when>
-                              <c:otherwise>
-                              </c:otherwise>
-                            </c:choose>
-                          </c:forEach>
-                        </c:when>
-                      </c:choose>
-                    </c:forEach>
-                  </select>
+                  <div class="col-xs-4">
+	                  <select class="cate02List form-control">
+	                    <option value='none'>==선택==</option>
+	                    <c:forEach var="cateVO2" items="${cate02List}">
+	                      <c:choose>
+	                        <c:when test="${vo.categoryNo == cateVO2.categoryNo }">
+	                          <c:forEach var="cateVO2_2" items="${cate02List }">
+	                            <c:choose>
+	                              <c:when test="${cateVO2.topNo == cateVO2_2.topNo }">
+	                                <c:choose>
+	                                  <c:when test="${vo.categoryNo == cateVO2_2.categoryNo}">
+							                        <option selected="selected" value='<c:out value="${cateVO2_2.categoryNo}"/>'>
+							                            <c:out value="${cateVO2_2.categoryNm}"/>
+							                        </option> 
+	                                  </c:when>
+	                                  <c:otherwise>
+							                        <option value='<c:out value="${cateVO2_2.categoryNo}"/>'>
+							                            <c:out value="${cateVO2_2.categoryNm}"/>
+							                        </option> 
+	                                  </c:otherwise>
+	                                </c:choose>
+	                              </c:when>
+	                              <c:otherwise>
+	                              </c:otherwise>
+	                            </c:choose>
+	                          </c:forEach>
+	                        </c:when>
+	                      </c:choose>
+	                    </c:forEach>
+	                  </select>
+                  </div>
                 </td>
               </tr>
               <tr>
                 <td class="table_left"><label for="name">상품명</label></td>
-                <td><input type="text" id="name" name="name" value="<c:out value='${vo.name}'></c:out>"></td>
+                <td><input class="form-control" type="text" id="name" name="name" value="<c:out value='${vo.name}'></c:out>"></td>
               </tr>
               <tr>
                 <td class="table_left"><label for="price">가격</label></td>
-                <td><input type="number" id="price" name="price" value="<c:out value='${vo.price}'></c:out>"></td>
+                <td><input class="form-control" type="number" id="price" name="price" value="<c:out value='${vo.price}'></c:out>"></td>
               </tr>
               <tr>
                 <td class="table_left"><label for="production">생산지</label></td>
-                <td><input type="text" id="production" name="production" value="<c:out value='${vo.production}'></c:out>"></td>
+                <td><input class="form-control" type="text" id="production" name="production" value="<c:out value='${vo.production}'></c:out>"></td>
               </tr>
               <tr>
                 <td class="table_left"><label for="weight">무게</label></td>
-                <td><input type="number" id="weight" name="weight" value="<c:out value='${vo.weight}'></c:out>"></td>
+                <td><input class="form-control" type="number" id="weight" name="weight" value="<c:out value='${vo.weight}'></c:out>"></td>
               </tr>
               <tr>
                 <td class="table_left"><label for="expired">유통기한</label></td>
-                <td><input type="text" id="expired" name="expired" value="<c:out value='${vo.expired}'></c:out>"></td>
+                <td><input class="form-control" type="text" id="expired" name="expired" value="<c:out value='${vo.expired}'></c:out>"></td>
               </tr>
               <tr>
                 <td class="table_left"><label for="quantity">재고수량</label></td>
-                <td><input type="number" id="quantity" name="quantity" value="<c:out value='${vo.quantity}'></c:out>"></td>
+                <td><input class="form-control" type="number" id="quantity" name="quantity" value="<c:out value='${vo.quantity}'></c:out>"></td>
               </tr>
               <tr>
                 <td class="table_left"><label for="detail">상품 설명</label></td>
-                <td><textarea rows="" cols="" id="detail" name="detail"><c:out value='${vo.detail}'></c:out></textarea></td>
+                <td><textarea class="form-control" id="detail" name="detail"><c:out value='${vo.detail}'></c:out></textarea></td>
               </tr>
               <tr>
                 <td class="table_left"><label for="imageName">이미지</label></td>
                 <td>
                   ${imgVO.orgName }<input type="file" id="imageName" name="imageName">
-                  <img alt="이미지" src="${CP}${imgVO.viewPath}/${imgVO.saveName}">
+                  <img style="width: 200px;" alt="이미지" src="${CP}${imgVO.viewPath}/${imgVO.saveName}">
                 </td>
               </tr>
             </table>
             <div class="reset">
-              <input type="reset">
+              <input class="btn btn-default btn-sm" type="reset">
             </div>
           </form>
         </div>
         <div class="bt_area">
-          <button id="prod_save_bt">수정</button>
-          <button id="prod_cancel_bt">취소</button>
+          <button class="btn btn-sm" style="background-color: #B8C9DF;" id="prod_save_bt">수정</button>
+          <button class="btn btn-default btn-sm" id="prod_cancel_bt">취소</button>
         </div>
       </div>
       <!-- content END ---------------------------------------------------------->

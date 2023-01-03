@@ -272,7 +272,7 @@
       
       
       PClass.callAjax(method, url, async, params, function(data) {
-        console.log(data);
+        //console.log(data);
         let parsedJson = JSON.parse(data);
         let htmlData = "";
         
@@ -384,47 +384,51 @@
         </div>
         <div class="content_body">
           <form action="#">
-            <table>
+            <table class="table table-bordered">
               <tr>
                 <td class="table_left"><label>분류선택</label></td>
                 <td>
-                  <select class="cate01List">
-                    <option value='none'>==선택==</option>
-                    <c:forEach var="vo" items="${cate01List}">
-                        <option value='<c:out value="${vo.categoryNo}"/>'>
-                            <c:out value="${vo.categoryNm}"/>
-                        </option>
-                    </c:forEach>
-                  </select>
-                  <select class="cate02List">
-                    <option value='none'>==선택==</option>
-                    <c:forEach var="vo" items="${cate02List}">
-                     <%--  <c:choose>
-                          <c:when test="${vo.topNo == 1 }">
-                            <option value='<c:out value="${vo.categoryNo}"/>'>
-                                <c:out value="${vo.categoryNm}"/>
+                  <div class="col-xs-4">
+                    <select class="cate01List form-control">
+                      <option value='none'>==선택==</option>
+                      <c:forEach var="vo" items="${cate01List}">
+                          <option value='<c:out value="${vo.categoryNo}"/>'>
+                              <c:out value="${vo.categoryNm}"/>
                           </option>
-                          </c:when>
-                      </c:choose> --%>
-                    </c:forEach>
-                  </select> 
+                      </c:forEach>
+                    </select>
+                  </div>
+                  <div class="col-xs-4">
+                    <select class="cate02List form-control">
+                      <option value='none'>==선택==</option>
+                      <c:forEach var="vo" items="${cate02List}">
+                       <%--  <c:choose>
+                            <c:when test="${vo.topNo == 1 }">
+                              <option value='<c:out value="${vo.categoryNo}"/>'>
+                                  <c:out value="${vo.categoryNm}"/>
+                            </option>
+                            </c:when>
+                        </c:choose> --%>
+                      </c:forEach>
+                    </select>
+                  </div> 
                 </td>
               </tr>
               <tr>
                 <td class="table_left"><label>검색어</label></td>
-                <td><input type="text" name="searchWord" id="searchWord" placeholder="상품명을 입력하세요."></td>
+                <td><input type="text" class="form-control" name="searchWord" id="searchWord" placeholder="상품명을 입력하세요."></td>
               </tr>
             </table>
             <div class="reset">
-              <input type="reset">
+              <input class="btn btn-default btn-sm" type="reset">
             </div>
           </form>
         </div>
         <div class="search_bt_area">
-          <button id="doRetrieve">검색</button>
+          <button class="btn" style="background-color: #b5c8e0; color: white;" id="doRetrieve">검색</button>
         </div>
-        <div class="search_option">
-          <select id="pageSize" name="pageSize">
+        <div class="search_option col-xs-2">
+          <select class="form-control" id="pageSize" name="pageSize">
             <c:forEach var="vo" items="${PAGE_SIZE }">
                 <option value='<c:out value="${vo.detCode}"/>'>
                     <c:out value="${vo.detName }"></c:out>
@@ -436,15 +440,15 @@
         <!-- 테이블 목록 -->
         <div class="search_list">
           <form action="#">
-            <table id="productTable">
+            <table class="table table-bordered table-hover" id="productTable">
               <thead>
                 <tr>
-                  <th width="5%"><input type="checkbox" id="checkAll"></th>
-                  <th width="8%">번호</th>
-                  <th width="45%">상품명</th>
-                  <th width="15%">판매가</th>
-                  <th width="10%">재고</th> 
-                  <th width="17%">등록일</th>
+                  <th style='text-align: center;' width="5%"><input type="checkbox" id="checkAll"></th>
+                  <th style='text-align: center;' width="8%">번호</th>
+                  <th style='text-align: center;' width="45%">상품명</th>
+                  <th style='text-align: center;' width="15%">판매가</th>
+                  <th style='text-align: center;' width="10%">재고</th> 
+                  <th style='text-align: center;' width="17%">등록일</th>
                   <th style="display: none;">SEQ</th>
                 </tr>
               </thead>
@@ -462,11 +466,11 @@
           <div id="page-selection" class="text-center page"></div>
         </div>
         <!-- 페이징 ------------------------------------------------------------->
-        
+         
         <div class="bottom_bt_area">
-          <button id="upDeleteAll">선택상품 삭제</button>
-          <button id="upSoldOutAll">선택상품 품절처리</button>
-          <button id="prod_reg_bt">상품 등록</button>
+          <button class="btn btn-danger btn-sm" id="upDeleteAll">선택상품 삭제</button>
+          <button class="btn btn-info btn-sm" id="upSoldOutAll">선택상품 품절처리</button>
+          <button class="btn btn-primary btn-sm" id="prod_reg_bt">상품 등록</button>
         </div>
       </div>
       <!-- content END -------------------------------------------------------->

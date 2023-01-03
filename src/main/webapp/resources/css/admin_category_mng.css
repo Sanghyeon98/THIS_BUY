@@ -1,4 +1,4 @@
-@charset "UTF-8";
+\@charset "UTF-8";
 
 /* 여백 초기화 */
 body, header, footer, div, h1, h2, ul, li, p {
@@ -28,7 +28,7 @@ a {
 
 #wrap {
   width: 1050px;
-  height: 600px;
+  /* height: 600px; */
   background-color: rgb(242, 242, 242);
   margin: 0 auto; /* 좌우 가운데 정렬 */
 }
@@ -36,7 +36,7 @@ a {
 .lnb {
   float: left;
   width: 20%;
-  background-color: lightgray;
+  /* background-color: lightgray; */ 
 }
 
 .lnb li {

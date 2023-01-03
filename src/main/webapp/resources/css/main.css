@@ -60,6 +60,7 @@ a {
   -webkit-box-align: center;
   align-items: center;
   font-size: 12px;
+  padding-right: 20px;
 }
 
 /* .top1 > a {
@@ -73,7 +74,18 @@ a {
 .mainMenu > li:hover .loginInfoList {display:block;}
 .mainMenu .loginInfoList {display:none; position:absolute; left:0; right:0; text-align:center;}
 .mainMenu .loginInfoList a {display:block; padding:5px; background:#fff; width: 80px; /*color:#fff;*/}
- 
+
+.categoryUl:after {display:block; content:''; clear:both;}
+.categoryUl > li {position:relative; float:left; margin-right:5px;}
+.categoryUl > li > a {display:block; padding:0 15px; height:56px; line-height:56px; /*color:#fff; background:#333;*/ }
+.categoryUl > li:hover #catelist {display:block;}
+.categoryUl #catelist {display:none; position:absolute; left:0; right:0; text-align:left;}
+.categoryUl #catelist a {display:block; padding:5px; background:#fff;  /*color:#fff;*/}
+
+/* #catelist {
+  margin-top: 18px;
+} */
+
 /*  
 .catelist:after {display:block; content:''; clear:both;}
 .catelist > li {position:relative; float:left; margin-right:5px;}
@@ -275,10 +287,6 @@ a {
   padding-left: 5px;
 }
 
-#catelist {
-  margin-top: 18px;
-}
-
 /* #loginInfoList {
   margin-top: 18px;
 } */
@@ -298,6 +306,7 @@ a {
 /* 2차 카테고리 */
 .cate02list {
   background-color: #FFFFFF;
+  width: 200px;
   padding: 3px; 
 }
 
