@@ -27,6 +27,7 @@ a {
   /* height: 600px; */ 
   background-color: rgb(242, 242, 242);
   margin: 0 auto; /* 좌우 가운데 정렬 */
+  padding: 10px;
 }
 
 .lnb {
