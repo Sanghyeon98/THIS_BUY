@@ -31,7 +31,7 @@
       // 최초 목록 조회
       doRetrieve(1);
       
-      // paging
+      // 페이징
       renderingPage('${totalPage}', 1);
       
       /* 
@@ -48,7 +48,7 @@
       }); */
       
       
-      // 품절 처리
+      // 품절처리 버튼
       $("#upSoldOutAll").on("click", function(){
         console.log("upSoldOutAll");
         
@@ -56,7 +56,7 @@
           
         $("input:checkbox[name=chk]").each(function(i, element) {
           // 체크된 데이터 uIdArray 추가
-          if ($(this).is(":checked") == true) {
+          if($(this).is(":checked") == true) {
             console.log($(this).val());
             uIdArray.push($(this).val());
           }

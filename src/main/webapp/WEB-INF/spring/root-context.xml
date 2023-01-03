@@ -67,7 +67,7 @@
 	<!-- database.properties read -->
 	<context:property-placeholder location="classpath:/resource/config/database.properties" />
 
-	<!--SimpleDriverDataSource to --> 
+	<!-- Apache Commons DBCP 스프링 설정 --> 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<!-- <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" /> -->
 		<property name="driverClassName" value="${jdbc.driver}" />
@@ -76,7 +76,7 @@
 		<property name="url" value="${jdbc.url}" />
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
-		<!-- 최대 접속 허용 갯수 -->
+		<!-- 동시에 사용할 수 있는 최대 커넥션 개수 -->
 		<property name="maxActive" value="${jdbc.maxActive}" />
 		<!-- 여분으로 남결질 Connection -->
 		<property name="maxIdle" value="${jdbc.maxIdle}" />
@@ -87,7 +87,6 @@
 		<!-- 버려진 연결로 인식할 기본 시간 -->
 		<property name="removeAbandonedTimeout" value="${jdbc.removeAbandonedTimeout}" />
 	</bean>
-	
 	
 
    <!-- 이메일 인증 관련 빈 등록 -->

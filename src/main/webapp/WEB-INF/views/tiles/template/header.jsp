@@ -18,7 +18,7 @@
 <script>
   $(document).ready(function(){
 	  
-	  // 장바구니
+	  // 장바구니 버튼 클릭 이벤트
 	  $(".cart_bnt").on("click", function() {
 		  window.location.href= "${CP}/cart/view.do";
 	  });    
@@ -26,10 +26,9 @@
     
     // 검색어 엔터
     $("#gnb_search").on("keypress", function(e) {
-      if(13==e.which){
-        e.preventDefault();
-        //event trigger발생
-        $('#search_bnt').trigger('click');
+      if(13 == e.which){
+        e.preventDefault();  // 기본으로 정의된 이벤트를 작동하지 못하게 하는 메서드 (ex, a태그, submit)
+        $('#search_bnt').trigger('click');  //event trigger발생
       }
     });
     
@@ -37,7 +36,6 @@
     // 검색어 버튼 클릭
     $("#search_bnt").on("click", function() {
       console.log("검색어 버튼");
-      console.log("검색어 : " + $("#gnb_search").val());
       
       let gnb_search = $("#gnb_search").val();
        
@@ -154,12 +152,12 @@
                 <a href="#">${sessionScope.memberInfo.name} 님</a>
                 <ul class="loginInfoList">
                   <c:choose>
-                    <c:when test="${sessionScope.memberInfo.auth != '1'}">
+                    <c:when test="${sessionScope.memberInfo.auth != '1'}">  <!-- 일반사용자 메뉴 -->
 		                  <li><a href="${CP}/order/orderView.do?memberId=${sessionScope.memberInfo.memberid}">주문내역</a></li>
 		                  <li><a href="${CP}/board/questionView.do?gubun=20">상품문의</a></li>
 		                  <li><a href="${CP}/memberupdate/memberCheck.do">개인정보수정</a></li>
                     </c:when>
-                    <c:otherwise>
+                    <c:otherwise>  <!-- 관리자 메뉴  -->
                       <li><a href="${CP}/product/productView.do">관리메뉴</a></li>
                     </c:otherwise>
                   </c:choose>
@@ -169,7 +167,7 @@
                 <a href="javascript:doLogout();" id="loginout">로그아웃</a>
               </li>
             </c:when>
-            <c:otherwise>
+            <c:otherwise>  <!-- session 값이 없으면 -->
               <li>
                 <a href="${CP}/signup/signup.do" id="singup">회원가입</a>
               </li>

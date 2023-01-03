@@ -29,6 +29,7 @@ public class AdminCategoryController {
 	
 	public AdminCategoryController() {}
 	
+	// 카테고리 관리 페이지 호출
 	@RequestMapping(value = "categoryView.do", method = RequestMethod.GET)
 	public String categoryView(Model model, CategoryVO inVO) throws SQLException {
 		String VIEW_NAME = "category/admin_category_mng";
@@ -40,6 +41,7 @@ public class AdminCategoryController {
 		return VIEW_NAME;
 	}
 	
+	// 카테고리 수정
 	@RequestMapping(value = "/doUpdate.do", method = RequestMethod.GET,
 			produces = "application/json;charset=UTF-8")
 	@ResponseBody
@@ -64,7 +66,7 @@ public class AdminCategoryController {
 		return jsonString;
 	}
 	
-	
+	// 카테고리 삭제
 	@RequestMapping(value = "/doDelete.do", method = RequestMethod.GET,
 			produces = "application/json;charset=UTF-8")
 	@ResponseBody
@@ -89,6 +91,7 @@ public class AdminCategoryController {
 		return jsonString;
 	}
 	
+	// 카테고리 한 건 선택
 	@RequestMapping(value = "/doSelectOne.do", method = RequestMethod.GET,
 			produces = "application/json;charset=UTF-8")
 	@ResponseBody
@@ -106,6 +109,7 @@ public class AdminCategoryController {
 		return jsonString;
 	}
 	
+	// 카테고리 추가
 	@RequestMapping(value = "/doSave.do", method = RequestMethod.GET,
 			produces = "application/json;charset=UTF-8")
 	@ResponseBody
