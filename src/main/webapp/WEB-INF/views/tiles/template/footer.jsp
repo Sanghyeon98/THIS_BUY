@@ -22,7 +22,8 @@
 
 <style>
   .main_footer {
-    height: 100px;
+    height: 100px; 
+    margin-top: 90px;
   }
 </style>
 

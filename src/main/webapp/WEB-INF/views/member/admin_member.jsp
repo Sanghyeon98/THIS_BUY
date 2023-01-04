@@ -286,7 +286,7 @@
           <form action="#">
             <table class="table table-bordered">
               <tr>
-	              <td class="table_left"><label>분류선택</label></td>
+	              <td style="vertical-align: middle;" class="table_left">분류선택</td>
 	              <td>
 	                <select class="form-control input-sm" name="searchDiv" id="searchDiv">  
 					          <option value="">전체</option>
@@ -297,7 +297,7 @@
 					      </td>
               </tr> 
               <tr> 
-	              <td class="table_left"><label>검색어</label></td> 
+	              <td style="vertical-align: middle;" class="table_left">검색어</td> 
 	              <td><input class="form-control" type="text" name="searchWord" id="searchWord" placeholder="검색어를 입력하세요."></td>
               </tr>
             </table>

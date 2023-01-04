@@ -41,6 +41,12 @@ body, header, footer, div, h1, h2, ul, li, p {
   box-sizing: border-box;  /* padding, border를 width에 포함 */
 }
 
+a {
+  background-color: transparent;
+  text-decoration: none;
+  color: inherit;
+} 
+
 .cart__list__optionbtn{
     background-color: #B8C9DF
 }

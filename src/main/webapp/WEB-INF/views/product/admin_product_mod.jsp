@@ -256,7 +256,7 @@
             <input type="hidden" name="itemNo" id="itemNo" value="${vo.itemNo}"> 
             <table class="table table-bordered">
               <tr>
-                <td class="table_left"><label>분류선택</label></td>
+                <td style="vertical-align: middle;" class="table_left">분류선택</td>
                 <td>
                   <!-- 1차 분류 -->
                   <div class="col-xs-4">
@@ -320,35 +320,35 @@
                 </td>
               </tr>
               <tr>
-                <td class="table_left"><label for="name">상품명</label></td>
+                <td style="vertical-align: middle;" class="table_left">상품명</td>
                 <td><input class="form-control" type="text" id="name" name="name" value="<c:out value='${vo.name}'></c:out>"></td>
               </tr>
               <tr>
-                <td class="table_left"><label for="price">가격</label></td>
+                <td style="vertical-align: middle;" class="table_left">가격</td>
                 <td><input class="form-control" type="number" id="price" name="price" value="<c:out value='${vo.price}'></c:out>"></td>
               </tr>
               <tr>
-                <td class="table_left"><label for="production">생산지</label></td>
+                <td style="vertical-align: middle;" class="table_left">생산지</td>
                 <td><input class="form-control" type="text" id="production" name="production" value="<c:out value='${vo.production}'></c:out>"></td>
               </tr>
               <tr>
-                <td class="table_left"><label for="weight">무게</label></td>
+                <td style="vertical-align: middle;" class="table_left">무게</td>
                 <td><input class="form-control" type="number" id="weight" name="weight" value="<c:out value='${vo.weight}'></c:out>"></td>
               </tr>
               <tr>
-                <td class="table_left"><label for="expired">유통기한</label></td>
+                <td style="vertical-align: middle;" class="table_left">유통기한</td>
                 <td><input class="form-control" type="text" id="expired" name="expired" value="<c:out value='${vo.expired}'></c:out>"></td>
               </tr>
               <tr>
-                <td class="table_left"><label for="quantity">재고수량</label></td>
+                <td style="vertical-align: middle;" class="table_left">재고수량</td>
                 <td><input class="form-control" type="number" id="quantity" name="quantity" value="<c:out value='${vo.quantity}'></c:out>"></td>
               </tr>
               <tr>
-                <td class="table_left"><label for="detail">상품 설명</label></td>
+                <td style="vertical-align: middle;" class="table_left">상품 설명</td>
                 <td><textarea class="form-control" id="detail" name="detail"><c:out value='${vo.detail}'></c:out></textarea></td>
               </tr>
               <tr>
-                <td class="table_left"><label for="imageName">이미지</label></td>
+                <td style="vertical-align: middle;" class="table_left">이미지</td>
                 <td>
                   ${imgVO.orgName }<input type="file" id="imageName" name="imageName">
                   <img style="width: 200px;" alt="이미지" src="${CP}${imgVO.viewPath}/${imgVO.saveName}">

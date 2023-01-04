@@ -245,15 +245,15 @@
             </ul>
           </div>
           <div class="cate_create clear">
-            <p>분류 생성/수정/삭제</p>
+            <p id="cate_top">분류 생성/수정/삭제</p>
             <form action="#">
 	            <div>
-	              <table>
+	              <table class="table table-bordered">
 	                <input type="hidden" id="currCateNo"> 
 	                <tr>
-	                  <td>분류</td>
+	                  <td style="text-align: center; vertical-align: middle;">분류</td>
 	                  <td>
-	                    <select id="categoryList" name="categoryList">
+	                    <select class="form-control" id="categoryList" name="categoryList">
 	                      <option value="none">==선택==</option>
 	                      <c:forEach var="vo" items="${list }">
 	                        <c:choose>
@@ -266,22 +266,22 @@
 	                  </td>
 	                </tr>
 	                <tr>
-	                  <td>이름</td>
+	                  <td style="text-align: center; vertical-align: middle;">이름</td>
 	                  <td>
-	                    <input type="text" id="categoryNm" name="categoryNm" placeholder="카테고리명">
+	                    <input class="form-control" type="text" id="categoryNm" name="categoryNm" placeholder="카테고리명">
 	                  </td>
 	                </tr>
 	              </table>
 	            </div>
-	            <div>
-	              <input type="reset">
-	            </div>
+	            <div class="reset">
+	              <input class="btn btn-default btn-sm" type="reset">
+	            </div> 
             </form>
-            <div> 
-              <button id="cate_save_bt">등록</button>
-              <button id="cate_mod_bt" style="display: none;">수정</button>
-              <button id="cate_del_bt" style="display: none;">삭제</button>
-              <button id="cate_can_bt" style="display: none;">취소</button>
+            <div class="btn-area">  
+              <button class="btn" style="background-color: #b5c8e0; color: white;" id="cate_save_bt">등록</button>
+              <button class="btn btn-sm" style="background-color: #b5c8e0; color: white;" id="cate_mod_bt" style="display: none;">수정</button>
+              <button class="btn btn-default btn-sm" id="cate_del_bt" style="display: none;">삭제</button>
+              <button class="btn btn-default btn-sm" id="cate_can_bt" style="display: none;">취소</button>
             </div>
           </div>
         </div>

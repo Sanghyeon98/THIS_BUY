@@ -25,6 +25,13 @@
  .r{
  color:red; 
 }
+
+a {
+  background-color: transparent;
+  text-decoration: none;
+  color: inherit;
+}
+
 #signup{
 margin: 0 auto;
 width:640px;

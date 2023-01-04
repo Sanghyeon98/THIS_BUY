@@ -72,12 +72,32 @@ a {
 } 
 
 .cate_list {
-	background-color: #b5c8e0;
+	background-color: white;
+	padding: 10px;
 	width: 25%;
+	border-right: 1px solid rgb(242, 242, 242);
+}
+
+.cate1 {
+  position: relative;
+  display: block;
+  padding: 7px 10px;
+  margin-bottom: -1px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.cate1:hover {
+	background-color: rgb(242, 242, 242);
+}
+
+#cate_top {
+	margin-bottom: 10px;
 }
 
 .cate_create {
-	background-color: #a8b2bf; 
+	background-color: white;
+	padding: 10px; 
 	width: 75%;
 }
 
@@ -85,11 +105,6 @@ table {
 	width: 100%;
 	border-collapse: collapse;
 	background-color: white;
-}
-
-tr, td, th { 
-	border: 1px solid;
-	padding: 5px 0; 
 }
 
 .table_left {
@@ -102,7 +117,7 @@ tr, td, th {
 	text-align: right;
 }
 
-.search_bt_area {
+.btn-area {
 	text-align: center;
 }
 

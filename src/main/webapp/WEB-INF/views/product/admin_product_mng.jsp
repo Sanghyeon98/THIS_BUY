@@ -386,7 +386,7 @@
           <form action="#">
             <table class="table table-bordered">
               <tr>
-                <td class="table_left"><label>분류선택</label></td>
+                <td style="vertical-align: middle;" class="table_left">분류선택</td>
                 <td>
                   <div class="col-xs-4">
                     <select class="cate01List form-control">
@@ -410,12 +410,12 @@
                             </c:when>
                         </c:choose> --%>
                       </c:forEach>
-                    </select>
+                    </select> 
                   </div> 
                 </td>
               </tr>
               <tr>
-                <td class="table_left"><label>검색어</label></td>
+                <td style="vertical-align: middle;" class="table_left">검색어</td>
                 <td><input type="text" class="form-control" name="searchWord" id="searchWord" placeholder="상품명을 입력하세요."></td>
               </tr>
             </table>

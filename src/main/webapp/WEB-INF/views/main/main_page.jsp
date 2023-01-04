@@ -25,8 +25,8 @@
   .catefont {
     margin-top: 100px;
   }
-  .main_itemList {
-    width : 186px;
+  .main_itemList { 
+    /* width : 170px; */
     margin-left: 36px;
     align-items: center;
     font-weight: 500;
@@ -49,6 +49,10 @@
     right: 45px;
     background-color: #CA8A8B;
     z-index: 1;
+  }
+
+  .goodsImg {
+    margin: 0 auto;
   }
 </style>
 
@@ -108,7 +112,7 @@
         <div class="goods responsive">
           <c:forEach var="vo1" items="${list1}">
             <figure class="main_itemList">
-              <a href="${CP}/detail/view.do?itemNo=${vo1.itemNo}"><img alf="이미지" width="170" src="${CP}${vo1.viewPath}/${vo1.saveName}"></a>
+              <a href="${CP}/detail/view.do?itemNo=${vo1.itemNo}"><img class="goodsImg" alf="이미지" width="170" src="${CP}${vo1.viewPath}/${vo1.saveName}"></a>
               <a href="${CP}/detail/view.do?itemNo=${vo1.itemNo}"><figcaption>${vo1.name}</figcaption></a>
               <a href="${CP}/detail/view.do?itemNo=${vo1.itemNo}"><figcaption class="price_font">${vo1.price}원</figcaption></a>
             </figure>
@@ -122,7 +126,7 @@
         <div class="goods responsive">
           <c:forEach var="vo2" items="${list2}">
             <figure class="main_itemList">
-              <a href="${CP}/detail/view.do?itemNo=${vo2.itemNo}"><img alf="이미지" width="170" src="${CP}${vo2.viewPath}/${vo2.saveName}"></a>
+              <a href="${CP}/detail/view.do?itemNo=${vo2.itemNo}"><img class="goodsImg" alf="이미지" width="170" src="${CP}${vo2.viewPath}/${vo2.saveName}"></a>
               <a href="${CP}/detail/view.do?itemNo=${vo2.itemNo}"><figcaption>${vo2.name}</figcaption></a>
               <a href="${CP}/detail/view.do?itemNo=${vo2.itemNo}"><figcaption class="price_font">${vo2.price}원</figcaption></a>
             </figure>
@@ -136,7 +140,7 @@
         <div class="goods responsive">
           <c:forEach var="vo3" items="${list3}">
             <figure class="main_itemList">
-              <a href="${CP}/detail/view.do?itemNo=${vo3.itemNo}"><img alf="이미지" width="170" src="${CP}${vo3.viewPath}/${vo3.saveName}"></a>
+              <a href="${CP}/detail/view.do?itemNo=${vo3.itemNo}"><img class="goodsImg" alf="이미지" width="170" src="${CP}${vo3.viewPath}/${vo3.saveName}"></a>
               <a href="${CP}/detail/view.do?itemNo=${vo3.itemNo}"><figcaption>${vo3.name}</figcaption></a>
               <a href="${CP}/detail/view.do?itemNo=${vo3.itemNo}"><figcaption class="price_font">${vo3.price}원</figcaption></a>
             </figure>
@@ -150,7 +154,7 @@
         <div class="goods responsive">
           <c:forEach var="vo4" items="${list4}">
             <figure class="main_itemList">
-              <a href="${CP}/detail/view.do?itemNo=${vo4.itemNo}"><img alf="이미지" width="170" src="${CP}${vo4.viewPath}/${vo4.saveName}"></a>
+              <a href="${CP}/detail/view.do?itemNo=${vo4.itemNo}"><img class="goodsImg" alf="이미지" width="170" src="${CP}${vo4.viewPath}/${vo4.saveName}"></a>
               <a href="${CP}/detail/view.do?itemNo=${vo4.itemNo}"><figcaption>${vo4.name}</figcaption></a>
               <a href="${CP}/detail/view.do?itemNo=${vo4.itemNo}"><figcaption class="price_font">${vo4.price}원</figcaption></a>
             </figure>
@@ -164,7 +168,7 @@
         <div class="goods responsive">
           <c:forEach var="vo5" items="${list5}">
             <figure class="main_itemList">
-              <a href="${CP}/detail/view.do?itemNo=${vo5.itemNo}"><img alf="이미지" width="170" src="${CP}${vo5.viewPath}/${vo5.saveName}"></a>
+              <a href="${CP}/detail/view.do?itemNo=${vo5.itemNo}"><img class="goodsImg" alf="이미지" width="170" src="${CP}${vo5.viewPath}/${vo5.saveName}"></a>
               <a href="${CP}/detail/view.do?itemNo=${vo5.itemNo}"><figcaption>${vo5.name}</figcaption></a>
               <a href="${CP}/detail/view.do?itemNo=${vo5.itemNo}"><figcaption class="price_font">${vo5.price}원</figcaption></a>
             </figure>
@@ -178,7 +182,7 @@
         <div class="goods responsive">
           <c:forEach var="vo6" items="${list6}">
             <figure class="main_itemList">
-              <a href="${CP}/detail/view.do?itemNo=${vo6.itemNo}"><img alf="이미지" width="170" src="${CP}${vo6.viewPath}/${vo6.saveName}"></a>
+              <a href="${CP}/detail/view.do?itemNo=${vo6.itemNo}"><img class="goodsImg" alf="이미지" width="170" src="${CP}${vo6.viewPath}/${vo6.saveName}"></a>
               <a href="${CP}/detail/view.do?itemNo=${vo6.itemNo}"><figcaption>${vo6.name}</figcaption></a>
               <a href="${CP}/detail/view.do?itemNo=${vo6.itemNo}"><figcaption class="price_font">${vo6.price}원</figcaption></a>
             </figure>
