@@ -110,6 +110,7 @@
       // 2차 분류에 cateTopX 클래스를 갖고있으면 (X값은 현재 선택된 1차분류 cateNo)
       if($(".cate02list").hasClass("cateTop"+cate01No)) {
         $(".cateTop"+cate01No).toggle();
+        console.log("cate02list.hasClass : ");
       }
       
     })/*.on("mouseleave",'.cate01list', function() {
@@ -118,7 +119,7 @@
     
     
     // 메인메뉴-카테고리 메뉴 보이기
-    $("#categoryMenu").hover(function() {
+    /* $("#categoryMenu").hover(function() {
       console.log("마우스오버");
       
       $(".cate01list").show();
@@ -126,7 +127,7 @@
       //이부분은 마우스가 요소에서 나갈떄 실행할 수 있는 이벤트 입니다.
       $(".cate01list").hide();
       $(".cate02list").hide();
-    });
+    }); */
     
   });
     

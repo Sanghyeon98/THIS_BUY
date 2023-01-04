@@ -83,12 +83,16 @@ a {
   display: block;
   padding: 7px 10px;
   margin-bottom: -1px;
-  background-color: #fff;
   border: 1px solid #ddd;
 }
 
-.cate1:hover {
+.cate1:hover, .cate2:hover {
 	background-color: rgb(242, 242, 242);
+}
+
+.cate2 {
+	background-color: white;
+	/* border: 1px solid #ddd; */
 }
 
 #cate_top {

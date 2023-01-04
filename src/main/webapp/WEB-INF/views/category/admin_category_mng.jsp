@@ -102,14 +102,14 @@
     	});
     	
     	// 카테고리 데이터 클릭
-    	$(".hide").on("click", "li", function() {
+    	$("#cate_list").on("click", "div", function() {
     		//console.log("클릭 카테고리 no : " + $(this).attr('id'));
     		console.log("클릭 카테고리 no : " + $(this).attr('id'));
     		
     		let cateNo = $(this).attr('id');  // 2차분류 본인 카테고리 번호
-    		let topNo = $(this).val();  // 상위 카테고리 번호
+    		//let topNo = $(this).val();  // 상위 카테고리 번호
     		
-    		console.log("topNo : " + topNo);
+    		//console.log("topNo : " + topNo);
     		
     		let method = "GET";
         let url = "/category/doSelectOne.do";
@@ -121,6 +121,8 @@
         PClass.callAjax(method, url, async, params, function(data) {
         	console.log("data:" + data);
         	let parsedJson = JSON.parse(data);
+        	
+        	let topNo = parsedJson.topNo ;
         	
         	$("#categoryList").val(topNo).prop("selected", true);
           $("#categoryNm").val(parsedJson.categoryNm);
@@ -165,7 +167,8 @@
     		});
     		
     	});
-       
+    	
+      /*  
       // 1차 분류 클릭 이벤트 (누르면 2차분류 보이도록_토글)
       $(".cate1").on("click", function() { 
         console.log("click!!"); 
@@ -175,7 +178,7 @@
         
         $(this).next("ul").toggle("hide");
         
-      });
+      }); */
       
       
     }); // document.ready END --------------------------------------------------
@@ -211,7 +214,40 @@
         
         <!-- content_body --> 
         <div class="content_body">  
-          <div class="cate_list" id="cate_list"> 
+          <div class="cate_list btn-toggle" id="cate_list">
+           
+          <!-- bootstrap 적용 후 소스 20230104 -->
+            <c:choose>
+              <c:when test="${list.size() > 0 }">
+                <c:forEach var="vo" items="${list }">
+	                <c:choose>
+	                  <c:when test="${vo.topNo == 0 }">  <!-- 1차분류 -->
+					            <button style="width: 180px; border-radius:0px; text-align: left; background-color: #E3EEFC;" class="btn btn-default" data-toggle="collapse" data-target=".topNo${vo.categoryNo}"
+					             name="cate1" class="cate1" value="${vo.categoryNo}">
+					              <c:out value="${vo.categoryNm }"/>
+					            </button>
+					            <div class="cate2-area">
+						            <c:forEach var="vo2" items="${list }">  <!-- 2차분류 -->
+		                      <c:choose>
+		                        <c:when test="${vo2.topNo != 0 && vo2.topNo == vo.categoryNo}">
+		                          <div name="cate2" class="cate2 collapse topNo${vo2.topNo}" id="${vo2.categoryNo}">
+		                            &nbsp;&nbsp;<c:out value="${vo2.categoryNm }"/>
+		                          </div>                   
+		                        </c:when>
+		                      </c:choose>
+		                    </c:forEach>
+	                    </div>
+					          </c:when>
+	                </c:choose>
+                </c:forEach>
+	            </c:when>
+	            <c:otherwise>
+	              <li>No Categories.</li>
+	            </c:otherwise>
+	          </c:choose>
+            <!-- bootstrap 적용 후 소스 20230104 ----------------------------------->
+            
+            <%-- bootstrap 적용 전 소스 
             <ul>
 	            <c:choose>
 	              <c:when test="${list.size() > 0 }">
@@ -242,8 +278,9 @@
 	                <li>No Categories.</li>
 	              </c:otherwise>
 	            </c:choose>
-            </ul>
+            </ul> --%>
           </div>
+          
           <div class="cate_create clear">
             <p id="cate_top">분류 생성/수정/삭제</p>
             <form action="#">
@@ -279,7 +316,7 @@
             </form>
             <div class="btn-area">  
               <button class="btn" style="background-color: #b5c8e0; color: white;" id="cate_save_bt">등록</button>
-              <button class="btn btn-sm" style="background-color: #b5c8e0; color: white;" id="cate_mod_bt" style="display: none;">수정</button>
+              <button class="btn btn-sm" style="display: none; background-color: #b5c8e0; color: white;" id="cate_mod_bt" style="display: none;">수정</button>
               <button class="btn btn-default btn-sm" id="cate_del_bt" style="display: none;">삭제</button>
               <button class="btn btn-default btn-sm" id="cate_can_bt" style="display: none;">취소</button>
             </div>
