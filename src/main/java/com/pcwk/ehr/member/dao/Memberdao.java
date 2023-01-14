@@ -16,6 +16,7 @@ public interface Memberdao extends WorkDiv<MemberVO> {
 		int passCheck(MemberVO inVO) throws SQLException; 
 		int authCheck(MemberVO inVO) throws SQLException;
 		int pwUpdate(MemberVO inVO) throws SQLException; 
+		int mailCheck(MemberVO inVO) throws SQLException; 
 		
 
 }

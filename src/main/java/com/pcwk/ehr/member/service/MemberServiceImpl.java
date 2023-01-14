@@ -2,18 +2,18 @@ package com.pcwk.ehr.member.service;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Random;
 
-import javax.annotation.Resource;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailSender;
-import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.pcwk.ehr.cmn.DTO;
-import com.pcwk.ehr.member.dao.MemberDaoImpl;
 import com.pcwk.ehr.member.dao.Memberdao;
 import com.pcwk.ehr.member.domain.MemberVO;
 
@@ -24,8 +24,6 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private Memberdao memberDao;
 
-	@Autowired
-	private JavaMailSender mailSender;
 	
 	
 	@Override
@@ -132,6 +130,12 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.pwUpdate(inVO);
 	}
 
+	@Override
+	public int mailCheck(MemberVO inVO) throws SQLException {
+		// TODO Auto-generated method stub
+		return memberDao.mailCheck(inVO);
+	}
+	
 
 	
 

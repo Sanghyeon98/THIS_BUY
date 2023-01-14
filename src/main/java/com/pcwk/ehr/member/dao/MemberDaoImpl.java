@@ -2,9 +2,7 @@ package com.pcwk.ehr.member.dao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,8 +10,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.pcwk.ehr.admin.domain.ProductVO;
-import com.pcwk.ehr.admin.domain.UserVO;
 import com.pcwk.ehr.cmn.SearchVO;
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.member.domain.MemberVO;
@@ -206,6 +202,13 @@ final Logger LOG = LogManager.getFormatterLogger(getClass());
 		LOG.debug("|cnt:"+cnt );
 		LOG.debug("└--------------------------------┘");		
 		return cnt;
+	}
+
+
+	@Override
+	public int mailCheck(MemberVO inVO) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 

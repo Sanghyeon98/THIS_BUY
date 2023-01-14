@@ -100,6 +100,7 @@ public interface MemberService {
 	 */
 	public int getCount(MemberVO inVO) throws SQLException;
 	
+	public int mailCheck(MemberVO inVO) throws SQLException;
 	
 	public MemberVO checkLoginBefore(String value) throws Exception;
 	

@@ -3,15 +3,23 @@ package com.pcwk.ehr.member.controller;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
+import javax.annotation.Resource;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,7 +39,8 @@ public class SignupController {
 
 	@Autowired
 	MemberService memberService;
-	
+	@Autowired
+	private MailSendService mailService;
 	
 	
 	final String VIEW_NAME = "member/signup";
@@ -48,7 +57,18 @@ public class SignupController {
 
 		return VIEW_NAME;
 	}
+	
 
+	
+	@RequestMapping(value = "mailCheck.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+	@ResponseBody 
+	public String mailCheck(String email) throws MessagingException {
+		System.out.println("이메일 인증 요청이 들어옴!");
+		System.out.println("이메일 인증 이메일 : " + email);
+	
+		
+		return mailService.joinEmail(email);
+	}
 	
 	@RequestMapping(value = "upDeleteAll.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
@@ -262,5 +282,6 @@ public class SignupController {
 		LOG.debug("└=============================┘");
 		return jsonString;
 	}
+	
 
 }
