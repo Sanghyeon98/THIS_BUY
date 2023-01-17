@@ -46,6 +46,12 @@
   </properties>
 
   <dependencies>
+  <!-- coolsms -->
+  <dependency>
+    <groupId>net.nurigo</groupId>
+    <artifactId>sdk</artifactId>
+    <version>4.2.7</version>
+</dependency>
   <!-- mail library -->
 <dependency>
     <groupId>javax.mail</groupId>

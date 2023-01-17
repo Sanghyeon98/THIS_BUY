@@ -30,22 +30,57 @@ import com.pcwk.ehr.cmn.SearchVO;
 import com.pcwk.ehr.cmn.StringUtil;
 import com.pcwk.ehr.member.domain.MemberVO;
 import com.pcwk.ehr.member.service.MemberService;
+import net.nurigo.sdk.NurigoApp;
+import net.nurigo.sdk.message.exception.NurigoMessageNotReceivedException;
+import net.nurigo.sdk.message.model.Balance;
+import net.nurigo.sdk.message.model.Message;
+import net.nurigo.sdk.message.model.StorageType;
+import net.nurigo.sdk.message.request.MessageListRequest;
+import net.nurigo.sdk.message.request.SingleMessageSendingRequest;
+import net.nurigo.sdk.message.response.MessageListResponse;
+import net.nurigo.sdk.message.response.MultipleDetailMessageSentResponse;
+import net.nurigo.sdk.message.response.SingleMessageSentResponse;
+import net.nurigo.sdk.message.service.DefaultMessageService;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.io.File;
+import java.io.IOException;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+
 
 @Controller("signupController")
 @RequestMapping("signup")
 public class SignupController {
 
 	final Logger LOG = LogManager.getLogger(getClass());
+	
+	final DefaultMessageService messageService;
 
 	@Autowired
 	MemberService memberService;
 	@Autowired
-	private MailSendService mailService;
-	
+	private SendService mailService;
+	private int authNumber1; 
+	public void makeRandomNumber1() {
+		// 난수의 범위 1111 ~ 9999 (4자리 난수)
+		Random r = new Random();
+		int checkNum1 = r.nextInt(8888) + 1111;
+		System.out.println("인증번호 : " + checkNum1);
+		authNumber1 = checkNum1;
+	}
 	
 	final String VIEW_NAME = "member/signup";
 
 	public SignupController() {
+		this.messageService = NurigoApp.INSTANCE.initialize("NCSJ9GCNZVQLQVPM", "SGVQVNWGTK4PDKXGQGQ6G44OCZNIALH0", "https://api.coolsms.co.kr");
 	}
 
 	// 화면
@@ -57,7 +92,22 @@ public class SignupController {
 
 		return VIEW_NAME;
 	}
-	
+	@RequestMapping(value = "phonech.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody 
+    public String sendOne(String phone) {
+        Message message = new Message();
+        makeRandomNumber1();
+        // 발신번호 및 수신번호는 반드시 01012345678 형태로 입력되어야 합니다.
+        message.setFrom("01028009441");
+        message.setTo(phone);
+        message.setText("[" + authNumber1 + "] This_buy 인증 번호를 입력해주세요.");
+
+        SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
+        System.out.println(response);
+        System.out.println(authNumber1);
+
+        return Integer.toString(authNumber1);
+    }
 
 	
 	@RequestMapping(value = "mailCheck.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")

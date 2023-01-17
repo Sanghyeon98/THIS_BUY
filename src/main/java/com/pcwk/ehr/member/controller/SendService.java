@@ -11,10 +11,10 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MailSendService {
+public class SendService {
 	@Autowired
 	private JavaMailSenderImpl mailSender;
-	private int authNumber; 
+	private int authNumber;
 	// 난수 발생(여러분들 맘대러)
 	
 		public void makeRandomNumber() {
@@ -24,6 +24,8 @@ public class MailSendService {
 			System.out.println("인증번호 : " + checkNum);
 			authNumber = checkNum;
 		}
+		
+		
 		
 		
 				//이메일 보낼 양식! 

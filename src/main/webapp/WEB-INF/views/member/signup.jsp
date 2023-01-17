@@ -63,8 +63,50 @@ $(document).ready(function(){
 
 //생년월일 select 활성화
 
-
-
+//전화번호 인증문자 발송
+ $("#phonech").on("click",function(){
+          console.log("#phonech");
+          if(eUtil.ISEmpty( $("#phone").val() ) == true){
+              alert("전화번호 를 입력하세요.");
+              $("#phone").focus();
+              return;
+          }
+          const phone = $('#phone').val();
+          const phonechnum = $('#phonechnum')
+          let method = "POST";
+          let url    = "/signup/phonech.do";
+          let async  = true;
+          let params = {
+        		  "phone"    : $("#phone").val()
+        		  };
+          PClass.callAjax(method,url,async,params,function(data){
+              console.log("data:"+data);
+              phonechnum.attr('disabled',false);
+              let parsedJson = JSON.parse(data);
+              phonecode=data;
+          });
+     });
+//전화번호 인증번호 확인
+ $("#phonechnumch").on("click",function(){
+	 console.log("#phonechnumch");
+	 const input= $("#phonechnum").val();
+	 
+     if(eUtil.ISEmpty( $("#phonechnum").val() ) == true){
+         alert("인증번호 를 입력하세요.");
+         $("#phonechnum").focus();
+         return;
+     }
+     if(input === phonecode){
+    	 alert("인증 되었습니다.")
+    	 $("#phoneCheck").val("1");
+    	 
+     }else{
+    	 alert("인증에 실패했습니다. 인증 번호를 확인해주세요.")
+    	 $("#phoneCheck").val("0");
+     }
+ });
+          
+          
 //id중복체크   
      $("#idCheck").on("click",function(){
           console.log("#idCheck");
@@ -126,7 +168,7 @@ $(document).ready(function(){
                 console.log("data : " +  data);
                 checkInput.attr('disabled',false);
                 let parsedJson = JSON.parse(data);
-                code=data;
+                emailcode=data;
                 alert('인증번호가 전송되었습니다.')
                 		
                      
@@ -142,7 +184,7 @@ $(document).ready(function(){
         const inputCode = $(this).val();
         const $resultMsg = $('#mail-check-warn');
         
-        if(inputCode === code){
+        if(inputCode === emailcode){
             $resultMsg.html('인증번호가 일치합니다.');
             $resultMsg.css('color','green');
             $('#emailCheck').attr('disabled',true);
@@ -171,6 +213,18 @@ $(document).ready(function(){
           if($("#idCheckYN").val() == "0"){
               alert("아이디중복를 체크  해주세요.");
               $("#idCheck").focus();
+              return;
+          }
+          
+          if(eUtil.ISEmpty( $("#phoneCheck").val() ) == true){
+              alert("휴대폰 인증을 해주세요.");
+              $("#phone").focus();
+              return;
+          }
+          
+          if($("#phoneCheck").val() == "0"){
+              alert("휴대폰 인증을 해주세요.");
+              $("#phone").focus();
               return;
           }
           
@@ -218,8 +272,8 @@ $(document).ready(function(){
              return ;
            }
            const inputCode = $("#mailcheckinput").val();
-           if( (inputCode) !== (code) ){
-        	   alert('인증번호가 불일치 합니다. 다시 확인해주세요!.');  
+           if( (inputCode) !== (emailcode) ){
+        	   alert('이메일 인증번호가 불일치 합니다. 다시 확인해주세요!.');  
         	   $("#mailcheckinput").focus();
         	   return;
            }
@@ -356,16 +410,27 @@ function test() {
    <span id="mail-check-warn"></span>  
    </div></div>
    
-   <!-- 본인 인증 넣기 -->
    <div class="row">
     <div class="col-md-2 text-centers">
+    <input type="hidden" name="phoneCheck" id="phoneCheck">
            휴대폰<span class="r">*</span>
     </div>
        <div class="col-md-7 text-centers">
          <input type="text"  class="form-control" id="phone" name="phone" placeholder="숫자만 입력해주세요">
        </div>
        <div class="col-md-3">
-         <button type="submit" class="btn btn-default btn-block ">인증번호 받기</button>
+         <button type="submit" class="btn btn-default btn-block" id="phonech" name="phonech">인증번호 받기</button>
+       </div>
+   </div>
+   
+    <div class="row">
+    <div class="col-md-2 text-centers">
+    </div>
+       <div class="col-md-7 text-centers">
+         <input type="text"  class="form-control" id="phonechnum" name="phonechnum" placeholder="인증번호를 입력하세요" disabled="disabled" maxlength="4">
+       </div>
+       <div class="col-md-3">
+         <button type="submit" class="btn btn-default btn-block" id="phonechnumch" name="phonechnumch" >인증번호 확인</button>
        </div>
    </div>
     
