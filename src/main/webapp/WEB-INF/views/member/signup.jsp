@@ -62,6 +62,44 @@ $(document).ready(function(){
   
 
 //생년월일 select 활성화
+ $("#pho").on("click",function(){
+    	TIMER();
+    });
+//전화번호 인증시 타이머
+    const Timer=document.getElementById('Timer'); //스코어 기록창-분
+    let time= 180000;
+    let min=3;
+    let sec=60;
+
+
+    Timer.value=min+":"+'00'; 
+   
+    function TIMER(){
+        PlAYTIME=setInterval(function(){
+            time=time-1000; //1초씩 줄어듦
+            min=time/(60*1000); 
+
+           if(sec>0){ //sec=60 에서 1씩 빼서 출력해준다.
+                sec=sec-1;
+                Timer.value=Math.floor(min)+':'+sec; //실수로 계산되기 때문에 소숫점 아래를 버리고 출력해준다.
+               
+            }
+            if(sec===0){
+             	// 0에서 -1을 하면 -59가 출력된다.
+                // 그래서 0이 되면 바로 sec을 60으로 돌려주고 value에는 0을 출력하도록 해준다.
+                sec=60;
+                Timer.value=Math.floor(min)+':'+'00'
+            }     
+       
+        },1000); //1초마다 
+    }
+
+
+    TIMER();
+    setTimeout(function(){
+        clearInterval(PlAYTIME);
+    },180000);//3분이 되면 타이머를 삭제한다.
+
 
 //전화번호 인증문자 발송
  $("#phonech").on("click",function(){
@@ -427,7 +465,10 @@ function test() {
     <div class="col-md-2 text-centers">
     </div>
        <div class="col-md-7 text-centers">
-         <input type="text"  class="form-control" id="phonechnum" name="phonechnum" placeholder="인증번호를 입력하세요" disabled="disabled" maxlength="4">
+         <input type="text"  class="form-control" id="phonechnum" name="phonechnum" placeholder="인증번호를 입력하세요"  maxlength="4">
+        		 <span id="Timer" class="timer" ><input type="text" id="Timer" value=""></span>
+        
+         
        </div>
        <div class="col-md-3">
          <button type="submit" class="btn btn-default btn-block" id="phonechnumch" name="phonechnumch" >인증번호 확인</button>
