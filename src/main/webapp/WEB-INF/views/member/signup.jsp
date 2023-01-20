@@ -62,53 +62,20 @@ $(document).ready(function(){
   
 
 //생년월일 select 활성화
- $("#pho").on("click",function(){
-    	TIMER();
-    });
-//전화번호 인증시 타이머
-    const Timer=document.getElementById('Timer'); //스코어 기록창-분
-    let time= 180000;
-    let min=3;
-    let sec=60;
 
 
-    Timer.value=min+":"+'00'; 
-   
-    function TIMER(){
-        PlAYTIME=setInterval(function(){
-            time=time-1000; //1초씩 줄어듦
-            min=time/(60*1000); 
-
-           if(sec>0){ //sec=60 에서 1씩 빼서 출력해준다.
-                sec=sec-1;
-                Timer.value=Math.floor(min)+':'+sec; //실수로 계산되기 때문에 소숫점 아래를 버리고 출력해준다.
-               
-            }
-            if(sec===0){
-             	// 0에서 -1을 하면 -59가 출력된다.
-                // 그래서 0이 되면 바로 sec을 60으로 돌려주고 value에는 0을 출력하도록 해준다.
-                sec=60;
-                Timer.value=Math.floor(min)+':'+'00'
-            }     
-       
-        },1000); //1초마다 
-    }
-
-
-    TIMER();
-    setTimeout(function(){
-        clearInterval(PlAYTIME);
-    },180000);//3분이 되면 타이머를 삭제한다.
 
 
 //전화번호 인증문자 발송
  $("#phonech").on("click",function(){
+	 check();
           console.log("#phonech");
           if(eUtil.ISEmpty( $("#phone").val() ) == true){
               alert("전화번호 를 입력하세요.");
               $("#phone").focus();
               return;
           }
+          
           const phone = $('#phone').val();
           const phonechnum = $('#phonechnum')
           let method = "POST";
@@ -119,9 +86,10 @@ $(document).ready(function(){
         		  };
           PClass.callAjax(method,url,async,params,function(data){
               console.log("data:"+data);
-              phonechnum.attr('disabled',false);
               let parsedJson = JSON.parse(data);
               phonecode=data;
+              $('#phch').show();
+              
           });
      });
 //전화번호 인증번호 확인
@@ -204,10 +172,14 @@ $(document).ready(function(){
           
           PClass.callAjax(method,url,async,params,function(data){// GET방식이라 Url 뒤에 email을 뭍힐수있다.       
                 console.log("data : " +  data);
-                checkInput.attr('disabled',false);
                 let parsedJson = JSON.parse(data);
                 emailcode=data;
                 alert('인증번호가 전송되었습니다.')
+                $('#emch').show();
+                changeemailbtnName();
+                emaillreset();
+                const $resultMsg = $('#mail-check-warn');
+                $resultMsg.html('')
                 		
                      
         });
@@ -225,9 +197,10 @@ $(document).ready(function(){
         if(inputCode === emailcode){
             $resultMsg.html('인증번호가 일치합니다.');
             $resultMsg.css('color','green');
-            $('#emailCheck').attr('disabled',true);
-            $('#email').attr('readonly',true);
-        }else{
+        }else if(inputCode == null){
+            $resultMsg.html('');
+        }
+        else{
             $resultMsg.html('인증번호가 불일치 합니다. 다시 확인해주세요!.');
             $resultMsg.css('color','red');
         }
@@ -251,6 +224,11 @@ $(document).ready(function(){
           if($("#idCheckYN").val() == "0"){
               alert("아이디중복를 체크  해주세요.");
               $("#idCheck").focus();
+              return;
+          }
+          if($("#pwch").val() == "0"){
+              alert("비밀번호가 유효하지 않습니다.");
+              $("#passwd1").focus();
               return;
           }
           
@@ -302,18 +280,19 @@ $(document).ready(function(){
                $("#address").focus();
                return;
            } 
+           
+           const inputCode = $("#mailcheckinput").val();
+           if( (inputCode) !== (emailcode) ){
+        	   alert('이메일 인증번호가 불일치 합니다. 다시 확인해주세요!.');  
+        	   $("#mailcheckinput").focus();
+        	   return;
+           }
            var p1 = document.getElementById('passwd1').value;
            var p2 = document.getElementById('passwd2').value;
            if(( p1 != p2 ) ==true) {
              alert("비밀번호가 일치 하지 않습니다");
              $("#passwd1").focus();
              return ;
-           }
-           const inputCode = $("#mailcheckinput").val();
-           if( (inputCode) !== (emailcode) ){
-        	   alert('이메일 인증번호가 불일치 합니다. 다시 확인해주세요!.');  
-        	   $("#mailcheckinput").focus();
-        	   return;
            }
            
            
@@ -353,18 +332,100 @@ $(document).ready(function(){
 
 });
 
-function test() {
-    var p1 = document.getElementById('passwd1').value;
-    var p2 = document.getElementById('passwd2').value;
-    if(( p1 != p2 ) ==true) {
-      alert("비밀번호가 일치 하지 않습니다");
-      $("#passwd").focus();
-      return false;
-    }
+//이메일 인증 다시하기
+function changeemailbtnName()  {
+	  const btnElement = document.getElementById('emailCheck');
+	  btnElement.innerText = '다시 인증하기';
+	}
+//email인증 다시하기 인증번호 초기화
+function emaillreset(){
+	const reset = "";
+	$("#mailcheckinput").val(reset);
+}
 
-  }
+//전화번호 인증시 타이머
+function check() {
+	
+	   var time=1800;
+	   var min="";
+	   var sec="";
+
+	   var x = setInterval(function(){
+		   min=parseInt(time/60);
+		   sec=time%60;		   
+		   function n2(sec){ //숫자를 2자리로 만들기 위함.
+				return sec >= 10 ? sec : "0" + sec; //숫자가 10보다 작을 경우 앞에 0을 붙임.
+			}
+		  
+		   document.getElementById("Timer").innerHTML ="0" + min + ":" + n2(sec);
+		   time--;
+		   
+		   
+		   if(time< 0){
+			   clearInterval(x);
+	              alert("다시 인증 해주세요.");
+	              $('#phch').hide();
+		   }
+		   
+	   
+	   },1000);
+	}
+//ID 특수문자, 공백 , 한글 방지
+// 특수문자 입력 방지
+function IDCheck(obj){
+var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi; 
+var space = /\s/g;
+var ko = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+// 허용할 특수문자는 여기서 삭제하면 됨
+// 지금은 띄어쓰기도 특수문자 처리됨 참고하셈
+if( regExp.test(obj.value) ){
+	   document.getElementById("id-check-warn").innerHTML ="특수 문자를 입력하실 수 없습니다";
+	 $("#idCheck").prop("disabled",true);
+	   }else if(space.test(obj.value)){
+	   document.getElementById("id-check-warn").innerHTML ="공백을 입력하실 수 없습니다";
+	 $("#idCheck").prop("disabled",true);
+	}else if(ko.test(obj.value)){
+	   document.getElementById("id-check-warn").innerHTML ="한글을 입력하실 수 없습니다";
+	 $("#idCheck").prop("disabled",true);
+	}else{
+	 document.getElementById("id-check-warn").innerHTML ="";
+	 $("#idCheck").prop("disabled",false);
+		
+	}
+}
+function chkPW(){
+
+	 var pw = $("#passwd1").val();
+	 var num = pw.search(/[0-9]/g);
+	 var eng = pw.search(/[a-z]/ig);
+	 var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+
+	 if(pw.length < 8 || pw.length > 20){
+	   document.getElementById("pw-check-warn").innerHTML ="8자리 ~ 20자리 이내로 입력해야합니다"; 
+	   $("#pwch").val("0");
+	 }else if(pw.search(/\s/) != -1){
+	   document.getElementById("pw-check-warn").innerHTML ="공백을 입력하실 수 없습니다";
+	   $("#pwch").val("0");
+	 }else if(num < 0 || eng < 0 || spe < 0 ){
+	   document.getElementById("pw-check-warn").innerHTML ="영문,숫자, 특수문자를 혼합하여 입력해야 합니다";
+	   $("#pwch").val("0");
+	 }else{
+	   document.getElementById("pw-check-warn").innerHTML ="";
+	   $("#pwch").val("1");
+	 
+	 }
+	}
+function chkPW2(){
+	var p1 = document.getElementById('passwd1').value;
+    var p2 = document.getElementById('passwd2').value;
+    if(( p1 == p2 ) ==true) {
+ 	  document.getElementById("pw-check-warn2").innerHTML ="";
+    }else{
+ 	  document.getElementById("pw-check-warn2").innerHTML ="비밀번호가 일치 하지 않습니다";
+    }
+}
+  
 //doc
- //버튼, 등록 컨트롤 초기화
     
 
 </script>
@@ -392,7 +453,8 @@ function test() {
     </div>
     <input type="hidden" name="idCheckYN" id="idCheckYN">
     <div class="col-md-7 text-centers">
-      <input type="text" class="form-control" id="memberid" name="memberid" placeholder="아이디를 입력해주세요">
+      <input type="text" class="form-control" id="memberid" name="memberid" placeholder="아이디를 입력해주세요" onkeyup="IDCheck(this)" onkeydown="IDCheck(this)">
+      <span id="id-check-warn" style="color:red;"></span> 
     </div>
      <div class="col-md-3 text-centers">
       <button type="button" class="btn btn-default btn-block" value="아이디 중복" id="idCheck">중복 확인</button>
@@ -402,9 +464,11 @@ function test() {
      <div class="row">
     <div class="col-md-2 text-centers">
      비밀번호<span class="r">*</span>
+    <input type="hidden" name="pwch" id="pwch">
     </div>
     <div class="col-md-7 text-centers">
-      <input type="password"  class="form-control" id="passwd1" name="passwd1" placeholder="비밀번호를 입력해주세요">
+      <input type="password"  class="form-control" id="passwd1" name="passwd1" placeholder="비밀번호를 입력해주세요" onkeyup="chkPW()" onkeydown="chkPW()">
+      <span id="pw-check-warn" style="color:red;"></span> 
     </div>
     </div>
     
@@ -414,7 +478,8 @@ function test() {
      비밀번호 확인<span class="r">*</span>
     </div>
     <div class="col-md-7 text-centers">
-      <input type="password" class="form-control" id="passwd2" name="passwd2" placeholder="비밀번호를 한번 더 입력해주세요">
+      <input type="password" class="form-control" id="passwd2" name="passwd2" placeholder="비밀번호를 한번 더 입력해주세요" onkeyup="chkPW2()" onkeydown="chkPW2()">
+      <span id="pw-check-warn2" style="color:red;"></span> 
     </div>
     </div>
     
@@ -428,7 +493,7 @@ function test() {
    </div>
  
  <!-- email 인증-->
-   <div class="row">
+   <div class="row" >
     <div class="col-md-2 text-centers">
              이메일<span class="r">*</span>
     </div>
@@ -441,14 +506,14 @@ function test() {
    		     
    </div>
    
-   <div class="row">
+   <div class="row" id="emch">
    <div class="col-md-2"></div>
    <div class="col-md-7 text-centers">
-   <input class="form-control mailcheckinput" name="mailcheckinput" id="mailcheckinput" placeholder="인증번호 6자리를 입력해주세요!" disabled="disabled" maxlength="6">
+   <input class="form-control mailcheckinput" name="mailcheckinput" id="mailcheckinput" placeholder="인증번호 6자리를 입력해주세요!" maxlength="6">
    <span id="mail-check-warn"></span>  
    </div></div>
    
-   <div class="row">
+   <div class="row" >
     <div class="col-md-2 text-centers">
     <input type="hidden" name="phoneCheck" id="phoneCheck">
            휴대폰<span class="r">*</span>
@@ -458,23 +523,19 @@ function test() {
        </div>
        <div class="col-md-3">
          <button type="submit" class="btn btn-default btn-block" id="phonech" name="phonech">인증번호 받기</button>
-       </div>
    </div>
-   
-    <div class="row">
+   </div>
+    <div class="row"  id="phch">
     <div class="col-md-2 text-centers">
     </div>
        <div class="col-md-7 text-centers">
          <input type="text"  class="form-control" id="phonechnum" name="phonechnum" placeholder="인증번호를 입력하세요"  maxlength="4">
-        		 <span id="Timer" class="timer" ><input type="text" id="Timer" value=""></span>
-        
-         
+        <span id="Timer" class="timer" ></span>
        </div>
        <div class="col-md-3">
          <button type="submit" class="btn btn-default btn-block" id="phonechnumch" name="phonechnumch" >인증번호 확인</button>
        </div>
    </div>
-    
     <!--  주소 api -->
     <div class="row">
     <div class="col-md-2 text-centers">
