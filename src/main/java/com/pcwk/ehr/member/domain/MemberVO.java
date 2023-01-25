@@ -9,7 +9,7 @@ public class MemberVO extends DTO {
 	private String email;// �̸���
 	private String phone;// �̸���
 	private String address;// �ּ�
-	private int gender;// ���� ��1 ��2
+	private String gender;// ���� ��1 ��2
 	private String birthdate;// �������
 	private String regDt;// �����
 	private String modDt;// ������
@@ -17,7 +17,7 @@ public class MemberVO extends DTO {
 	
 	public MemberVO() {}
 
-	public MemberVO(String memberid, String passwd, String name, String email, String phone, String address, int gender,
+	public MemberVO(String memberid, String passwd, String name, String email, String phone, String address, String gender,
 			String birthdate, String regDt, String modDt, String auth) {
 		super();
 		this.memberid = memberid;
@@ -88,11 +88,11 @@ public class MemberVO extends DTO {
 		this.address = address;
 	}
 
-	public int getGender() {
+	public String getGender() {
 		return gender;
 	}
 
-	public void setGender(int gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 

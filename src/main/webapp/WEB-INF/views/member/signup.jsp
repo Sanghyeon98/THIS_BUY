@@ -232,17 +232,17 @@ $(document).ready(function(){
               return;
           }
           
-          if(eUtil.ISEmpty( $("#phoneCheck").val() ) == true){
-              alert("휴대폰 인증을 해주세요.");
-              $("#phone").focus();
-              return;
-          }
+    //      if(eUtil.ISEmpty( $("#phoneCheck").val() ) == true){
+     //         alert("휴대폰 인증을 해주세요.");
+     //         $("#phone").focus();
+     //         return;
+     //     }
           
-          if($("#phoneCheck").val() == "0"){
-              alert("휴대폰 인증을 해주세요.");
-              $("#phone").focus();
-              return;
-          }
+       //   if($("#phoneCheck").val() == "0"){
+      //        alert("휴대폰 인증을 해주세요.");
+      //        $("#phone").focus();
+      //        return;
+      //    }
           
           
           if(eUtil.ISEmpty( $("#passwd").val() ) == true){
@@ -264,11 +264,11 @@ $(document).ready(function(){
                return;
            }
            
-           if(eUtil.ISEmpty( $("#mailauth").val() ) == true){
-               alert("이메일 인증을 해주세요.");
-               $("#mailauth").focus();
-               return;
-           }
+      //     if(eUtil.ISEmpty( $("#mailauth").val() ) == true){
+      //         alert("이메일 인증을 해주세요.");
+      //         $("#mailauth").focus();
+      //         return;
+        //   }
            
            if(eUtil.ISEmpty( $("#phone").val() ) == true){
                alert("휴대폰 번호을 입력 하세요.");
@@ -281,12 +281,12 @@ $(document).ready(function(){
                return;
            } 
            
-           const inputCode = $("#mailcheckinput").val();
-           if( (inputCode) !== (emailcode) ){
-        	   alert('이메일 인증번호가 불일치 합니다. 다시 확인해주세요!.');  
-        	   $("#mailcheckinput").focus();
-        	   return;
-           }
+        //   const inputCode = $("#mailcheckinput").val();
+        //   if( (inputCode) !== (emailcode) ){
+        //	   alert('이메일 인증번호가 불일치 합니다. 다시 확인해주세요!.');  
+        //	   $("#mailcheckinput").focus();
+        //	   return;
+        //   }
            var p1 = document.getElementById('passwd1').value;
            var p2 = document.getElementById('passwd2').value;
            if(( p1 != p2 ) ==true) {
@@ -294,7 +294,6 @@ $(document).ready(function(){
              $("#passwd1").focus();
              return ;
            }
-           
            
            if(confirm("등록 하시겠습니까?")==false)return;
            
@@ -308,6 +307,7 @@ $(document).ready(function(){
                "email"    : $("#email").val(),
                "phone"    : $("#phone").val(),
                "address"    : $("#address").val(),
+               "gender"    :$('input[id="gender"]:checked').val()
                
            };
            
@@ -317,9 +317,6 @@ $(document).ready(function(){
                
                if("1" == parsedJson.msgId){
                   alert(parsedJson.msgContents);
-                  //입력 항목 초기화
-                  //아이디: enabledz
-                  //등록버튼:enabled
                   window.location.href = "${CP}/login/login.do";
                }else{
                    alert(parsedJson.msgId+","+parsedJson.msgContents);
@@ -331,7 +328,6 @@ $(document).ready(function(){
 
 
 });
-
 //이메일 인증 다시하기
 function changeemailbtnName()  {
 	  const btnElement = document.getElementById('emailCheck');
@@ -554,14 +550,13 @@ function chkPW2(){
     </div>
            <div class="col-md-7 text-centers " style="display:flex;">
            <label class="radio-inline">여자</label>
-           <input type="radio" name="gender"  value="option1" checked>
+           <input type="radio" name="gender" id="gender" value="여자" >
             <div style="width:15%"></div>
            <label class="radio-inline">남자</label>
-           <input type="radio" name="gender"  value="option2" >
+           <input type="radio" name="gender" id="gender"  value="남자" >
             <div style="width:15%"></div>
            <label class="radio-inline">선택 안함</label>
-           <input type="radio" name="gender"  value="option3" >
-           
+           <input type="radio" name="gender" id="gender" value="x" >
        </div>
        </div>
    

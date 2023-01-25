@@ -176,6 +176,7 @@
 		email ,
 		phone ,
 		address ,
+		gender,
 		reg_dt
 		) VALUES (
 		#{memberid},
@@ -184,6 +185,7 @@
 		#{email},
 		#{phone},
 		#{address},
+		#{gender},
 		SYSDATE
 		)
 	</insert>
