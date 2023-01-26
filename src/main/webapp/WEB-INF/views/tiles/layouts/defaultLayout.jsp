@@ -35,15 +35,11 @@
   <!-- jQuery -->
   <script src="${CP_RES}/js/jquery-1.12.4.js"></script>
   <!-- callAjax -->
-  <script src="${CP_RES}/js/callAjax.js"></script>
-  <!-- String, Number, Date Util -->
-  <script src="${CP_RES}/js/eUtil.js"></script>
-  <!-- paging -->
   <script src="${CP_RES}/js/jquery.bootpag.js"></script>
   <!-- bootstrap js -->
   <script src="${CP_RES}/js/bootstrap.min.js"></script>  
   
-  <title><tiles:getAsString name="title"/></title>  <!-- tiles.xml 파일에 <put-attribute name="title" value=""/> 부분 -->
+  <title><tiles:getAsString name="title"/></title>  <!--  	iles.xml 파일에 <put-attribute name="title" value=""/> 부분 -->
 </head>
 <body>
   <div class="container-fluid">

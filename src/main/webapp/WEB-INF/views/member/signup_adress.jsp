@@ -34,41 +34,11 @@
 <script >
 
 
-//생년월일 select 활성화
-$(document).ready(function(){   
-	
-	
-    var now = new Date();
-    var year = now.getFullYear();
-    var mon = (now.getMonth() + 1) > 9 ? ''+(now.getMonth() + 1) : '0'+(now.getMonth() + 1); 
-    var day = (now.getDate()) > 9 ? ''+(now.getDate()) : '0'+(now.getDate());           
-    //년도 selectbox만들기               
-    for(var i = 1900 ; i <= year ; i++) {
-        $('#year').append('<option value="' + i + '">' + i + '년</option>');    
-    }
 
-    // 월별 selectbox 만들기            
-    for(var i=1; i <= 12; i++) {
-        var mm = i > 9 ? i : "0"+i ;            
-        $('#month').append('<option value="' + mm + '">' + mm + '월</option>');    
-    }
-    
-    // 일별 selectbox 만들기
-    for(var i=1; i <= 31; i++) {
-        var dd = i > 9 ? i : "0"+i ;            
-        $('#day').append('<option value="' + dd + '">' + dd+ '일</option>');    
-    }
-    $("#year  > option[value="+year+"]").attr("selected", "true");        
-    $("#month  > option[value="+mon+"]").attr("selected", "true");    
-    $("#day  > option[value="+day+"]").attr("selected", "true");       
-  
-
-    
-    
-    
- $("#adresssearch").on("click",function(){
+ $("#addresssearch").on("click",function(){
     new daum.Postcode({
         oncomplete: function(data) {
+        	$ ('.show').show();
             // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
             // 예제를 참고하여 다양한 활용법을 확인해 보세요.
             }
@@ -568,7 +538,7 @@ function chkPW2(){
           주소<span class="r">*</span>
     </div>
        <div class="col-md-7 text-centers">
-       <button type="submit" class="btn btn-default btn-block" id="addresssearch" name="addresssearch" >주소 검색</button>
+       <button type="submit" class="btn btn-default btn-block" id="adresssearch" name="addresssearch" >주소 검색</button>
  <input type="text"  class="form-control" id="address" name="address" placeholder="주소를 입력해주세요">        
   <small>배송지에 따라 상품 정보가 달라질 수 있습니다.</small>
        </div>
@@ -615,7 +585,7 @@ function chkPW2(){
 
    </div>
    </div>
-<div class="show" ref="addressdetail"> <h2 class="text-center">나머지 주소를 입력해주세요.</h2>
+<div class="show"> <h2 class="text-center">나머지 주소를 입력해주세요.</h2>
 
 <hr>
 

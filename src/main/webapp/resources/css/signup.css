@@ -25,7 +25,11 @@
  .r{
  color:red; 
 }
-
+.searchico{
+	width:16px;
+	height:16px;
+	background-color:#B8C9DF;
+}
 a {
   background-color: transparent;
   text-decoration: none;
