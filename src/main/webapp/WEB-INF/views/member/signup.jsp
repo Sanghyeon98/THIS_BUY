@@ -78,7 +78,7 @@ $(document).ready(function(){
           
           const phone = $('#phone').val();
           const phonechnum = $('#phonechnum')
-          let method = "POST";
+          let method = "GET";
           let url    = "/signup/phonech.do";
           let async  = true;
           let params = {
@@ -232,17 +232,17 @@ $(document).ready(function(){
               return;
           }
           
-    //      if(eUtil.ISEmpty( $("#phoneCheck").val() ) == true){
-     //         alert("휴대폰 인증을 해주세요.");
-     //         $("#phone").focus();
-     //         return;
-     //     }
+    /*       if(eUtil.ISEmpty( $("#phoneCheck").val() ) == true){
+              alert("휴대폰 인증을 해주세요.");
+              $("#phone").focus();
+              return;
+          }
           
-       //   if($("#phoneCheck").val() == "0"){
-      //        alert("휴대폰 인증을 해주세요.");
-      //        $("#phone").focus();
-      //        return;
-      //    }
+          if($("#phoneCheck").val() == "0"){
+             alert("휴대폰 인증을 해주세요.");
+              $("#phone").focus();
+              return;
+          } */
           
           
           if(eUtil.ISEmpty( $("#passwd").val() ) == true){
@@ -264,11 +264,11 @@ $(document).ready(function(){
                return;
            }
            
-      //     if(eUtil.ISEmpty( $("#mailauth").val() ) == true){
-      //         alert("이메일 인증을 해주세요.");
-      //         $("#mailauth").focus();
-      //         return;
-        //   }
+           if(eUtil.ISEmpty( $("#mailauth").val() ) == true){
+               alert("이메일 인증을 해주세요.");
+               $("#mailauth").focus();
+               return;
+           }
            
            if(eUtil.ISEmpty( $("#phone").val() ) == true){
                alert("휴대폰 번호을 입력 하세요.");
@@ -281,12 +281,12 @@ $(document).ready(function(){
                return;
            } 
            
-        //   const inputCode = $("#mailcheckinput").val();
-        //   if( (inputCode) !== (emailcode) ){
-        //	   alert('이메일 인증번호가 불일치 합니다. 다시 확인해주세요!.');  
-        //	   $("#mailcheckinput").focus();
-        //	   return;
-        //   }
+ //          const inputCode = $("#mailcheckinput").val();
+  //         if( (inputCode) !== (emailcode) ){
+   //     	   alert('이메일 인증번호가 불일치 합니다. 다시 확인해주세요!.');  
+  //      	   $("#mailcheckinput").focus();
+  //      	   return;
+   //       }
            var p1 = document.getElementById('passwd1').value;
            var p2 = document.getElementById('passwd2').value;
            if(( p1 != p2 ) ==true) {
@@ -294,6 +294,8 @@ $(document).ready(function(){
              $("#passwd1").focus();
              return ;
            }
+           const birth=$("select[name=yy]").val()+$("select[name=mm]").val()+$("select[name=dd]").val()
+           $("birth").val(birth);
            
            if(confirm("등록 하시겠습니까?")==false)return;
            
@@ -307,7 +309,8 @@ $(document).ready(function(){
                "email"    : $("#email").val(),
                "phone"    : $("#phone").val(),
                "address"    : $("#address").val(),
-               "gender"    :$('input[id="gender"]:checked').val()
+               "gender"    :$('input[id="gender"]:checked').val(),
+               "birthdate" :  $("birth").val()
                
            };
            
@@ -569,6 +572,8 @@ function chkPW2(){
  <select name="yy" id="year"></select>년
 <select name="mm" id="month"></select>월
 <select name="dd" id="day"></select>일
+<input type="hidden" name="birth" id="birth">
+
 </div>
 </div>
   

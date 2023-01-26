@@ -1,6 +1,5 @@
 package com.pcwk.ehr.member.controller;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -48,6 +47,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -92,7 +92,7 @@ public class SignupController {
 
 		return VIEW_NAME;
 	}
-	@RequestMapping(value = "phonech.do", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = "phonech.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	@ResponseBody 
     public String sendOne(String phone) {
         Message message = new Message();
