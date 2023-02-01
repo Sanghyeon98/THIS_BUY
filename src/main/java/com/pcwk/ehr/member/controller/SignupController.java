@@ -77,7 +77,7 @@ public class SignupController {
 		authNumber1 = checkNum1;
 	}
 	
-	final String VIEW_NAME = "member/signup";
+	final String VIEW_NAME = "member";
 
 	public SignupController() {
 		this.messageService = NurigoApp.INSTANCE.initialize("NCSJ9GCNZVQLQVPM", "SGVQVNWGTK4PDKXGQGQ6G44OCZNIALH0", "https://api.coolsms.co.kr");
@@ -90,7 +90,16 @@ public class SignupController {
 		LOG.debug("|signup=                      |");
 		LOG.debug("└=============================┘");
 
-		return VIEW_NAME;
+		return VIEW_NAME+"/signup";
+		
+	}
+	@RequestMapping(value = "/signup_address.do")
+	public String singup_adress() {
+		LOG.debug("┌=============================┐");
+		LOG.debug("|signup=                      |");
+		LOG.debug("└=============================┘");
+
+		return VIEW_NAME+"/signup_address";
 	}
 	@RequestMapping(value = "phonech.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	@ResponseBody 
