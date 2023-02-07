@@ -36,11 +36,15 @@
 
 
 </script>
-
+<style>
+.body{
+	display: inline-block;
+}
+</style>
 
  
 </head>
-<body >
+<body>
 <div class="signupaddress"> <h2 class="text-center">나머지 주소를 입력해주세요.</h2>
 
 <hr>

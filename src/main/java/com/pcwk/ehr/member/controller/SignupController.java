@@ -99,7 +99,7 @@ public class SignupController {
 		LOG.debug("|signup=                      |");
 		LOG.debug("└=============================┘");
 
-		return VIEW_NAME+"/signup_address";
+		return "member_popup/signup_address";
 	}
 	@RequestMapping(value = "phonech.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 	@ResponseBody 
