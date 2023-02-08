@@ -62,21 +62,21 @@ $(document).ready(function(){
     $("#month  > option[value="+mon+"]").attr("selected", "true");    
     $("#day  > option[value="+day+"]").attr("selected", "true");       
   
-    function addressPopup(){
-        window.open("${CP}/signup/signup_address.do","팝업 테스트","width=500, height=500, top=50, left=100");
-    }
     
-    
+   
 
  $("#addresssearch").on("click",function(){
  new daum.Postcode({
      oncomplete: function(data) {
          // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
          // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+    	
+	// 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+    // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+  
 	addressPopup();
-         
-     }
- }).open();
+}
+}).open();
  });
 //전화번호 인증문자 발송
  $("#phonech").on("click",function(){
@@ -434,6 +434,10 @@ function chkPW2(){
     }else{
  	  document.getElementById("pw-check-warn2").innerHTML ="비밀번호가 일치 하지 않습니다";
     }
+}
+function addressPopup(){
+	 
+  window.open("${CP}/signup/signup_address.do","팝업 테스트","width=700, height=500, top=50, left=100");
 }
   
 //doc

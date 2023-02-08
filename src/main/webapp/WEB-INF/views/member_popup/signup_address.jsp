@@ -17,7 +17,7 @@
   <meta name="keywords" content="html5, css3, javascipt6, jQuery">
   <!-- favicon -->
   <link rel="shortcut icon" type="images/x-icon"  href="${CP_RES}/favicon.ico">
-  <link rel="stylesheet" href="${CP_RES}/css/signup.css">
+  <link rel="stylesheet" href="${CP_RES}/css/signup_address.css">
 	<!-- 주소 api --> 
     <script src="${CP_RES}/js/postcode.v2.js"></script>
     <!-- jQuery -->
@@ -37,52 +37,58 @@
 
 </script>
 <style>
-.body{
-	display: inline-block;
+
+
+.row{
+width: 80%; 
+margin: 0 auto;
 }
+.col1{
+width: 63%;
+display: inline-block;
+margin: 0px 0px 10px 0px;
+}
+.col2{
+width: 32%;
+display: inline-block;
+height: 44px;
+margin: 0px 0px 0px 25px;
+}
+.col3{
+margin: 0px 0px 10px 0px;
+}
+
 </style>
 
  
 </head>
 <body>
-<div class="signupaddress"> <h2 class="text-center">나머지 주소를 입력해주세요.</h2>
+<%
+	String address = request.getParameter("id");
+%>
+<div class="signupaddress"> <h3 class="text-center">나머지 주소를 입력해주세요.</h3>
 
 <hr>
 
 
  <div class="row">
-    <div class="col-md-7 text-centers">
-      <input type="text" class="form-control" id="" name=""  >
-    </div>
-     <div class="col-md-3 text-centers">
-      <button type="button" class="btn btn-default btn-block" value="" id=""><img class="searchico" src="${CP_RES}/img/common/search.png" />재검색</button>
+    <div class="cc text-centers">
+      <input type="text" class="col1 form-control" id="sample4_roadAddress" name=""  ><%=address %><button type="button" class="col2 btn btn-default btn-block text-center" value="" id=""><img class="searchico" src="${CP_RES}/img/common/search.png" />재검색</button>
     </div>
     </div>
  <div class="row">
-    <div class="col-md-10 text-centers">
-      <input type="text"  class="form-control" id="" name=""  >
+    <div class=" text-centers">
+      <input type="text"  class="form-control col3" id="" name=""  >
     </div>
     </div>
- <div class="row">
-    <div class="col-md-10 text-centers">
-      <label class="radio-inline">기본 배송지로 설정</label>
-           <input type="radio" name="" id="" value="" >
-    </div>
-    </div>
+ 
 <div class="row">
-     <div class="col-md-10 text-centers">
-      <button type="button" class="btn btn-default btn-block" value="" id="">저장</button>
+     <div class="text-centers">
+      <button  type="button" style="height: 44px;" class="btn btn-default btn-block btn1" value="" id="">저장</button>
     </div>
     </div>	
 </div>    
    
-
-
-
-
-
-
-
 
 
 
