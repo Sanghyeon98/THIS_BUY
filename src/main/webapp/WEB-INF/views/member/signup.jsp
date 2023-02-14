@@ -73,8 +73,24 @@ $(document).ready(function(){
     	
 	// 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
     // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-  
-	addressPopup();
+    	 var addr = ''; // 주소 변수
+         var extraAddr = ''; // 참고항목 변수
+
+         //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+         if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+             addr = data.roadAddress;
+         } else { // 사용자가 지번 주소를 선택했을 경우(J)
+             addr = data.jibunAddress;
+         }
+
+         // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+      
+             // 조합된 참고항목을 해당 필드에 넣는다.
+       
+
+         // 우편번호와 주소 정보를 해당 필드에 넣는다.
+         // 커서를 상세주소 필드로 이동한다.
+         window.open("${CP}/signup/signup_address.do?address="+addr,"팝업 테스트","width=700, height=500, top=50, left=100");
 }
 }).open();
  });
@@ -435,10 +451,7 @@ function chkPW2(){
  	  document.getElementById("pw-check-warn2").innerHTML ="비밀번호가 일치 하지 않습니다";
     }
 }
-function addressPopup(){
-	 
-  window.open("${CP}/signup/signup_address.do","팝업 테스트","width=700, height=500, top=50, left=100");
-}
+
   
 //doc
     
