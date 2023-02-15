@@ -31,7 +31,18 @@
     <!-- bootstrap js -->
     <script src="${CP_RES}/js/bootstrap.min.js"></script>
 <title>회원가입</title>
-<script >
+<script>
+$(document).ready(function(){
+	$('#address_save').click(function() {
+		var address_popup=$('#address').val()+$('#address_detail').val();
+		
+		document.getElementById("address").val = address_popup;
+		
+		window.close();
+	});
+});
+
+
 
 <%
 String address = request.getParameter("address");
@@ -65,29 +76,31 @@ margin: 0px 0px 10px 0px;
  
 </head>
 <body>
+<form action="/ehr/signup/signup.do">
 
 <div class="signupaddress"> <h3 class="text-center">나머지 주소를 입력해주세요.</h3>
 
 <hr>
 
-
  <div class="row">
     <div class="cc text-centers">
-      <input type="text" class="col1 form-control" id="" name="" value="<%=address%>" ><button type="button" class="col2 btn btn-default btn-block text-center" value="" id=""><img class="searchico" src="${CP_RES}/img/common/search.png" />재검색</button>
+      <input type="text" class="col1 form-control" id="address" name="address1" value="<%=address%>" ><button type="button" class="col2 btn btn-default btn-block text-center" value="" id=""><img class="searchico" src="${CP_RES}/img/common/search.png" />재검색</button>
     </div>
     </div>
  <div class="row">
     <div class=" text-centers">
-      <input type="text"  class="form-control col3" id="" name=""  >
+      <input type="text"  class="form-control col3" id="address_detail" name="address_detail"  >
     </div>
     </div>
  
 <div class="row">
      <div class="text-centers">
-      <button  type="button" style="height: 44px;" class="btn btn-default btn-block btn1" value="" id="">저장</button>
+      <button  type="submit" style="height: 44px;" class="btn btn-default btn-block btn1" value="" id="address_save">저장</button>
     </div>
     </div>	
 </div>    
+</form>  
+
    
 
 

@@ -28,6 +28,7 @@
            dataType: "html",
            data:_params,
            success:function(data){ //통신 성공
+           if(null !=_url)_url = "/ehr"+_url;
              _callback(data);
            },
            error:function(data){//실패

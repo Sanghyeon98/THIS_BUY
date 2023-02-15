@@ -29,11 +29,14 @@
     <!-- paging -->
     <script src="${CP_RES}/js/jquery.bootpag.js"></script>  
     <!-- bootstrap js -->
-    <script src="${CP_RES}/js/postcode.v2.js"></script>
+    <script src="${CP_RES}/js/bootstrap.min.js"></script>
  	<title>회원가입</title>
 <script >
 
-
+<%
+String ad = request.getParameter("address1");
+String ad2 = request.getParameter("address_detail");
+%>
 //생년월일 select 활성화
 $(document).ready(function(){   
 	
@@ -86,7 +89,7 @@ $(document).ready(function(){
          // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
       
              // 조합된 참고항목을 해당 필드에 넣는다.
-       //ㅁ
+       //
 
          // 우편번호와 주소 정보를 해당 필드에 넣는다.
          // 커서를 상세주소 필드로 이동한다.
@@ -571,7 +574,7 @@ function chkPW2(){
     </div>
        <div class="col-md-7 text-centers">
        <button type="submit" class="btn btn-default btn-block" id="addresssearch" name="addresssearch" >주소 검색</button>
- <input type="text"  class="form-control" id="address" name="address" placeholder="주소를 입력해주세요">        
+ <input type="text"  class="form-control" id="address_final" name="address" placeholder="<%=ad%><%=ad2%>">  
   <small>배송지에 따라 상품 정보가 달라질 수 있습니다.</small>
        </div>
        </div>
