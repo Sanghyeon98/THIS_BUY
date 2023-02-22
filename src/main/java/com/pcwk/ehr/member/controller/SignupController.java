@@ -93,6 +93,15 @@ public class SignupController {
 		return VIEW_NAME+"/signup";
 		
 	}
+	@RequestMapping(value = "/iframe.do")
+	public String iframe() {
+		LOG.debug("┌=============================┐");
+		LOG.debug("|iframe=                      |");
+		LOG.debug("└=============================┘");
+
+		return "member_popup/iframe";
+		
+	}
 	@RequestMapping(value = "/signup_address.do")
 	public String singup_adress() {
 		LOG.debug("┌=============================┐");

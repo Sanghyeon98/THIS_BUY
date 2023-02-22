@@ -33,10 +33,7 @@
  	<title>회원가입</title>
 <script >
 
-<%
-String ad = request.getParameter("address1");
-String ad2 = request.getParameter("address_detail");
-%>
+
 //생년월일 select 활성화
 $(document).ready(function(){   
 	
@@ -68,34 +65,10 @@ $(document).ready(function(){
     
    
 
+ //주소찾기
  $("#addresssearch").on("click",function(){
- new daum.Postcode({
-     oncomplete: function(data) {
-         // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
-         // 예제를 참고하여 다양한 활용법을 확인해 보세요.
-    	
-	// 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
-    // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-    	 var addr = ''; // 주소 변수
-         var extraAddr = ''; // 참고항목 변수
-
-         //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-         if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-             addr = data.roadAddress;
-         } else { // 사용자가 지번 주소를 선택했을 경우(J)
-             addr = data.jibunAddress;
-         }
-
-         // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
-      
-             // 조합된 참고항목을 해당 필드에 넣는다.
-       //
-
-         // 우편번호와 주소 정보를 해당 필드에 넣는다.
-         // 커서를 상세주소 필드로 이동한다.
-         window.open("${CP}/signup/signup_address.do?address="+addr,"팝업 테스트","width=700, height=500, top=50, left=100");
-}
-}).open();
+	 var iframe=document.getElementById("iframe");
+	 iframe.contentWindow.search();
  });
 //전화번호 인증문자 발송
  $("#phonech").on("click",function(){
@@ -362,6 +335,7 @@ $(document).ready(function(){
 
 
 });
+
 //이메일 인증 다시하기
 function changeemailbtnName()  {
 	  const btnElement = document.getElementById('emailCheck');
@@ -464,6 +438,9 @@ function chkPW2(){
 
  
 </head>
+//style='visibility:hidden;'
+<iframe id="iframe" src="iframe.do" width="300" height="200" frameborder="1"  ></iframe>
+
 <body >
 <div class="position-relative">
 <div id="signup" class="position-absolute top-0 start-50 translate-middle">
@@ -574,8 +551,9 @@ function chkPW2(){
     </div>
        <div class="col-md-7 text-centers">
        <button type="submit" class="btn btn-default btn-block" id="addresssearch" name="addresssearch" >주소 검색</button>
- <input type="text"  class="form-control" id="address_final" name="address" placeholder="<%=ad%><%=ad2%>">  
+ <input type="text"  class="form-control" id="address_final" name="address_final" value="">  
   <small>배송지에 따라 상품 정보가 달라질 수 있습니다.</small>
+  
        </div>
        </div>
        

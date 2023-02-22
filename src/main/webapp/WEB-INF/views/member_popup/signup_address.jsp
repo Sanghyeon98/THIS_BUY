@@ -34,11 +34,11 @@
 <script>
 $(document).ready(function(){
 	$('#address_save').click(function() {
+		
 		var address_popup=$('#address').val()+$('#address_detail').val();
 		
-		document.getElementById("address").val = address_popup;
-		
-		window.close();
+		opener.document.getElementById("address_final").value = address_popup;
+		opener.send();
 	});
 });
 
@@ -76,7 +76,7 @@ margin: 0px 0px 10px 0px;
  
 </head>
 <body>
-<form action="/ehr/signup/signup.do">
+
 
 <div class="signupaddress"> <h3 class="text-center">나머지 주소를 입력해주세요.</h3>
 
@@ -99,7 +99,7 @@ margin: 0px 0px 10px 0px;
     </div>
     </div>	
 </div>    
-</form>  
+
 
    
 
