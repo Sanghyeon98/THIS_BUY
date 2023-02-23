@@ -37,7 +37,6 @@
 //생년월일 select 활성화
 $(document).ready(function(){   
 	
-	
     var now = new Date();
     var year = now.getFullYear();
     var mon = (now.getMonth() + 1) > 9 ? ''+(now.getMonth() + 1) : '0'+(now.getMonth() + 1); 
@@ -67,6 +66,10 @@ $(document).ready(function(){
 
  //주소찾기
  $("#addresssearch").on("click",function(){
+	 var iframe=document.getElementById("iframe");
+	 iframe.contentWindow.search();
+ });
+ $("#addresssearch2").on("click",function(){
 	 var iframe=document.getElementById("iframe");
 	 iframe.contentWindow.search();
  });
@@ -109,13 +112,11 @@ $(document).ready(function(){
      if(input === phonecode){
     	 alert("인증 되었습니다.")
     	 $("#phoneCheck").val("1");
-    	 
      }else{
     	 alert("인증에 실패했습니다. 인증 번호를 확인해주세요.")
     	 $("#phoneCheck").val("0");
      }
  });
-          
           
 //id중복체크   
      $("#idCheck").on("click",function(){
@@ -218,7 +219,6 @@ $(document).ready(function(){
              return;
            }
            
-          //$("#idCheckYN").val("0");          
           if(eUtil.ISEmpty( $("#idCheckYN").val() ) == true){
               alert("아이디중복를 체크 해주세요.");
               $("#idCheck").focus();
@@ -236,7 +236,7 @@ $(document).ready(function(){
               return;
           }
           
-    /*       if(eUtil.ISEmpty( $("#phoneCheck").val() ) == true){
+           if(eUtil.ISEmpty( $("#phoneCheck").val() ) == true){
               alert("휴대폰 인증을 해주세요.");
               $("#phone").focus();
               return;
@@ -246,7 +246,7 @@ $(document).ready(function(){
              alert("휴대폰 인증을 해주세요.");
               $("#phone").focus();
               return;
-          } */
+          } 
           
           
           if(eUtil.ISEmpty( $("#passwd").val() ) == true){
@@ -285,12 +285,12 @@ $(document).ready(function(){
                return;
            } 
            
- //          const inputCode = $("#mailcheckinput").val();
-  //         if( (inputCode) !== (emailcode) ){
-   //     	   alert('이메일 인증번호가 불일치 합니다. 다시 확인해주세요!.');  
-  //      	   $("#mailcheckinput").focus();
-  //      	   return;
-   //       }
+           const inputCode = $("#mailcheckinput").val();
+           if( (inputCode) !== (emailcode) ){
+        	   alert('이메일 인증번호가 불일치 합니다. 다시 확인해주세요!.');  
+        	   $("#mailcheckinput").focus();
+        	   return;
+          }
            var p1 = document.getElementById('passwd1').value;
            var p2 = document.getElementById('passwd2').value;
            if(( p1 != p2 ) ==true) {
@@ -312,7 +312,7 @@ $(document).ready(function(){
                "name"     : $("#name").val(),
                "email"    : $("#email").val(),
                "phone"    : $("#phone").val(),
-               "address"    : $("#address").val(),
+               "address"    : $("#address_final").val()+$("#address_detail").val(),
                "gender"    :$('input[id="gender"]:checked').val(),
                "birthdate" :  $("#birth").val()
                
@@ -335,7 +335,14 @@ $(document).ready(function(){
 
 
 });
-
+//주소 검색시 버튼 숨기고 인풋박스 열기
+function addresspick(){
+	document.getElementById('addresssearch').style.display='none';
+	document.getElementById('address_final').style.display='block';
+	document.getElementById('addresssearch2').style.display='block';
+	document.getElementById('address_detail').style.display='block';
+	document.getElementById('addressseachbefore').style.display='block';
+}
 //이메일 인증 다시하기
 function changeemailbtnName()  {
 	  const btnElement = document.getElementById('emailCheck');
@@ -350,7 +357,7 @@ function emaillreset(){
 //전화번호 인증시 타이머
 function check() {
 	
-	   var time=1800;
+	   var time=10;
 	   var min="";
 	   var sec="";
 
@@ -360,20 +367,26 @@ function check() {
 		   function n2(sec){ //숫자를 2자리로 만들기 위함.
 				return sec >= 10 ? sec : "0" + sec; //숫자가 10보다 작을 경우 앞에 0을 붙임.
 			}
-		  
-		   document.getElementById("Timer").innerHTML ="0" + min + ":" + n2(sec);
+		
+		document.getElementById("Timer").innerHTML ="0" + min + ":" + n2(sec);
+			 
 		   time--;
 		   
+		   $('#phonechnumch').click(function(){
+			   clearInterval(x);
+		   });
 		   
+		    	
 		   if(time< 0){
 			   clearInterval(x);
 	              alert("다시 인증 해주세요.");
 	              $('#phch').hide();
 		   }
-		   
-	   
+		  
+		  
 	   },1000);
-	}
+	  
+   }
 //ID 특수문자, 공백 , 한글 방지
 // 특수문자 입력 방지
 function IDCheck(obj){
@@ -438,8 +451,7 @@ function chkPW2(){
 
  
 </head>
-//style='visibility:hidden;'
-<iframe id="iframe" src="iframe.do" width="300" height="200" frameborder="1"  ></iframe>
+<iframe id="iframe" src="iframe.do" width="300" height="200" frameborder="1" style='visibility:hidden; display:none;' ></iframe>
 
 <body >
 <div class="position-relative">
@@ -514,6 +526,7 @@ function chkPW2(){
    		     
    </div>
    
+   
    <div class="row" id="emch">
    <div class="col-md-2"></div>
    <div class="col-md-7 text-centers">
@@ -551,8 +564,20 @@ function chkPW2(){
     </div>
        <div class="col-md-7 text-centers">
        <button type="submit" class="btn btn-default btn-block" id="addresssearch" name="addresssearch" >주소 검색</button>
- <input type="text"  class="form-control" id="address_final" name="address_final" value="">  
-  <small>배송지에 따라 상품 정보가 달라질 수 있습니다.</small>
+       <input type="text"  class="form-control" id="address_final" name="address_final" value="" style='display:none;' readonly="readonly">  
+       </div>
+  	
+  		<div class="col-md-3">
+         <button type="submit" class="btn btn-default btn-block" id="addresssearch2" name="addresssearch2" style='display:none;'><img class="searchico" src="${CP_RES}/img/common/search.png" />재검색</button>
+       </div>
+   
+       </div>
+       
+       <div class="row" id="addressseachbefore" style='display:none;' >
+    	<div class="col-md-2 text-centers">
+    	</div>
+       <div class="col-md-7 text-centers">
+       <input type="text"  class="form-control" id="address_detail" name="address_detail" value="" style='display:none;'>  
   
        </div>
        </div>

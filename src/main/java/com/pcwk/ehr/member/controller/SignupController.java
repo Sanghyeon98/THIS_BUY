@@ -192,7 +192,7 @@ public class SignupController {
 
 		String message = "";
 		if (1 == cnt) {
-			message = inVO.getMemberid() + "는 중복되었습니다.";
+			message = inVO.getMemberid() + "는 이미 존재하는 ID 입니다.";
 		} else {
 			message = inVO.getMemberid() + "는 사용 가능합니다.";
 		}

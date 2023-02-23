@@ -33,7 +33,6 @@
     <title>회원가입</title>
     <script type="text/javascript">
     $(document).ready(function(){   
-    	        var addr2=$('#address').val();
     
     });
     var addr = ''; // 주소 변수
@@ -44,7 +43,7 @@
     	     oncomplete: function(data) {
     	         // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
     	         // 예제를 참고하여 다양한 활용법을 확인해 보세요.
-    	    	
+    	    	 
     		// 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
     	    // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
     	    	 
@@ -66,18 +65,25 @@
     	         
     	        insert();
     	     }
-    	}).open();
+    	}).open({popupKey: 'popup1'	});
     }
     var openwin;
     function insert(){
+    	if(openwin != null){
+    		openwin.close();
+        } 
     	        openwin= window.open("${CP}/signup/signup_address.do?address="+addr,"상세주소입력 팝업","width=700, height=500, top=50, left=100");
-    	
+    	        openwin.focus();
     }
-    	var address_popup;
+    	var address_final;
+    	var address_detail;
     function send(){
     	// 여기서 받은값 ifram 부모창으로 값전달
-    	address_popup = document.getElementById("address_final").value;
-    	parent.document.getElementById("address_final").value = address_popup;
+    	address_final = document.getElementById("address_final").value;
+    	address_detail = document.getElementById("address_detail").value;
+    	parent.document.getElementById("address_final").value = address_final;
+    	parent.document.getElementById("address_detail").value = address_detail;
+    	window.parent.addresspick();
     }
    
     </script>
@@ -85,6 +91,7 @@
 <a href="#" id="address_search" onclick="parent.openaddress_detail()">aaaa</a>
 <input type="text" class="col1 form-control" id="address" name="address" value="" >
  <input type="text"  class="form-control" id="address_final" name="address_final" value=""> 
+ <input type="text"  class="form-control" id="address_detail" name="address_detail" value=""> 
 </body>
 </html>
 </fmt:bundle>

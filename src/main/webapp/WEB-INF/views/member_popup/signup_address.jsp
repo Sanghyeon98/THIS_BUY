@@ -35,10 +35,18 @@
 $(document).ready(function(){
 	$('#address_save').click(function() {
 		
-		var address_popup=$('#address').val()+$('#address_detail').val();
+		var address_final=$('#address').val()
+		var address_detail=$('#address_detail').val();
 		
-		opener.document.getElementById("address_final").value = address_popup;
+		opener.document.getElementById("address_final").value = address_final;
+		opener.document.getElementById("address_detail").value = address_detail;
 		opener.send();
+		window.close();
+	});
+	
+	$('#re').click(function() {
+		window.close();
+		window.opener.search();
 	});
 });
 
@@ -84,7 +92,7 @@ margin: 0px 0px 10px 0px;
 
  <div class="row">
     <div class="cc text-centers">
-      <input type="text" class="col1 form-control" id="address" name="address1" value="<%=address%>" ><button type="button" class="col2 btn btn-default btn-block text-center" value="" id=""><img class="searchico" src="${CP_RES}/img/common/search.png" />재검색</button>
+      <input type="text" class="col1 form-control" id="address" name="address" value="<%=address%>" ><button type="button" class="col2 btn btn-default btn-block text-center" value="" id="re" name="re"><img class="searchico" src="${CP_RES}/img/common/search.png" />재검색</button>
     </div>
     </div>
  <div class="row">
