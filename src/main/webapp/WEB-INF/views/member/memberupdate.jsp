@@ -188,7 +188,7 @@ $(document).ready(function(){
          <input type="text"  class="form-control" id="phone" value="${sessionScope.memberInfo.phone }" name="phone" placeholder="숫자만 입력해주세요">
        </div>
        <div class="col-md-3">
-         <button type="submit" class="btn btn-default btn-block ">다른 인증 받기</button>
+         <button type="submit" class="btn btn-default btn-block ">다른 번호 인증 받기</button>
        </div>
    </div>
     

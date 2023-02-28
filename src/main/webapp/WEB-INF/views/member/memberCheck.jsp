@@ -114,7 +114,7 @@ $(document).ready(function(){
 <br>
 <form class="login">
         <!-- session으로 아이디 찍기  -->
-      <input type="text" class="login1" id="memberid" name="memberid" placeholder="a">
+      <input type="text" class="login1" id="memberid" name="memberid" value="${sessionScope.memberInfo.memberid }" readonly="readonly">
 
       <input type="password"  class="login1" id="passwd" name="passwd" placeholder="현재 비밀번호를 입력해주세요">
         
