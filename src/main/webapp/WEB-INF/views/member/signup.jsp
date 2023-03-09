@@ -188,7 +188,7 @@ $(document).ready(function(){
                 		
                      
         });
-   });// end ajax
+   });
     // end send eamil
     
     
