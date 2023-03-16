@@ -408,7 +408,6 @@ function chkPW(){
 	 }else{
 	   document.getElementById("pw-check-warn").innerHTML ="";
 	   $("#pwch").val("1");
-	 
 	 }
 	}
 function chkPW2(){
