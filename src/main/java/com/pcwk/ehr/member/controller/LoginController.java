@@ -112,7 +112,6 @@ public class LoginController {
 				//로그인 정보 조회
 				//-----------------------------------------------
 				MemberVO loginInfo1 = memberservice.doSelectOne(inVO);
-				//접속자 수가 적은 경우(내부사이트)
 				if(null !=loginInfo1) {
 					session.setAttribute("memberInfo", loginInfo1);
 				}

@@ -115,7 +115,6 @@ public class SignupController {
     public String sendOne(String phone) {
         Message message = new Message();
         makeRandomNumber1();
-        // 발신번호 및 수신번호는 반드시 01012345678 형태로 입력되어야 합니다.
         message.setFrom("01028009441");
         message.setTo(phone);
         message.setText("[" + authNumber1 + "] This_buy 인증 번호를 입력해주세요.");
@@ -302,7 +301,6 @@ public class SignupController {
 		} else {
 			message = inVO.getMemberid() + "등록 실패";
 		}
-
 		MessageVO messageVO = new MessageVO(String.valueOf(flag), message);
 
 		jsonString = new Gson().toJson(messageVO);

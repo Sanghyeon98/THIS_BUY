@@ -218,13 +218,11 @@ $(document).ready(function(){
              $("#memberid").focus();
              return;
            }
-           
           if(eUtil.ISEmpty( $("#idCheckYN").val() ) == true){
               alert("아이디중복를 체크 해주세요.");
               $("#idCheck").focus();
               return;
           }
-          
           if($("#idCheckYN").val() == "0"){
               alert("아이디중복를 체크  해주세요.");
               $("#idCheck").focus();
@@ -235,45 +233,36 @@ $(document).ready(function(){
               $("#passwd1").focus();
               return;
           }
-          
            if(eUtil.ISEmpty( $("#phoneCheck").val() ) == true){
               alert("휴대폰 인증을 해주세요.");
               $("#phone").focus();
               return;
           }
-          
           if($("#phoneCheck").val() == "0"){
              alert("휴대폰 인증을 해주세요.");
               $("#phone").focus();
               return;
           } 
-          
-          
           if(eUtil.ISEmpty( $("#passwd").val() ) == true){
                alert("비밀번호을 입력 하세요.");
                $("#passwd").focus();
                return;
           }       
-
            if(eUtil.ISEmpty( $("#name").val() ) == true){
                alert("이름을 입력 하세요.");
                $("#passwd").focus();
                return;
            }
-           
-          
            if(eUtil.ISEmpty( $("#email").val() ) == true){
                alert("이메일을 입력 하세요.");
                $("#email").focus();
                return;
            }
-           
            if(eUtil.ISEmpty( $("#mailauth").val() ) == true){
                alert("이메일 인증을 해주세요.");
                $("#mailauth").focus();
                return;
            }
-           
            if(eUtil.ISEmpty( $("#phone").val() ) == true){
                alert("휴대폰 번호을 입력 하세요.");
                $("#phone").focus();
@@ -284,7 +273,6 @@ $(document).ready(function(){
                $("#address").focus();
                return;
            } 
-           
            const inputCode = $("#mailcheckinput").val();
            if( (inputCode) !== (emailcode) ){
         	   alert('이메일 인증번호가 불일치 합니다. 다시 확인해주세요!.');  
@@ -367,25 +355,17 @@ function check() {
 		   function n2(sec){ //숫자를 2자리로 만들기 위함.
 				return sec >= 10 ? sec : "0" + sec; //숫자가 10보다 작을 경우 앞에 0을 붙임.
 			}
-		
 		document.getElementById("Timer").innerHTML ="0" + min + ":" + n2(sec);
-			 
 		   time--;
-		   
 		   $('#phonechnumch').click(function(){
 			   clearInterval(x);
 		   });
-		   
-		    	
 		   if(time< 0){
 			   clearInterval(x);
 	              alert("다시 인증 해주세요.");
 	              $('#phch').hide();
 		   }
-		  
-		  
 	   },1000);
-	  
    }
 //ID 특수문자, 공백 , 한글 방지
 // 특수문자 입력 방지
@@ -394,7 +374,6 @@ var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi;
 var space = /\s/g;
 var ko = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
 // 허용할 특수문자는 여기서 삭제하면 됨
-// 지금은 띄어쓰기도 특수문자 처리됨 참고하셈
 if( regExp.test(obj.value) ){
 	   document.getElementById("id-check-warn").innerHTML ="특수 문자를 입력하실 수 없습니다";
 	 $("#idCheck").prop("disabled",true);
