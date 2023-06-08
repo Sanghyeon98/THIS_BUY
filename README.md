@@ -1,10 +1,6 @@
 <div align=center>
 
-<img src="https://user-images.githubusercontent.com/107021908/174239639-c2fb9584-427d-4d8a-acc2-450561de3ace.jpg" width="75%" height="75%"/>
 
-
-
- 
 # 0. 목차:link:   
 <H4>:one: MISS 팀 소개   
  <br>
